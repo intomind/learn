@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Microcontrollers and circuits · BCI101</title>
+<meta name="description" content="What a microcontroller and a pin are, a light switched from code, Bluetooth Low Energy and pairing, closed loops and their latency, and the security of a link that carries neural data.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/assets/site.css">
+<script>(function(){var d=document.documentElement,q=new URLSearchParams(location.search),s=function(k){try{return localStorage.getItem(k)}catch(e){return null}},L={ms:1,hs:1,college:1,grad:1},l=q.get("level");if(L[l]){try{localStorage.setItem("curriculum-level",l)}catch(e){}}else l=s("curriculum-level");if(!L[l]){l="hs";d.dataset.ask="1"}d.dataset.level=l;d.dataset.theme=q.get("theme")||s("curriculum-theme")||"dark";})()</script>
+<script type="module" src="/assets/curriculum.js"></script>
+</head>
+<body>
+<header class="chrome">
+  <a class="mark" href="/">IntoMind<span>Learn</span></a>
+  <nav class="nav" aria-label="Pages"><a href="/" aria-current="page">Contents</a><a href="/labs/">Labs</a><a href="/vocabulary/">Vocabulary</a><a href="/safety/">Safety</a></nav>
+  <div class="controls"><button class="theme" type="button">Light</button></div>
+</header>
+<main class="page kind-chapter">
+  <div class="lv lv-ms" data-l="ms">
+    <header class="hero">
+      <p class="eb">Chapter 7 · Middle school</p>
+      <h1>Microcontrollers and circuits</h1>
+      <p class="lede">What is the small computer that will switch a light for your brain, and how do you make it blink?</p>
+    </header>
+
+    
+
+    <section id="chip">
+      <h2>A computer on a chip</h2>
+      <div class="grid">
+        <div class="text">
+          <p>A <dfn data-term="Microcontroller" data-l="ms" data-def="A small computer on one chip, built to do one job.">microcontroller</dfn> is a whole small computer on one chip, built to run one program. There is one inside a remote control, a washing machine, a toy and a car.</p>
+          <p>The Raspberry Pi Pico 2 W is a small board with a microcontroller, a light, Bluetooth, and two rows of <dfn data-term="Pin" data-l="ms" data-def="A connection on the board that a program can switch on, to 3.3 volts, or off.">pins</dfn>. A program can switch a pin on, to 3.3 volts, or off.</p>
+        </div>
+        <figure class="fig" data-fig="pinmap" data-pins="18 20"><figcaption><b>The pins</b> The Raspberry Pi Pico 2 W from above, with its USB socket at the top. Pin 20, which programs call GP15, is the one this book switches. Pin 18 is a ground.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="circuit">
+      <h2>A circuit for an LED</h2>
+      <div class="grid flip">
+        <div class="text">
+          <p>An <dfn data-term="LED" data-l="ms" data-def="A small light that lights when current flows through it, one way only.">LED</dfn> is a small light that lights when current flows through it, one way only. Connect one from a pin back to ground, and it lights when the pin is on.</p>
+          <p>It also needs a <dfn data-term="Resistor" data-l="ms" data-def="A part that limits how much current flows.">resistor</dfn>, a part that limits how much current flows. Without one, too much current flows, and the LED or the board can be damaged.</p>
+        </div>
+        <figure class="fig" data-fig="circuit"><figcaption><b>The circuit</b> From pin 20, through a 330 ohm resistor and an LED, back to ground on pin 18. The LED's longer leg faces the pin.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>A circuit on paper, then for real</h3>
+        <p>On paper, draw the circuit: a pin, a resistor, an LED, and back to ground. Mark which way the current flows, and which leg of the LED is longer.</p>
+        <p>Then build it on the breadboard, with the board unplugged: from pin 20, through the resistor and the LED in a row, to ground on pin 18, with the LED's long leg toward pin 20. Have it checked before you plug anything in.</p>
+        
+      </div>
+    </section>
+
+    <section id="blink">
+      <h2>Make it blink</h2>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>Blink</h3>
+        <p>Plug the board into the computer with the USB cable, and open the MicroPython editor. Type this program, and run it.</p>
+        <pre><code>from machine import Pin
+import time
+
+led = Pin("LED", Pin.OUT)
+while True:
+    led.toggle()
+    time.sleep(0.5)</code></pre>
+        <p>Change the 0.5 to 0.1, and run it again. Then change <code>Pin("LED", Pin.OUT)</code> to <code>Pin(15, Pin.OUT)</code>, and run it once more, to blink the LED on your breadboard.</p>
+        <p class="see"><b>You should see</b>The board's own light blinking, faster when the number is smaller. Then the LED on your breadboard blinking the same way.</p>
+        
+      </div>
+    </section>
+
+    <section id="listen">
+      <h2>The board can listen</h2>
+      <div class="grid">
+        <div class="text">
+          <p>The board can also listen. In the Mind-Controlled Microcontroller, your IntoMind One sends it a score over Bluetooth every few seconds, and the board switches its light from that.</p>
+          <p>The first time they connect, they pair: they set up secret keys, so anyone who only listens in can't read what passes between them.</p>
+        </div>
+        <figure class="fig" data-fig="datapath" data-to="board"><figcaption><b>The link</b> From your neurons, through the IntoMind One's electrodes and chip, over Bluetooth to the board, with no computer in between.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Talk about it</h2>
+      <ol class="qs">
+        <li class="q"><p>Name three things at home that probably have a microcontroller inside.</p></li>
+        <li class="q"><p>Why does the LED need a resistor?</p></li>
+        <li class="q"><p>In the blink program, what does changing 0.5 to 0.1 do, and why?</p></li>
+      </ol>
+    </section>
+  </div>
+
+  <div class="lv lv-hs" data-l="hs">
+    <header class="hero">
+      <p class="eb">Chapter 8 · High school</p>
+      <h1>Microcontrollers and circuits</h1>
+      <p class="lede">How does a small board drive an LED safely, run a program, and talk to an IntoMind One over an encrypted link?</p>
+    </header>
+
+    
+
+    <section id="chip">
+      <h2>A computer on a chip</h2>
+      <div class="grid">
+        <div class="text">
+          <p>A <dfn data-term="Microcontroller" data-l="hs" data-def="A small computer on one chip, built to do one job.">microcontroller</dfn> is a whole small computer on one chip, built to run one program. The Raspberry Pi Pico 2 W is a board with one, a light, a Bluetooth radio, and two rows of <dfn data-term="Pin" data-l="hs" data-def="A connection on the board that a program can switch on, to 3.3 volts, or off.">pins</dfn>. Its programs here are written in <dfn data-term="MicroPython" data-l="hs" data-def="Python made small enough to run on a microcontroller.">MicroPython</dfn>, which is Python made small enough for a microcontroller.</p>
+          <p>A pin set as an output sits at 3.3 volts or at 0. That on and off is a signal another circuit can use: here, to light an LED.</p>
+        </div>
+        <figure class="fig" data-fig="pinmap" data-pins="18 20"><figcaption><b>The pins</b> The Raspberry Pi Pico 2 W from above, with its USB socket at the top. Pin 20, which programs call GP15, is the one this book switches. Pin 18 is a ground.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="ohm">
+      <h2>A pin, and Ohm's law</h2>
+      <div class="grid flip">
+        <div class="text">
+          <p>An LED needs about 2 volts across it, and a small current, a few milliamps. The rest of the pin's 3.3 volts has to drop across a <dfn data-term="Resistor" data-l="hs" data-def="A part that limits current.">resistor</dfn> in series with it.</p>
+          <p><dfn data-term="Ohm's law" data-l="hs" data-def="Voltage equals current times resistance.">Ohm's law</dfn>, V = I × R, gives its size: (3.3 − 2.0) volts ÷ 0.004 amps is about 330 ohms. Without a resistor, the current is limited only by the pin and the LED, and one of them can be damaged.</p>
+        </div>
+        <figure class="fig" data-fig="circuit"><figcaption><b>The circuit</b> From pin 20, through a 330 ohm resistor and an LED, back to ground on pin 18. The LED's longer leg faces the pin.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>A circuit on paper, then for real</h3>
+        <p>Draw the circuit: a pin, a resistor, an LED, and back to ground. Mark which way the current flows, and which leg of the LED is longer. Then build it on the breadboard, with the board unplugged: from pin 20 through the resistor and the LED in a row, to ground on pin 18, with the LED's long leg toward pin 20. Have it checked before you plug anything in.</p>
+        
+      </div>
+    </section>
+
+    <section id="blink">
+      <h2>Make it blink</h2>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>Blink</h3>
+        <p>Plug the board into the computer, and open the MicroPython editor. Run this program, then change the 0.5 and run it again.</p>
+        <pre><code>from machine import Pin
+import time
+
+led = Pin("LED", Pin.OUT)
+while True:
+    led.toggle()
+    time.sleep(0.5)</code></pre>
+        <p>Then change <code>Pin("LED", Pin.OUT)</code> to <code>Pin(15, Pin.OUT)</code>, to blink the LED on your breadboard.</p>
+        <p class="see"><b>You should see</b>The board's own light blinking, faster when the number is smaller. Then your LED blinking the same way.</p>
+      </div>
+    </section>
+
+    <section id="ble">
+      <h2>Bluetooth Low Energy</h2>
+      <div class="grid">
+        <div class="text">
+          <p>A Bluetooth Low Energy device <dfn data-term="Advertising and pairing" data-l="hs" data-def="Broadcasting what a device is, and setting up the keys that encrypt a link.">advertises</dfn>: it broadcasts a short packet a few times a second, saying what it is. A central, such as the board or your computer, scans, connects, and pairs: it sets up keys, so the link is encrypted. Bonding keeps those keys for next time.</p>
+          <p>Then the central reads and writes the device's values, and subscribes to notifications: values the device sends whenever they change. The board will subscribe to your custom AI head's score.</p>
+        </div>
+        <figure class="fig" data-fig="datapath" data-to="board"><figcaption><b>The link</b> From your neurons, through the IntoMind One's electrodes and chip, over an encrypted Bluetooth link to the board, with no computer in between.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>Scan the room</h3>
+        <p>List every IntoMind One the board can hear, and how strongly it hears each, in dBm: closer to zero is stronger.</p>
+        <pre><code>import asyncio
+import intomind
+
+async def main():
+    for found in await intomind.scan():
+        print(found.name, found.rssi)
+
+asyncio.run(main())</code></pre>
+        <p class="see"><b>You should see</b>Every IntoMind One switched on nearby, except any already connected to a computer or a board, with the strongest, usually the closest, first.</p>
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Talk about it</h2>
+      <ol class="qs">
+        <li class="q"><p>Choose a resistor for an LED that needs 2.0 volts and 4 milliamps, from a 3.3-volt pin.</p></li>
+        <li class="q"><p>Why does the strongest signal in the scan usually belong to the closest IntoMind One?</p></li>
+        <li class="q"><p>What does pairing protect, and what doesn't it?</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Raspberry Pi Ltd. Raspberry Pi Pico 2 W documentation.</p>
+      <p>The IntoMind MicroPython repository, github.com/intomind/micropython.</p>
+    </section>
+  </div>
+
+  <div class="lv lv-college" data-l="college">
+    <header class="hero">
+      <p class="eb">Chapter 9 · College</p>
+      <h1>Microcontrollers and circuits</h1>
+      <p class="lede">How does a small board drive a pin safely, find and pair with an IntoMind One over Bluetooth Low Energy, and how long does a change of mind take to reach that pin?</p>
+    </header>
+
+    
+
+    <section id="chip">
+      <h2>A pin, and Ohm's law</h2>
+      <div class="grid">
+        <div class="text">
+          <p>A <dfn data-term="Microcontroller" data-l="college" data-def="A small computer on one chip, built to do one job.">microcontroller</dfn> is a small computer on one chip, built to run one program. The Raspberry Pi Pico 2 W carries one, a radio for Bluetooth, and forty pins. A <dfn data-term="Pin" data-l="college" data-def="A connection on the board that a program can switch on, to 3.3 volts, or off.">pin</dfn> set as an output sits at 3.3 volts or at 0, and can source a few milliamps: enough for an LED, or a signal into another board's input with the grounds joined.</p>
+          <p>An LED drops about 2 volts. The rest falls across a <dfn data-term="Resistor" data-l="college" data-def="A part that limits current.">resistor</dfn> in series, sized by <dfn data-term="Ohm's law" data-l="college" data-def="Voltage equals current times resistance.">Ohm's law</dfn>, V = IR: (3.3 − 2.0) V ÷ 4 mA ≈ 330 Ω. Nothing on the pin ever connects to anything that plugs into a wall.</p>
+        </div>
+        <figure class="fig" data-fig="pinmap" data-pins="18 20"><figcaption><b>The pins</b> The Raspberry Pi Pico 2 W from above, USB at the top. Pin 20 is GP15, the pin the programs switch, and pin 18 a ground.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="ble">
+      <h2>Bluetooth Low Energy</h2>
+      <div class="grid flip">
+        <div class="text">
+          <p>A Bluetooth Low Energy peripheral advertises, a central scans and connects, and the peripheral exposes services, each a set of <dfn data-term="Characteristic" data-l="college" data-def="A value a Bluetooth device offers, to read, write, or subscribe to.">characteristics</dfn> with properties: read, write, notify, indicate. A notification arrives unacknowledged, and an indication is acknowledged, so it isn't lost.</p>
+          <p>The IntoMind One advertises one service. A client writes commands to one characteristic, receives each answer by indication on another, and subscribes to notifications for the EEG, the predictions and the status. It accepts commands and sends data only over an encrypted, bonded link.</p>
+        </div>
+        <figure class="fig" data-fig="datapath" data-to="board"><figcaption><b>The link</b> From the electrodes to the chip on the IntoMind One, over an encrypted Bluetooth link to the board: neural data one way, commands the other.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>A connection, traced</h3>
+        <p>Read intomind/client.py in github.com/intomind/micropython, and list each step from the scan to the first notification. Then run this on a board, with an IntoMind One switched on nearby and connected to nothing else, and match what prints to your list.</p>
+        <pre><code>import asyncio
+import intomind
+
+async def main():
+    device = await intomind.connect()
+    info = device.info
+    print("firmware", info.firmware, "channels", info.channels)
+    print("rates", info.supported_rates, "head slots", info.head_slots)
+    active, heads = await device.heads()
+    print("selected", active)
+    for h in heads:
+        print(h.slot, h.state, h.out_dim, h.name)
+    await device.disconnect()
+
+asyncio.run(main())</code></pre>
+        <p class="see"><b>You should see</b>The firmware version, four channels, the sample rates and the number of head slots, then each slot with its state, its number of outputs and its name.</p>
+      </div>
+    </section>
+
+    <section id="pairing">
+      <h2>Pairing, and what it protects</h2>
+      <div class="text">
+        <p><dfn data-term="Advertising and pairing" data-l="college" data-def="Broadcasting what a device is, and setting up the keys that encrypt a link.">Pairing</dfn> sets up the keys that encrypt the link, and bonding keeps them for the next connection. With LE Secure Connections, every pairing method uses an elliptic curve key exchange that defeats a passive eavesdropper, even one who heard the pairing.</p>
+        <p>The methods differ in what else they defend. Just Works asks nothing of the user, so it can't detect an active attacker in the middle of the pairing, and it accepts any device in range that asks to pair with an IntoMind One not already connected. Numeric comparison and passkey entry need a display or a keypad, and out-of-band pairing a second channel, such as NFC. The IntoMind One pairs with Just Works.</p>
+      </div>
+    </section>
+
+    <section id="latency">
+      <h2>Closed loops, and latency</h2>
+      <div class="grid">
+        <div class="text">
+          <p>A closed loop measures, decides and acts. Its <dfn data-term="Latency" data-l="college" data-def="The delay from a cause to its effect.">latency</dfn> is the sum of its stages: the four-second window, the time for a window to fill with the new state, the model's time on the chip, the link, and the program. The window dominates. Shortening it gives the model less signal, and costs accuracy.</p>
+        </div>
+        <figure class="fig" data-fig="lag"><figcaption><b>Simulated</b> EEG in four-second readings, gray for Off and orange for On, each with its score. The light comes on with the first score above 0.5. Switch at another moment, and the delay changes.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>A latency budget</h3>
+        <p>Before the Mind-Controlled Microcontroller measures it, write down your expected delay for each stage from a change of state to the board's pin, and their sum.</p>
+        <table class="sheet" data-sheet="college-budget">
+          <thead><tr><th>Stage</th><th>Expected delay, seconds</th><th>Why</th></tr></thead>
+          <tbody><tr><td>The window filling with the new state</td><td></td><td></td></tr><tr><td>The model on the chip</td><td></td><td></td></tr><tr><td>The link to the board</td><td></td><td></td></tr><tr><td>The program's decision and the pin</td><td></td><td></td></tr><tr><td>The whole loop</td><td></td><td></td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Problems</h2>
+      <ol class="qs">
+        <li class="q"><p>Why does the client wait for an indication answering each command, rather than just writing commands?</p></li>
+        <li class="q"><p>Choose a resistor for an LED that drops 2.0 volts at 4 milliamps, from a 3.3-volt pin.</p></li>
+        <li class="q"><p>Which pairing methods would defeat an attacker present during pairing, and what would each need on a board with no screen?</p></li>
+        <li class="q"><p>Which stage dominates the loop's latency, and what would shortening it cost?</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Raspberry Pi Ltd. Raspberry Pi Pico 2 W documentation.</p>
+      <p>The IntoMind MicroPython repository, github.com/intomind/micropython.</p>
+      <p>Bluetooth SIG. Bluetooth Core Specification, Security Manager.</p>
+    </section>
+  </div>
+
+  <div class="lv lv-grad" data-l="grad">
+    <header class="hero">
+      <p class="eb">Chapter 9 · Graduate</p>
+      <h1>Microcontrollers and circuits</h1>
+      <p class="lede">What does closing the loop on a small board add: in delay, in ways to fail, and in ways to be attacked?</p>
+    </header>
+
+    
+
+    <section id="program">
+      <h2>The program on the board</h2>
+      <div class="text">
+        <p>The Mind-Controlled Microcontroller runs one MicroPython program on a Raspberry Pi Pico 2 W. It scans for three seconds, keeps the IntoMind Ones whose names start with a prefix, empty by default, and connects to the one heard most strongly. It selects the head in slot 2, starts the stream unless one is running, and turns on predictions. Each clean reading sets the decision, On when the score is above 0.5. A reading with a gap in the signal changes nothing, and the LED blinks fast to say so.</p>
+        <p>Its fail-safes: the decision is Off at start and whenever the link is lost, and the link counts as lost after 20 seconds without a reading. It retries every 5 seconds, and after two connections in a row that fail, it forgets its pairings and pairs again. A pin set as an output switches between 0 and 3.3 volts, which drives an LED through a resistor, (3.3 − 2.0) volts over 4 milliamps or about 330 ohms, or a signal for anything that runs on the same low voltage.</p>
+      </div>
+    </section>
+
+    <section id="delay">
+      <h2>Delay, as a distribution</h2>
+      <div class="text">
+        <p>The device describes one four-second window every four seconds, on a grid that starts with the stream. A change of state falls somewhere inside a window, and if a window's score follows the share of it spent in the new state, the first window more than half new comes 2 to 6 seconds after the change, uniformly, before the model, the link and the program add their own. Shorter windows would answer sooner with less signal each. The closed loop's delay is a distribution, and its tail matters as much as its middle.</p>
+      </div>
+    </section>
+
+    <section id="errors">
+      <h2>False switches, per hour</h2>
+      <div class="text">
+        <p>At one window every four seconds a loop makes 900 decisions an hour. If each Off window crosses the threshold with probability α, independently, the pin goes high about 900α times an hour. People who might rely on a brain-computer interface ask for accidental activations no more than once every two to four hours (Huggins, Wren and Gruis, 2011), so α near 1 in 2,000. A higher threshold or a run of k windows in a row, roughly α<sup>k</sup>, buys that with delay. The board's program uses neither, which suits a demonstration and wouldn't suit someone's front door.</p>
+      </div>
+    </section>
+
+    <section id="security">
+      <h2>Pairing, and a threat model</h2>
+      <div class="text">
+        <p>The IntoMind One requires an encrypted, bonded link for everything but its device information, paired by LE Secure Connections with Just Works, since it has no display or keypad. The elliptic-curve exchange defeats a passive eavesdropper, but a pairing that asks for no code can't tell whether an active attacker sits between the two at that moment. Bonding keeps the keys for later connections, for up to four computers.</p>
+        <p>A threat model names the assets, the adversaries and the surfaces (Denning, Matsuoka and Kohno, 2009). Here the assets are the pin's state, the head, and what flows over the link. An adversary in radio range can pair with an IntoMind One that isn't connected, since anyone can, and any connected program can install a head, since the device checks a head's shape and hash and never who made it. The board connects to the strongest device whose name fits its prefix, so a stronger impostor with that name is chosen first. Jamming the link only forces the fail-safe, Off. Signals from the brain can leak more than their purpose (Martinovic and others, 2012), and attacks on brain-computer interfaces raise their own ethical questions (Ienca and Haselager, 2016).</p>
+      </div>
+    </section>
+
+    <section id="analysis">
+      <h2>Analysis</h2>
+      <div class="try">
+        <p class="k">Analysis</p>
+        <h3>Delay and false switches, traded</h3>
+        <p>Simulate the loop's delay, with windows on a fixed grid and a change of state at a random moment, and its false switches over hundreds of hours at rest, for two thresholds and for one or two windows in a row. Off scores sit near 0.2 and On near 0.8, with a spread of 0.15 from window to window.</p>
+        <pre><code>import numpy as np
+
+rng = np.random.default_rng(9)
+W = 4.0           # seconds in a window, and between windows
+DELTA = 0.5       # an assumed delay for the model, the link and the program: measure yours
+
+def runs(above, hold):
+    """True where `hold` scores in a row have been above the threshold."""
+    count = np.zeros(above.shape, int)
+    for j in range(above.shape[1]):
+        prev = count[:, j - 1] if j else 0
+        count[:, j] = np.where(above[:, j], prev + 1, 0)
+    return count &gt;= hold
+
+def latency(threshold, hold, off=0.2, on=0.8, noise=0.15, trials=20000):
+    """Seconds from a change to On until the pin, with windows on a fixed grid. A window's
+    score moves from Off's toward On's with the share of it spent in the new state."""
+    t0 = rng.uniform(0, W, trials)                 # where the change falls in its window
+    ends = W * np.arange(1, 9)
+    share = np.clip((ends[None] - t0[:, None]) / W, 0, 1)
+    score = off + share * (on - off) + rng.normal(0, noise, share.shape)
+    first = np.argmax(runs(score &gt; threshold, hold), axis=1)
+    return ends[first] - t0 + DELTA
+
+def false_switches_per_hour(threshold, hold, off=0.2, noise=0.15, hours=500):
+    """How often the pin goes high while the wearer stays Off."""
+    on = runs((off + rng.normal(0, noise, (1, int(hours * 3600 / W)))) &gt; threshold, hold)[0]
+    return np.sum(on[1:] &amp; ~on[:-1]) / hours
+
+for threshold, hold in ((0.5, 1), (0.5, 2), (0.6, 1), (0.6, 2)):
+    lat = latency(threshold, hold)
+    print(f"threshold {threshold}, {hold} in a row: median delay {np.median(lat):.1f} s, "
+          f"90 percent within {np.percentile(lat, 90):.1f} s, "
+          f"{false_switches_per_hour(threshold, hold):.2f} false switches an hour")</code></pre>
+        <p class="see"><b>You should see</b>At the program's rule, a threshold of 0.5 and one window, a median delay of 4.5 seconds, 90 percent within 6.6, and about 20 false switches an hour. Two windows in a row cut that to about one every two hours, and double the delay. A threshold of 0.6 with two in a row gives about one false switch in a hundred hours, with 90 percent of switches within 15 seconds.</p>
+        <p>Then report: the rule you would choose for a light, and for a call button, and why. And write the threat model for the loop: assets, adversaries, surfaces, and one mitigation for each.</p>
+        
+      </div>
+    </section>
+
+    <section id="open">
+      <h2>Open problems</h2>
+      <ol class="rulelist">
+        <li><b>Authenticating without a screen.</b> Pairing that resists an active attacker needs a display, a keypad or a second channel, which small wearables and boards lack. Doing it without burdening the user is open.</li>
+        <li><b>Safe defaults for uncertain decisions.</b> A decoder's output is uncertain every time, and how a system should act on it, when to hold, when to ask, and when to do nothing, depends on what acting costs. General rules don't exist.</li>
+        <li><b>Who may install what.</b> Heads are weights, never code, and still change what a device does. How to let people install their own while keeping out heads nobody asked for is unsettled.</li>
+      </ol>
+    </section>
+
+    <section id="talk">
+      <h2>Problems</h2>
+      <ol class="qs">
+        <li class="q"><p>Derive the delay from a change of state to the first window that is more than half new, when the change falls uniformly within a four-second window. What are its mean and its standard deviation?</p></li>
+        <li class="q"><p>Off windows cross the threshold with probability 0.02, independently. How many false switches an hour at one window, and at two in a row? What does the independence assumption hide?</p></li>
+        <li class="q"><p>Why is Off the right state for the pin when the link is lost? When might it not be?</p></li>
+        <li class="q"><p>An attacker wants the board to switch on. List two ways the setup allows, and a mitigation for each.</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Denning, T., Matsuoka, Y., and Kohno, T. (2009). Neurosecurity: security and privacy for neural devices. Neurosurgical Focus.</p>
+      <p>Huggins, J. E., Wren, P. A., and Gruis, K. L. (2011). What would brain-computer interface users want? Opinions and priorities of potential users with amyotrophic lateral sclerosis. Amyotrophic Lateral Sclerosis.</p>
+      <p>Martinovic, I., Davies, D., Frank, M., Perito, D., Ros, T., and Song, D. (2012). On the feasibility of side-channel attacks with brain-computer interfaces. Proceedings of the USENIX Security Symposium.</p>
+      <p>Ienca, M., and Haselager, P. (2016). Hacking the brain: brain-computer interfacing technology and the ethics of neurosecurity. Ethics and Information Technology.</p>
+      <p>Bluetooth SIG. Bluetooth Core Specification, Security Manager.</p>
+      <p>Raspberry Pi Ltd. Raspberry Pi Pico 2 W documentation.</p>
+      <p>The IntoMind MicroPython repository, github.com/intomind/micropython.</p>
+    </section>
+  </div>
+
+</main>
+<footer class="colophon">
+  <p><b>BCI101</b> An Applied Introduction to Noninvasive Brain-Computer Interfaces. Neurons, to bits, to real-world outcomes. Built on the demos at <a href="https://demo.intomind.com/">demo.intomind.com</a>.</p>
+  <div class="level-line"><span>Level</span><div class="levels" role="group" aria-label="Level"><button type="button" data-level="ms">Middle school</button><button type="button" data-level="hs">High school</button><button type="button" data-level="college">College</button><button type="button" data-level="grad">Graduate</button></div></div>
+</footer>
+</body>
+</html>

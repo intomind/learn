@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Evaluating models · BCI101</title>
+<meta name="description" content="Mean error against a baseline, intervals over studies, AUC, base rates and predictive value, and the model card that says what a model is for.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/assets/site.css">
+<script>(function(){var d=document.documentElement,q=new URLSearchParams(location.search),s=function(k){try{return localStorage.getItem(k)}catch(e){return null}},L={ms:1,hs:1,college:1,grad:1},l=q.get("level");if(L[l]){try{localStorage.setItem("curriculum-level",l)}catch(e){}}else l=s("curriculum-level");if(!L[l]){l="hs";d.dataset.ask="1"}d.dataset.level=l;d.dataset.theme=q.get("theme")||s("curriculum-theme")||"dark";})()</script>
+<script type="module" src="/assets/curriculum.js"></script>
+</head>
+<body>
+<header class="chrome">
+  <a class="mark" href="/">IntoMind<span>Learn</span></a>
+  <nav class="nav" aria-label="Pages"><a href="/" aria-current="page">Contents</a><a href="/labs/">Labs</a><a href="/vocabulary/">Vocabulary</a><a href="/safety/">Safety</a></nav>
+  <div class="controls"><button class="theme" type="button">Light</button></div>
+</header>
+<main class="page kind-chapter"><section class="elsewhere" data-l="ms hs"><h1>Evaluating models</h1><p class="lede">This chapter is part of the book from college on.</p><p><a href="/">Back to the contents</a></p></section><div data-l="college grad">
+  <div class="lv lv-college" data-l="college">
+    <header class="hero">
+      <p class="eb">Chapter 8 · College</p>
+      <h1>Evaluating models</h1>
+      <p class="lede">Is a model any good? Only against the right baseline, with an interval, on test data like the data it will meet, and at the base rate of the people it will be used on.</p>
+    </header>
+
+    
+
+    <section id="baselines">
+      <h2>An error needs a baseline</h2>
+      <div class="grid">
+        <div class="text">
+          <p>A <dfn data-term="Mean absolute error" data-l="college" data-def="The average size of the errors, ignoring their direction.">mean absolute error</dfn> means nothing alone. Compare it with a <dfn data-term="Baseline" data-l="college" data-def="Something to compare against: a simple model fitted the same way, or a measurement taken before anything changes.">baseline</dfn>: what a trivial model gets, such as always guessing the training data's mean age, and what a simple model fitted the same way gets, such as one on band power.</p>
+          <p>The age head misses by 9.16 years, averaged over a person's windows. Band power misses by 10.02, and always guessing the mean age by 9.77. The head beats band power, with an interval that clears zero, but its lead over the mean age has an interval that includes it.</p>
+        </div>
+        <figure class="fig" data-fig="intervals" data-rows='[{"label":"head against the mean age","value":0.61,"lo":-0.03,"hi":1.25},{"label":"head against band power","value":0.86,"lo":0.24,"hi":1.48}]' data-unit=" years"><figcaption><b>Published</b> How many years better the age head is, averaged over a person's windows, with 95 percent intervals over studies.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="test-data">
+      <h2>Where the test data comes from</h2>
+      <div class="grid flip">
+        <div class="text">
+          <p>Test on new windows from people in the training data, and you measure memory of those people. Test on new people from the same studies, and you measure generalization within those studies. Leave whole studies out, and you measure what happens on a new device, protocol and population, which is how a model gets used. The published heads were scored on studies they never saw.</p>
+          <p>The interval comes from resampling the unit that varies in use: whole studies, not windows, in a <dfn data-term="Bootstrap interval" data-l="college" data-def="An interval from resampling the units that vary, here studies, many times.">bootstrap interval</dfn>. One caveat stays in the published account: the encoder, trained with no labels, saw unlabeled windows from most of the studies the heads were scored on.</p>
+        </div>
+        <figure class="fig" data-fig="intervals" data-rows='[{"label":"head against the mean age","value":-0.18,"lo":-0.83,"hi":0.45},{"label":"head against band power","value":0.33,"lo":-0.28,"hi":0.95}]' data-unit=" years"><figcaption><b>Published</b> The same comparisons on one four-second window. Neither interval clears zero, and against the mean age the head is 0.18 years worse. Averaging a person's windows is what moves it ahead of band power.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>The age head against its baselines</h3>
+        <p>From the published evaluation, write each comparison as one sentence a reader can't misread: the difference, its interval, and what it means.</p>
+        <table class="sheet" data-sheet="college-baselines">
+          <thead><tr><th>Comparison</th><th>One window</th><th>A person's windows, averaged</th></tr></thead>
+          <tbody><tr><td>The head against band power</td><td></td><td></td></tr><tr><td>The head against the mean age</td><td></td><td></td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="roc">
+      <h2>Classifiers, thresholds and base rates</h2>
+      <div class="grid">
+        <div class="text">
+          <p>A classifier's score becomes a call at a threshold, and moving the threshold trades false positives for false negatives. The ROC curve plots the true positive rate against the false positive rate at every threshold. Its area, the AUC, is the chance that a random member of one group outscores a random member of the other: 0.5 for a coin, 1 for perfect separation. Two normal groups 0.44 standard deviations apart give 0.623, the sex head's published AUC averaged over a person's windows.</p>
+        </div>
+        <figure class="fig" data-fig="roc" data-dprime="0.44"><figcaption><b>From the published AUC</b> The ROC curve of two normal groups 0.44 standard deviations apart. Its area is 0.623, and the diagonal is guessing.</figcaption></figure>
+      </div>
+      <div class="grid flip">
+        <div class="text">
+          <p>The AUC doesn't depend on the base rate, but what a call means does. The <dfn data-term="Positive predictive value" data-l="college" data-def="Of the cases a test calls positive, the fraction that are.">positive predictive value</dfn> falls steeply as a class becomes rare: with equal groups, a threshold halfway between those two means is right about 59 times in 100, and with one group at 10 percent of people, a call of it is right about 14 times in 100.</p>
+          <p>A score isn't a probability unless it has been <dfn data-term="Calibration" data-l="college" data-def="Whether a score of 0.7 is right 70 percent of the time.">calibrated</dfn> to one. The sex head's output is a least-squares score, not a probability, and its evaluation says so.</p>
+        </div>
+        <figure class="fig" data-fig="dist" data-dprime="0.44" data-left="negative, 0" data-right="positive, 1" data-control="base"><figcaption><b>Two groups 0.44 apart</b> The groups behind an AUC of 0.623, and a threshold between them. Move the share of group 1, and watch what a call of group 1 is worth.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>An AUC at work</h3>
+        <p>Simulate two groups with the sex head's separation, draw their ROC curve, compute the AUC by ranks, and work out what a call is worth at four base rates.</p>
+        <pre><code>import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import rankdata
+
+d = 0.44                                  # the groups&#x27; separation, in standard deviations
+rng = np.random.default_rng(0)
+neg = rng.normal(0, 1, 20_000)            # scores of group 0
+pos = rng.normal(d, 1, 20_000)            # scores of group 1
+
+# The ROC curve, and its area by ranks: the chance a random 1 outscores a random 0.
+t = np.linspace(-4, 5, 400)
+plt.plot([(neg &gt; x).mean() for x in t], [(pos &gt; x).mean() for x in t])
+plt.plot([0, 1], [0, 1], &quot;--&quot;)
+plt.xlabel(&quot;false positive rate&quot;)
+plt.ylabel(&quot;true positive rate&quot;)
+plt.show()
+r = rankdata(np.r_[pos, neg])
+auc = (r[:len(pos)].sum() - len(pos) * (len(pos) + 1) / 2) / (len(pos) * len(neg))
+print(&quot;AUC&quot;, round(auc, 3))
+
+# A threshold halfway between the means, and what a call of group 1 is worth.
+sensitivity, false_alarms = (pos &gt; d / 2).mean(), (neg &gt; d / 2).mean()
+for base in (0.5, 0.2, 0.1, 0.01):
+    ppv = base * sensitivity / (base * sensitivity + (1 - base) * false_alarms)
+    print(f&quot;group 1 at {base:.0%}: a call of group 1 is right {ppv:.0%} of the time&quot;)</code></pre>
+        <p class="see"><b>You should see</b>An AUC near 0.62, and a call of group 1 right about 59 times in 100 with equal groups, 26 at a fifth, 14 at a tenth, and 1 at one in a hundred.</p>
+      </div>
+    </section>
+
+    <section id="cards">
+      <h2>Model cards</h2>
+      <div class="text">
+        <p>A <dfn data-term="Model card" data-l="college" data-def="A short account of a model: what it is for, how it was evaluated, and where it fails.">model card</dfn> puts all of this on one page: what the model is, what it is for and not for, the data it was fitted and evaluated on, the metrics with their baselines and intervals, and its limitations. The published evaluation reads as one, and ends with the sentence every model card needs: neither head is a useful predictor of a person's age or sex, and neither is offered as one.</p>
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Problems</h2>
+      <ol class="qs">
+        <li class="q"><p>Why is “mean error 9.16 years” incomplete without the mean-age baseline?</p></li>
+        <li class="q"><p>Why resample studies, not windows, for the interval?</p></li>
+        <li class="q"><p>An AUC of 0.62 doesn't change with the base rate. Why does the positive predictive value?</p></li>
+        <li class="q"><p>A vendor reports 95 percent accuracy for a detector of a condition one person in a hundred has. What do you ask for?</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>IntoMind (2026). Heads for encoder e2f9b60f411f0e73. github.com/intomind/eeg-foundation-model-heads.</p>
+      <p>Fawcett, T. (2006). An introduction to ROC analysis. Pattern Recognition Letters.</p>
+      <p>Efron, B., and Tibshirani, R. J. (1993). An Introduction to the Bootstrap. Chapman and Hall.</p>
+      <p>Mitchell, M., and others (2019). Model cards for model reporting. Proceedings of the Conference on Fairness, Accountability, and Transparency.</p>
+    </section>
+  </div>
+
+  <div class="lv lv-grad" data-l="grad">
+    <header class="hero">
+      <p class="eb">Chapter 8 · Graduate</p>
+      <h1>Evaluating models</h1>
+      <p class="lede">What would convince you a model works: against which baseline, scored on whose data, with uncertainty from which unit, and for what use?</p>
+    </header>
+
+    
+
+    <section id="baselines">
+      <h2>Baselines</h2>
+      <div class="text">
+        <p>An error means something only beside a baseline: a trivial one that ignores the input, such as the training data's mean, and a simple one fitted the same way, such as band power. The published age head misses by 9.93 years on one window, against 10.26 for band power and 9.75 for always guessing the training studies' mean age. Averaged over a person's windows it misses by 9.16, against 10.02 and 9.77. The sex head's AUC is 0.588 on one window and 0.623 averaged, against 0.582 and 0.614 for band power. The evaluation's own conclusion: neither is a useful predictor of a person's age or sex.</p>
+      </div>
+    </section>
+
+    <section id="unit">
+      <h2>The unit of inference</h2>
+      <div class="text">
+        <p>Studies differ in devices, protocols and populations, and a model is used on studies it has never seen, so the published evaluation leaves each study out in turn. It hides the electrode positions, scores nine referential montages of 2, 4 and 8 electrodes with the device's integer arithmetic, and for its averaged results averages each person's windows, up to 40 a dataset. Each study gives one value per method, the reported value is the mean over studies, and its 95 percent interval comes from resampling studies. Each comparison is a Wilcoxon signed-rank test over studies, Holm-corrected over eight tests.</p>
+        <p>The unit resampled is the unit that varies in use. Resampling windows, or people within studies, describes how precisely these studies were measured, not how the model will do on the next one (Efron and Tibshirani, 1993).</p>
+      </div>
+    </section>
+
+    <section id="age">
+      <h2>Age, and regression to the mean</h2>
+      <div class="text">
+        <p>A model fitted by least squares on a weak signal predicts toward its training mean, so young people are predicted older and old people younger, and the gap between predicted and actual age falls with age. A group difference in the gap can then be a difference in age. Regressing age out of the gap removes that dependence (Smith and others, 2019), and analyses of the gap should adjust for age (Le and others, 2018). But predictions corrected with each person's true age, then scored against it, are circular: their R² rarely falls below 0.85 whatever the model (Butler and others, 2021). EEG predicts age, from sleep (Sun and others, 2019) and at rest, where a shared benchmark compares methods on the same data (Engemann and others, 2022).</p>
+      </div>
+    </section>
+
+    <section id="classifiers">
+      <h2>Discrimination, calibration and base rates</h2>
+      <div class="text">
+        <p>The <dfn data-term="AUC" data-l="grad" data-def="The area under the ROC curve: the probability that a random member of one group outscores a random member of the other.">AUC</dfn> is the probability that a random member of one group outscores a random member of the other (Hanley and McNeil, 1982), and DeLong's interval (DeLong, DeLong and Clarke-Pearson, 1988) assumes the examples are independent, which windows within people within studies aren't. Discrimination isn't calibration: the sex head's output is a least-squares score, female as 1 and male as 0, not a probability, and the same score would need recalibrating for every population. What a positive call is worth depends on the base rate: for an AUC of 0.62 with equal variances and a threshold midway, a positive call is right 59 percent of the time when the groups are equal in number, and 14 percent when the positive group is a tenth of those tested.</p>
+      </div>
+    </section>
+
+    <section id="exposure">
+      <h2>Exposure, and what a report owes its reader</h2>
+      <div class="text">
+        <p>The heads were fitted and scored on separate studies, but the encoder beneath them saw unlabeled windows from 81 of the 109 studies scored for age and 90 of the 121 for sex. The representation was not fitted to those labels, but it was shaped by those recordings. A test of how the whole system does on a new study needs studies that no part of it ever saw.</p>
+        <p>A report says what a model is for, what it was evaluated on, against what, and with what uncertainty, as model cards (Mitchell and others, 2019) and, for clinical prediction, TRIPOD+AI (Collins and others, 2024) lay out. The heads' evaluation states its exposure and that the heads are offered as no one's predictor, which is what lets a reader use it.</p>
+      </div>
+    </section>
+
+    <section id="analysis">
+      <h2>Analysis</h2>
+      <div class="try">
+        <p class="k">Analysis</p>
+        <h3>A biased age head, a circular correction, and two intervals</h3>
+        <p>Simulate a head that predicts toward a training mean of 40, and score it in a population like its training studies' and in a seminar room aged 22 to 30, against the training mean and the group's own mean. Correct its gap the usual way, and score the corrected predictions. Then compute a mean AUC over 20 studies that differ in how well the head separates the groups, with intervals from resampling windows within studies and from resampling whole studies.</p>
+        <pre><code>import numpy as np
+from scipy.stats import rankdata
+
+rng = np.random.default_rng(8)
+
+# 1. A head that regresses toward its training mean, as a weak least-squares fit does.
+def predict(age, train_mean=40.0, slope=0.4, noise=7.0):
+    return train_mean + slope * (age - train_mean) + rng.normal(0, noise, len(age))
+
+wide = rng.uniform(18, 80, 3000)                       # people like the training studies'
+room = rng.uniform(22, 30, 30)                         # a seminar room
+for name, ages in (("wide population", wide), ("seminar room", room)):
+    p = predict(ages)
+    print(f"{name}: head {np.mean(np.abs(p - ages)):.1f} years, "
+          f"training mean {np.mean(np.abs(40.0 - ages)):.1f}, "
+          f"the group's own mean {np.mean(np.abs(ages.mean() - ages)):.1f}")
+
+p = predict(wide)
+gap = p - wide                                        # the "brain age gap"
+print(f"gap against age: r = {np.corrcoef(gap, wide)[0, 1]:.2f}")
+b, a = np.polyfit(wide, gap, 1)                # the usual correction, fitted on age itself
+corrected = p - (a + b * wide)
+r2 = lambda q: 1 - np.sum((q - wide) ** 2) / np.sum((wide - wide.mean()) ** 2)
+print(f"R^2 of the predictions {r2(p):.2f}, of the corrected ones {r2(corrected):.2f}")
+
+# 2. An AUC per study, averaged over studies, with its interval from resampling the windows
+#    or the studies. Studies differ in how well the head separates the groups.
+studies, per = 20, 200
+study = np.repeat(np.arange(studies), per)
+effect = np.repeat(rng.normal(0.35, 0.4, studies), per)    # the separation, study by study
+group = (rng.random(studies * per) &lt; 0.5).astype(int)
+score = effect * group + rng.normal(0, 1, studies * per)
+
+def auc(s, g):
+    r = rankdata(s)
+    n1 = g.sum()
+    return (r[g == 1].sum() - n1 * (n1 + 1) / 2) / (n1 * (len(g) - n1))
+
+def mean_auc(pick):
+    """The mean over the studies in `pick`, repeats allowed, of each one's AUC."""
+    return np.mean([auc(score[w], group[w]) for w in pick])
+
+each = [np.flatnonzero(study == s) for s in range(studies)]
+by_window = [mean_auc([rng.choice(w, len(w)) for w in each]) for _ in range(1000)]
+by_study = [mean_auc([each[s] for s in rng.integers(0, studies, studies)]) for _ in range(1000)]
+print(f"mean AUC over studies {mean_auc(each):.3f}")
+for name, vals in (("windows within studies", by_window), ("whole studies", by_study)):
+    print(f"95% interval, resampling {name}: {np.round(np.percentile(vals, [2.5, 97.5]), 3)}")</code></pre>
+        <p class="see"><b>You should see</b>In the wide population, the head misses by 11.2 years against 16.3 for the training mean. In the room, by 10.8 against 14.4, while the room's own mean misses by 2.1. The gap falls with age, r = −0.84, and correcting it lifts R² from 0.37 to 0.85. The mean AUC is 0.611, with an interval of 0.593 to 0.629 from windows and 0.575 to 0.645 from studies.</p>
+        <p>Then report: which baseline each claim needs, and why the corrected R² says nothing about the head.</p>
+        
+      </div>
+    </section>
+
+    <section id="open">
+      <h2>Open problems</h2>
+      <ol class="rulelist">
+        <li><b>What a brain-age gap means.</b> Whether the gap measures anything beyond the model's own bias, and how to correct it without circularity, is debated, as Smith and others (2019) and Butler and others (2021) show.</li>
+        <li><b>Exposure.</b> How much self-supervised pretraining on evaluation data inflates downstream results, and how to report it, has no settled answer.</li>
+        <li><b>New devices.</b> Studies differ in amplifiers, electrodes and montages, and a model meets yet another device in use. Estimating performance on a device it was never evaluated on is open.</li>
+      </ol>
+    </section>
+
+    <section id="talk">
+      <h2>Problems</h2>
+      <ol class="qs">
+        <li class="q"><p>On one window the age head is 0.18 years worse than the mean age, with a 95 percent interval from 0.45 better to 0.83 worse. Averaged over a person's windows it is 0.61 better, from 0.03 worse to 1.25 better. What can you claim?</p></li>
+        <li class="q"><p>Why do the heads' intervals come from resampling studies rather than windows or people?</p></li>
+        <li class="q"><p>A paper reports a corrected brain-age R² of 0.9 from EEG. What do you ask?</p></li>
+        <li class="q"><p>A classifier's AUC is 0.62. With equal variances and a threshold midway, what are its sensitivity and false positive rate? How often is a positive call right when the positive group is 50 percent of those tested, and when it is 10 percent?</p></li>
+        <li class="q"><p>What must a model card for the sex head say?</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Hanley, J. A., and McNeil, B. J. (1982). The meaning and use of the area under a receiver operating characteristic (ROC) curve. Radiology.</p>
+      <p>DeLong, E. R., DeLong, D. M., and Clarke-Pearson, D. L. (1988). Comparing the areas under two or more correlated receiver operating characteristic curves: a nonparametric approach. Biometrics.</p>
+      <p>Efron, B., and Tibshirani, R. J. (1993). An Introduction to the Bootstrap. Chapman and Hall.</p>
+      <p>Le, T. T., and others (2018). A nonlinear simulation framework supports adjusting for age when analyzing BrainAGE. Frontiers in Aging Neuroscience.</p>
+      <p>Mitchell, M., and others (2019). Model cards for model reporting. Proceedings of the Conference on Fairness, Accountability, and Transparency.</p>
+      <p>Smith, S. M., Vidaurre, D., Alfaro-Almagro, F., Nichols, T. E., and Miller, K. L. (2019). Estimation of brain age delta from brain imaging. NeuroImage.</p>
+      <p>Sun, H., and others (2019). Brain age from the electroencephalogram of sleep. Neurobiology of Aging.</p>
+      <p>Butler, E. R., and others (2021). Pitfalls in brain age analyses. Human Brain Mapping.</p>
+      <p>Engemann, D. A., and others (2022). A reusable benchmark of brain-age prediction from M/EEG resting-state signals. NeuroImage.</p>
+      <p>Collins, G. S., and others (2024). TRIPOD+AI statement: updated guidance for reporting clinical prediction models that use regression or machine learning methods. BMJ.</p>
+      <p>IntoMind (2026). Heads for encoder e2f9b60f411f0e73. github.com/intomind/eeg-foundation-model-heads.</p>
+    </section>
+  </div>
+
+  <div data-l="ms hs">
+    <header class="hero">
+      <p class="eb">Part 2 · Bits · Chapter 8</p>
+      <h1>Evaluating models</h1>
+      <p class="lede" data-l="ms hs">This topic is part of the college and graduate courses. The Age Detector lab covers what middle and high school students need.</p>
+      
+    </header>
+
+
+
+
+
+
+    
+
+  </div>
+</div></main>
+<footer class="colophon">
+  <p><b>BCI101</b> An Applied Introduction to Noninvasive Brain-Computer Interfaces. Neurons, to bits, to real-world outcomes. Built on the demos at <a href="https://demo.intomind.com/">demo.intomind.com</a>.</p>
+  <div class="level-line"><span>Level</span><div class="levels" role="group" aria-label="Level"><button type="button" data-level="ms">Middle school</button><button type="button" data-level="hs">High school</button><button type="button" data-level="college">College</button><button type="button" data-level="grad">Graduate</button></div></div>
+</footer>
+</body>
+</html>

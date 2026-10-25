@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Biological Sex Detector · BCI101</title>
+<meta name="description" content="For college and graduate students. What a score means when two groups overlap far more than they differ: AUC, base rates, confounds, and the difference between sex and gender.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/assets/site.css">
+<script>(function(){var d=document.documentElement,q=new URLSearchParams(location.search),s=function(k){try{return localStorage.getItem(k)}catch(e){return null}},L={ms:1,hs:1,college:1,grad:1},l=q.get("level");if(L[l]){try{localStorage.setItem("curriculum-level",l)}catch(e){}}else l=s("curriculum-level");if(!L[l]){l="hs";d.dataset.ask="1"}d.dataset.level=l;d.dataset.theme=q.get("theme")||s("curriculum-theme")||"dark";})()</script>
+<script type="module" src="/assets/curriculum.js"></script>
+</head>
+<body>
+<header class="chrome">
+  <a class="mark" href="/">IntoMind<span>Learn</span></a>
+  <nav class="nav" aria-label="Pages"><a href="/">Contents</a><a href="/labs/" aria-current="page">Labs</a><a href="/vocabulary/">Vocabulary</a><a href="/safety/">Safety</a></nav>
+  <div class="controls"><button class="theme" type="button">Light</button></div>
+</header>
+<main class="page kind-lab"><section class="elsewhere" data-l="ms hs"><h1>Biological Sex Detector</h1><p class="lede">This lab is part of the book from college on.</p><p><a href="/">Back to the contents</a></p></section><div data-l="college grad">
+  <div class="lv lv-college" data-l="college">
+    <header class="hero">
+      <p class="eb">Lab 4 · College</p>
+      <h1>Biological Sex Detector</h1>
+      <p class="lede">An AI model on the IntoMind One scores EEG between two groups that overlap far more than they differ. What can a score this weak say about one person, and what must it never be used to say?</p>
+    </header>
+
+    
+
+    <section id="background">
+      <h2>Background</h2>
+      <p class="after-note">Read it before the lab.</p>
+      <div class="grid">
+        <div class="text">
+          <h3>What the head was taught</h3>
+          <p>The sex head was fitted on 194,940 four-second windows from 3,986 people in 95 studies, each person labeled 0 for male and 1 for female, as the studies recorded them. Its output is a least-squares score on that scale, not a probability, and it can fall below 0 or above 1.</p>
+          <p>The labels are the category each study recorded, however it decided it. The evaluation doesn't say whether the studies asked about sex or about gender, and two categories don't describe everyone's biology. The score measures only how much a recording resembles the training data's two groups.</p>
+        </div>
+        <figure class="fig" data-fig="dist" data-dprime="0.44" data-left="male, 0" data-right="female, 1"><figcaption><b>From the published AUC</b> The two groups the head learned from, drawn as normal scores 0.44 standard deviations apart, the separation an AUC of 0.623 implies.</figcaption></figure>
+      </div>
+      <div class="grid flip">
+        <div class="text">
+          <h3>How weak, exactly</h3>
+          <p>Averaged over a person's windows, the head's AUC on studies it never saw is 0.623, and band power from the same channels gets 0.614. On one window, 0.588 against 0.582. If both groups' scores are normal with the same spread, the AUC fixes the separation of their means:</p>
+          <p class="eq">AUC = Φ(d′ / √2), so d′ = √2 Φ⁻¹(AUC)</p>
+          <p>That is about 0.44 standard deviations: the clouds overlap almost entirely. A call at the midpoint is right with probability Φ(d′/2), and what a call for one group is worth then depends on how common that group is.</p>
+        </div>
+        <figure class="fig" data-fig="roc" data-dprime="0.44"><figcaption><b>From the published AUC</b> The ROC curve of two normal groups 0.44 standard deviations apart. Its area is 0.623, and the diagonal is guessing.</figcaption></figure>
+      </div>
+      <div class="text">
+        <h3>Beating chance isn't a difference in kind</h3>
+        <p>Small average differences can beat chance while almost everyone overlaps, and some of them may not be about the brain at all: head size and skull thickness change band power, and so can hair and contact. The published evaluation's own verdict is that the head is not a useful predictor of a person's sex, and is not offered as one. It shows what the embedding carries.</p>
+      </div>
+    </section>
+
+    <section id="hypothesis">
+      <h2>Prediction</h2>
+      <div class="text">
+        <p class="after-note">Write it before the analysis.</p>
+        <p class="ask"><span class="lbl">Prediction</span>If one group were a tenth of the people scored, a call for that group would be right about <span class="fill" data-key="p-rare" data-hint="how often"></span> of the time. Averaging a person's windows raises the AUC from 0.588 to 0.623 because <span class="fill" data-key="p-why" data-hint="why"></span>.</p>
+      </div>
+    </section>
+
+    <section id="ready">
+      <h2>Get ready</h2>
+      <div class="three">
+        <div>
+          <h3>You need</h3>
+          <ul>
+            <li>For anyone who chooses to read their score: an IntoMind One, charged, with its cable unplugged, and the demo on a screen facing only them</li>
+            <li>Python 3 with NumPy and SciPy, or a spreadsheet</li>
+            <li>A clean microfiber, soft cotton or eyeglass cloth</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Roles</h3>
+          <dl class="roles">
+            <div><dt>Wearer</dt><dd>Anyone who chooses to read their own score, alone.</dd></div>
+            <div><dt>Analysts</dt><dd>Everyone, working from the published numbers.</dd></div>
+          </dl>
+          <p class="after">Nobody is asked whether they wore it, or what they saw.</p>
+        </div>
+        <div>
+          <h3>Rules</h3>
+          <ul>
+            <li>Unplug the cable before anyone puts it on.</li>
+            <li>Wearing it, and reading a score, are your choice.</li>
+            <li>Scores are private: nothing is written down or shared.</li>
+            <li>Wipe the electrodes between wearers with the soft cloth, since a rough one can scratch their gold coating.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="steps">
+      <h2>Procedure</h2>
+      <ol class="steps">
+        <li class="text">
+          <div>
+            <h3>Decide privately</h3>
+            <p>Reading your own score is a choice, and nobody else will see it. If you would rather nobody saw you wear the IntoMind One, use the station out of the room's view, or a time outside class. The rest of the lab works without anyone's score.</p>
+          </div>
+        </li>
+        <li>
+          <h3>Read it alone, if you choose</h3>
+          <figure class="fig" data-fig="shot" data-shot="sex-detector"></figure>
+          <div>
+            <p>Put the IntoMind One on at any site, connect to the <a href="https://demo.intomind.com/biological-sex-detector/">Biological Sex Detector demo</a>, and sit still for a couple of minutes. Save image saves a picture of your score: press it only if you want that picture, which is yours to keep or delete. Then close the tab.</p>
+            <p class="see"><b>You should see</b>Two clouds that overlap almost entirely, spaced as the published AUC implies, and your average score among them.</p>
+            
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="analysis">
+      <h2>Analysis</h2>
+      <div class="text">
+        <p>From the published AUCs alone, work out each separation, how often a call at the midpoint is right, and what a call for one group is worth as that group becomes rare. Then ask what averaging would give if a person's windows were independent.</p>
+      </div>
+      <pre><code>import numpy as np
+from scipy.stats import norm
+
+for name, auc in ((&quot;one window&quot;, 0.588), (&quot;a person&#x27;s windows&quot;, 0.623)):
+    d = np.sqrt(2) * norm.ppf(auc)             # the separation of two normal groups, in SDs
+    right = norm.cdf(d / 2)                    # a call at the midpoint, with equal groups
+    print(f&quot;{name}: d&#x27; {d:.2f}, a call right {right:.0%} of the time with equal groups&quot;)
+    for base in (0.5, 0.1, 0.01):
+        ppv = base * right / (base * right + (1 - base) * (1 - right))
+        print(f&quot;    one group at {base:.0%} of people: a call for it is right {ppv:.0%}&quot;)
+
+# If a person&#x27;s windows were independent, averaging 40 of them would multiply d&#x27; by √40.
+d1 = np.sqrt(2) * norm.ppf(0.588)
+print(&quot;forty independent windows would give an AUC of&quot;, round(norm.cdf(d1 * np.sqrt(40) / np.sqrt(2)), 2))</code></pre>
+      <table class="sheet" data-sheet="college-sex-results">
+        <thead><tr><th>Quantity</th><th>One window</th><th>A person's windows</th></tr></thead>
+        <tbody><tr><td>Published AUC</td><td>0.588</td><td>0.623</td></tr><tr><td>Separation d′, in standard deviations</td><td></td><td></td></tr><tr><td>Right at the midpoint, equal groups</td><td></td><td></td></tr><tr><td>A call for a group that is 10 percent of people, right</td><td></td><td></td></tr></tbody>
+      </table>
+      
+    </section>
+
+    <section id="report">
+      <h2>Written analysis</h2>
+      <div class="text">
+        <ol class="rulelist">
+          <li>Your prediction, as you wrote it before the analysis.</li>
+          <li>The quantities from the published AUCs, with the formula behind each.</li>
+          <li>What a call for a rare group is worth, and why.</li>
+          <li>What the score does not measure, and one thing besides the brain that could produce part of it.</li>
+          <li>One way a sex detector on EEG could harm someone, and one safeguard against it.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Problems</h2>
+      <ol class="qs">
+        <li class="q"><p>Say in words what an AUC of 0.62 means.</p></li>
+        <li class="q"><p>For an AUC of 0.623, how far apart are the means of two normal groups with the same spread?</p></li>
+        <li class="q"><p>Ten percent of the people scored are female. What fraction of those called female are?</p></li>
+        <li class="q"><p>If a person's 40 windows were independent, what AUC would averaging them give? What does 0.623 tell you?</p></li>
+        <li class="q"><p>What does the score not measure? Name three things.</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>IntoMind (2026). Heads for encoder e2f9b60f411f0e73. github.com/intomind/eeg-foundation-model-heads.</p>
+      <p>Fawcett, T. (2006). An introduction to ROC analysis. Pattern Recognition Letters.</p>
+      <p>Joel, D., and others (2015). Sex beyond the genitalia: the human brain mosaic. Proceedings of the National Academy of Sciences.</p>
+    </section>
+  </div>
+
+  <div class="lv lv-grad" data-l="grad">
+    <header class="hero">
+      <p class="eb">Lab 4 · Graduate</p>
+      <h1>Biological Sex Detector</h1>
+      <p class="lede">A score separates two labeled groups' EEG at an AUC near 0.6. What does it measure, how far could it ever go, and what would it take to show that it reads the brain rather than the head, the hair or the contact?</p>
+    </header>
+
+    
+
+    <section id="demo">
+      <h2>The demo, exactly</h2>
+      <table class="data text">
+        <thead><tr><th>Part</th><th>What it does</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td>The head</td><td data-th="What it does">The open sex head, which ships in slot 1. Fitted on 194,940 windows from 3,986 people in 95 studies, each person labeled 0 for male and 1 for female, as each study recorded them.</td><td data-th="Source">github.com/intomind/eeg-foundation-model-heads</td></tr>
+          <tr><td>Its output</td><td data-th="What it does">A least-squares score on that scale, for every four-second window, not a probability: it can fall below 0 or above 1.</td><td data-th="Source">the device's model</td></tr>
+          <tr><td>The screen</td><td data-th="What it does">The mean score so far, windows with a gap left out, drawn against two normal clouds spaced as an AUC of 0.623 implies.</td><td data-th="Source">biological-sex-detector/main.js, lib/readout.js</td></tr>
+          <tr><td>The published test</td><td data-th="What it does">On studies it never saw, an AUC of 0.588 on one window and 0.623 on a person's averaged windows, against 0.582 and 0.614 for band power fitted the same way. The head's lead, 0.009 averaged, has a 95 percent interval from −0.013 to 0.032.</td><td data-th="Source">the same</td></tr>
+        </tbody>
+      </table>
+      <div class="text">
+        <p>What it leaves out: what the studies' labels meant. The evaluation doesn't say whether they asked about sex or gender, and two categories don't describe everyone's biology. And anything about why the score differs between groups: whatever the head reads, a band-power model reads nearly as well.</p>
+      </div>
+    </section>
+
+    <section id="background">
+      <h2>Background</h2>
+      <div class="text">
+        <p>Joel and others (2015) found that brains in MRI rarely have all their features at one sex's end, and called them mosaics. Chekroud and others (2016) answered that a multivariate classifier still separates the groups well, and Del Giudice and others (2016) that the mosaic method would miss large differences. Both can be true: groups can be told apart in many dimensions while individuals mix features. In EEG, a deep network trained on clinical recordings reached more than 80 percent accuracy, with fast beta, 20 to 25 hertz, its main feature (van Putten, Olbrich and Arns, 2018), a band where scalp recordings also carry muscle.</p>
+        <p>A score can separate groups through anything that differs between them on average and changes the signal: head size, hair under the electrodes, contact, age, the recording site, the study. Skull thickness, often suspected, explained little of alpha power between people in one study (Hagemann and others, 2008), which is the kind of test each suspect needs. Rippon and others (2014) set out principles for such research, from treating sex and gender as variables with many causes to reporting overlap, not only means.</p>
+      </div>
+    </section>
+
+    <section id="ready">
+      <h2>Get ready</h2>
+      <div class="three">
+        <div>
+          <h3>You need</h3>
+          <ul>
+            <li>For anyone who chooses to read their score: an IntoMind One, charged, with its cable unplugged, and the demo on a screen facing only them</li>
+            <li>Python 3 with NumPy and SciPy</li>
+            <li>A clean microfiber, soft cotton or eyeglass cloth</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Roles</h3>
+          <dl class="roles">
+            <div><dt>Wearer</dt><dd>Anyone who chooses to read their own score, alone.</dd></div>
+            <div><dt>Analysts</dt><dd>Everyone, from the published numbers and the simulation.</dd></div>
+          </dl>
+          <p class="after">Nobody is asked whether they wore it, or what they saw.</p>
+        </div>
+        <div>
+          <h3>Rules</h3>
+          <ul>
+            <li>Unplug the cable before anyone puts it on.</li>
+            <li>Wearing it, and reading a score, are your choice.</li>
+            <li>Scores are private: nothing is written down or shared.</li>
+            <li>Wipe the electrodes between wearers with the soft cloth, since a rough one can scratch their gold coating.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="steps">
+      <h2>Procedure</h2>
+      <ol class="steps">
+        <li class="text">
+          <div>
+            <h3>Decide privately</h3>
+            <p>Reading your own score is a choice, and nobody else will see it. If you would rather nobody saw you wear the IntoMind One, use the station out of the room's view, or a time outside class. The rest of the lab works without anyone's score.</p>
+          </div>
+        </li>
+        <li>
+          <h3>Read it alone, if you choose</h3>
+          <figure class="fig" data-fig="shot" data-shot="sex-detector"></figure>
+          <div>
+            <p>Put the IntoMind One on at any site, connect to the <a href="https://demo.intomind.com/biological-sex-detector/">Biological Sex Detector demo</a>, and sit still for a couple of minutes. Save image saves a picture of your score, yours to keep or delete. Then close the tab.</p>
+            <p class="see"><b>You should see</b>Two clouds that overlap almost entirely, spaced as the published AUC implies, and your average score among them.</p>
+            
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="analysis">
+      <h2>Analyses</h2>
+      <div class="text">
+        <p>From the published AUCs, with two normal groups of equal spread: the separation on one window and averaged, the share of a window's score that is stable within a person, and the AUC that averaging could never exceed. Then simulate a score that reads only contact, where contact differs between the groups, and adjust it for a measured index of contact, such as power from 30 to 45 hertz. Then a score with a real difference and contact that doesn't differ.</p>
+      </div>
+      <pre><code>import numpy as np
+from scipy.stats import norm, rankdata
+
+def auc(score, group):
+    """The chance that a random member of group 1 outscores a random member of group 0."""
+    r = rankdata(score)
+    n1 = group.sum()
+    return (r[group == 1].sum() - n1 * (n1 + 1) / 2) / (n1 * (len(group) - n1))
+
+# 1. What the published AUCs imply, with two normal groups of equal spread.
+d1, dm = (np.sqrt(2) * norm.ppf(a) for a in (0.588, 0.623))
+m = 40                                   # the most windows averaged for one person
+stable = (1 / (dm / d1) ** 2 - 1 / m) / (1 - 1 / m)
+ceiling = d1 / np.sqrt(stable)
+print(f"d' {d1:.2f} on one window, {dm:.2f} averaged")
+print(f"the share of a window's score that is stable within a person: about {stable:.2f}")
+print(f"averaging without limit: d' {ceiling:.2f}, AUC {norm.cdf(ceiling / np.sqrt(2)):.3f}")
+
+# 2. A score that reads contact and nothing of the brain, when contact differs by group.
+rng = np.random.default_rng(4)
+n = 4000
+group = rng.integers(0, 2, n)                     # the label the studies recorded
+hair = rng.normal(0, 1, n) + 1.0 * group          # hair under the electrodes, more in group 1
+contact = -0.8 * hair + rng.normal(0, 1, n)       # thicker hair, poorer contact
+score = -0.6 * contact + rng.normal(0, 1, n)      # poorer contact, higher score: no brain term
+proxy = contact + rng.normal(0, 0.5, n)           # a measured index of contact, with error
+adjusted = score - np.polyval(np.polyfit(proxy, score, 1), proxy)
+print(f"contact only: AUC {auc(score, group):.3f}, "
+      f"after adjusting for the index {auc(adjusted, group):.3f}")
+
+# 3. The same, with a real difference and contact that doesn't differ by group.
+contact = rng.normal(0, 1, n)
+score = 0.3 * group - 0.5 * contact + rng.normal(0, 1, n)
+proxy = contact + rng.normal(0, 0.5, n)
+adjusted = score - np.polyval(np.polyfit(proxy, score, 1), proxy)
+print(f"a real difference: AUC {auc(score, group):.3f}, "
+      f"after adjusting {auc(adjusted, group):.3f}")</code></pre>
+      <div class="text">
+        <p>Then report:</p>
+        <ol class="rulelist">
+          <li>Derive the stable share from the two AUCs, and say what it means that averaging stops near 0.62.</li>
+          <li>From the simulation, what adjusting for contact does to a score that reads contact and to one that doesn't, and what a noisy index would leave behind.</li>
+          <li>Design the study that would separate brain from contact: what you would measure, in whom, and the comparison that would decide it.</li>
+        </ol>
+      </div>
+      
+    </section>
+
+    <section id="open">
+      <h2>Open problems</h2>
+      <ol class="rulelist">
+        <li><b>Brain, or body?</b> How much of any EEG classifier's separation of the sexes comes from the brain rather than anatomy, hair, contact or muscle is not known, for this head or the deep network that found more.</li>
+        <li><b>Mosaics and classifiers.</b> Whether brains are better described as two types or as mosaics depends on the question, and the debate Joel and others (2015) opened continues.</li>
+        <li><b>What the labels mean.</b> Most datasets record two categories without saying how they were assigned. What a classifier learns from such labels, and for whom it fails, is open.</li>
+      </ol>
+    </section>
+
+    <section id="report">
+      <h2>Written analysis</h2>
+      <div class="text">
+        <ol class="rulelist">
+          <li>The quantities from the published AUCs, with the derivation behind each.</li>
+          <li>The confound simulation, and what it shows adjusting can and can't do.</li>
+          <li>Your design for separating brain from contact, with its comparison and what would count against each answer.</li>
+          <li>One way a sex classifier on EEG could harm someone, and one safeguard against it.</li>
+          <li>No one's score.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Hagemann, D., Hewig, J., Walter, C., and Naumann, E. (2008). Skull thickness and magnitude of EEG alpha activity. Clinical Neurophysiology.</p>
+      <p>Rippon, G., Jordan-Young, R., Kaiser, A., and Fine, C. (2014). Recommendations for sex/gender neuroimaging research: key principles and implications for research design, analysis, and interpretation. Frontiers in Human Neuroscience.</p>
+      <p>Joel, D., and others (2015). Sex beyond the genitalia: the human brain mosaic. Proceedings of the National Academy of Sciences.</p>
+      <p>Chekroud, A. M., Ward, E. J., Rosenberg, M. D., and Holmes, A. J. (2016). Patterns in the human brain mosaic discriminate males from females. Proceedings of the National Academy of Sciences.</p>
+      <p>Del Giudice, M., and others (2016). Joel et al.'s method systematically fails to detect large, consistent sex differences. Proceedings of the National Academy of Sciences.</p>
+      <p>van Putten, M. J. A. M., Olbrich, S., and Arns, M. (2018). Predicting sex from brain rhythms with deep learning. Scientific Reports.</p>
+      <p>IntoMind (2026). Heads for encoder e2f9b60f411f0e73. github.com/intomind/eeg-foundation-model-heads.</p>
+    </section>
+  </div>
+
+  <div data-l="ms hs">
+    <header class="hero">
+      <p class="eb">Part 2 · Bits · Lab 4</p>
+      <h1>Biological Sex Detector</h1>
+      <p class="lede" data-l="ms hs">This lab starts at college. Choose College or Graduate at the top to see it.</p>
+      
+    </header>
+
+    
+
+
+
+
+
+
+
+
+
+
+    
+
+  </div>
+</div></main>
+<footer class="colophon">
+  <p><b>BCI101</b> An Applied Introduction to Noninvasive Brain-Computer Interfaces. Neurons, to bits, to real-world outcomes. Built on the demos at <a href="https://demo.intomind.com/">demo.intomind.com</a>.</p>
+  <div class="level-line"><span>Level</span><div class="levels" role="group" aria-label="Level"><button type="button" data-level="ms">Middle school</button><button type="button" data-level="hs">High school</button><button type="button" data-level="college">College</button><button type="button" data-level="grad">Graduate</button></div></div>
+</footer>
+</body>
+</html>

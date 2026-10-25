@@ -1,0 +1,878 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mind-Controlled Light Switch · BCI101</title>
+<meta name="description" content="Teach a custom AI head two of your own mental states, test it fairly against chance, and run it on the IntoMind One's chip.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/assets/site.css">
+<script>(function(){var d=document.documentElement,q=new URLSearchParams(location.search),s=function(k){try{return localStorage.getItem(k)}catch(e){return null}},L={ms:1,hs:1,college:1,grad:1},l=q.get("level");if(L[l]){try{localStorage.setItem("curriculum-level",l)}catch(e){}}else l=s("curriculum-level");if(!L[l]){l="hs";d.dataset.ask="1"}d.dataset.level=l;d.dataset.theme=q.get("theme")||s("curriculum-theme")||"dark";})()</script>
+<script type="module" src="/assets/curriculum.js"></script>
+</head>
+<body>
+<header class="chrome">
+  <a class="mark" href="/">IntoMind<span>Learn</span></a>
+  <nav class="nav" aria-label="Pages"><a href="/">Contents</a><a href="/labs/" aria-current="page">Labs</a><a href="/vocabulary/">Vocabulary</a><a href="/safety/">Safety</a></nav>
+  <div class="controls"><button class="theme" type="button">Light</button></div>
+</header>
+<main class="page kind-lab">
+  <div class="lv lv-ms" data-l="ms">
+    <header class="hero">
+      <p class="eb">Lab 4 · Middle school</p>
+      <h1>Mind-Controlled Light Switch</h1>
+      <p class="lede">Can you teach a computer to tell two of your own thoughts apart, well enough to switch a light?</p>
+    </header>
+
+    
+
+    <section id="ready">
+      <h2>Get ready</h2>
+      <div class="three">
+        <div>
+          <h3>You need</h3>
+          <ul>
+            <li>An IntoMind One, charged, with its cable unplugged</li>
+            <li>A computer with Chrome or Edge</li>
+            <li>A chair for the wearer, in a quiet spot</li>
+            <li>A clean microfiber, soft cotton or eyeglass cloth</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Roles</h3>
+          <dl class="roles">
+            <div><dt>Wearer</dt><dd>Wears the IntoMind One, and rests or counts when the demo says.</dd></div>
+            <div><dt>Coach</dt><dd>Keeps the group quiet, and keeps time.</dd></div>
+            <div><dt>Recorder</dt><dd>Writes down the score, and counts the light's switches.</dd></div>
+            <div><dt>Skeptic</dt><dd>Watches the wearer, and writes down every blink, word or jaw clench, and when.</dd></div>
+          </dl>
+          <p class="after">Take turns, so everyone who wants to can be the wearer. In a group of three, the coach is the skeptic too.</p>
+        </div>
+        <div>
+          <h3>Rules</h3>
+          <ul>
+            <li>Unplug the cable before anyone puts it on.</li>
+            <li>Wearing it is your choice. Every role is a real one.</li>
+            <li>Wipe the electrodes between wearers with the soft cloth, since a rough one can scratch their gold coating.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="steps">
+      <h2>Steps</h2>
+      <ol class="steps">
+        <li>
+          <h3>Put it on and connect</h3>
+          <figure class="fig" data-fig="picture" data-src="/assets/heads/oz" data-alt="A head seen from behind. An orange area on the back of the head, a little above the neck, shows where the IntoMind One goes."></figure>
+          <div>
+            <p>The IntoMind One goes on the back of the head, a little above the bump where the skull meets the neck: the same place as in Alpha Flower. Alpha, which comes from the back of the brain, usually drops when you concentrate on counting, and that change is what this lab uses.</p>
+            <p>Unplug the cable. The wearer sits down. Put it on with the strap around the head. Part the hair under each electrode so it touches skin, and press it down until it feels firm but not tight.</p>
+            <p>Open the <a href="https://demo.intomind.com/light-switch/">Mind-Controlled Light Switch demo</a>, press <b>Connect your IntoMind One</b>, and choose yours from the list.</p>
+            <p class="see"><b>You should see</b>Connected and the battery level at the top right, and the demo's line: Off is resting, On is a thought you hold.</p>
+          </div>
+        </li>
+        <li>
+          <h3>Teach it</h3>
+          <figure class="fig" data-fig="shot" data-shot="switch-teaching"></figure>
+          <div>
+            <p>Press <b>Start teaching</b>. For about seven minutes, the demo shows Off or On.</p>
+            <p><b>Off:</b> rest with your eyes open, and let your mind wander. <b>On:</b> count down from 300 by sevens, in your head. Switch when the demo switches. A high beep marks On, a low beep marks Off, and the demo says each one aloud.</p>
+            <p class="see"><b>You should see</b>Eight rounds, Off and On in turn, with the readings in each round counted under the word on the screen.</p>
+            
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>Read the score</h3>
+            <p>When teaching ends, the demo teaches a <dfn data-term="Custom AI head" data-l="ms" data-def="The small model you teach on the Mind-Controlled Light Switch. It gives each reading a score, near 0 for Off and near 1 for On.">custom AI head</dfn>: a small model of your own that tells your two states apart. Then it tests it on readings it held back.</p>
+            <p class="see"><b>You should see</b>A line at the bottom left, like: “Tested on readings it held back: 60 of 88 right, clearly better than guessing.” If the score isn't clearly better than guessing, the line says it could be luck, and to teach it again or pick another thought for On.</p>
+            
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>Run it</h3>
+            <p class="ask"><span class="lbl">Predict</span>The light will follow me <span class="fill" data-key="predict-follow" data-hint="how many"></span> of 10 switches.</p>
+            <p>Press <b>Run it on your IntoMind One</b>. Your custom AI head now runs on the IntoMind One's own chip, and sends a score every few seconds: near 0 for Off, near 1 for On. The page compares each score with 0.5, and shows On or Off.</p>
+            <p>The recorder calls ten switches, On, then Off, and counts how many times the light follows.</p>
+          </div>
+          <figure class="fig" data-fig="shot" data-shot="switch-running"></figure>
+          <table class="sheet" data-sheet="ms-switch">
+            <thead><tr><th>Wearer</th><th>Score, of 88</th><th>Clearly better than guessing?</th><th>Predicted, of 10</th><th>Light followed, of 10</th><th>Skeptic's notes</th></tr></thead>
+            <tbody><tr><td>1</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>2</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>3</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>4</td><td></td><td></td><td></td><td></td><td></td></tr></tbody>
+          </table>
+          <div>
+            <p class="see"><b>You should see</b>The light on the board drawn in the demo turning on a few seconds after you switch to On, and off a few seconds after you rest.</p>
+            
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>Save it</h3>
+            <p>Press <b>Save</b>, then <b>Save the head</b>, and rename the file with your name. It is your custom AI head, to put back on the IntoMind One in the Mind-Controlled Microcontroller.</p>
+            <p class="see"><b>You should see</b>A file on your computer whose name starts with light-switch.</p>
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>Remove it, if your teacher asks</h3>
+            <p>Your custom AI head stays on your IntoMind One until it is removed or replaced. When your teacher wants the device clear, press <b>Remove it from your IntoMind One</b>, at the bottom right.</p>
+            <p class="see"><b>You should see</b>Removed. Your custom AI head stays on the page, to run or save again.</p>
+            
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="happened">
+      <h2>What happened</h2>
+      <div class="grid">
+        <div class="text">
+          <p>You taught a model, as in Models that learn. Every four seconds of your EEG was one example, labeled Off or On by what the demo told you to do. On the IntoMind One's chip, a model called the encoder turns each four seconds into 76 numbers, and your custom AI head learned what makes your Off numbers different from your On numbers.</p>
+          <p>The test was fair: the readings it was tested on were ones it never learned from, and its score was compared with guessing, which gets about half of 88, or 44.</p>
+          <p>The light changes a few seconds after you do, because each reading is four seconds of EEG. Your custom AI head never knows what you were thinking. It only learned what made two of your states look different.</p>
+          
+        </div>
+        <figure class="fig" data-fig="pipeline"><figcaption><b>Simulated</b> Four seconds of EEG, the encoder on the IntoMind One's chip, the 76 numbers it makes, your custom AI head, its score, and the light, which is on while the score is above 0.5.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Talk about it</h2>
+      <ol class="qs">
+        <li class="q"><p>What did your custom AI head learn from?</p></li>
+        <li class="q"><p>Compare your score with guessing, 44 of 88. Did your custom AI head learn something real? How can you tell?</p></li>
+        <li class="q"><p>The skeptic wrote down blinks and jaw clenches. Could those have fooled the custom AI head? How would you check?</p></li>
+      </ol>
+    </section>
+  </div>
+
+  <div class="lv lv-hs" data-l="hs">
+    <header class="hero">
+      <p class="eb">Lab 4 · High school</p>
+      <h1>Mind-Controlled Light Switch</h1>
+      <p class="lede">Choose two mental states, and the place on the head where they should differ most. Can a model learn to tell them apart, and how will you know it isn't luck?</p>
+    </header>
+
+    
+
+    <section id="background">
+      <h2>Background</h2>
+      <p class="after-note">Read it the night before.</p>
+      <div class="grid">
+        <div class="text">
+          <h3>Teaching a model your states</h3>
+          <p>The demo teaches a classifier from labeled examples. Each example is four seconds of your EEG, summed up as 76 numbers by the IntoMind One's encoder, and labeled Off while you rest and On while you hold your On state. It collects them in eight rounds, Off and On in turn, eleven readings in each.</p>
+          <p>The model it fits is your <dfn data-term="Custom AI head" data-l="hs" data-def="The small model you teach on the Mind-Controlled Light Switch. It gives each reading a score, near 0 for Off and near 1 for On.">custom AI head</dfn>. To test it fairly, the demo teaches it eight times, each time holding back one round and testing on it, so each of the 88 readings is scored by a head that never learned from it. A whole round is held back, not single readings, because readings close together in time are alike.</p>
+        </div>
+        <figure class="fig" data-fig="rounds" data-held="3"><figcaption><b>Eight rounds</b> Off and On in turn, with eleven readings kept in each. The two faint readings after every switch are left out while the brain settles. Each round in turn is held back and tested on: the outlined one is one of them.</figcaption></figure>
+      </div>
+      <div class="grid flip">
+        <div class="text">
+          <h3>Better than guessing?</h3>
+          <p>With two states taught equally, guessing gets about half right: 44 of 88 readings. A score is evidence only when it is clearly above that, and the demo works out how far above is clear, by teaching and testing a fresh head on each of the 70 ways to relabel the rounds.</p>
+          <p>Blinks, talking and a clenched jaw make large signals that aren't from the brain. If one state has more of them, they can raise the score for the wrong reason.</p>
+          
+        </div>
+        <figure class="fig" data-fig="binomial" data-n="88" data-k="53"><figcaption><b>Guessing</b> How often a guesser gets each number of 88 readings right. Most often about 44, and 53 or more, in orange, about 3.5 times in 100.</figcaption></figure>
+      </div>
+      <div class="grid">
+        <div class="text">
+          <h3>Choose your states, and where they show</h3>
+          <p>Each mental state changes the signal most over one part of the brain, so you choose your two states and the site together.</p>
+          <p>A fist, made or just imagined, changes the <dfn data-term="Mu rhythm" data-l="hs" data-def="A rhythm of about 8 to 13 waves a second over the motor cortex, which drops when the opposite hand moves or imagines moving.">mu rhythm</dfn> over the <dfn data-term="Motor cortex" data-l="hs" data-def="The strip of the brain above and in front of the ears that controls movement. Each side controls the opposite hand.">motor cortex</dfn> on the opposite side of the brain from the hand. So a right fist shows at C3, on the left, about three fifths of the way from the left ear up to the top of the head.</p>
+        </div>
+        <figure class="fig" data-fig="head" data-views="top" data-sites="C3 C4 Cz Oz Fpz" data-device="C3" data-shade="motor language"><figcaption><b>The sites</b> From above, with the motor cortex and the language areas shaded. The IntoMind One is drawn at C3, over the motor cortex for the right hand.</figcaption></figure>
+      </div>
+      <table class="data choices">
+        <thead><tr><th>Your two states</th><th>Site</th><th>Why there</th></tr></thead>
+        <tbody>
+          <tr><td>Resting, and counting down in your head</td><td>Oz</td><td>Alpha, from the visual areas at the back, usually drops when you concentrate.</td></tr>
+          <tr><td>Eyes open, and eyes closed</td><td>Oz</td><td>Alpha rises strongly with the eyes closed, as in Alpha Flower: the surest pair.</td></tr>
+          <tr><td>Resting, and a right fist, made or imagined</td><td>C3</td><td>The mu rhythm over the left motor cortex drops when the right hand moves, or imagines moving.</td></tr>
+          <tr><td>Left fist, and right fist</td><td>C3, then C4</td><td>Each side of the brain controls the opposite hand. Teach at C3, then test the same head at the mirror site, C4.</td></tr>
+          <tr><td>Resting, and saying a word in your head</td><td>Left side, just above the ear</td><td>Most people's language areas are on the left. Inner speech is weak in EEG, so a score near chance is a real result.</td></tr>
+          <tr><td>Any pair</td><td>Fpz</td><td>No hair, so contact is easy. But blinks are largest there, and a head can learn them instead of your states.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="ready">
+      <h2>Get ready</h2>
+      <div class="three">
+        <div>
+          <h3>You need</h3>
+          <ul>
+            <li>An IntoMind One, charged, with its cable unplugged</li>
+            <li>A computer with Chrome or Edge</li>
+            <li>A chair for the wearer, in a quiet spot</li>
+            <li>A clean microfiber, soft cotton or eyeglass cloth</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Roles</h3>
+          <dl class="roles">
+            <div><dt>Wearer</dt><dd>Wears the IntoMind One, and holds Off or On when the demo says.</dd></div>
+            <div><dt>Coach</dt><dd>Keeps the group quiet, and keeps time.</dd></div>
+            <div><dt>Recorder</dt><dd>Writes down the score, and counts the light's switches.</dd></div>
+            <div><dt>Skeptic</dt><dd>Watches the wearer, and writes down every blink, word or jaw clench, and the round it happened in.</dd></div>
+          </dl>
+          <p class="after">Take turns, so everyone who wants to can be the wearer. In a group of three, the coach is the skeptic too.</p>
+        </div>
+        <div>
+          <h3>Rules</h3>
+          <ul>
+            <li>Unplug the cable before anyone puts it on.</li>
+            <li>Wearing it is your choice. Every role is a real one.</li>
+            <li>Wipe the electrodes between wearers with the soft cloth, since a rough one can scratch their gold coating.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="steps">
+      <h2>Steps</h2>
+      <ol class="steps">
+        <li class="text">
+          <div>
+            <h3>Choose your states and site</h3>
+            <p class="ask"><span class="lbl">Our choice</span>Off: <span class="fill" data-key="off-state" data-hint="state"></span>. On: <span class="fill" data-key="on-state" data-hint="state"></span>. Site: <span class="fill" data-key="site" data-hint="where"></span>, because <span class="fill" data-key="site-why" data-hint="why"></span>.</p>
+            <p>In every pair but eyes open and closed, do both states with your eyes open, in the same posture, so that the only difference is the one you chose.</p>
+          </div>
+        </li>
+        <li>
+          <h3>Put it on and connect</h3>
+          <figure class="fig trio">
+            <div class="views">
+              <div><span class="picture"><img class="dark" src="/assets/heads/oz-dark.webp" alt="A head from behind, with an orange area over Oz."><img class="light" src="/assets/heads/oz-light.webp" alt="A head from behind, with an orange area over Oz."></span><span>Oz</span></div>
+              <div><span class="picture"><img class="dark" src="/assets/heads/c3-dark.webp" alt="A head from its left side, with an orange area over C3, above the ear."><img class="light" src="/assets/heads/c3-light.webp" alt="A head from its left side, with an orange area over C3, above the ear."></span><span>C3</span></div>
+              <div><span class="picture"><img class="dark" src="/assets/heads/fpz-dark.webp" alt="A head from the front, with an orange area over Fpz, on the forehead."><img class="light" src="/assets/heads/fpz-light.webp" alt="A head from the front, with an orange area over Fpz, on the forehead."></span><span>Fpz</span></div>
+            </div>
+          </figure>
+          <div>
+            <p>Put the IntoMind One at your site: on the midline just above the inion for Oz, or for C3, on the line over the top of the head from ear to ear, about three fifths of the way from the left ear up to the top. Unplug the cable first. Part the hair under each electrode, and press it down until it feels firm but not tight.</p>
+            <p>Open the <a href="https://demo.intomind.com/light-switch/">Mind-Controlled Light Switch demo</a>, press <b>Connect your IntoMind One</b>, and choose yours from the list.</p>
+            <p class="see"><b>You should see</b>Connected and the battery level at the top right, and the demo's line: Off is resting, On is a thought you hold.</p>
+          </div>
+        </li>
+        <li>
+          <h3>Teach it</h3>
+          <figure class="fig" data-fig="shot" data-shot="switch-teaching"></figure>
+          <div>
+            <p>Press <b>Start teaching</b>. For about seven minutes the demo shows Off or On. Hold your Off state or your On state, and switch when the demo switches. A high beep marks On, a low beep marks Off, and the demo says each one aloud.</p>
+            <p class="see"><b>You should see</b>Eight rounds, Off and On in turn, with the readings in each round counted under the word on the screen.</p>
+            
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>Read the score</h3>
+            <p>When teaching ends, the demo tests your custom AI head on readings it held back, a round at a time, then fits it on all 88.</p>
+            <p class="see"><b>You should see</b>A line at the bottom left, like: “Tested on readings it held back: 60 of 88 right, clearly better than guessing.” If the score isn't clearly better, the line says it could be luck, and to teach again or choose another state for On.</p>
+            
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>Run it</h3>
+            <p class="ask"><span class="lbl">Predict</span>The light will follow me <span class="fill" data-key="predict-follow" data-hint="how many"></span> of 10 switches.</p>
+            <p>Press <b>Run it on your IntoMind One</b>. Your custom AI head now runs on the IntoMind One's own chip, and sends a score every few seconds: near 0 for Off and near 1 for On, and sometimes a little outside. The page compares each score with 0.5, and shows On or Off. The recorder calls ten switches, and counts how many times the light follows.</p>
+          </div>
+          <figure class="fig" data-fig="shot" data-shot="switch-running"></figure>
+          <div>
+            <p class="see"><b>You should see</b>The light on the board drawn in the demo turning on a few seconds after you switch to On, and off a few seconds after you switch back.</p>
+            
+          </div>
+        </li>
+        <li>
+          <h3>Test the mirror site</h3>
+          <figure class="fig" data-fig="picture" data-src="/assets/heads/c4" data-alt="A head from its right side, with an orange area over C4, above the ear."></figure>
+          <div>
+            <p class="ask"><span class="lbl">Predict</span>At the mirror site, the light will follow me <span class="fill" data-key="predict-mirror" data-hint="how many"></span> of 10 switches.</p>
+            <p>For a fist pair. Keep the head running, move the IntoMind One to the mirror site, C4 for a head taught at C3, part the hair and press it down, and call ten switches again, the same way. Then put it back at the taught site.</p>
+            <p class="see"><b>You should see</b>For most people, the light following fewer of the ten at the mirror site.</p>
+            
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>Save it</h3>
+            <p>Press <b>Save</b>. Save the head, to install it again later, for example in the Mind-Controlled Microcontroller, and rename its file with your name. Save the training data, to analyze it.</p>
+            <p class="see"><b>You should see</b>Two files on your computer: the head, and the training data. The training data comes from your EEG, so it is yours to keep or delete.</p>
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>Record it</h3>
+          </div>
+          <table class="sheet" data-sheet="hs-switch">
+            <thead><tr><th>Wearer</th><th>States and site</th><th>Score, of 88</th><th>Clearly better than guessing?</th><th>Light followed, of 10</th><th>Mirror site, of 10</th><th>Skeptic's notes</th></tr></thead>
+            <tbody><tr><td>1</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>2</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>3</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>4</td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody>
+          </table>
+        </li>
+        <li class="text">
+          <div>
+            <h3>Remove it, if your teacher asks</h3>
+            <p>Your custom AI head stays on your IntoMind One until it is removed or replaced. When your teacher wants the device clear, press <b>Remove it from your IntoMind One</b>, at the bottom right.</p>
+            
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="work">
+      <h2>Work it out</h2>
+      <div class="text">
+        <p class="ask"><span class="lbl">Work it out</span>Our best score minus 44, the guessing score: <span class="fill" data-key="above-44" data-hint="how many"></span>. The demo's verdict: <span class="fill" data-key="verdict" data-hint="what it said"></span>. For a fist pair, the light followed <span class="fill" data-key="taught-10" data-hint="how many"></span> of 10 at the taught site, and <span class="fill" data-key="mirror-10" data-hint="how many"></span> of 10 at the mirror site.</p>
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Talk about it</h2>
+      <ol class="qs">
+        <li class="q"><p>Why does the demo alternate between Off and On over eight rounds, instead of doing all the Off first?</p></li>
+        <li class="q"><p>Why would testing on the readings it trained on give a score that looks better than it is?</p></li>
+        <li class="q"><p>Two wearers scored 61 and 79 out of 88. Give two reasons they might differ that aren't about their brains.</p></li>
+        <li class="q"><p>Would eyes closed against eyes open separate better than resting against counting? Predict, then explain.</p></li>
+        <li class="q"><p>A head taught at C3 with the right fist as On followed 8 of 10 switches there, and 5 of 10 at C4. What does that show? What would 8 of 10 at C4 have shown?</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Pfurtscheller, G., and Lopes da Silva, F. H. (1999). Event-related EEG/MEG synchronization and desynchronization: basic principles. Clinical Neurophysiology.</p>
+      <p>Panachakel, J. T., and Ramakrishnan, A. G. (2021). Decoding covert speech from EEG: a comprehensive review. Frontiers in Neuroscience.</p>
+      <p>Combrisson, E., and Jerbi, K. (2015). Exceeding chance level by chance: the caveat of theoretical chance levels in brain signal classification and statistical assessment of decoding accuracy. Journal of Neuroscience Methods.</p>
+      <p>Wolpaw, J. R., and Wolpaw, E. W., editors (2012). Brain-Computer Interfaces: Principles and Practice. Oxford University Press.</p>
+    </section>
+  </div>
+
+  <div class="lv lv-college" data-l="college">
+    <header class="hero">
+      <p class="eb">Lab 5 · College</p>
+      <h1>Mind-Controlled Light Switch</h1>
+      <p class="lede">Choose two mental states and the site where they should differ most. Can a regularized linear model on the encoder's embeddings tell them apart on rounds it never saw, beyond what relabeling the rounds gives, and does it still work at the mirror site?</p>
+    </header>
+
+    
+
+    <section id="background">
+      <h2>Background</h2>
+      <p class="after-note">Read it before the lab.</p>
+      <div class="grid">
+        <div class="text">
+          <h3>The pipeline</h3>
+          <p>Every four seconds the encoder turns the EEG into 76 numbers. While you teach, the demo labels each embedding Off or On by the cue on screen, drops the two readings after every switch, which still carry the old state, and drops any reading whose four seconds had a gap. Eight rounds, Off and On in turn, keep eleven readings each: 88.</p>
+          <p>Your browser fits ridge regression from the 76 numbers to the labels, with λ from the embeddings alone, scores it by holding out each round in turn, rounds the weights to bytes, and installs the <dfn data-term="Custom AI head" data-l="college" data-def="The small linear model you teach on the Mind-Controlled Light Switch. It gives each reading a score, near 0 for Off and near 1 for On.">custom AI head</dfn> on the IntoMind One, which sends a score every four seconds. The page, or a board, compares it with 0.5.</p>
+        </div>
+        <figure class="fig" data-fig="pipeline"><figcaption><b>Simulated</b> Four seconds of EEG, the encoder on the chip, its 76 numbers, your custom AI head, its score, and the light, on while the score is above 0.5.</figcaption></figure>
+      </div>
+      <div class="grid flip">
+        <div class="text">
+          <h3>States and sites</h3>
+          <p>Each state changes the signal most over one part of the cortex, so you choose the pair and the site together. A fist, made or imagined, desynchronizes the <dfn data-term="Mu rhythm" data-l="college" data-def="A rhythm of about 8 to 13 hertz over the sensorimotor cortex, which falls when the opposite hand moves or imagines moving.">mu rhythm</dfn> over the <dfn data-term="Motor cortex" data-l="college" data-def="The strip of cortex in front of the central sulcus that controls movement. Each side controls the opposite side of the body.">motor cortex</dfn> opposite the hand: C3 for the right hand. Taught at C3, a head that learned one hemisphere's change should fall toward chance at the mirror site, C4.</p>
+        </div>
+        <figure class="fig" data-fig="head" data-views="top" data-sites="C3 C4 Cz Oz Fpz" data-device="C3" data-shade="motor language"><figcaption><b>The sites</b> From above, with the motor cortex and the language areas shaded. The IntoMind One is drawn at C3, over the motor cortex for the right hand.</figcaption></figure>
+      </div>
+      <table class="data choices">
+        <thead><tr><th>Your two states</th><th>Site</th><th>Why there</th></tr></thead>
+        <tbody>
+          <tr><td>Resting, and counting down in your head</td><td>Oz</td><td>Occipital alpha usually falls with concentration.</td></tr>
+          <tr><td>Eyes open, and eyes closed</td><td>Oz</td><td>Alpha rises strongly with the eyes closed: the surest pair.</td></tr>
+          <tr><td>Resting, and a right fist, made or imagined</td><td>C3</td><td>The mu rhythm over the left motor cortex falls with the right hand's movement, or its imagined movement.</td></tr>
+          <tr><td>Left fist, and right fist</td><td>C3, then C4</td><td>Each hemisphere controls the opposite hand. Teach at C3, then test the same head at the mirror site.</td></tr>
+          <tr><td>Resting, and a word in your head</td><td>Left side, just above the ear</td><td>Most people's language areas are on the left. Inner speech is weak in EEG, and decoding it sits near chance.</td></tr>
+          <tr><td>Any pair</td><td>Fpz</td><td>The easiest contact, and the largest blinks, which a head can learn in place of the states.</td></tr>
+        </tbody>
+      </table>
+      <div class="grid">
+        <div class="text">
+          <h3>Against chance</h3>
+          <p>Judged as 88 independent tries, a one-sided binomial test draws its 0.05 line at 53 right. But readings in a round share a state, a posture and a stretch of time, so the binomial overstates the evidence. The demo instead scores every one of the C(8, 4) = 70 ways to call four rounds On, with the same folds. Since a labeling and its mirror score alike, p can't go below 2/70, and the demo calls a score clearly better than guessing when p is below 0.05.</p>
+        </div>
+        <figure class="fig" data-fig="labelings"><figcaption><b>70 labelings</b> Every way of calling four of the eight rounds On. Each is scored like the taught one, outlined with its mirror.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="hypothesis">
+      <h2>Hypothesis</h2>
+      <div class="text">
+        <p class="after-note">Write it before the wearer sits down.</p>
+        <p class="ask"><span class="lbl">Hypothesis</span>Off: <span class="fill" data-key="h-off" data-hint="state"></span>. On: <span class="fill" data-key="h-on" data-hint="state"></span>. Site: <span class="fill" data-key="h-site" data-hint="site"></span>, because <span class="fill" data-key="h-why" data-hint="why"></span>. The head will get about <span class="fill" data-key="h-score" data-hint="how many"></span> of 88 right on rounds it never saw, and for a fist pair, follow <span class="fill" data-key="h-mirror" data-hint="how many"></span> of 10 switches at the mirror site.</p>
+      </div>
+    </section>
+
+    <section id="ready">
+      <h2>Get ready</h2>
+      <div class="three">
+        <div>
+          <h3>You need</h3>
+          <ul>
+            <li>An IntoMind One, charged, with its cable unplugged</li>
+            <li>A computer with Chrome or Edge, Python 3 with the intomind package, and <a href="https://github.com/intomind/demo">the demos' source</a></li>
+            <li>A chair for the wearer, in a quiet spot, and a stopwatch</li>
+            <li>A clean microfiber, soft cotton or eyeglass cloth</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Roles</h3>
+          <dl class="roles">
+            <div><dt>Wearer</dt><dd>Wears the IntoMind One, and holds Off or On when the demo says.</dd></div>
+            <div><dt>Operator</dt><dd>Runs the demo, calls the switches and times the light.</dd></div>
+            <div><dt>Analyst</dt><dd>Notes anything that could leak into the labels: blinks, movement, talking, a missed cue, and the round it happened in.</dd></div>
+          </dl>
+          <p class="after">Rotate, so everyone who wants to is the wearer once.</p>
+        </div>
+        <div>
+          <h3>Rules</h3>
+          <ul>
+            <li>Unplug the cable before anyone puts it on.</li>
+            <li>Wearing it is your choice. Every role is a real one.</li>
+            <li>Saved training data comes from someone's EEG. Keep it only with their permission.</li>
+            <li>Wipe the electrodes between wearers with the soft cloth, since a rough one can scratch their gold coating.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="steps">
+      <h2>Procedure</h2>
+      <ol class="steps">
+        <li>
+          <h3>Put it on at your site</h3>
+          <figure class="fig trio">
+            <div class="views">
+              <div><span class="picture"><img class="dark" src="/assets/heads/oz-dark.webp" alt="A head from behind, with an orange area over Oz."><img class="light" src="/assets/heads/oz-light.webp" alt="A head from behind, with an orange area over Oz."></span><span>Oz</span></div>
+              <div><span class="picture"><img class="dark" src="/assets/heads/c3-dark.webp" alt="A head from its left side, with an orange area over C3, above the ear."><img class="light" src="/assets/heads/c3-light.webp" alt="A head from its left side, with an orange area over C3, above the ear."></span><span>C3</span></div>
+              <div><span class="picture"><img class="dark" src="/assets/heads/fpz-dark.webp" alt="A head from the front, with an orange area over Fpz, on the forehead."><img class="light" src="/assets/heads/fpz-light.webp" alt="A head from the front, with an orange area over Fpz, on the forehead."></span><span>Fpz</span></div>
+            </div>
+          </figure>
+          <div>
+            <p>Oz is on the midline just above the inion. C3 is on the line from ear to ear over the top of the head, three fifths of the way from the left ear up to the top. Unplug the cable, part the hair under each electrode, and press it down until it feels firm but not tight. Open the <a href="https://demo.intomind.com/light-switch/">Mind-Controlled Light Switch demo</a> and connect.</p>
+          </div>
+        </li>
+        <li>
+          <h3>Teach it</h3>
+          <figure class="fig" data-fig="shot" data-shot="switch-teaching"></figure>
+          <div>
+            <p>Press <b>Start teaching</b>. For about seven minutes the demo shows Off or On, with a high beep for On and a low one for Off. Hold your state, and switch when the demo switches. In every pair but eyes open and closed, keep the eyes open and the posture the same in both states.</p>
+            <p class="see"><b>You should see</b>Eight rounds, Off and On in turn, with the readings in each round counted under the word on the screen.</p>
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>Read the score</h3>
+            <p>When teaching ends, your browser fits the head and tests it on each round held back in turn.</p>
+            <p class="see"><b>You should see</b>A line at the bottom left: how many of the 88 readings it got right on rounds it never saw, and whether that is clearly better than guessing.</p>
+          </div>
+        </li>
+        <li>
+          <h3>Run it, and time it</h3>
+          <figure class="fig" data-fig="shot" data-shot="switch-running"></figure>
+          <div>
+            <p>Press <b>Run it on your IntoMind One</b>. The operator calls ten switches at random times, and times each one from the call to the light. For a fist pair, then move the IntoMind One to the mirror site, C4 for a head taught at C3, and call ten more.</p>
+            <p class="see"><b>You should see</b>The light on the board drawn in the demo following a few seconds behind, and for most fist pairs, following fewer of the ten at the mirror site.</p>
+            
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>Save it, and record it</h3>
+            <p>Press <b>Save</b>: the head, renamed with the wearer's number, and the training data, for the analysis.</p>
+          </div>
+          <table class="sheet" data-sheet="college-switch">
+            <thead><tr><th>Wearer</th><th>States and site</th><th>Score, of 88</th><th>Demo's verdict</th><th>Light followed, of 10</th><th>Mirror site, of 10</th><th>Analyst's notes</th></tr></thead>
+            <tbody><tr><td>1</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>2</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>3</td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody>
+          </table>
+        </li>
+        <li class="text">
+          <div>
+            <h3>Remove it, if your instructor asks</h3>
+            <p>A custom AI head stays on the IntoMind One until it is removed or replaced. Press <b>Remove it from your IntoMind One</b>, or run <code>python3 remove_head.py</code> from <a href="https://github.com/intomind/demo">the demos' source</a>.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="analysis">
+      <h2>Analysis</h2>
+      <div class="text">
+        <p>First, reproduce one head from its training data with the demos' Python program, and check it matches the one the browser saved, byte for byte. Then, on your own training data, measure what random folds would have claimed, and run the permutation test over rounds yourself.</p>
+      </div>
+      <pre><code>cd python
+python3 teach_it.py --from training-data.json --out reproduced.imh
+cmp reproduced.imh the-head-you-saved.imh &amp;&amp; echo identical</code></pre>
+      <pre><code>import json
+from itertools import combinations
+import numpy as np
+
+data = json.load(open(&quot;training-data.json&quot;))      # the training data the demo saved
+X = np.array([w[&quot;embedding&quot;] for w in data[&quot;windows&quot;]], float)
+y = np.array([w[&quot;label&quot;] for w in data[&quot;windows&quot;]], float)
+round_of = np.array([w[&quot;round&quot;] for w in data[&quot;windows&quot;]])
+
+def fit(X, y):
+    &quot;&quot;&quot;Ridge with the trainer&#x27;s λ, from the embeddings alone, and no penalty on the intercept.&quot;&quot;&quot;
+    Xc = X - X.mean(axis=0)
+    ev = np.linalg.eigvalsh(Xc.T @ Xc)
+    lam = np.sqrt(max(ev[0], 1) * ev[1])
+    A = np.c_[X, np.ones(len(X))]
+    P = lam * np.eye(A.shape[1])
+    P[-1, -1] = 0
+    return np.linalg.solve(A.T @ A + P, A.T @ y)
+
+def right(X, y, folds):
+    &quot;&quot;&quot;Readings right when each fold is held out in turn.&quot;&quot;&quot;
+    n = 0
+    for test in folds:
+        train = np.setdiff1d(np.arange(len(y)), test)
+        w = fit(X[train], y[train])
+        n += np.sum((np.c_[X[test], np.ones(len(test))] @ w &gt; 0.5) == y[test])
+    return int(n)
+
+rounds = np.unique(round_of)
+by_round = [np.flatnonzero(round_of == r) for r in rounds]
+shuffled = np.array_split(np.random.default_rng(0).permutation(len(y)), len(rounds))
+real = right(X, y, by_round)
+print(&quot;random folds:&quot;, right(X, y, shuffled), &quot;of&quot;, len(y))
+print(&quot;a round held out at a time:&quot;, real, &quot;of&quot;, len(y))
+
+# Every way of calling as many rounds On as were taught, scored the same way.
+taught_on = [r for r in rounds if y[round_of == r][0] == 1]
+null = [right(X, np.isin(round_of, on).astype(float), by_round)
+        for on in combinations(rounds, len(taught_on))]
+print(&quot;p over&quot;, len(null), &quot;labelings:&quot;, round(np.mean(np.array(null) &gt;= real), 3))</code></pre>
+      <table class="sheet" data-sheet="college-switch-results">
+        <thead><tr><th>Wearer</th><th>Random folds, of 88</th><th>A round held out, of 88</th><th>Your p, of 70 labelings</th><th>The demo's verdict</th></tr></thead>
+        <tbody><tr><td>1</td><td></td><td></td><td></td><td></td></tr><tr><td>2</td><td></td><td></td><td></td><td></td></tr><tr><td>3</td><td></td><td></td><td></td><td></td></tr></tbody>
+      </table>
+      
+    </section>
+
+    <section id="report">
+      <h2>Report</h2>
+      <div class="text">
+        <ol class="rulelist">
+          <li>The question, and your states, site and hypothesis as you wrote them first.</li>
+          <li>Methods: the pipeline, the ridge and its λ, the folds, and the permutation test.</li>
+          <li>Results: each wearer's score against chance, your p beside the demo's verdict, random folds against held-out rounds, the timed switches, and the mirror test.</li>
+          <li>Interpretation: which pairs separated and why, what the mirror test says about where the head's evidence comes from, and what leaked.</li>
+          <li>Limitations: one session, 88 readings for 77 parameters, the analyst's notes, and contact at each site.</li>
+          <li>Your code, as an appendix.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Problems</h2>
+      <ol class="qs">
+        <li class="q"><p>With 88 readings and a 76-dimensional embedding, what does the ridge do, and what happens without it?</p></li>
+        <li class="q"><p>Why are the tests whole rounds rather than readings drawn at random?</p></li>
+        <li class="q"><p>Under a binomial test against a chance of one half, how many of 88 must be right for a one-sided p below 0.05? What does it assume that this data breaks?</p></li>
+        <li class="q"><p>The head is rounded to signed bytes before it runs on the device. How would you measure what that changes?</p></li>
+        <li class="q"><p>Make the mirror test fair. What must be the same at both sites, and what confounds it?</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Pfurtscheller, G., and Lopes da Silva, F. H. (1999). Event-related EEG/MEG synchronization and desynchronization: basic principles. Clinical Neurophysiology.</p>
+      <p>McFarland, D. J., Miner, L. A., Vaughan, T. M., and Wolpaw, J. R. (2000). Mu and beta rhythm topographies during motor imagery and actual movements. Brain Topography.</p>
+      <p>Panachakel, J. T., and Ramakrishnan, A. G. (2021). Decoding covert speech from EEG: a comprehensive review. Frontiers in Neuroscience.</p>
+      <p>Combrisson, E., and Jerbi, K. (2015). Exceeding chance level by chance: the caveat of theoretical chance levels in brain signal classification and statistical assessment of decoding accuracy. Journal of Neuroscience Methods.</p>
+      <p>Varoquaux, G., and others (2017). Assessing and tuning brain decoders: cross-validation, caveats, and guidelines. NeuroImage.</p>
+      <p>Wolpaw, J. R., and Wolpaw, E. W., editors (2012). Brain-Computer Interfaces: Principles and Practice. Oxford University Press.</p>
+    </section>
+  </div>
+
+  <div class="lv lv-grad" data-l="grad">
+    <header class="hero">
+      <p class="eb">Lab 5 · Graduate</p>
+      <h1>Mind-Controlled Light Switch</h1>
+      <p class="lede">Can a linear head on the encoder's embeddings tell two of your states apart on rounds it never saw, does the demo's test of that hold up, and does the head still work on another day?</p>
+    </header>
+
+    
+
+    <section id="demo">
+      <h2>The demo, exactly</h2>
+      <table class="data text">
+        <thead><tr><th>Part</th><th>What it does</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td>Teaching</td><td data-th="What it does">Eight rounds, Off and On in turn, starting with Off, cued by a word and a beep, high for On. Each keeps 11 embeddings, one every four seconds, after dropping the 2 after each switch and any with a gap in the signal: 88 in about seven minutes.</td><td data-th="Source">light-switch/main.js</td></tr>
+          <tr><td>The fit</td><td data-th="What it does">Ridge regression of the labels, 0 and 1, on the embeddings as integers, the intercept unpenalized, its penalty the geometric mean of the two smallest eigenvalues of the centered Gram matrix. Refused unless there are more embeddings than 76.</td><td data-th="Source">lib/train.js</td></tr>
+          <tr><td>The head</td><td data-th="What it does">Weights rounded to signed bytes against the largest, the bias in the same units: 156 bytes, installed in slot 2.</td><td data-th="Source">lib/train.js</td></tr>
+          <tr><td>The score</td><td data-th="What it does">Eight folds of one round each. Every labeling of four rounds On, 70 in all, scored with the same folds by heads rounded as the device runs them. Clearly better than guessing when the share scoring at least as well is under 0.05, which can't fall below 2/70.</td><td data-th="Source">lib/train.js</td></tr>
+          <tr><td>Running</td><td data-th="What it does">The device scores every window, and the light follows each score above or below 0.5. A window with a gap leaves it as it was.</td><td data-th="Source">light-switch/main.js</td></tr>
+          <tr><td>Saving</td><td data-th="What it does">The head, and the training data: every kept embedding with its round and label, the states and the encoder's identity, as JSON. The Python program teach_it.py rebuilds the same head from it, byte for byte.</td><td data-th="Source">lib/train.js, python/teach_it.py</td></tr>
+        </tbody>
+      </table>
+      <div class="text">
+        <p>What it leaves out: any second day, since a head is taught and tested within one session. A penalty chosen for prediction rather than for stability, with 77 windows to fit 76 weights in every fold. And any check on what the head learned: blinks, muscle and posture that change with the state are as learnable as the state.</p>
+      </div>
+    </section>
+
+    <section id="background">
+      <h2>States and sites</h2>
+      <div class="grid">
+        <div class="text">
+          <p>Each state changes the signal most over one part of the cortex, so the pair and the site are chosen together. A fist, made or imagined, desynchronizes the mu and beta rhythms over the motor cortex opposite the hand (Pfurtscheller and Lopes da Silva, 1999): C3 for the right hand. Taught at C3, a head that learned one hemisphere's change should fall toward chance at the mirror site, C4. Inner speech is weak in EEG, and decoding it sits near chance (Panachakel and Ramakrishnan, 2021).</p>
+          <p>Between days the embeddings move: contact, posture, alertness and the electrodes' exact place all change, and a head fitted on one session meets a shifted distribution on the next (Shenoy and others, 2006). Removing each session's mean before fitting and applying is the simplest correction, a Euclidean cousin of re-centering covariance matrices (Zanini and others, 2018).</p>
+        </div>
+        <figure class="fig" data-fig="head" data-views="top" data-sites="C3 C4 Cz Oz Fpz" data-device="C3" data-shade="motor language"><figcaption><b>The sites</b> From above, with the motor cortex and the language areas shaded. The IntoMind One is drawn at C3, over the motor cortex for the right hand.</figcaption></figure>
+      </div>
+      <table class="data choices">
+        <thead><tr><th>Your two states</th><th>Site</th><th>Why there</th></tr></thead>
+        <tbody>
+          <tr><td>Resting, and counting down in your head</td><td>Oz</td><td>Occipital alpha usually falls with concentration.</td></tr>
+          <tr><td>Eyes open, and eyes closed</td><td>Oz</td><td>Alpha rises strongly with the eyes closed: the surest pair.</td></tr>
+          <tr><td>Resting, and a right fist, made or imagined</td><td>C3</td><td>The mu rhythm over the left motor cortex falls with the right hand's movement, or its imagined movement.</td></tr>
+          <tr><td>Left fist, and right fist</td><td>C3, then C4</td><td>Each hemisphere controls the opposite hand. Teach at C3, then test the same head at the mirror site.</td></tr>
+          <tr><td>Resting, and a word in your head</td><td>Left side, just above the ear</td><td>Most people's language areas are on the left. Inner speech is weak in EEG, and decoding it sits near chance.</td></tr>
+          <tr><td>Any pair</td><td>Fpz</td><td>The easiest contact, and the largest blinks, which a head can learn in place of the states.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="preregister">
+      <h2>Preregister</h2>
+      <div class="text">
+        <p>Fill it in before the first session, and change nothing after. The report names every deviation.</p>
+      </div>
+      <table class="sheet form" data-sheet="grad-switch-prereg">
+        <thead><tr><th>Item</th><th>Your plan, before any data</th></tr></thead>
+        <tbody>
+          <tr><td>States and site, and why</td><td></td></tr>
+          <tr><td>Hypotheses: each session's score, the transfer to the second day, and the mirror site for a fist pair</td><td></td></tr>
+          <tr><td>Penalties and tests, and what would count against each hypothesis</td><td></td></tr>
+          <tr><td>Exclusions: missed cues, blinks or movement noted, contact</td><td></td></tr>
+          <tr><td>Controls: how you will tell the state from what comes with it</td><td></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="ready">
+      <h2>Get ready</h2>
+      <div class="three">
+        <div>
+          <h3>You need</h3>
+          <ul>
+            <li>An IntoMind One, charged, with its cable unplugged</li>
+            <li>A computer with Chrome or Edge, Python 3 with the intomind package, and <a href="https://github.com/intomind/demo">the demos' source</a></li>
+            <li>A chair for the wearer, in a quiet spot, and a stopwatch</li>
+            <li>A clean microfiber, soft cotton or eyeglass cloth</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Roles</h3>
+          <dl class="roles">
+            <div><dt>Wearer</dt><dd>Wears the IntoMind One, and holds Off or On when the demo says.</dd></div>
+            <div><dt>Operator</dt><dd>Runs the demo, calls the switches and times the light.</dd></div>
+            <div><dt>Analyst</dt><dd>Notes anything that could leak into the labels: blinks, movement, talking, a missed cue, and the round it happened in.</dd></div>
+          </dl>
+          <p class="after">Rotate, so everyone who wants to is the wearer once.</p>
+        </div>
+        <div>
+          <h3>Rules</h3>
+          <ul>
+            <li>Unplug the cable before anyone puts it on.</li>
+            <li>Wearing it is your choice. Every role is a real one.</li>
+            <li>Saved training data comes from someone's EEG. Keep it only with their permission.</li>
+            <li>Wipe the electrodes between wearers with the soft cloth, since a rough one can scratch their gold coating.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="steps">
+      <h2>Procedure</h2>
+      <ol class="steps">
+        <li>
+          <h3>Session 1: put it on at your site</h3>
+          <figure class="fig trio">
+            <div class="views">
+              <div><span class="picture"><img class="dark" src="/assets/heads/oz-dark.webp" alt="A head from behind, with an orange area over Oz."><img class="light" src="/assets/heads/oz-light.webp" alt="A head from behind, with an orange area over Oz."></span><span>Oz</span></div>
+              <div><span class="picture"><img class="dark" src="/assets/heads/c3-dark.webp" alt="A head from its left side, with an orange area over C3, above the ear."><img class="light" src="/assets/heads/c3-light.webp" alt="A head from its left side, with an orange area over C3, above the ear."></span><span>C3</span></div>
+              <div><span class="picture"><img class="dark" src="/assets/heads/fpz-dark.webp" alt="A head from the front, with an orange area over Fpz, on the forehead."><img class="light" src="/assets/heads/fpz-light.webp" alt="A head from the front, with an orange area over Fpz, on the forehead."></span><span>Fpz</span></div>
+            </div>
+          </figure>
+          <div>
+            <p>Oz is on the midline just above the inion. C3 is on the line from ear to ear over the top of the head, three fifths of the way from the left ear up to the top. Unplug the cable, part the hair under each electrode, and press it down until it feels firm but not tight. Open the <a href="https://demo.intomind.com/light-switch/">Mind-Controlled Light Switch demo</a> and connect.</p>
+          </div>
+        </li>
+        <li>
+          <h3>Teach it</h3>
+          <figure class="fig" data-fig="shot" data-shot="switch-teaching"></figure>
+          <div>
+            <p>Press <b>Start teaching</b>. For about seven minutes the demo shows Off or On. Hold your state, and switch when the demo switches. In every pair but eyes open and closed, keep the eyes open and the posture the same in both states.</p>
+            <p class="see"><b>You should see</b>Eight rounds, Off and On in turn, then a line at the bottom left: how many of the 88 readings the head got right on rounds it never saw, and whether that is clearly better than guessing.</p>
+          </div>
+        </li>
+        <li>
+          <h3>Run it, and time it</h3>
+          <figure class="fig" data-fig="shot" data-shot="switch-running"></figure>
+          <div>
+            <p>Press <b>Run it on your IntoMind One</b>. The operator calls ten switches at random times and times each from the call to the light. For a fist pair, move the IntoMind One to the mirror site and call ten more.</p>
+            <p class="see"><b>You should see</b>The light following a few seconds behind, if the head works, and for most fist pairs following fewer at the mirror site.</p>
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>Probe it</h3>
+            <p>Still running, with the wearer holding Off, the operator asks for three bursts of blinking, a jaw clench, and a slow look left and right, ten seconds apart. The analyst counts how often the light turns on.</p>
+            
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>Save it</h3>
+            <p>Press <b>Save</b>: the head and the training data. Rename both with the wearer's number and the session, as w1-session1.</p>
+          </div>
+        </li>
+        <li>
+          <h3>Session 2: the same site, another day</h3>
+          <figure class="fig" data-fig="shot" data-shot="switch-ready"></figure>
+          <div>
+            <p>At least a day later, put the IntoMind One on at the same site, connect, and press <b>Install a saved head</b> to put session 1's head back on. Run it, and call ten switches as before.</p>
+            <p class="see"><b>You should see</b>How well yesterday's head follows today's states.</p>
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>Teach it again</h3>
+            <p>Press <b>Teach again</b> for a second session's 88 readings, and save the training data and the head as w1-session2. The new head replaces the old one on the IntoMind One.</p>
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>Record it</h3>
+            <p>Each wearer's results, from the demo and the stopwatch, and then remove the heads if your instructor asks: <b>Remove it from your IntoMind One</b>, or <code>python3 remove_head.py</code>.</p>
+          </div>
+          <table class="sheet" data-sheet="grad-switch">
+            <thead><tr><th>Wearer</th><th>States and site</th><th>Session 1, of 88</th><th>Light followed, of 10</th><th>Probes that switched it</th><th>Yesterday's head today, of 10</th><th>Session 2, of 88</th></tr></thead>
+            <tbody><tr><td>1</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>2</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>3</td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody>
+          </table>
+        </li>
+      </ol>
+    </section>
+
+    <section id="analysis">
+      <h2>Analyses</h2>
+      <div class="text">
+        <p>First, reproduce a head from its training data with the demos' Python program, and check it matches the one saved, byte for byte. Then, for each wearer: each session's held-out score against its 70 relabelings with the demo's penalty and with a heavier one that also uses no labels, session 1's head on session 2 with and without each session's mean removed, and how far the sessions moved compared with the states.</p>
+      </div>
+      <pre><code>cd python
+python3 teach_it.py --from w1-session1.json --out reproduced.imh
+cmp reproduced.imh w1-session1.imh &amp;&amp; echo identical</code></pre>
+      <pre><code>import json
+from itertools import combinations
+import numpy as np
+
+def load(path):
+    """A training file the demo saved: embeddings as integers, labels, and rounds."""
+    w = json.load(open(path))["windows"]
+    X = np.array([v["embedding"] for v in w], float)
+    return X, np.array([v["label"] for v in w], float), np.array([v["round"] for v in w])
+
+def penalty(X, rule):
+    """Both use no labels: "gap" is the demo's, "mean" the Gram matrix's mean eigenvalue."""
+    ev = np.linalg.eigvalsh((X - X.mean(0)).T @ (X - X.mean(0)))
+    return np.sqrt(max(ev[0], 1) * ev[1]) if rule == "gap" else ev.mean()
+
+def fit(X, y, rule):
+    """Ridge with the intercept unpenalized: the weights and the intercept."""
+    m = X.mean(0)
+    xc = X - m
+    lam = penalty(X, rule)
+    w = np.linalg.solve(xc.T @ xc + lam * np.eye(X.shape[1]), xc.T @ (y - y.mean()))
+    return w, y.mean() - m @ w
+
+def held_out(X, y, r, rule):
+    """Readings right with each round held out in turn."""
+    right = 0
+    for k in np.unique(r):
+        w, b = fit(X[r != k], y[r != k], rule)
+        right += np.sum((X[r == k] @ w + b &gt; 0.5) == (y[r == k] == 1))
+    return right
+
+def relabelings(y, r):
+    """Every labeling of the rounds with as many On as were taught: 70 for 4 of 8."""
+    rounds = np.unique(r)
+    on = sum(y[r == k][0] for k in rounds)
+    return [np.isin(r, c).astype(float) for c in combinations(rounds, int(on))]
+
+s1, s2 = load("w1-session1.json"), load("w1-session2.json")     # the files you saved
+for rule in ("gap", "mean"):
+    for name, (X, y, r) in (("session 1", s1), ("session 2", s2)):
+        real = held_out(X, y, r, rule)
+        p = np.mean([held_out(X, z, r, rule) &gt;= real for z in relabelings(y, r)])
+        print(f"{rule:4s} {name}: {real} of {len(y)} on held-out rounds, p {p:.3f}")
+    # Transfer: the head from all of session 1, on all of session 2, against its relabelings.
+    for recenter in (False, True):
+        (X1, y1, _), (X2, y2, r2) = s1, s2
+        if recenter:                        # each session's own mean, which uses no labels
+            X1, X2 = X1 - X1.mean(0), X2 - X2.mean(0)
+        w, b = fit(X1, y1, rule)
+        hit = lambda z: np.sum((X2 @ w + b &gt; 0.5) == (z == 1))
+        p = np.mean([hit(z) &gt;= hit(y2) for z in relabelings(y2, r2)])
+        print(f"{rule:4s} session 1's head on session 2{', recentered' if recenter else ''}: "
+              f"{hit(y2)} of {len(y2)}, p {p:.3f}")
+
+(X1, y1, _), (X2, y2, _) = s1, s2
+shift = np.linalg.norm(X2.mean(0) - X1.mean(0))
+states = np.linalg.norm(X1[y1 == 1].mean(0) - X1[y1 == 0].mean(0))
+print(f"the sessions' means are {shift:.0f} apart, "
+      f"the two states' means within session 1 {states:.0f}")</code></pre>
+      <div class="text">
+        <p>Then report:</p>
+        <ol class="rulelist">
+          <li>Each session's score and p with both penalties, and why a score below 44 of 88 can still have a small p.</li>
+          <li>The transfer, raw and recentered, against each session's own held-out score.</li>
+          <li>The probes and the mirror site: what the head responds to besides the state.</li>
+          <li>For the class: which pairs and sites held up on a second day.</li>
+        </ol>
+      </div>
+      
+    </section>
+
+    <section id="open">
+      <h2>Open problems</h2>
+      <ol class="rulelist">
+        <li><b>Another day.</b> Nonstationarity between sessions is among the main obstacles to everyday use of noninvasive interfaces (Shenoy and others, 2006). How to keep a head working without teaching it again is open.</li>
+        <li><b>Who can't.</b> For some people a decoder never separates the states, which has been called BCI illiteracy (Vidaurre and Blankertz, 2010). Thompson (2019) argues the term puts on the person a failure of the method, and how to design for everyone is open.</li>
+        <li><b>The body in the signal.</b> Telling a state from the blinks, muscle and posture that come with it, without many channels or other sensors, is unsolved, and a high score doesn't settle it.</li>
+      </ol>
+    </section>
+
+    <section id="report">
+      <h2>Report</h2>
+      <div class="text">
+        <ol class="rulelist">
+          <li>The preregistration as written, and every deviation from it, each with its reason.</li>
+          <li>Methods: the states, the site, both sessions, the penalties and the tests.</li>
+          <li>Results for each wearer: both sessions' scores and p values, the transfer raw and recentered, the timed switches, the probes, and the mirror site where used.</li>
+          <li>What the head learned, as far as the controls can say.</li>
+          <li>The code, with the reproduced head's check.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Pfurtscheller, G., and Lopes da Silva, F. H. (1999). Event-related EEG/MEG synchronization and desynchronization: basic principles. Clinical Neurophysiology.</p>
+      <p>Shenoy, P., Krauledat, M., Blankertz, B., Rao, R. P. N., and Müller, K.-R. (2006). Towards adaptive classification for BCI. Journal of Neural Engineering.</p>
+      <p>Vidaurre, C., and Blankertz, B. (2010). Towards a cure for BCI illiteracy. Brain Topography.</p>
+      <p>Zanini, P., Congedo, M., Jutten, C., Said, S., and Berthoumieu, Y. (2018). Transfer learning: a Riemannian geometry framework with applications to brain-computer interfaces. IEEE Transactions on Biomedical Engineering.</p>
+      <p>Thompson, M. C. (2019). Critiquing the concept of BCI illiteracy. Science and Engineering Ethics.</p>
+      <p>Panachakel, J. T., and Ramakrishnan, A. G. (2021). Decoding covert speech from EEG: a comprehensive review. Frontiers in Neuroscience.</p>
+    </section>
+  </div>
+
+</main>
+<footer class="colophon">
+  <p><b>BCI101</b> An Applied Introduction to Noninvasive Brain-Computer Interfaces. Neurons, to bits, to real-world outcomes. Built on the demos at <a href="https://demo.intomind.com/">demo.intomind.com</a>.</p>
+  <div class="level-line"><span>Level</span><div class="levels" role="group" aria-label="Level"><button type="button" data-level="ms">Middle school</button><button type="button" data-level="hs">High school</button><button type="button" data-level="college">College</button><button type="button" data-level="grad">Graduate</button></div></div>
+</footer>
+</body>
+</html>

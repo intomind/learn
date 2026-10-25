@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The brain's electricity · BCI101</title>
+<meta name="description" content="How neurons signal with electricity, why only many neurons in step make a signal on the scalp, and what EEG can and cannot see.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/assets/site.css">
+<script>(function(){var d=document.documentElement,q=new URLSearchParams(location.search),s=function(k){try{return localStorage.getItem(k)}catch(e){return null}},L={ms:1,hs:1,college:1,grad:1},l=q.get("level");if(L[l]){try{localStorage.setItem("curriculum-level",l)}catch(e){}}else l=s("curriculum-level");if(!L[l]){l="hs";d.dataset.ask="1"}d.dataset.level=l;d.dataset.theme=q.get("theme")||s("curriculum-theme")||"dark";})()</script>
+<script type="module" src="/assets/curriculum.js"></script>
+</head>
+<body>
+<header class="chrome">
+  <a class="mark" href="/">IntoMind<span>Learn</span></a>
+  <nav class="nav" aria-label="Pages"><a href="/" aria-current="page">Contents</a><a href="/labs/">Labs</a><a href="/vocabulary/">Vocabulary</a><a href="/safety/">Safety</a></nav>
+  <div class="controls"><button class="theme" type="button">Light</button></div>
+</header>
+<main class="page kind-chapter">
+  <div class="lv lv-ms" data-l="ms">
+    <header class="hero">
+      <p class="eb">Chapter 1 · Middle school</p>
+      <h1>The brain's electricity</h1>
+      <p class="lede">How can a device resting on your head pick up what your brain is doing?</p>
+    </header>
+
+    
+
+    <section id="pulses">
+      <h2>Your brain runs on electricity</h2>
+      <div class="text">
+        <p>Your brain is made of about 86 billion cells called <dfn data-term="Neuron" data-l="ms" data-def="A brain cell that sends signals to other cells with pulses of electricity.">neurons</dfn>, and each one connects to thousands of others. A neuron sends a message as a tiny pulse of electricity that runs along it in about a thousandth of a second. Where it meets the next neuron, chemicals carry the message across, and the next neuron may fire a pulse of its own.</p>
+        <p>Everything you see, think and do involves millions of these pulses.</p>
+        
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>The neuron chain</h3>
+        <p>Stand in a line holding hands, with your eyes closed. The timekeeper says go and starts the timer. The first person squeezes the next hand, and each person passes the squeeze on as soon as they feel it. The last person raises their free hand, and the timekeeper stops the timer. Do it three times.</p>
+        <p class="ask"><span class="lbl">Predict</span>The squeeze will take about <span class="fill" data-key="predict-chain" data-hint="how many"></span> seconds to reach the end of the line.</p>
+        <table class="sheet" data-sheet="ms-chain">
+          <thead><tr><th>People in the line</th><th>Try 1, seconds</th><th>Try 2, seconds</th><th>Try 3, seconds</th></tr></thead>
+          <tbody><tr><td></td><td></td><td></td><td></td></tr></tbody>
+        </table>
+        <p class="ask"><span class="lbl">Work it out</span>Divide your fastest time by the number of people. Each squeeze took about <span class="fill" data-key="per-person" data-hint="how long"></span> seconds.</p>
+        <p class="see"><b>You should see</b>A squeeze that takes time to travel, person by person, about a quarter of a second each. A neuron passes its pulse on in about a thousandth of a second, hundreds of times faster.</p>
+        
+      </div>
+    </section>
+
+    <section id="in-step">
+      <h2>Many neurons in step</h2>
+      <div class="grid">
+        <div class="text">
+          <p>One neuron's pulse is far too small to notice from outside your head. Your skull and skin are in the way, and they spread every signal out.</p>
+          <p>But when millions of neurons near each other pulse together, in step, their signals add up. The sum is strong enough to reach your scalp, as a voltage of a few millionths of a volt. That is what the IntoMind One picks up, and a recording of it is called <dfn data-term="EEG" data-l="ms" data-def="Electroencephalography: the brain's electrical activity, recorded from electrodes on the scalp.">EEG</dfn>.</p>
+          
+        </div>
+        <figure class="fig" data-fig="neurons"><figcaption><b>Simulated</b> Fourteen neurons, each with its own rhythm. Out of step, they mostly cancel out. Press the button to put them in step, and see what they add up to.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>Clapping in step</h3>
+        <p>Half the class goes into the hallway and closes the door. The other half claps for ten seconds, each person at their own speed. Then everyone claps together, in step, for ten seconds. In the hallway, listen: can you hear a beat each time? Then swap.</p>
+        <p class="see"><b>You should see</b>A beat in the hallway only when the claps were in step. The door is like your skull: what gets through clearly is many signals in step.</p>
+      </div>
+    </section>
+
+    <section id="path">
+      <h2>From your brain to the screen</h2>
+      <div class="grid flip">
+        <div class="text">
+          <p>The IntoMind One rests on your head. Its <dfn data-term="Electrode" data-l="ms" data-def="A small contact that touches the skin and picks up electrical signals.">electrodes</dfn>, small contacts on its underside, touch your skin and pick up the voltage. Inside it, a chip measures that voltage hundreds of times every second and turns each measurement into a number.</p>
+          <p>Bluetooth carries the numbers to your computer, where a demo shows them. They go nowhere else.</p>
+          <p>A system that turns a signal from the brain into a command, with no muscles in between, is called a <dfn data-term="Brain-computer interface" data-l="ms" data-def="A system that turns a signal from the brain into a command, with no muscles in between.">brain-computer interface</dfn>, or BCI. In this course, you will build one.</p>
+        </div>
+        <figure class="fig" data-fig="datapath" data-to="screen"><figcaption><b>The path</b> From neurons in step, through the skull and skin, into the IntoMind One's electrodes and chip, and over Bluetooth to your computer.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>Draw the path</h3>
+        <p>On paper, draw the path from your neurons to the screen: neurons in step, skull and skin, electrodes, chip, Bluetooth, computer. Then mark the part of the path where the signal is electricity, and the part where it has become numbers.</p>
+        
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Talk about it</h2>
+      <ol class="qs">
+        <li class="q"><p>What do neurons use to send messages to each other?</p></li>
+        <li class="q"><p>Why can the IntoMind One pick up your brain only when many neurons pulse in step?</p></li>
+        <li class="q"><p>Where does the signal stop being electricity and become numbers? Why does that matter?</p></li>
+      </ol>
+    </section>
+  </div>
+
+  <div class="lv lv-hs" data-l="hs">
+    <header class="hero">
+      <p class="eb">Chapter 1 · High school</p>
+      <h1>The brain's electricity</h1>
+      <p class="lede">How does a pulse in one neuron, a thousandth of a second long, become a voltage you can measure on the scalp?</p>
+    </header>
+
+    
+
+    <section id="pulse">
+      <h2>One neuron's pulse</h2>
+      <div class="grid">
+        <div class="text">
+          <p>Your brain has about 86 billion <dfn data-term="Neuron" data-l="hs" data-def="A brain cell that sends signals to other cells with pulses of electricity.">neurons</dfn>. At rest, a neuron holds a voltage of about −70 millivolts across its membrane. When it fires, an <dfn data-term="Action potential" data-l="hs" data-def="The brief electrical pulse that travels along a neuron.">action potential</dfn> flips that voltage for about a millisecond and travels along its axon.</p>
+          <p>Where the axon meets the next neuron, at a synapse, the pulse releases neurotransmitters. They open channels in the next neuron and change its voltage for tens of milliseconds: a <dfn data-term="Postsynaptic potential" data-l="hs" data-def="The longer change in a neuron's voltage when another neuron signals to it.">postsynaptic potential</dfn>.</p>
+        </div>
+        <figure class="fig" data-fig="potentials"><figcaption><b>Drawn to scale in time</b> One neuron's action potential lasts about a millisecond. The postsynaptic potential it causes in the next neuron lasts tens of times longer.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>The neuron chain</h3>
+        <p>Stand in a line holding hands, eyes closed. A timekeeper says go and starts the timer. The first person squeezes the next hand, and each person passes the squeeze on as soon as they feel it. The last person raises their free hand, and the timekeeper stops the timer. Do it three times.</p>
+        <p class="ask"><span class="lbl">Predict</span>Each person will take about <span class="fill" data-key="predict-chain" data-hint="how long"></span> seconds to pass the squeeze on.</p>
+        <table class="sheet" data-sheet="hs-chain">
+          <thead><tr><th>People in the line</th><th>Try 1, seconds</th><th>Try 2, seconds</th><th>Try 3, seconds</th></tr></thead>
+          <tbody><tr><td></td><td></td><td></td><td></td></tr></tbody>
+        </table>
+        <p class="ask"><span class="lbl">Work it out</span>Fastest time ÷ people = <span class="fill" data-key="per-person" data-hint="seconds"></span> seconds a person, about <span class="fill" data-key="times-slower" data-hint="how many"></span> times slower than a neuron passing on its pulse in about a thousandth of a second.</p>
+        <p class="see"><b>You should see</b>A squeeze that takes a few tenths of a second a person: hundreds of times slower than a neuron.</p>
+      </div>
+    </section>
+
+    <section id="in-step">
+      <h2>Many neurons in step</h2>
+      <div class="grid flip">
+        <div class="text">
+          <p>EEG comes mostly from postsynaptic currents in the cortex's pyramidal neurons, which line up side by side, at right angles to the surface. Because postsynaptic potentials last tens of milliseconds, those of many neurons overlap in time and add up.</p>
+          <p>Neurons firing together are in <dfn data-term="Synchrony" data-l="hs" data-def="Many things happening in step at the same moment.">synchrony</dfn>. In step, a hundred sources add up to a hundred times one. Out of step they mostly cancel, and their sum grows only like the square root of their number: about ten times one, for a hundred.</p>
+          
+        </div>
+        <figure class="fig" data-fig="neurons"><figcaption><b>Simulated</b> Fourteen neurons, each with its own rhythm. Out of step, their sum is small and ragged. Press the button to put them in step.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>Clapping in step</h3>
+        <p>Half the class goes into the hallway and closes the door. The other half claps for ten seconds, each person at their own speed, then ten seconds all together, in step. In the hallway, listen for a beat each time. Then swap.</p>
+        <p class="see"><b>You should see</b>A beat that gets through the door only when the claps are in step.</p>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>In step and out of step</h3>
+        <p>In a spreadsheet, put the times 0, 0.01, 0.02 and so on down column A, to 1 second. In row 1, from column B across to column CW, put 100 starting points, called phases: first all 0, for in step. Fill each cell below with <code>=SIN(2*PI()*10*$A2+B$1)</code>, and add each row's 100 waves in a last column. Note the biggest sum. Then change every phase to <code>=RAND()*2*PI()</code>, for out of step, and note the biggest sum again. Do the random case five times.</p>
+        <table class="sheet" data-sheet="hs-sums">
+          <thead><tr><th>Phases</th><th>Biggest sum</th></tr></thead>
+          <tbody><tr><td>All in step</td><td></td></tr><tr><td>Random, try 1</td><td></td></tr><tr><td>Random, try 2</td><td></td></tr><tr><td>Random, try 3</td><td></td></tr><tr><td>Random, try 4</td><td></td></tr><tr><td>Random, try 5</td><td></td></tr></tbody>
+        </table>
+        <p class="see"><b>You should see</b>In step, a sum of 100. Out of step, a sum near 10, different each time.</p>
+        
+      </div>
+    </section>
+
+    <section id="limits">
+      <h2>What EEG can and can't see</h2>
+      <div class="grid">
+        <div class="text">
+          <p>The skull spreads every signal over centimeters, so EEG can't say precisely where a signal came from, and sources deep in the brain barely reach the scalp. But it follows changes within milliseconds, faster than almost any other way of measuring a living brain.</p>
+          <p>The IntoMind One's four <dfn data-term="Electrode" data-l="hs" data-def="A small contact that touches the skin and picks up electrical signals.">electrodes</dfn> pick up that voltage, a few millionths of a volt, and its chip turns it into numbers, hundreds of times a second. A recording of it is called <dfn data-term="EEG" data-l="hs" data-def="Electroencephalography: the brain's electrical activity, recorded from electrodes on the scalp.">EEG</dfn>.</p>
+        </div>
+        <figure class="fig" data-fig="datapath" data-to="screen"><figcaption><b>The path</b> From neurons in step, through the skull and skin, into the IntoMind One's electrodes and chip, and over Bluetooth to the computer.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>Time against space</h3>
+        <p>Compare EEG with fMRI, the kind of MRI that follows changes in blood flow as the brain works. Look up what you need.</p>
+        <table class="sheet" data-sheet="hs-eeg-fmri">
+          <thead><tr><th></th><th>EEG</th><th>fMRI</th></tr></thead>
+          <tbody><tr><td>What it measures</td><td></td><td></td></tr><tr><td>How fast it follows a change</td><td></td><td></td></tr><tr><td>How precisely it says where</td><td></td><td></td></tr><tr><td>What it costs</td><td></td><td></td></tr><tr><td>Can you wear it?</td><td></td><td></td></tr></tbody>
+        </table>
+        <p class="ask"><span class="lbl">Work it out</span>With four channels, the IntoMind One is good for <span class="fill" data-key="four-good" data-hint="what"></span>, and poor for <span class="fill" data-key="four-poor" data-hint="what"></span>.</p>
+        
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Talk about it</h2>
+      <ol class="qs">
+        <li class="q"><p>Why does EEG reflect postsynaptic potentials more than action potentials?</p></li>
+        <li class="q"><p>A hundred sources in step add up to a hundred times one. Out of step, about ten times. Why the square root?</p></li>
+        <li class="q"><p>A company says its four electrodes can tell exactly which part of your brain is active. What would you ask?</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Nunez, P. L., and Srinivasan, R. (2006). Electric Fields of the Brain: The Neurophysics of EEG. Oxford University Press.</p>
+    </section>
+  </div>
+
+  <div class="lv lv-college" data-l="college">
+    <header class="hero">
+      <p class="eb">Chapter 1 · College</p>
+      <h1>The brain's electricity</h1>
+      <p class="lede">How does synaptic current in the cortex become a few microvolts on the scalp, and what does the choice of reference do to what you measure?</p>
+    </header>
+
+    
+
+    <section id="sources-of-eeg">
+      <h2>From synapse to scalp</h2>
+      <div class="grid">
+        <div class="text">
+          <p>A neuron's <dfn data-term="Action potential" data-l="college" data-def="The brief electrical pulse that travels along a neuron's axon, lasting about a millisecond.">action potential</dfn> lasts about a millisecond. The <dfn data-term="Postsynaptic potential" data-l="college" data-def="The slower change in a neuron's membrane potential when another neuron signals to it, lasting tens of milliseconds.">postsynaptic potential</dfn> it causes in the next neuron lasts tens of milliseconds, so in a population the second kind overlaps in time and adds up, and the first rarely does.</p>
+          <p>Scalp EEG comes mostly from postsynaptic currents in the pyramidal neurons of the cortex. They stand side by side, perpendicular to the surface, so their currents line up. A patch of them active together behaves as a <dfn data-term="Current dipole" data-l="college" data-def="A current source and sink a short distance apart: the model of a patch of cortex whose aligned neurons are active together.">current dipole</dfn>.</p>
+        </div>
+        <figure class="fig" data-fig="potentials"><figcaption><b>Drawn to scale in time</b> An action potential, about a millisecond, and the postsynaptic potential it causes, tens of times longer.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="in-step">
+      <h2>In step, and out of step</h2>
+      <div class="grid flip">
+        <div class="text">
+          <p>Give each of N sources an oscillation of amplitude a. In step, they add to N·a. With independent, random phases, the sum is a random walk, and its typical amplitude is only √N·a.</p>
+          <p>So a rhythm reaches the scalp only when very many neurons are synchronized, typically over several square centimeters of cortex. EEG measures synchrony as much as activity: a region can be busy and show little, if its neurons are out of step.</p>
+        </div>
+        <figure class="fig" data-fig="neurons"><figcaption><b>Simulated</b> Fourteen oscillations and their sum. Out of step, the sum is small and ragged. Press the button to bring them into step.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>Adding sources</h3>
+        <p>Sum N ten-hertz sources with random phases, twenty times over, and compare the typical amplitude of the sum with N, the amplitude in step, for N of 1, 100 and 10,000.</p>
+        <pre><code>import numpy as np
+
+rng = np.random.default_rng(0)
+t = np.arange(0, 1, 1 / 500)            # one second, 500 samples a second
+for n in (1, 100, 10_000):
+    sizes = []
+    for _ in range(20):
+        phases = rng.uniform(0, 2 * np.pi, n)
+        total = np.sin(2 * np.pi * 10 * t[:, None] + phases).sum(axis=1)
+        # the amplitude of the summed sinusoid
+        sizes.append(np.sqrt(2 * np.mean(total ** 2)))
+    typical = np.sqrt(np.mean(np.square(sizes)))
+    print(n, "in step:", n, "out of step:", round(typical, 1))</code></pre>
+        <p class="see"><b>You should see</b>Out of step, about 1, 10 and 100: √N, against N in step.</p>
+        
+      </div>
+    </section>
+
+    <section id="volume">
+      <h2>Through the head</h2>
+      <div class="grid">
+        <div class="text">
+          <p>The head is a <dfn data-term="Volume conduction" data-l="college" data-def="Currents spreading through the tissues of the head, so that every electrode records a weighted sum of many sources.">volume conductor</dfn>. A dipole drives currents through brain, cerebrospinal fluid, skull and scalp, and every point on the scalp sees a weighted sum of every active source. In a uniform medium, a dipole's potential falls as cos θ / r², with distance r and angle θ from its axis.</p>
+          <p>The skull conducts far less than the tissues around it, and spreads each source's potential over several centimeters of scalp. Deep sources contribute little: they are farther away, and many deep structures lack the aligned geometry that lets currents add.</p>
+        </div>
+        <figure class="fig" data-fig="dipole"><figcaption><b>A source and its field</b> A patch of cortex in step acts as a current dipole. The skull spreads its potential over centimeters of scalp, so the peak is broad and every electrode sees a mixture.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="reference">
+      <h2>The reference and the montage</h2>
+      <div class="text">
+        <p>An EEG channel is always the difference between two electrodes. The <dfn data-term="Reference and montage" data-l="college" data-def="The electrode or average each channel is measured against, and the set of differences chosen to look at.">reference</dfn> is the electrode, or the average, every channel is measured against, and a montage is the set of differences you choose to look at. Change either, and every waveform changes.</p>
+        <p>The IntoMind One has four channels with a shared reference, five gold-plated electrodes on one small device, a few centimeters apart. Each channel is a local difference: a source that reaches an electrode and the reference alike cancels, and a source near one electrode survives.</p>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>Re-referencing</h3>
+        <p>Five electrodes see a broad six-hertz source almost equally, and a local twenty-hertz source near electrode 0. Work out how much of each source four channels carry, measured against electrode 4, then against their own average.</p>
+        <pre><code>import numpy as np
+
+# how strongly each of five electrodes sees the broad source and the local one
+w = np.array([[1.00, 1.0], [0.97, 0.5], [0.94, 0.2], [0.91, 0.1], [0.88, 0.0]])
+to_one = w[:4] - w[4]                   # four channels, against electrode 4
+to_mean = w[:4] - w[:4].mean(axis=0)    # the same four, against their average
+print(np.round(to_one, 2))
+print(np.round(to_mean, 2))
+
+# each channel's signal, to plot
+t = np.arange(0, 2, 1 / 500)
+sources = np.vstack([np.sin(2 * np.pi * 6 * t), np.sin(2 * np.pi * 20 * t)])
+channels = to_one @ sources</code></pre>
+        <p class="see"><b>You should see</b>The broad source cut from about 1 to a tenth or less in every channel, under either reference, and the local source kept near electrode 0, at a size that depends on the reference. Under the average, it even changes sign in channels 2 and 3.</p>
+        
+      </div>
+    </section>
+
+    <section id="seeing">
+      <h2>What EEG can and can't see</h2>
+      <div class="text">
+        <p>EEG follows the brain millisecond by millisecond, through the skull, with nothing implanted. It pays for that in space: each electrode sees centimeters of cortex, mixed. Four channels close together can describe rhythms and how they change, and can't say where a source is.</p>
+      </div>
+      <table class="data text">
+        <thead><tr><th>Method</th><th>What it measures</th><th>In time</th><th>In space</th><th>Implanted?</th></tr></thead>
+        <tbody>
+          <tr><td>EEG</td><td data-th="What it measures">Potentials on the scalp from synchronized postsynaptic currents</td><td data-th="In time">Milliseconds</td><td data-th="In space">Centimeters</td><td data-th="Implanted?">No</td></tr>
+          <tr><td>MEG</td><td data-th="What it measures">The magnetic fields of the same currents</td><td data-th="In time">Milliseconds</td><td data-th="In space">Several millimeters to centimeters</td><td data-th="Implanted?">No, but a shielded room</td></tr>
+          <tr><td>fMRI</td><td data-th="What it measures">Changes in blood oxygen that follow activity</td><td data-th="In time">Seconds</td><td data-th="In space">Millimeters</td><td data-th="Implanted?">No, but a scanner</td></tr>
+          <tr><td>ECoG</td><td data-th="What it measures">Potentials on the surface of the cortex</td><td data-th="In time">Milliseconds</td><td data-th="In space">Millimeters</td><td data-th="Implanted?">Yes, under the skull</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="talk">
+      <h2>Problems</h2>
+      <ol class="qs">
+        <li class="q"><p>Why does scalp EEG reflect postsynaptic potentials far more than action potentials?</p></li>
+        <li class="q"><p>Ten thousand sources would each contribute 0.01 microvolts at an electrode. What does the electrode see if they are in step, and if their phases are random?</p></li>
+        <li class="q"><p>A dipole twice as far from an electrode, at the same angle: what happens to its potential there? Give a second reason deep sources contribute little.</p></li>
+        <li class="q"><p>An electrode and its reference both record the same 20-microvolt alpha rhythm, in phase. What does the channel show? What does that mean for a reference a few centimeters away?</p></li>
+        <li class="q"><p>A company says its four electrodes can tell exactly which part of your brain is active. What would you ask?</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Nunez, P. L., and Srinivasan, R. (2006). Electric Fields of the Brain: The Neurophysics of EEG. Oxford University Press.</p>
+      <p>Buzsáki, G., Anastassiou, C. A., and Koch, C. (2012). The origin of extracellular fields and currents: EEG, ECoG, LFP and spikes. Nature Reviews Neuroscience.</p>
+      <p>Cohen, M. X. (2017). Where does EEG come from and what does it mean? Trends in Neurosciences.</p>
+    </section>
+  </div>
+
+  <div class="lv lv-grad" data-l="grad">
+    <header class="hero">
+      <p class="eb">Chapter 1 · Graduate</p>
+      <h1>The brain's electricity</h1>
+      <p class="lede">What generates the potential on the scalp, how does the head carry it there, and what can four channels with a shared reference say about where it came from?</p>
+    </header>
+
+    
+
+    <section id="generators">
+      <h2>Generators</h2>
+      <div class="text">
+        <p>The scalp potential comes mostly from transmembrane currents in cortical pyramidal neurons: synaptic currents above all, with contributions from active currents such as dendritic calcium spikes and afterhyperpolarizations (Buzsáki, Anastassiou and Koch, 2012). Pyramidal cells stand side by side with their apical dendrites perpendicular to the cortical surface, so current entering a cell at one depth and leaving at another adds across neighbors. A patch acting together is a <dfn data-term="Current dipole" data-l="grad" data-def="A current source and sink a short distance apart, with a moment in ampere-meters: the model of a patch of aligned neurons active together.">current dipole</dfn>, of moment <i>p</i> in ampere-meters, normal to the cortex. On a gyral crown it is radial to the scalp. In a sulcal wall it is tangential, and opposite walls of a sulcus partly cancel.</p>
+        <p>Sources in step add as their number <i>N</i>, and out of step as √<i>N</i>, so the scalp sees synchrony over large areas. In simultaneous scalp and intracranial recordings, 90 percent of interictal spikes with a cortical source above 10 cm² appeared on the scalp, 10 percent of those below it, and none below 6 cm² (Tao and others, 2005). EEG measures how much activity is synchronized, which is not the same as how much there is, and what a synchronized rhythm means for computation is a separate question (Cohen, 2017).</p>
+      </div>
+    </section>
+
+    <section id="forward">
+      <h2>The forward model</h2>
+      <div class="text">
+        <p>At the frequencies of EEG, the tissues' capacitance, induction and propagation delays are negligible (Plonsey and Heppner, 1967). The potential then follows the source current from moment to moment, by Poisson's equation, with conductivity σ and the primary current density <b>J</b><sub>p</sub> of the neurons:</p>
+        <p class="eq">∇·(σ ∇V) = ∇·<b>J</b><sub>p</sub></p>
+        <p>In an infinite homogeneous medium, a dipole <b>p</b> at <b>r</b>′ gives</p>
+        <p class="eq">V(<b>r</b>) = <b>p</b>·(<b>r</b> − <b>r</b>′) / (4πσ |<b>r</b> − <b>r</b>′|³)</p>
+        <p>which falls as 1/r² and as the cosine of the angle from the dipole's axis. The head is not homogeneous. The skull conducts far less than brain and scalp, and spreads each source's potential over centimeters. Source modeling long used a brain-to-skull ratio of 80 (Rush and Driscoll, 1968). In vivo and in vitro measurement gave about 15 (Oostendorp and others, 2000). Spheres, boundary elements and finite elements trade realism for computation (Mosher, Leahy and Lewis, 1999).</p>
+        <p>The equation is linear in the sources. Place candidate dipoles on a grid, three orientations each, and the electrodes' potentials are</p>
+        <p class="eq">v = L s + n</p>
+        <p>where s holds the dipole moments, n the noise, and the <dfn data-term="Lead field" data-l="grad" data-def="The matrix that maps source dipole moments to the potentials at the electrodes, computed from a model of the head's geometry and conductivities.">lead field</dfn> L, one row per channel and one column per source orientation, comes from the head model. Computing v from s is the forward problem, and it has one answer.</p>
+      </div>
+    </section>
+
+    <section id="reference">
+      <h2>The reference</h2>
+      <div class="text">
+        <p>An amplifier measures differences. With five electrodes, the fifth a shared reference, the four channels are v = D V, where V holds the five potentials against infinity and D = [I<sub>4</sub> | −1]. Re-referencing is another linear map of the same channels. None recovers V, which is known only up to a constant common to every electrode, and none adds information: the rank stays at most four. Differences between channels don't depend on the reference at all. The average of a few electrodes close together is not a stand-in for infinity. That needs coverage of the whole head, or a head model, as in Yao's (2001) standardization.</p>
+        <p>The IntoMind One has four channels with a shared reference: five dry, gold-plated electrodes on one small device. Every channel is a difference across a few centimeters, a spatial high-pass filter. It rejects what reaches an electrode and the reference alike, such as broad or distant sources, and keeps local gradients.</p>
+      </div>
+    </section>
+
+    <section id="inverse">
+      <h2>The inverse problem</h2>
+      <div class="text">
+        <p>From v to s, there is no single answer. With four channels and thousands of unknowns, L has a null space of dimension at least the number of unknowns minus four, and any pattern in it can be added to any solution without changing a single channel. An inverse method picks one solution by a prior. The <dfn data-term="Minimum-norm estimate" data-l="grad" data-def="The source pattern with the smallest total size that explains the data, with a regularization parameter that trades fit for size.">minimum-norm estimate</dfn> picks the smallest pattern that explains the data (Hämäläinen and Ilmoniemi, 1994):</p>
+        <p class="eq">ŝ = Lᵀ (L Lᵀ + λI)⁻¹ v</p>
+        <p>It lies in the row space of L, so it is built from the channels' own sensitivity profiles, and it explains a deep source with shallower ones of smaller moment. What a point source becomes after inversion is a column of the resolution matrix R = Lᵀ(L Lᵀ + λI)⁻¹ L. With four channels close together, the prior does nearly all the work: the data can describe a rhythm's amplitude and timing near the device, and can't say where it came from.</p>
+      </div>
+    </section>
+
+    <section id="analysis">
+      <h2>Analysis</h2>
+      <div class="try">
+        <p class="k">Analysis</p>
+        <h3>A lead field for a small device</h3>
+        <p>Build the forward model for five electrodes 2 cm apart near Oz, a stand-in for one small device, on a four-shell sphere with the skull at a fifteenth of the brain's conductivity. Reference four channels to the fifth, then find two different source patterns that give the same channels, invert a shallow and a deep source, and see how a source's reach falls with depth.</p>
+        <pre><code>import numpy as np
+import mne
+
+# A spherical head of radius 9 cm in four shells: brain, cerebrospinal fluid, skull and scalp,
+# with the skull at a fifteenth of the brain's conductivity.
+sphere = mne.make_sphere_model(r0=(0.0, 0.0, 0.0), head_radius=0.09,
+                               relative_radii=(0.90, 0.92, 0.97, 1.0),
+                               sigmas=(0.33, 1.0, 0.33 / 15, 0.33), verbose="error")
+
+def on_scalp(azimuth, elevation, r=0.09):
+    """A point at radius r, by degrees around from the back of the head and up from the ears."""
+    a, e = np.radians(azimuth), np.radians(elevation)
+    return r * np.array([np.cos(e) * np.sin(a), -np.cos(e) * np.cos(a), np.sin(e)])
+
+# Five electrodes 2 cm apart near Oz: a stand-in for one small device. E5 is the reference.
+step = np.degrees(0.02 / 0.09)
+spots = [(0, 20 + step), (step, 20), (0, 20 - step), (-step, 20), (0, 20)]
+names = ["E1", "E2", "E3", "E4", "E5"]
+info = mne.create_info(names, 500.0, "eeg")
+info.set_montage(mne.channels.make_dig_montage(
+    ch_pos={n: on_scalp(*s) for n, s in zip(names, spots)}, coord_frame="head"))
+
+# Candidate sources on a 1 cm grid inside the brain, each free to point any way.
+src = mne.setup_volume_source_space(sphere=sphere, pos=10.0, mindist=5.0, exclude=20.0,
+                                    verbose="error")
+fwd = mne.make_forward_solution(info, trans=None, src=src, bem=sphere, eeg=True, meg=False,
+                                verbose="error")
+G = fwd["sol"]["data"]          # 5 electrodes x 3 orientations per source, volts per A m
+pos = fwd["source_rr"]
+D = np.hstack([np.eye(4), -np.ones((4, 1))])    # each channel against E5
+L = D @ G
+
+sv = np.linalg.svd(L, compute_uv=False)
+print(f"{len(pos)} sources, {L.shape[1]} unknowns, rank {np.linalg.matrix_rank(L)}")
+print("singular values, relative to the largest:", np.round(sv / sv[0], 2))
+
+# Two different patterns of sources, the same four channels.
+u = on_scalp(0, 20) / 0.09      # the direction from the center to the device
+def source_at(depth, moment=10e-9):
+    """A source of `moment` A m pointing out of the head, `depth` m under the device."""
+    k = int(np.argmin(np.linalg.norm(pos - u * (0.09 - depth), axis=1)))
+    s = np.zeros(L.shape[1])
+    s[3 * k:3 * k + 3] = moment * pos[k] / np.linalg.norm(pos[k])
+    return s, k
+s, k = source_at(0.02)
+null = np.linalg.svd(L)[2][4:]  # 5,432 patterns of sources the channels can't see
+other = s + 1e-7 * null[0]      # add one of them, ten times the source's size
+print("one source, microvolts:   ", np.round(1e6 * L @ s, 3))
+print("a different pattern, same:", np.round(1e6 * L @ other, 3))
+
+# The minimum-norm estimate, for a source 2 cm and 5 cm under the device.
+lam = 1e-4 * np.trace(L @ L.T) / 4
+W = L.T @ np.linalg.inv(L @ L.T + lam * np.eye(4))
+deep = lambda i: 100 * (0.09 - np.linalg.norm(pos[i]))
+for depth in (0.02, 0.05):
+    s, k = source_at(depth)
+    peak = int(np.argmax(np.linalg.norm((W @ (L @ s)).reshape(-1, 3), axis=1)))
+    away = 100 * np.linalg.norm(pos[peak] - pos[k])
+    print(f"a source {deep(k):.1f} cm deep: the estimate peaks {deep(peak):.1f} cm deep, "
+          f"{away:.1f} cm from it")
+
+# How strongly a source reaches the channels, by depth: against E5, and against infinity.
+for depth in (0.02, 0.03, 0.04, 0.05, 0.06):
+    s, k = source_at(depth)
+    local, far = 1e6 * np.abs(L @ s).max(), 1e6 * np.abs(G[4] @ s)
+    print(f"{deep(k):.1f} cm deep: largest channel against E5 {local:.2f} uV, "
+          f"E5 against infinity {far:.2f} uV")</code></pre>
+        <p class="see"><b>You should see</b>Rank 4 among 5,436 unknowns. A second pattern, the source plus an invisible one ten times its size, giving identical channels. The estimate of a source 1.7 cm deep in the right place, and of one 4.9 cm deep at 1.7 cm, 3.2 cm away. From 1.7 to 4.9 cm deep, the largest local channel falls from 5.40 to 0.43 microvolts, twelvefold, and the electrode above the source against infinity only fourfold, from 8.74 to 2.15.</p>
+        <p>Then report: how the depth falloff changes with the spacing of the electrodes, at 1, 2 and 4 cm, and with the skull's ratio at 15 and at 80. Which of your conclusions depend on the head model?</p>
+        
+      </div>
+    </section>
+
+    <section id="open">
+      <h2>Open problems</h2>
+      <ol class="rulelist">
+        <li><b>Deep sources.</b> With 256 channels and recordings from deep brain stimulation electrodes, Seeber and others (2019) found alpha envelopes from the thalamus and the nucleus accumbens reflected in scalp source estimates, in three patients. How much subcortical activity reaches the scalp, and whether any of it can be read from a few channels, is unsettled.</li>
+        <li><b>Beyond synapses.</b> In a detailed model of neocortex, active membrane currents shaped the local field potential as much as synaptic ones (Reimann and others, 2013). How their share carries to the scalp, and to which rhythms, is not known.</li>
+        <li><b>A neutral reference.</b> Every reference is somewhere. Standardizing to infinity depends on the head model and on coverage (Yao, 2001), and for a few electrodes close together, nothing recovers the potential against infinity.</li>
+        <li><b>The skull.</b> Its conductivity differs between people and across one skull, and the literature's ratios differ fivefold. How much that matters depends on the question: little for a rhythm's timing, a great deal for its location.</li>
+      </ol>
+    </section>
+
+    <section id="talk">
+      <h2>Problems</h2>
+      <ol class="qs">
+        <li class="q"><p>A dipole of 10 nA·m in an infinite medium of 0.33 S/m: what potential does it make 3 cm away on its axis, and at 6 cm? At 3 cm and 60 degrees off its axis?</p></li>
+        <li class="q"><p>Four channels are recorded against a fifth electrode. Write the matrix that re-references them to their own average. What is its rank, and what is lost? What would keep the rank at four?</p></li>
+        <li class="q"><p>In the analysis, how many independent source patterns are invisible to the four channels? Of all the source patterns that fit the data exactly, which does the minimum-norm estimate choose, and why that one?</p></li>
+        <li class="q"><p>Why does the minimum-norm estimate move a deep source toward the surface? What does weighting each source by its own gain fix, and what does it assume instead?</p></li>
+        <li class="q"><p>A paper reports, from four electrodes over the back of the head, that a participant's thalamus drives their alpha. What evidence would you need before believing it?</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Plonsey, R., and Heppner, D. B. (1967). Considerations of quasi-stationarity in electrophysiological systems. Bulletin of Mathematical Biophysics.</p>
+      <p>Rush, S., and Driscoll, D. A. (1968). Current distribution in the brain from surface electrodes. Anesthesia and Analgesia.</p>
+      <p>Hämäläinen, M. S., and Ilmoniemi, R. J. (1994). Interpreting magnetic fields of the brain: minimum norm estimates. Medical and Biological Engineering and Computing.</p>
+      <p>Mosher, J. C., Leahy, R. M., and Lewis, P. S. (1999). EEG and MEG: forward solutions for inverse methods. IEEE Transactions on Biomedical Engineering.</p>
+      <p>Oostendorp, T. F., Delbeke, J., and Stegeman, D. F. (2000). The conductivity of the human skull: results of in vivo and in vitro measurements. IEEE Transactions on Biomedical Engineering.</p>
+      <p>Yao, D. (2001). A method to standardize a reference of scalp EEG recordings to a point at infinity. Physiological Measurement.</p>
+      <p>Tao, J. X., Ray, A., Hawes-Ebersole, S., and Ebersole, J. S. (2005). Intracranial EEG substrates of scalp EEG interictal spikes. Epilepsia.</p>
+      <p>Nunez, P. L., and Srinivasan, R. (2006). Electric Fields of the Brain: The Neurophysics of EEG. Oxford University Press.</p>
+      <p>Buzsáki, G., Anastassiou, C. A., and Koch, C. (2012). The origin of extracellular fields and currents: EEG, ECoG, LFP and spikes. Nature Reviews Neuroscience.</p>
+      <p>Reimann, M. W., and others (2013). A biophysically detailed model of neocortical local field potentials predicts the critical role of active membrane currents. Neuron.</p>
+      <p>Cohen, M. X. (2017). Where does EEG come from and what does it mean? Trends in Neurosciences.</p>
+      <p>Seeber, M., and others (2019). Subcortical electrophysiological activity is detectable with high-density EEG source imaging. Nature Communications.</p>
+    </section>
+  </div>
+
+</main>
+<footer class="colophon">
+  <p><b>BCI101</b> An Applied Introduction to Noninvasive Brain-Computer Interfaces. Neurons, to bits, to real-world outcomes. Built on the demos at <a href="https://demo.intomind.com/">demo.intomind.com</a>.</p>
+  <div class="level-line"><span>Level</span><div class="levels" role="group" aria-label="Level"><button type="button" data-level="ms">Middle school</button><button type="button" data-level="hs">High school</button><button type="button" data-level="college">College</button><button type="button" data-level="grad">Graduate</button></div></div>
+</footer>
+</body>
+</html>

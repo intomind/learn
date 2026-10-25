@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Designing a BCI · BCI101</title>
+<meta name="description" content="Who brain-computer interfaces are for, the engineering design process, and writing down what success means before building anything.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/assets/site.css">
+<script>(function(){var d=document.documentElement,q=new URLSearchParams(location.search),s=function(k){try{return localStorage.getItem(k)}catch(e){return null}},L={ms:1,hs:1,college:1,grad:1},l=q.get("level");if(L[l]){try{localStorage.setItem("curriculum-level",l)}catch(e){}}else l=s("curriculum-level");if(!L[l]){l="hs";d.dataset.ask="1"}d.dataset.level=l;d.dataset.theme=q.get("theme")||s("curriculum-theme")||"dark";})()</script>
+<script type="module" src="/assets/curriculum.js"></script>
+</head>
+<body>
+<header class="chrome">
+  <a class="mark" href="/">IntoMind<span>Learn</span></a>
+  <nav class="nav" aria-label="Pages"><a href="/" aria-current="page">Contents</a><a href="/labs/">Labs</a><a href="/vocabulary/">Vocabulary</a><a href="/safety/">Safety</a></nav>
+  <div class="controls"><button class="theme" type="button">Light</button></div>
+</header>
+<main class="page kind-chapter">
+  <div class="lv lv-ms" data-l="ms">
+    <header class="hero">
+      <p class="eb">Chapter 8 · Middle school</p>
+      <h1>Designing a BCI</h1>
+      <p class="lede">What would you build if your brain could flip a switch? Plan it, and plan how you will know it works.</p>
+    </header>
+
+    
+
+    <section id="design">
+      <h2>How engineers design</h2>
+      <div class="grid">
+        <div class="text">
+          <p>Engineers build in a loop called the <dfn data-term="Engineering design process" data-l="ms" data-def="Define the problem, imagine ideas, plan one, create it, test it, improve it, and test again.">engineering design process</dfn>: define the problem, imagine ideas, plan one, create it, test it, improve it, and test again.</p>
+          <p>Your project, in the capstone, will tell two of your mental states apart and switch the board's light or pin. It starts with a person and a need.</p>
+        </div>
+        <figure class="fig" data-fig="loop"><figcaption><b>The design loop</b> A person and a need, requirements, the test written first, the build, the test run, and one change. Then around again.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>The brief</h3>
+        <p>In your group, write the problem in one sentence. Then three ideas for what your board's light or pin could do. Pick one, and say why.</p>
+        <table class="sheet" data-sheet="ms-brief">
+          <thead><tr><th>Your brief</th><th>Your group's answer</th></tr></thead>
+          <tbody>
+            <tr><td>The problem, in one sentence</td><td></td></tr>
+            <tr><td>Idea 1</td><td></td></tr>
+            <tr><td>Idea 2</td><td></td></tr>
+            <tr><td>Idea 3</td><td></td></tr>
+            <tr><td>The one we pick, and why</td><td></td></tr>
+          </tbody>
+        </table>
+        
+      </div>
+    </section>
+
+    <section id="states">
+      <h2>Choosing two states</h2>
+      <div class="grid flip">
+        <div class="text">
+          <p>Choose two states you can each hold for a minute, that don't need blinking or moving your jaw, and that are likely to look different in your EEG. Resting with your eyes open, against counting down in your head, works for many people.</p>
+          <p>Blinks and a clenched jaw make signals far bigger than your brain's. A project built on them would be reading your muscles, not your mind.</p>
+        </div>
+        <figure class="fig" data-fig="trace" data-kind="artifacts"><figcaption><b>Simulated</b> Four seconds of EEG with two blinks and a clenched jaw in it. Both are far bigger than the brain's own signal.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="test-first">
+      <h2>A test you write first</h2>
+      <div class="grid">
+        <div class="text">
+          <p>Engineers write the test before they build, so nobody can change what counts as working after seeing the result. Each <dfn data-term="Requirement" data-l="ms" data-def="A condition a design must meet, stated so a test can check it.">requirement</dfn> is a condition the design must meet, written so a test can check it.</p>
+          <p>Ask for more than luck. A light that only guessed would follow eight or more of ten switches about 5 times in 100.</p>
+        </div>
+        <figure class="fig" data-fig="binomial" data-n="10" data-p="0.5" data-k="8"><figcaption><b>Ten switches, by luck</b> How many of ten switches a light would follow if it only guessed. Eight or more, in orange, happens about 5 times in 100.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>The test, written first</h3>
+        <p>Before you collect anything, write your test. Your teacher keeps a copy.</p>
+        <table class="sheet" data-sheet="ms-test-plan">
+          <thead><tr><th>Your test</th><th>Your group's answer</th></tr></thead>
+          <tbody>
+            <tr><td>Our two states</td><td></td></tr>
+            <tr><td>How many times each wearer will teach it</td><td></td></tr>
+            <tr><td>The score that counts as working</td><td></td></tr>
+            <tr><td>How many of ten switches the light must follow</td><td></td></tr>
+            <tr><td>What we will do if it doesn't work</td><td></td></tr>
+            <tr><td>Date</td><td></td></tr>
+          </tbody>
+        </table>
+        
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Talk about it</h2>
+      <ol class="qs">
+        <li class="q"><p>Why do engineers write the test before they build?</p></li>
+        <li class="q"><p>Why should your two states not need blinking or clenching your jaw?</p></li>
+        <li class="q"><p>Why ask the light to follow eight of ten switches, not six?</p></li>
+      </ol>
+    </section>
+  </div>
+
+  <div class="lv lv-hs" data-l="hs">
+    <header class="hero">
+      <p class="eb">Chapter 9 · High school</p>
+      <h1>Designing a BCI</h1>
+      <p class="lede">Who would your brain-computer interface help, and how will you know it works for them? Turn a need into requirements, and write the test before you build.</p>
+    </header>
+
+    
+
+    <section id="design">
+      <h2>Who brain-computer interfaces are for</h2>
+      <div class="grid">
+        <div class="text">
+          <p>Brain-computer interfaces were first developed for people who cannot move or speak, such as people with advanced ALS, a disease that takes away the control of the muscles. For them, an interface that is slow and imperfect can still mean calling for help, answering yes or no, or switching something on without help.</p>
+          <p>Engineers design in a loop called the <dfn data-term="Engineering design process" data-l="hs" data-def="Define the problem, imagine ideas, plan one, create it, test it, improve it, and test again.">engineering design process</dfn>, and it starts with the person: what they need to do, what stops them, and what would make an interface worth wearing.</p>
+        </div>
+        <figure class="fig" data-fig="loop"><figcaption><b>The design loop</b> A person and a need, requirements, the test written first, the build, the test run, and one change. Then around again.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>The brief</h3>
+        <p>Choose a person to design for: someone described in a published case, such as a study or a news story about brain-computer interfaces, or a person your group imagines from such cases. Then write three ideas for what your board's light or pin could do for them, and pick one.</p>
+        <table class="sheet" data-sheet="hs-brief">
+          <thead><tr><th>Your brief</th><th>Your group's answer</th></tr></thead>
+          <tbody>
+            <tr><td>The person, and what they need to do</td><td></td></tr>
+            <tr><td>What stops them now</td><td></td></tr>
+            <tr><td>What would make them stop using it</td><td></td></tr>
+            <tr><td>Idea 1</td><td></td></tr>
+            <tr><td>Idea 2</td><td></td></tr>
+            <tr><td>Idea 3</td><td></td></tr>
+            <tr><td>The one we pick, and why</td><td></td></tr>
+          </tbody>
+        </table>
+        
+      </div>
+    </section>
+
+    <section id="requirements">
+      <h2>Requirements</h2>
+      <div class="text">
+        <p>A <dfn data-term="Requirement" data-l="hs" data-def="A condition a design must meet, stated so a test can check it.">requirement</dfn> turns a need into something a test can check. When 61 people with ALS were asked what a brain-computer interface would have to do, most would be satisfied by one that is right at least 9 times in 10, as fast as 15 to 19 letters a minute, and that leaves its standby by mistake no more than once every 2 to 4 hours.</p>
+        <p>Each of those is a number a test can check. Yours will be too.</p>
+      </div>
+      <table class="data text">
+        <thead><tr><th>A need</th><th>A requirement</th><th>A test that checks it</th></tr></thead>
+        <tbody>
+          <tr><td>To switch it on when they mean to</td><td data-th="A requirement">The light follows at least 8 of 10 switches.</td><td data-th="A test that checks it">Someone else calls ten switches, and counts.</td></tr>
+          <tr><td>Not to switch it on by mistake</td><td data-th="A requirement">At most one switch to On in 5 minutes of rest.</td><td data-th="A test that checks it">The wearer rests for 5 minutes, and the recorder counts.</td></tr>
+          <tr><td>Not to wait long</td><td data-th="A requirement">The light comes on within 10 seconds, in the median of 5 switches.</td><td data-th="A test that checks it">Time five switches, as in the Mind-Controlled Microcontroller.</td></tr>
+          <tr><td>To use it every day</td><td data-th="A requirement">A helper puts it on and starts it in under 3 minutes.</td><td data-th="A test that checks it">Time three setups.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="mistakes">
+      <h2>Two kinds of mistakes</h2>
+      <div class="grid flip">
+        <div class="text">
+          <p>A switch can be wrong two ways. A <dfn data-term="False positive and false negative" data-l="hs" data-def="A false positive says yes when the truth is no. A false negative says no when the truth is yes.">false positive</dfn> switches to On when nobody meant it. A false negative stays Off when the wearer meant On.</p>
+          <p>The threshold sets the balance between them. The board compares each score with <code>SWITCH_THRESHOLD</code>, 0.5 unless you change it. Raise it, and there are fewer false positives and more false negatives. Which mistake costs more depends on the person and the purpose.</p>
+        </div>
+        <figure class="fig" data-fig="threshold"><figcaption><b>Simulated</b> Forty Off readings and forty On readings from one custom AI head, by score. The ringed ones are mistakes. Move the threshold, and one kind of mistake trades for the other.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="test-first">
+      <h2>A test you write first</h2>
+      <div class="grid">
+        <div class="text">
+          <p>Write the test before you build, and keep to it. Then nobody, including you, can move the bar after seeing the result. Scientists call this <dfn data-term="Preregistration" data-l="hs" data-def="Recording the plan for a study before collecting its data.">preregistration</dfn>.</p>
+          <p>Ask for more than luck. A light that only guessed would follow 8 or more of 10 switches about 5 times in 100.</p>
+        </div>
+        <figure class="fig" data-fig="binomial" data-n="10" data-p="0.5" data-k="8"><figcaption><b>Ten switches, by luck</b> How many of ten switches a light would follow if it only guessed. Eight or more, in orange, happens about 5 times in 100.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>The test, written first</h3>
+        <p>Choose your states and site as in the <a href="/light-switch/">Mind-Controlled Light Switch</a>: two states you can each hold for a minute without blinking or moving your jaw, at the site where they should differ most. Then write your test. Swap it with another group, and ask whether a test could check every line. Then sign and date it. Your teacher keeps a copy.</p>
+        <table class="sheet" data-sheet="hs-test-plan">
+          <thead><tr><th>Your test</th><th>Your group's answer</th></tr></thead>
+          <tbody>
+            <tr><td>Our two states, and the site</td><td></td></tr>
+            <tr><td>Sessions to teach it, on how many different days</td><td></td></tr>
+            <tr><td>The score that counts as working</td><td></td></tr>
+            <tr><td>How many of ten switches the light must follow</td><td></td></tr>
+            <tr><td>The longest median delay we accept, in seconds</td><td></td></tr>
+            <tr><td>False positives allowed in 5 minutes of rest</td><td></td></tr>
+            <tr><td>Our threshold, and why</td><td></td></tr>
+            <tr><td>What we will do if it doesn't work</td><td></td></tr>
+            <tr><td>Signed and dated</td><td></td></tr>
+          </tbody>
+        </table>
+        
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Talk about it</h2>
+      <ol class="qs">
+        <li class="q"><p>Your interface is right 7 times in 10. For whom could that be useful, and for whom not?</p></li>
+        <li class="q"><p>Your interface calls for help. Would you set the threshold above 0.5, or below? What does it cost?</p></li>
+        <li class="q"><p>A group writes its test after seeing its results. How could that make an interface that doesn't work look as if it does?</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Huggins, J. E., Wren, P. A., and Gruis, K. L. (2011). What would brain-computer interface users want? Opinions and priorities of potential users with amyotrophic lateral sclerosis. Amyotrophic Lateral Sclerosis.</p>
+      <p>Wolpaw, J. R., Birbaumer, N., McFarland, D. J., Pfurtscheller, G., and Vaughan, T. M. (2002). Brain-computer interfaces for communication and control. Clinical Neurophysiology.</p>
+      <p>Nosek, B. A., Ebersole, C. R., DeHaven, A. C., and Mellor, D. T. (2018). The preregistration revolution. Proceedings of the National Academy of Sciences.</p>
+    </section>
+  </div>
+
+  <div class="lv lv-college" data-l="college">
+    <header class="hero">
+      <p class="eb">Chapter 10 · College</p>
+      <h1>Designing a BCI</h1>
+      <p class="lede">Who would your brain-computer interface serve, what must it do for them, stated so a test can check it, and where should its threshold sit when the two kinds of mistake cost different amounts?</p>
+    </header>
+
+    
+
+    <section id="users">
+      <h2>Who brain-computer interfaces are for</h2>
+      <div class="grid">
+        <div class="text">
+          <p>Brain-computer interfaces were developed first for people who can't move or speak, such as people with advanced ALS. A person with locked-in syndrome has used a fully implanted interface to communicate at home, and noninvasive ones have been used for years in research.</p>
+          <p><dfn data-term="User-centered design" data-l="college" data-def="Designing with the people who will use a system, from their needs to the evaluation.">User-centered design</dfn> evaluates an interface with the people it is for, by its effectiveness, its efficiency and their satisfaction, not only by accuracy with healthy volunteers. Reliability, setup time and independence matter to users in ways a lab's accuracy doesn't measure.</p>
+        </div>
+        <figure class="fig" data-fig="loop"><figcaption><b>The design loop</b> A person and a need, requirements, the test written first, the build, the test run, and one change. Then around again.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="requirements">
+      <h2>Requirements a test can check</h2>
+      <div class="text">
+        <p>A <dfn data-term="Requirement" data-l="college" data-def="A condition a design must meet, stated so a test can check it.">requirement</dfn> names a metric, a threshold, the conditions and the users. When 61 people with ALS were asked what an interface would have to do, most would be satisfied by one right at least 9 times in 10, as fast as 15 to 19 letters a minute, and leaving its standby by mistake no more than once every 2 to 4 hours.</p>
+      </div>
+      <table class="data text">
+        <thead><tr><th>What users need</th><th>A requirement</th><th>How to test it</th></tr></thead>
+        <tbody>
+          <tr><td>Effectiveness</td><td data-th="A requirement">The custom AI head clearly better than chance, in every session, for the user.</td><td data-th="How to test it">The permutation test over rounds, in each session.</td></tr>
+          <tr><td>Efficiency</td><td data-th="A requirement">The pin following at least 8 of 10 calls, each within 8 seconds.</td><td data-th="How to test it">Ten calls at random times, timed.</td></tr>
+          <tr><td>Few false alarms</td><td data-th="A requirement">At most one switch to On in 10 minutes of rest.</td><td data-th="How to test it">Ten minutes at rest, counted.</td></tr>
+          <tr><td>Setup</td><td data-th="A requirement">Worn and running in under 5 minutes, with one helper.</td><td data-th="How to test it">Three setups, timed.</td></tr>
+          <tr><td>Satisfaction</td><td data-th="A requirement">A usability score above an agreed line.</td><td data-th="How to test it">A standard questionnaire, such as the System Usability Scale.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="operating-point">
+      <h2>The operating point</h2>
+      <div class="grid flip">
+        <div class="text">
+          <p>The threshold chooses a point on the ROC curve: raise it, and false positives fall while false negatives rise. When the two cost different amounts, choose the threshold that minimizes the expected cost,</p>
+          <p class="eq">cost = c<sub>FP</sub> · P(false positive) + c<sub>FN</sub> · P(false negative)</p>
+          <p>estimated on data the head never trained on. A call for help, where a miss costs far more than a false alarm, wants a low threshold. A switch that does something hard to undo wants a high one.</p>
+        </div>
+        <figure class="fig" data-fig="threshold"><figcaption><b>Simulated</b> Forty Off readings and forty On readings from one custom AI head, by score. The ringed ones are mistakes. Move the threshold, and one kind of mistake trades for the other.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>The brief, and its requirements</h3>
+        <p>Choose a person to design for, from a published case or imagined from one, and write the brief and the requirements your capstone will be tested against.</p>
+        <table class="sheet" data-sheet="college-brief">
+          <thead><tr><th>Your brief</th><th>Your group's answer</th></tr></thead>
+          <tbody>
+            <tr><td>The person, and what they need to do</td><td></td></tr>
+            <tr><td>What stops them now, and what would make them stop using it</td><td></td></tr>
+            <tr><td>What the board's pin will do for them</td><td></td></tr>
+            <tr><td>Effectiveness: the requirement and its test</td><td></td></tr>
+            <tr><td>Efficiency: the requirement and its test</td><td></td></tr>
+            <tr><td>False alarms: the requirement and its test</td><td></td></tr>
+            <tr><td>Which mistake costs more, and so where the threshold goes</td><td></td></tr>
+          </tbody>
+        </table>
+        
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Problems</h2>
+      <ol class="qs">
+        <li class="q"><p>Why is accuracy with healthy volunteers not enough to evaluate an assistive interface?</p></li>
+        <li class="q"><p>Rewrite “it should be fast and accurate” as requirements a test can check.</p></li>
+        <li class="q"><p>A miss costs ten times a false alarm. Where should the threshold move, and how would you find the point?</p></li>
+        <li class="q"><p>A two-state interface is right 85 percent of the time, with a decision every four seconds. How many bits a minute is that?</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Kübler, A., and others (2014). The user-centered design as novel perspective for evaluating the usability of BCI-controlled applications. PLoS ONE.</p>
+      <p>Huggins, J. E., Wren, P. A., and Gruis, K. L. (2011). What would brain-computer interface users want? Opinions and priorities of potential users with amyotrophic lateral sclerosis. Amyotrophic Lateral Sclerosis.</p>
+      <p>Vansteensel, M. J., and others (2016). Fully implanted brain-computer interface in a locked-in patient with ALS. New England Journal of Medicine.</p>
+      <p>Brooke, J. (1996). SUS: a quick and dirty usability scale. In Usability Evaluation in Industry. Taylor and Francis.</p>
+    </section>
+  </div>
+
+  <div class="lv lv-grad" data-l="grad">
+    <header class="hero">
+      <p class="eb">Chapter 10 · Graduate</p>
+      <h1>Designing a BCI</h1>
+      <p class="lede">Given a person and a purpose, how do you specify a brain-computer interface, choose where it operates, and decide whether it is good enough, before you build it and after?</p>
+    </header>
+
+    
+
+    <section id="users">
+      <h2>Users first</h2>
+      <div class="text">
+        <p>User-centered design evaluates an interface by its effectiveness, its efficiency and its users' satisfaction, with the people it is for, in their setting (Kübler and others, 2014). Asked what a brain-computer interface would have to do, most of 61 people with ALS would be satisfied with one that was right at least 90 percent of the time, that spelled 15 to 19 letters a minute, and that left its standby by mistake no more than once every 2 to 4 hours (Huggins, Wren and Gruis, 2011). A <dfn data-term="Requirement" data-l="grad" data-def="A condition a design must meet, with a metric, a threshold, the conditions and the users, stated so a test can check it.">requirement</dfn> turns such an answer into a metric, a threshold, the conditions and the users, so that a test can check it.</p>
+      </div>
+    </section>
+
+    <section id="metrics">
+      <h2>Metrics that mean something</h2>
+      <div class="text">
+        <p>Wolpaw's <dfn data-term="Information transfer rate" data-l="grad" data-def="Bits a minute from the number of choices, the accuracy and the time per choice, assuming equally likely choices and evenly spread errors.">information transfer rate</dfn> (Wolpaw and others, 2002) summarizes speed and accuracy in bits a minute, under assumptions that interfaces rarely meet: choices equally likely, errors spread evenly, and no cost to correcting them (Thompson and others, 2014). A utility metric counts what the user gains, with the time errors cost to undo (Dal Seno, Matteucci and Mainardi, 2010). For a switch, the numbers that matter are the delay to a deliberate switch, its tail as much as its middle, and the false switches per hour of meaning nothing. An interface used asynchronously, whenever the user wants, has a no-control state, and keeping it quiet is often harder than telling two states apart (Mason and Birch, 2000).</p>
+      </div>
+    </section>
+
+    <section id="operating">
+      <h2>The operating point</h2>
+      <div class="text">
+        <p>A threshold trades the two errors. With the share of time spent in On, π, and the costs of a false switch and a missed one, the expected cost of a decision is</p>
+        <p class="eq">c<sub>FP</sub> (1 − π) P(score &gt; θ | Off) + c<sub>FN</sub> π P(score ≤ θ | On)</p>
+        <p>and the threshold that minimizes it is where the scores' likelihood ratio, On over Off, equals c<sub>FP</sub>(1 − π) / (c<sub>FN</sub> π). A run of k windows above it lowers false switches, by about the k-th power only if neighboring windows are independent, and adds k − 1 windows of delay. When the cost of acting wrongly is high, the system can also wait, ask, or let the user undo, and the brain's own response to an error can help it notice (Chavarriaga, Sobolewski and Millán, 2014).</p>
+      </div>
+    </section>
+
+    <section id="analysis">
+      <h2>Analysis</h2>
+      <div class="try">
+        <p class="k">Analysis</p>
+        <h3>An operating point that meets two requirements</h3>
+        <p>Two requirements: no more than one false switch every two hours, and 90 percent of deliberate switches within 15 seconds. Simulate a head's scores with neighboring windows alike, as real ones are, and search thresholds and holds for one that meets both. Then put in your own head's numbers from the light switch.</p>
+        <pre><code>import numpy as np
+
+rng = np.random.default_rng(10)
+W = 4.0                       # a score every four seconds
+OFF, ON, SD, RHO = 0.2, 0.8, 0.15, 0.5   # your head's scores: means, spread, and how alike
+                                         # neighboring windows are. Put in your own.
+
+def noise(rows, cols):
+    """Window-to-window noise that carries over from one window to the next."""
+    e = rng.normal(0, SD, (rows, cols))
+    for j in range(1, cols):
+        e[:, j] = RHO * e[:, j - 1] + np.sqrt(1 - RHO ** 2) * e[:, j]
+    return e
+
+def held(above, hold):
+    """Where `hold` windows in a row have been above the threshold."""
+    count = np.zeros(above.shape, int)
+    for j in range(above.shape[1]):
+        count[:, j] = np.where(above[:, j], (count[:, j - 1] if j else 0) + 1, 0)
+    return count &gt;= hold
+
+def false_per_hour(threshold, hold, hours=200):
+    on = held(OFF + noise(1, int(hours * 3600 / W)) &gt; threshold, hold)[0]
+    return np.sum(on[1:] &amp; ~on[:-1]) / hours
+
+def slow_tail(threshold, hold, trials=5000):
+    """The 90th percentile of the delay from a change to On, with windows on a grid."""
+    t0 = rng.uniform(0, W, trials)
+    ends = W * np.arange(1, 13)
+    share = np.clip((ends[None] - t0[:, None]) / W, 0, 1)
+    h = held(OFF + share * (ON - OFF) + noise(trials, len(ends)) &gt; threshold, hold)
+    return np.percentile(ends[np.argmax(h, axis=1)] - t0, 90)
+
+print("threshold  hold  false an hour  90% of switches within")
+for threshold in (0.5, 0.6, 0.7):
+    for hold in (1, 2, 3):
+        f, tail = false_per_hour(threshold, hold), slow_tail(threshold, hold)
+        ok = "  meets both" if f &lt;= 0.5 and tail &lt;= 15 else ""
+        print(f"{threshold:9.1f} {hold:5d} {f:14.2f} {tail:13.1f} s{ok}")</code></pre>
+        <p class="see"><b>You should see</b>One rule meeting both, a threshold of 0.7 with no hold: 0.39 false switches an hour, and 90 percent within 12.3 seconds. The demo's rule, 0.5 with no hold, gives 17 false switches an hour. Holds help less than independence would suggest: at 0.5, two in a row still leave 2.8 an hour.</p>
+        <p>Then report: the rule your own head's scores allow, or which requirement it can't meet, and what would have to change.</p>
+        
+      </div>
+    </section>
+
+    <section id="open">
+      <h2>Open problems</h2>
+      <ol class="rulelist">
+        <li><b>Metrics that predict use.</b> Which laboratory measures predict whether someone keeps using an interface at home is not settled (Thompson and others, 2014).</li>
+        <li><b>Home use.</b> A noninvasive interface was used independently at home by people with ALS for up to 18 months, though 14 of the 42 who enrolled got that far (Wolpaw and others, 2018), and an implanted one by a person with ALS in daily life (Vansteensel and others, 2016). What it takes for more people to keep using noninvasive ones is open.</li>
+        <li><b>Meaning nothing.</b> Recognizing that a person doesn't intend anything, reliably and for hours, is the hard part of asynchronous control, and no general solution exists.</li>
+      </ol>
+    </section>
+
+    <section id="talk">
+      <h2>Problems</h2>
+      <ol class="qs">
+        <li class="q"><p>Turn "leaves standby by mistake no more than once every two hours" into a per-window probability for a decoder that decides every four seconds: with no hold, and with three windows in a row, if windows were independent.</p></li>
+        <li class="q"><p>A switch is right 95 percent of the time, deciding every four seconds. What is its information transfer rate, and what does that number leave out?</p></li>
+        <li class="q"><p>Off scores are normal around 0.2 and On around 0.8, both with a spread of 0.15. The user is in On a tenth of the time, and a false switch costs five times a missed one. Where should the threshold be?</p></li>
+        <li class="q"><p>Which of effectiveness, efficiency and satisfaction does the light switch's verdict address?</p></li>
+        <li class="q"><p>Write three testable requirements for a mind-controlled call button for someone who can't move, and how you would test each.</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Mason, S. G., and Birch, G. E. (2000). A brain-controlled switch for asynchronous control applications. IEEE Transactions on Biomedical Engineering.</p>
+      <p>Wolpaw, J. R., Birbaumer, N., McFarland, D. J., Pfurtscheller, G., and Vaughan, T. M. (2002). Brain-computer interfaces for communication and control. Clinical Neurophysiology.</p>
+      <p>Dal Seno, B., Matteucci, M., and Mainardi, L. T. (2010). The utility metric: a novel method to assess the overall performance of discrete brain-computer interfaces. IEEE Transactions on Neural Systems and Rehabilitation Engineering.</p>
+      <p>Huggins, J. E., Wren, P. A., and Gruis, K. L. (2011). What would brain-computer interface users want? Opinions and priorities of potential users with amyotrophic lateral sclerosis. Amyotrophic Lateral Sclerosis.</p>
+      <p>Chavarriaga, R., Sobolewski, A., and Millán, J. del R. (2014). Errare machinale est: the use of error-related potentials in brain-machine interfaces. Frontiers in Neuroscience.</p>
+      <p>Kübler, A., and others (2014). The user-centered design as novel perspective for evaluating the usability of BCI-controlled applications. PLoS ONE.</p>
+      <p>Thompson, D. E., and others (2014). Performance measurement for brain-computer or brain-machine interfaces: a tutorial. Journal of Neural Engineering.</p>
+      <p>Vansteensel, M. J., and others (2016). Fully implanted brain-computer interface in a locked-in patient with ALS. New England Journal of Medicine.</p>
+      <p>Wolpaw, J. R., and others (2018). Independent home use of a brain-computer interface by people with amyotrophic lateral sclerosis. Neurology.</p>
+    </section>
+  </div>
+
+</main>
+<footer class="colophon">
+  <p><b>BCI101</b> An Applied Introduction to Noninvasive Brain-Computer Interfaces. Neurons, to bits, to real-world outcomes. Built on the demos at <a href="https://demo.intomind.com/">demo.intomind.com</a>.</p>
+  <div class="level-line"><span>Level</span><div class="levels" role="group" aria-label="Level"><button type="button" data-level="ms">Middle school</button><button type="button" data-level="hs">High school</button><button type="button" data-level="college">College</button><button type="button" data-level="grad">Graduate</button></div></div>
+</footer>
+</body>
+</html>

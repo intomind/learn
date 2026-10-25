@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Models that learn · BCI101</title>
+<meta name="description" content="Learning a rule from labeled examples, testing it on new ones, fitting a line through data, and regularization when there are almost as many numbers as examples.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/assets/site.css">
+<script>(function(){var d=document.documentElement,q=new URLSearchParams(location.search),s=function(k){try{return localStorage.getItem(k)}catch(e){return null}},L={ms:1,hs:1,college:1,grad:1},l=q.get("level");if(L[l]){try{localStorage.setItem("curriculum-level",l)}catch(e){}}else l=s("curriculum-level");if(!L[l]){l="hs";d.dataset.ask="1"}d.dataset.level=l;d.dataset.theme=q.get("theme")||s("curriculum-theme")||"dark";})()</script>
+<script type="module" src="/assets/curriculum.js"></script>
+</head>
+<body>
+<header class="chrome">
+  <a class="mark" href="/">IntoMind<span>Learn</span></a>
+  <nav class="nav" aria-label="Pages"><a href="/" aria-current="page">Contents</a><a href="/labs/">Labs</a><a href="/vocabulary/">Vocabulary</a><a href="/safety/">Safety</a></nav>
+  <div class="controls"><button class="theme" type="button">Light</button></div>
+</header>
+<main class="page kind-chapter">
+  <div class="lv lv-ms" data-l="ms">
+    <header class="hero">
+      <p class="eb">Chapter 5 · Middle school</p>
+      <h1>Models that learn</h1>
+      <p class="lede">How can a computer learn a rule that nobody told it?</p>
+    </header>
+
+    
+
+    <section id="examples">
+      <h2>Learning from examples</h2>
+      <div class="text">
+        <p>A <dfn data-term="Model" data-l="ms" data-def="A set of rules a computer learns from examples, so it can decide about new ones.">model</dfn> is a set of rules a computer learns from examples. Each example comes with its answer, called its <dfn data-term="Label" data-l="ms" data-def="The answer given with each example a model learns from.">label</dfn>. Show a model many pictures of animals labeled cat or dog, and it can learn what makes cats and dogs different. Then it can decide about animals it has never seen.</p>
+        <p>Nobody writes the rule for it. The rule comes from the examples.</p>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>The sorting game</h3>
+        <p>Here are twelve creatures, each labeled a Glorp or a Zib. Work out a rule that says which is which. Then use your rule on the eight new creatures.</p>
+        <table class="data">
+          <thead><tr><th>Creature</th><th>Spots</th><th>Legs</th><th>Color</th><th>Tail</th><th>It is a</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Yes</td><td>4</td><td>Red</td><td>Long</td><td>Glorp</td></tr>
+            <tr><td>2</td><td>Yes</td><td>6</td><td>Blue</td><td>Short</td><td>Glorp</td></tr>
+            <tr><td>3</td><td>No</td><td>4</td><td>Red</td><td>Long</td><td>Zib</td></tr>
+            <tr><td>4</td><td>Yes</td><td>2</td><td>Red</td><td>Short</td><td>Zib</td></tr>
+            <tr><td>5</td><td>No</td><td>6</td><td>Blue</td><td>Long</td><td>Zib</td></tr>
+            <tr><td>6</td><td>Yes</td><td>4</td><td>Blue</td><td>Short</td><td>Glorp</td></tr>
+            <tr><td>7</td><td>No</td><td>2</td><td>Blue</td><td>Short</td><td>Zib</td></tr>
+            <tr><td>8</td><td>Yes</td><td>6</td><td>Red</td><td>Long</td><td>Glorp</td></tr>
+            <tr><td>9</td><td>Yes</td><td>2</td><td>Blue</td><td>Long</td><td>Zib</td></tr>
+            <tr><td>10</td><td>No</td><td>4</td><td>Blue</td><td>Short</td><td>Zib</td></tr>
+            <tr><td>11</td><td>Yes</td><td>4</td><td>Red</td><td>Short</td><td>Glorp</td></tr>
+            <tr><td>12</td><td>No</td><td>6</td><td>Red</td><td>Short</td><td>Zib</td></tr>
+          </tbody>
+        </table>
+        <p class="ask"><span class="lbl">Your rule</span>A creature is a Glorp when <span class="fill" data-key="rule" data-hint="what it has"></span>.</p>
+        <table class="sheet" data-sheet="ms-new-creatures">
+          <thead><tr><th>New creature</th><th>Spots</th><th>Legs</th><th>Color</th><th>Tail</th><th>Your rule says</th></tr></thead>
+          <tbody>
+            <tr><td>13</td><td>Yes</td><td>6</td><td>Blue</td><td>Long</td><td></td></tr>
+            <tr><td>14</td><td>No</td><td>4</td><td>Red</td><td>Short</td><td></td></tr>
+            <tr><td>15</td><td>Yes</td><td>2</td><td>Red</td><td>Long</td><td></td></tr>
+            <tr><td>16</td><td>Yes</td><td>4</td><td>Blue</td><td>Long</td><td></td></tr>
+            <tr><td>17</td><td>No</td><td>2</td><td>Red</td><td>Long</td><td></td></tr>
+            <tr><td>18</td><td>Yes</td><td>6</td><td>Red</td><td>Short</td><td></td></tr>
+            <tr><td>19</td><td>No</td><td>6</td><td>Blue</td><td>Short</td><td></td></tr>
+            <tr><td>20</td><td>Yes</td><td>2</td><td>Blue</td><td>Short</td><td></td></tr>
+          </tbody>
+        </table>
+        
+      </div>
+    </section>
+
+    <section id="testing">
+      <h2>Testing on new examples</h2>
+      <div class="text">
+        <p>A model that only remembers the examples it was shown isn't much use. It answers those perfectly, and is stuck on anything new.</p>
+        <p>So a model is always tested on examples it did not learn from. <dfn data-term="Training and testing" data-l="ms" data-def="Training fits the rules to examples whose answers are known. Testing measures them on examples held back.">Training</dfn> fits its rules to examples whose answers are known. Testing checks them on examples held back.</p>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>The memorizer</h3>
+        <p>One student plays a memorizer. For each new creature, the memorizer may answer only if it matches one of the first twelve exactly, and must guess otherwise. Score the memorizer, and the rule-finders, on the eight new creatures.</p>
+        <p class="ask"><span class="lbl">Work it out</span>The memorizer got <span class="fill" data-key="memorizer" data-hint="how many"></span> of 8 right. Our rule got <span class="fill" data-key="rule-score" data-hint="how many"></span> of 8 right.</p>
+        <p class="see"><b>You should see</b>The memorizer guessing on every new creature, since none matches one of the twelve exactly, and the rule-finders doing far better.</p>
+      </div>
+    </section>
+
+    <section id="your-brain">
+      <h2>Your brain as examples</h2>
+      <div class="grid">
+        <div class="text">
+          <p>In the Mind-Controlled Light Switch, you will teach a model too, and the examples will be your own EEG, four seconds at a time. Each is labeled Off while you rest, or On while you count down in your head, by what the demo tells you to do.</p>
+          <p>The demo teaches in eight rounds, Off and On in turn. Then it tests the model on readings it held back, so its score comes from examples it never learned from.</p>
+        </div>
+        <figure class="fig" data-fig="rounds" data-held="3"><figcaption><b>Held back</b> Eight rounds, Off and On in turn. In each, the first two readings after a switch are left out while the brain settles, and eleven are kept. Each round in turn is held back from training and tested on. The outlined round is one of them.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Talk about it</h2>
+      <ol class="qs">
+        <li class="q"><p>What was the rule for Glorps? How did you find it?</p></li>
+        <li class="q"><p>Why did the memorizer do badly on the new creatures?</p></li>
+        <li class="q"><p>In the Mind-Controlled Light Switch, what are the examples, and what are the labels?</p></li>
+      </ol>
+    </section>
+  </div>
+
+  <div class="lv lv-hs" data-l="hs">
+    <header class="hero">
+      <p class="eb">Chapter 5 · High school</p>
+      <h1>Models that learn</h1>
+      <p class="lede">How does a computer learn a rule from labeled examples, and how do you know whether it learned the rule or just the examples?</p>
+    </header>
+
+    
+
+    <section id="examples">
+      <h2>Learning from examples</h2>
+      <div class="text">
+        <p>A <dfn data-term="Model" data-l="hs" data-def="A set of rules a computer learns from examples, so it can decide about new ones.">model</dfn> that sorts examples into groups is a classifier. It is given numbers about each example, its <dfn data-term="Feature" data-l="hs" data-def="A number the model is given about each example.">features</dfn>, and learns a rule that maps them to a <dfn data-term="Label" data-l="hs" data-def="The answer given for each training example.">label</dfn>. <dfn data-term="Training and testing" data-l="hs" data-def="Training fits the rules to examples whose answers are known. Testing measures them on examples held back.">Training</dfn> fits the rule to examples whose labels are known. Testing measures it on examples held back.</p>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>The sorting game</h3>
+        <p>Here are twelve creatures, each labeled a Glorp or a Zib. Find the rule, then use it on the eight new ones. Then one student plays a memorizer, who may answer for a new creature only if it matches one of the twelve exactly, and must guess otherwise.</p>
+        <table class="data">
+          <thead><tr><th>Creature</th><th>Spots</th><th>Legs</th><th>Color</th><th>Tail</th><th>It is a</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Yes</td><td>4</td><td>Red</td><td>Long</td><td>Glorp</td></tr>
+            <tr><td>2</td><td>Yes</td><td>6</td><td>Blue</td><td>Short</td><td>Glorp</td></tr>
+            <tr><td>3</td><td>No</td><td>4</td><td>Red</td><td>Long</td><td>Zib</td></tr>
+            <tr><td>4</td><td>Yes</td><td>2</td><td>Red</td><td>Short</td><td>Zib</td></tr>
+            <tr><td>5</td><td>No</td><td>6</td><td>Blue</td><td>Long</td><td>Zib</td></tr>
+            <tr><td>6</td><td>Yes</td><td>4</td><td>Blue</td><td>Short</td><td>Glorp</td></tr>
+            <tr><td>7</td><td>No</td><td>2</td><td>Blue</td><td>Short</td><td>Zib</td></tr>
+            <tr><td>8</td><td>Yes</td><td>6</td><td>Red</td><td>Long</td><td>Glorp</td></tr>
+            <tr><td>9</td><td>Yes</td><td>2</td><td>Blue</td><td>Long</td><td>Zib</td></tr>
+            <tr><td>10</td><td>No</td><td>4</td><td>Blue</td><td>Short</td><td>Zib</td></tr>
+            <tr><td>11</td><td>Yes</td><td>4</td><td>Red</td><td>Short</td><td>Glorp</td></tr>
+            <tr><td>12</td><td>No</td><td>6</td><td>Red</td><td>Short</td><td>Zib</td></tr>
+          </tbody>
+        </table>
+        <table class="sheet" data-sheet="hs-new-creatures">
+          <thead><tr><th>New creature</th><th>Spots</th><th>Legs</th><th>Color</th><th>Tail</th><th>Your rule says</th><th>The memorizer says</th></tr></thead>
+          <tbody>
+            <tr><td>13</td><td>Yes</td><td>6</td><td>Blue</td><td>Long</td><td></td><td></td></tr>
+            <tr><td>14</td><td>No</td><td>4</td><td>Red</td><td>Short</td><td></td><td></td></tr>
+            <tr><td>15</td><td>Yes</td><td>2</td><td>Red</td><td>Long</td><td></td><td></td></tr>
+            <tr><td>16</td><td>Yes</td><td>4</td><td>Blue</td><td>Long</td><td></td><td></td></tr>
+            <tr><td>17</td><td>No</td><td>2</td><td>Red</td><td>Long</td><td></td><td></td></tr>
+            <tr><td>18</td><td>Yes</td><td>6</td><td>Red</td><td>Short</td><td></td><td></td></tr>
+            <tr><td>19</td><td>No</td><td>6</td><td>Blue</td><td>Short</td><td></td><td></td></tr>
+            <tr><td>20</td><td>Yes</td><td>2</td><td>Blue</td><td>Short</td><td></td><td></td></tr>
+          </tbody>
+        </table>
+        <p class="ask"><span class="lbl">Work it out</span>The rule: a Glorp has <span class="fill" data-key="rule" data-hint="what"></span>. The features that don't matter: <span class="fill" data-key="ignore" data-hint="which"></span>.</p>
+        
+      </div>
+    </section>
+
+    <section id="line">
+      <h2>A line between two groups</h2>
+      <div class="grid">
+        <div class="text">
+          <p>The simplest useful classifier draws a line between two groups, or with more features, a flat plane. Each example gets a score: a weighted sum of its features, plus a constant. The weights are fitted so the scores come close to 0 for one group and 1 for the other, and everything above 0.5 is called the second group.</p>
+          <p>The usual way to fit them is least squares: choose the weights that make the squared differences between the scores and the labels as small as possible. The Mind-Controlled Light Switch does exactly this, with 76 features.</p>
+        </div>
+        <figure class="fig" data-fig="scatter" data-table="#points-hs" data-train="16"><figcaption><b>Least squares</b> Twenty-four points in two groups, from the table below. The line is fitted on the sixteen solid points. The eight hollow ones are held back to test it.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>A line through examples</h3>
+        <p>Plot the first sixteen points on graph paper, marking each group. Draw the line you think separates them best, and use it on the last eight. Then, in a spreadsheet, fit score = a·x + b·y + c by least squares on the first sixteen, with <code>=LINEST(D2:D17, B2:C17)</code>. It lists the weights in reverse order: b, then a, then c.</p>
+        <table class="data" id="points-hs">
+          <thead><tr><th>Point</th><th>x</th><th>y</th><th>Group</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>1.9</td><td>2.2</td><td>1</td></tr><tr><td>2</td><td>0.9</td><td>1.9</td><td>0</td></tr><tr><td>3</td><td>2.4</td><td>1.5</td><td>1</td></tr><tr><td>4</td><td>2.5</td><td>1.2</td><td>1</td></tr>
+            <tr><td>5</td><td>1.3</td><td>1.6</td><td>0</td></tr><tr><td>6</td><td>0.5</td><td>1.8</td><td>0</td></tr><tr><td>7</td><td>2.4</td><td>1.4</td><td>1</td></tr><tr><td>8</td><td>2.8</td><td>0.8</td><td>1</td></tr>
+            <tr><td>9</td><td>0.9</td><td>2.6</td><td>0</td></tr><tr><td>10</td><td>2.0</td><td>2.3</td><td>1</td></tr><tr><td>11</td><td>2.0</td><td>2.1</td><td>1</td></tr><tr><td>12</td><td>1.8</td><td>1.5</td><td>1</td></tr>
+            <tr><td>13</td><td>-0.1</td><td>2.1</td><td>0</td></tr><tr><td>14</td><td>-0.1</td><td>2.2</td><td>0</td></tr><tr><td>15</td><td>1.8</td><td>2.0</td><td>0</td></tr><tr><td>16</td><td>1.2</td><td>2.4</td><td>0</td></tr>
+            <tr><td>17</td><td>2.0</td><td>1.9</td><td>held back</td></tr><tr><td>18</td><td>2.5</td><td>1.0</td><td>held back</td></tr><tr><td>19</td><td>1.4</td><td>2.1</td><td>held back</td></tr><tr><td>20</td><td>0.4</td><td>1.9</td><td>held back</td></tr>
+            <tr><td>21</td><td>1.3</td><td>2.8</td><td>held back</td></tr><tr><td>22</td><td>1.1</td><td>1.9</td><td>held back</td></tr><tr><td>23</td><td>1.1</td><td>0.9</td><td>held back</td></tr><tr><td>24</td><td>1.2</td><td>1.5</td><td>held back</td></tr>
+          </tbody>
+        </table>
+        <p class="ask"><span class="lbl">Work it out</span>a = <span class="fill" data-key="a" data-hint="weight"></span>, b = <span class="fill" data-key="b" data-hint="weight"></span>, c = <span class="fill" data-key="c" data-hint="constant"></span>. Right on the sixteen: <span class="fill" data-key="train-right" data-hint="how many"></span>. Right on the eight held back, once your teacher gives their groups: <span class="fill" data-key="test-right" data-hint="how many"></span>.</p>
+        
+      </div>
+    </section>
+
+    <section id="overfitting">
+      <h2>Overfitting</h2>
+      <div class="grid flip">
+        <div class="text">
+          <p>A rule flexible enough to fit every training example, noise and all, <dfn data-term="Overfitting" data-l="hs" data-def="Fitting the noise in the training examples, so the rule does worse on new ones.">overfits</dfn>: it scores well on what it saw, and worse on anything new. The gap between the training score and the held-out score measures it.</p>
+          <p>So a model is scored on examples it never learned from. The Mind-Controlled Light Switch teaches in eight rounds, and tests each round with a head taught on the other seven.</p>
+        </div>
+        <figure class="fig" data-fig="rounds" data-held="3"><figcaption><b>Held back</b> Eight rounds of teaching, Off and On in turn. Each round in turn is held back from training and tested on, so the model's score comes from readings it never learned from. The outlined round is one of them.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>A boundary that fits everything</h3>
+        <p>On your plot of the first sixteen points, draw a boundary that weaves around every point, so that all sixteen are on the right side. Score it on the eight held back, and compare it with your straight line.</p>
+        <table class="sheet" data-sheet="hs-overfit">
+          <thead><tr><th>Rule</th><th>Right on the sixteen</th><th>Right on the eight</th></tr></thead>
+          <tbody><tr><td>The straight line</td><td></td><td></td></tr><tr><td>The weaving boundary</td><td></td><td></td></tr></tbody>
+        </table>
+        <p class="see"><b>You should see</b>A perfect score on the sixteen that promises more than it delivers on the eight.</p>
+        
+      </div>
+    </section>
+
+    <section id="python">
+      <h2>The same line in Python</h2>
+      <div class="try">
+        <p class="k">Try it, if you code</p>
+        <h3>Fit it in Python</h3>
+        <pre><code>import numpy as np
+train = np.array([[1.9, 2.2, 1], [0.9, 1.9, 0], [2.4, 1.5, 1], [2.5, 1.2, 1],
+                  [1.3, 1.6, 0], [0.5, 1.8, 0], [2.4, 1.4, 1], [2.8, 0.8, 1],
+                  [0.9, 2.6, 0], [2.0, 2.3, 1], [2.0, 2.1, 1], [1.8, 1.5, 1],
+                  [-0.1, 2.1, 0], [-0.1, 2.2, 0], [1.8, 2.0, 0], [1.2, 2.4, 0]])
+X = np.c_[train[:, :2], np.ones(len(train))]
+w = np.linalg.lstsq(X, train[:, 2], rcond=None)[0]
+print(w, ((X @ w > 0.5) == train[:, 2]).mean())</code></pre>
+        <p>It prints the weights a, b and c, and the share of the sixteen it gets right. Add the eight held-back points, with the groups your teacher gives you, and score the line on them.</p>
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Talk about it</h2>
+      <ol class="qs">
+        <li class="q"><p>Your line got 15 of 16 training points right, but fewer of the held-back ones. Why is the held-back score the one to report?</p></li>
+        <li class="q"><p>The least-squares line gives almost no weight to y. What does that tell you about the feature?</p></li>
+        <li class="q"><p>Describe a classifier that would score 16 of 16 on training and still be useless.</p></li>
+      </ol>
+    </section>
+  </div>
+
+  <div class="lv lv-college" data-l="college">
+    <header class="hero">
+      <p class="eb">Chapter 5 · College</p>
+      <h1>Models that learn</h1>
+      <p class="lede">How does a linear model fit labeled examples, why does it fit noise when the features nearly outnumber the examples, and how do you choose a penalty without peeking at the test?</p>
+    </header>
+
+    
+
+    <section id="examples">
+      <h2>Learning from labeled examples</h2>
+      <div class="grid">
+        <div class="text">
+          <p>A <dfn data-term="Model" data-l="college" data-def="A rule with parameters fitted to examples, so it can make a decision about new ones.">model</dfn> is a rule with parameters fitted to examples. Each example is a vector of <dfn data-term="Feature" data-l="college" data-def="A number the model is given about each example.">features</dfn> x with a <dfn data-term="Label" data-l="college" data-def="The answer given for each training example.">label</dfn> y. A linear classifier scores each example w·x + b and calls it the second group when the score passes 0.5.</p>
+          <p>A custom AI head is exactly this, with the encoder's 76 numbers as features and Off and On as 0 and 1, its weights rounded to bytes so the IntoMind One's chip can run it.</p>
+        </div>
+        <figure class="fig" data-fig="scatter" data-table="#points-college" data-train="16"><figcaption><b>Least squares</b> Twenty-four points in two groups, from the table below. The line is fitted on the sixteen solid points, and the eight hollow ones are held back to test it.</figcaption></figure>
+      </div>
+      <table class="data" id="points-college">
+        <thead><tr><th>Point</th><th>x</th><th>y</th><th>Group</th></tr></thead>
+        <tbody>
+            <tr><td>1</td><td>1.9</td><td>2.2</td><td>1</td></tr><tr><td>2</td><td>0.9</td><td>1.9</td><td>0</td></tr><tr><td>3</td><td>2.4</td><td>1.5</td><td>1</td></tr><tr><td>4</td><td>2.5</td><td>1.2</td><td>1</td></tr>
+            <tr><td>5</td><td>1.3</td><td>1.6</td><td>0</td></tr><tr><td>6</td><td>0.5</td><td>1.8</td><td>0</td></tr><tr><td>7</td><td>2.4</td><td>1.4</td><td>1</td></tr><tr><td>8</td><td>2.8</td><td>0.8</td><td>1</td></tr>
+            <tr><td>9</td><td>0.9</td><td>2.6</td><td>0</td></tr><tr><td>10</td><td>2.0</td><td>2.3</td><td>1</td></tr><tr><td>11</td><td>2.0</td><td>2.1</td><td>1</td></tr><tr><td>12</td><td>1.8</td><td>1.5</td><td>1</td></tr>
+            <tr><td>13</td><td>−0.1</td><td>2.1</td><td>0</td></tr><tr><td>14</td><td>−0.1</td><td>2.2</td><td>0</td></tr><tr><td>15</td><td>1.8</td><td>2.0</td><td>0</td></tr><tr><td>16</td><td>1.2</td><td>2.4</td><td>0</td></tr>
+            <tr><td>17</td><td>2.0</td><td>1.9</td><td>1</td></tr><tr><td>18</td><td>2.5</td><td>1.0</td><td>1</td></tr><tr><td>19</td><td>1.4</td><td>2.1</td><td>0</td></tr><tr><td>20</td><td>0.4</td><td>1.9</td><td>0</td></tr>
+            <tr><td>21</td><td>1.3</td><td>2.8</td><td>0</td></tr><tr><td>22</td><td>1.1</td><td>1.9</td><td>0</td></tr><tr><td>23</td><td>1.1</td><td>0.9</td><td>1</td></tr><tr><td>24</td><td>1.2</td><td>1.5</td><td>1</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="least-squares">
+      <h2>Least squares</h2>
+      <div class="text">
+        <p>Stack the examples as the rows of X, with a column of ones for the constant. Least squares chooses the weights that minimize the squared error ‖Xw − y‖², and setting the gradient to zero gives the normal equations:</p>
+        <p class="eq">w = (XᵀX)⁻¹ Xᵀy</p>
+        <p>Training fits w on some examples. Testing scores it on others it never saw, which estimates how it will do on new ones: <dfn data-term="Training and testing" data-l="college" data-def="Fitting a model on examples whose answers are known, and measuring it on others held back.">training and testing</dfn>.</p>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>A line through examples</h3>
+        <p>Fit the line on the first sixteen points by the normal equations, and score it on those and on the eight held back.</p>
+        <pre><code>import numpy as np
+
+# point, x, y, group, from the table: the first sixteen to fit, the last eight held back
+P = np.array([[1.9, 2.2, 1], [0.9, 1.9, 0], [2.4, 1.5, 1], [2.5, 1.2, 1],
+              [1.3, 1.6, 0], [0.5, 1.8, 0], [2.4, 1.4, 1], [2.8, 0.8, 1],
+              [0.9, 2.6, 0], [2.0, 2.3, 1], [2.0, 2.1, 1], [1.8, 1.5, 1],
+              [-0.1, 2.1, 0], [-0.1, 2.2, 0], [1.8, 2.0, 0], [1.2, 2.4, 0],
+              [2.0, 1.9, 1], [2.5, 1.0, 1], [1.4, 2.1, 0], [0.4, 1.9, 0],
+              [1.3, 2.8, 0], [1.1, 1.9, 0], [1.1, 0.9, 1], [1.2, 1.5, 1]])
+A = np.c_[P[:, :2], np.ones(len(P))]            # x, y and a constant
+w = np.linalg.solve(A[:16].T @ A[:16], A[:16].T @ P[:16, 2])
+right = (A @ w &gt; 0.5) == P[:, 2]
+print(np.round(w, 3), right[:16].sum(), &quot;of 16 fitted,&quot;, right[16:].sum(), &quot;of 8 held back&quot;)</code></pre>
+        <p class="see"><b>You should see</b>Weights of about 0.469 on x, −0.003 on y and −0.204 for the constant: 15 of 16 right on the points it was fitted on, and 6 of 8 on the points held back.</p>
+        
+      </div>
+    </section>
+
+    <section id="ridge">
+      <h2>Too many features, and ridge regression</h2>
+      <div class="grid flip">
+        <div class="text">
+          <p>As the number of features d approaches the number of examples n, some combinations of features are barely determined by the data. XᵀX gets tiny eigenvalues, their inverses blow up the weights, and the fit chases noise: <dfn data-term="Overfitting" data-l="college" data-def="Fitting the noise in the training examples, so the model does worse on new ones.">overfitting</dfn>. The Mind-Controlled Light Switch fits 77 parameters to 88 readings, squarely in that regime.</p>
+          <p><dfn data-term="Ridge regression" data-l="college" data-def="Least squares with a penalty on large weights, so a model with many inputs and few examples does not fit the noise.">Ridge regression</dfn> adds a penalty λ on the squared weights, leaving the constant unpenalized:</p>
+          <p class="eq">w = (XᵀX + λI)⁻¹ Xᵀy</p>
+          <p>Every eigenvalue rises by λ, which bounds the inverse. A larger λ shrinks the weights, adding <dfn data-term="Bias and variance" data-l="college" data-def="Error from a rule too simple to fit the truth, and error from a rule too sensitive to the particular examples it was fitted on.">bias</dfn> and removing variance.</p>
+        </div>
+        <figure class="fig" data-fig="rounds" data-held="3"><figcaption><b>Held back</b> The Mind-Controlled Light Switch teaches in eight rounds, Off and On in turn, eleven readings in each, and tests on the outlined round, which it never learned from.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="choosing">
+      <h2>Choosing λ without the test</h2>
+      <div class="text">
+        <p>The best λ minimizes error on data the fit hasn't seen, but choosing it by its score on the test fits λ to the test, and flatters that score. So λ is chosen inside the training data, by cross-validation nested inside each training set, or by a rule that uses no labels at all.</p>
+        <p>The demos' trainer uses such a rule: the geometric mean of the two smallest eigenvalues of XᵀX for the centered embeddings. Embeddings barely vary along one direction, and a penalty of that size removes it while leaving the rest almost unshrunk.</p>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>The ridge path</h3>
+        <p><a href="https://github.com/intomind/demo">The demos' source</a> holds the trainer's test data: 150 rows of 76 numbers in tests/fixtures/train/embeddings.json, with labels in targets.json. They aren't EEG: they are random numbers shaped like embeddings, labeled by a rule with noise, and stored as the integers the IntoMind One sends, so λ is in those units. From the top of <a href="https://github.com/intomind/demo">the demos' source</a>, trace training and held-out error against λ, holding out blocks of consecutive rows, then choose λ by nested cross-validation.</p>
+        <pre><code>import json
+import numpy as np
+import matplotlib.pyplot as plt
+
+X = np.array(json.load(open(&quot;tests/fixtures/train/embeddings.json&quot;)), float)
+y = np.array(json.load(open(&quot;tests/fixtures/train/targets.json&quot;)), float)
+
+def fit(X, y, lam):
+    &quot;&quot;&quot;Ridge on the weights, none on the intercept.&quot;&quot;&quot;
+    A = np.c_[X, np.ones(len(X))]
+    P = lam * np.eye(A.shape[1])
+    P[-1, -1] = 0
+    return np.linalg.solve(A.T @ A + P, A.T @ y)
+
+def mse(X, y, w):
+    return np.mean((np.c_[X, np.ones(len(X))] @ w - y) ** 2)
+
+def blocked(X, y, lam, k=5):
+    &quot;&quot;&quot;Training and held-out error, holding out k blocks of consecutive rows in turn.&quot;&quot;&quot;
+    edges = np.linspace(0, len(X), k + 1).astype(int)
+    train, held = [], []
+    for a, b in zip(edges[:-1], edges[1:]):
+        out = np.zeros(len(X), bool)
+        out[a:b] = True
+        w = fit(X[~out], y[~out], lam)
+        train.append(mse(X[~out], y[~out], w))
+        held.append(mse(X[out], y[out], w))
+    return np.mean(train), np.mean(held)
+
+lams = 10.0 ** np.arange(4, 13)
+errors = np.array([blocked(X, y, lam) for lam in lams])
+plt.semilogx(lams, errors[:, 0], label=&quot;training&quot;)
+plt.semilogx(lams, errors[:, 1], label=&quot;held out&quot;)
+plt.xlabel(&quot;λ&quot;)
+plt.ylabel(&quot;mean squared error&quot;)
+plt.legend()
+plt.show()
+
+# Nested: each outer block&#x27;s λ is chosen inside the other blocks only.
+edges = np.linspace(0, len(X), 6).astype(int)
+for a, b in zip(edges[:-1], edges[1:]):
+    out = np.zeros(len(X), bool)
+    out[a:b] = True
+    best = min(lams, key=lambda lam: blocked(X[~out], y[~out], lam)[1])
+    w = fit(X[~out], y[~out], best)
+    print(f&quot;rows {a} to {b}: λ {best:.0e}, held-out error {mse(X[out], y[out], w):.3f}&quot;)
+print(&quot;the trainer&#x27;s λ:&quot;, round(json.load(open(&quot;tests/fixtures/train/ridge.json&quot;))[&quot;ridge&quot;]))</code></pre>
+        <p class="see"><b>You should see</b>Training error rising as λ grows, and held-out error falling to its lowest near 10⁸ to 10⁹, then rising. Nested cross-validation chooses λ there in every block, thousands of times the trainer's λ of about 20,000.</p>
+        
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Problems</h2>
+      <ol class="qs">
+        <li class="q"><p>Why is the held-back score the one to report, not the training score?</p></li>
+        <li class="q"><p>Fitted on sixteen points, y gets a weight of almost zero. Fitted on all 24, about −0.29. What does that say about small samples?</p></li>
+        <li class="q"><p>Why does XᵀX become nearly singular as the number of features approaches the number of examples, and what does λI fix?</p></li>
+        <li class="q"><p>Why must λ be chosen without the held-out blocks?</p></li>
+        <li class="q"><p>The demos' trainer refuses to fit a head on 76 or fewer readings. Why?</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Hoerl, A. E., and Kennard, R. W. (1970). Ridge regression: biased estimation for nonorthogonal problems. Technometrics.</p>
+      <p>Hastie, T., Tibshirani, R., and Friedman, J. (2009). The Elements of Statistical Learning, second edition. Springer.</p>
+      <p>Varoquaux, G., and others (2017). Assessing and tuning brain decoders: cross-validation, caveats, and guidelines. NeuroImage.</p>
+    </section>
+  </div>
+
+  <div class="lv lv-grad" data-l="grad">
+    <header class="hero">
+      <p class="eb">Chapter 5 · Graduate</p>
+      <h1>Models that learn</h1>
+      <p class="lede">How do you fit a decoder with nearly as many weights as examples, what does the penalty you choose do to it and to its test, and what do its weights say about the data?</p>
+    </header>
+
+    
+
+    <section id="decoders">
+      <h2>Linear decoders</h2>
+      <div class="text">
+        <p>For two classes with means μ<sub>0</sub> and μ<sub>1</sub> and a shared covariance, Fisher's discriminant (1936) projects each example x onto</p>
+        <p class="eq">w ∝ S<sub>W</sub><sup>−1</sup>(μ<sub>1</sub> − μ<sub>0</sub>)</p>
+        <p>where S<sub>W</sub> is the pooled within-class scatter. Least squares on labels of 0 and 1 finds the same direction: the total scatter is the within-class scatter plus a term along μ<sub>1</sub> − μ<sub>0</sub>, and inverting it leaves the direction unchanged (Duda, Hart and Stork, 2001). Logistic regression fits the same family by likelihood. All three need S<sub>W</sub> or its like, and with 76 features and 88 windows, as in the Mind-Controlled Light Switch, its smallest eigenvalues are estimated far too small and its inverse is mostly noise.</p>
+      </div>
+    </section>
+
+    <section id="ridge">
+      <h2>Ridge and shrinkage</h2>
+      <div class="text">
+        <p><dfn data-term="Ridge regression" data-l="grad" data-def="Least squares with a penalty λ on the weights' squared size, which shrinks each direction of the data by its eigenvalue over its eigenvalue plus λ.">Ridge regression</dfn> adds a penalty λ on the weights' squared size, with the intercept left free (Hoerl and Kennard, 1970). On centered data X<sub>c</sub>,</p>
+        <p class="eq">ŵ = (X<sub>c</sub>ᵀX<sub>c</sub> + λI)<sup>−1</sup> X<sub>c</sub>ᵀy</p>
+        <p>In the eigenbasis of X<sub>c</sub>ᵀX<sub>c</sub>, with eigenvalues d<sub>j</sub>, ridge keeps a fraction d<sub>j</sub>/(d<sub>j</sub> + λ) of the least-squares fit along each direction, and the <dfn data-term="Effective degrees of freedom" data-l="grad" data-def="The sum over a ridge fit's directions of each eigenvalue over itself plus λ: how many weights the fit effectively spends.">effective degrees of freedom</dfn> are Σ d<sub>j</sub>/(d<sub>j</sub> + λ) (Hastie, Tibshirani and Friedman, 2009). On labels, ridge is the discriminant with S<sub>W</sub> + λI in place of S<sub>W</sub>.</p>
+        <p>Shrinkage LDA replaces the covariance with (1 − γ)Σ̂ + γνI, where ν is its mean eigenvalue and γ is set analytically from the data (Ledoit and Wolf, 2004). It is the standard decoder for EEG with few trials (Blankertz and others, 2011).</p>
+      </div>
+    </section>
+
+    <section id="choosing">
+      <h2>Choosing the penalty, honestly</h2>
+      <div class="text">
+        <p>A penalty chosen by cross-validation is fitted to the data like any weight, and the cross-validated score at the chosen penalty is optimistic. Nested cross-validation chooses the penalty inside each outer training set and scores the outer test set with it (Varma and Simon, 2006). Selection overfits too, and the more settings are compared, the more it does (Cawley and Talbot, 2010). With windows from one session, every fold must also respect time, which is the next chapter's subject.</p>
+        <p>Too little penalty has its own peak. As the number of training examples approaches the number of weights, an unpenalized fit's variance grows without bound, and its error on new data peaks: the top of the curve Belkin and others (2019) called double descent, analyzed for least squares by Hastie and others (2022). A training set of 77 windows for 76 weights sits right on it.</p>
+      </div>
+    </section>
+
+    <section id="patterns">
+      <h2>What the weights mean</h2>
+      <div class="text">
+        <p>A decoder's weights are a filter: they combine features to recover the label, and they weigh a feature heavily as readily to cancel noise it shares with another as to pick up signal. The activation pattern, a ∝ Σ<sub>x</sub>w, says how the decoded quantity shows in each feature, and only the pattern can be read as where the signal is (Haufe and others, 2014). On a pretrained encoder's embedding, neither maps to the cortex: the features are learned, and each mixes everything the encoder kept.</p>
+      </div>
+    </section>
+
+    <section id="demo">
+      <h2>In the demo</h2>
+      <div class="text">
+        <p>The Mind-Controlled Light Switch fits ridge regression of labels 0 and 1 on the device's embeddings as integers, each value times 4,096 and rounded, with the intercept unpenalized. It refuses to fit unless there are more windows than the embedding's 76 numbers. No label enters its penalty: λ is the geometric mean of the two smallest eigenvalues of the centered Gram matrix, the smallest floored at 1. The device's embeddings, like the trainer's test fixture, sum to about zero, so one direction, every feature equal, carries almost no variance. The smallest eigenvalue is that direction's, and the penalty sits between it and the next, suppressing it and barely touching the rest.</p>
+      </div>
+    </section>
+
+    <section id="analysis">
+      <h2>Analysis</h2>
+      <div class="try">
+        <p class="k">Analysis</p>
+        <h3>The trainer's penalty, and better ones</h3>
+        <p>In <a href="https://github.com/intomind/demo">the demos' source</a>, the trainer's fixture holds 150 windows of embeddings as integers, balanced labels, and the penalty the Python API chose for them. Reproduce the penalty, then compare it with others by contiguous five-fold cross-validation, choose one by nested cross-validation, and fit shrinkage LDA. Then cut the data to the light switch's size.</p>
+        <pre><code>import json
+import numpy as np
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+
+F = "tests/fixtures/train/"                  # in the demos' source
+X = np.array(json.load(open(F + "embeddings.json")), float)   # 150 windows of 76, as integers
+y = np.array(json.load(open(F + "targets.json")), float)      # 0 and 1
+trainer = json.load(open(F + "ridge.json"))["ridge"]
+
+def gap_ridge(X):
+    """The demo's penalty: the geometric mean of the two smallest eigenvalues."""
+    ev = np.linalg.eigvalsh((X - X.mean(axis=0)).T @ (X - X.mean(axis=0)))
+    return np.sqrt(max(ev[0], 1) * ev[1])
+
+Xc = X - X.mean(axis=0)
+ev, vecs = np.linalg.eigh(Xc.T @ Xc)                          # ascending
+gap = gap_ridge(X)
+print(f"smallest eigenvalues {ev[0]:.2f} and {ev[1]:.3g}: "
+      f"gap ridge {gap:.2f}, the trainer's {trainer:.2f}")
+cosine = abs(vecs[:, 0].sum()) / 76 ** 0.5
+print(f"the smallest one's direction against all ones: cosine {cosine:.3f}")
+
+def fit(X, y, lam):
+    """Ridge with the intercept left unpenalized, as the demo's fitLinear does."""
+    m = X.mean(axis=0)
+    xc = X - m
+    w = np.linalg.solve(xc.T @ xc + lam * np.eye(X.shape[1]), xc.T @ (y - y.mean()))
+    return w, y.mean() - m @ w
+
+def blocks(n, k=5):
+    size = -(-n // k)
+    return [np.arange(i * size, min(n, (i + 1) * size)) for i in range(k)]
+
+def blocked(X, y, lam, k=5):
+    """Accuracy and squared error on contiguous held-out blocks: a score above 0.5 means 1.
+    lam="gap" chooses the demo's penalty afresh from each training set."""
+    hits = err = 0.0
+    for test in blocks(len(y), k):
+        train = np.setdiff1d(np.arange(len(y)), test)
+        penalty = gap_ridge(X[train]) if lam == "gap" else lam
+        w, b = fit(X[train], y[train], penalty)
+        s = X[test] @ w + b
+        hits += np.sum((s &gt; 0.5) == (y[test] == 1))
+        err += np.sum((s - y[test]) ** 2)
+    return hits / len(y), err / len(y)
+
+grid = [10.0 ** p for p in range(5, 11)]
+for lam in [gap] + grid:
+    acc, mse = blocked(X, y, lam)
+    print(f"lambda {lam:8.2g}  effective df {np.sum(ev / (ev + lam)):5.1f}  "
+          f"accuracy {acc:.2f}  mse {mse:.3f}")
+
+# Nested: choose lambda inside each outer training set, then score the outer block.
+hits, chosen = 0, []
+for test in blocks(len(y)):
+    train = np.setdiff1d(np.arange(len(y)), test)
+    best = min(grid, key=lambda lam: blocked(X[train], y[train], lam, k=4)[1])
+    w, b = fit(X[train], y[train], best)
+    hits += np.sum((X[test] @ w + b &gt; 0.5) == (y[test] == 1))
+    chosen.append(f"{best:.0e}")
+print(f"nested: accuracy {hits / len(y):.2f}, lambdas chosen {chosen}")
+
+# Shrinkage LDA, its shrinkage set analytically from each training set (Ledoit and Wolf).
+hits = 0
+for test in blocks(len(y)):
+    train = np.setdiff1d(np.arange(len(y)), test)
+    lda = LinearDiscriminantAnalysis(solver="lsqr", shrinkage="auto").fit(X[train], y[train])
+    hits += np.sum(lda.predict(X[test]) == y[test])
+print(f"shrinkage LDA: accuracy {hits / len(y):.2f}")
+
+# Cut to the light switch's size: 88 windows held out a round of 11 at a time, so every
+# training set has 77 windows for 76 weights.
+for lam in ("gap", 1e8, 1e9):
+    acc = blocked(X[:88], y[:88], lam, k=8)[0]
+    name = lam if lam == "gap" else f"{lam:.0e}"
+    print(f"88 windows in 8 folds, lambda {name}: accuracy {acc:.2f}")</code></pre>
+        <p class="see"><b>You should see</b>The trainer's penalty reproduced exactly, 20,131.58, between eigenvalues of 5.07 and 7.99 × 10⁷, and the smallest one's direction all ones. At that penalty the fit spends 75 of its 76 degrees of freedom and scores 0.67. Squared error is lowest near 10⁹, at 31 degrees of freedom and 0.70. Nested cross-validation chooses 10⁸ or 10⁹ and scores 0.71, and shrinkage LDA 0.69. Cut to 88 windows held out a round of 11 at a time, the trainer's penalty scores 0.50, chance, where 10⁸ scores 0.61 and 10⁹ 0.66.</p>
+        <p>Then report: how large a difference in accuracy 150 windows can resolve, why the trainer's penalty does well at 150 windows and fails at 88, and what penalty you would choose without labels.</p>
+        
+      </div>
+    </section>
+
+    <section id="open">
+      <h2>Open problems</h2>
+      <ol class="rulelist">
+        <li><b>Small data.</b> With the few trials of a calibration session, linear decoders with shrinkage remain hard to beat, and whether more flexible models help depends on how much data a person can give (Lotte and others, 2018).</li>
+        <li><b>Reading a head.</b> Patterns in a pretrained embedding don't map to sources, and how to say what a head on such an embedding responds to is open.</li>
+        <li><b>The penalty over time.</b> The best penalty for one session needn't be the best for the next, when the data have shifted. How to regularize for the session to come rather than the one at hand is unsettled.</li>
+      </ol>
+    </section>
+
+    <section id="talk">
+      <h2>Problems</h2>
+      <ol class="qs">
+        <li class="q"><p>Show that least squares on labels of 0 and 1 gives a weight vector parallel to Fisher's discriminant.</p></li>
+        <li class="q"><p>How much of the least-squares fit does ridge keep along a direction whose eigenvalue equals λ? Along one ten times larger, and ten times smaller?</p></li>
+        <li class="q"><p>The demo's penalty uses no labels. Why does that matter for its test against chance?</p></li>
+        <li class="q"><p>A decoder puts its largest weight on feature 3. Can you conclude that feature 3 carries the signal? What would you compute instead?</p></li>
+        <li class="q"><p>The light switch keeps 88 windows in eight rounds of 11. Its test holds out one round at a time. How many windows does each training set have, and why does the trainer refuse fewer than 77?</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Fisher, R. A. (1936). The use of multiple measurements in taxonomic problems. Annals of Eugenics.</p>
+      <p>Hoerl, A. E., and Kennard, R. W. (1970). Ridge regression: biased estimation for nonorthogonal problems. Technometrics.</p>
+      <p>Duda, R. O., Hart, P. E., and Stork, D. G. (2001). Pattern Classification, second edition. Wiley.</p>
+      <p>Ledoit, O., and Wolf, M. (2004). A well-conditioned estimator for large-dimensional covariance matrices. Journal of Multivariate Analysis.</p>
+      <p>Varma, S., and Simon, R. (2006). Bias in error estimation when using cross-validation for model selection. BMC Bioinformatics.</p>
+      <p>Hastie, T., Tibshirani, R., and Friedman, J. (2009). The Elements of Statistical Learning, second edition. Springer.</p>
+      <p>Cawley, G. C., and Talbot, N. L. C. (2010). On over-fitting in model selection and subsequent selection bias in performance evaluation. Journal of Machine Learning Research.</p>
+      <p>Blankertz, B., Lemm, S., Treder, M., Haufe, S., and Müller, K.-R. (2011). Single-trial analysis and classification of ERP components: a tutorial. NeuroImage.</p>
+      <p>Haufe, S., and others (2014). On the interpretation of weight vectors of linear models in multivariate neuroimaging. NeuroImage.</p>
+      <p>Lotte, F., and others (2018). A review of classification algorithms for EEG-based brain-computer interfaces: a 10 year update. Journal of Neural Engineering.</p>
+      <p>Belkin, M., Hsu, D., Ma, S., and Mandal, S. (2019). Reconciling modern machine-learning practice and the classical bias-variance trade-off. Proceedings of the National Academy of Sciences.</p>
+      <p>Hastie, T., Montanari, A., Rosset, S., and Tibshirani, R. J. (2022). Surprises in high-dimensional ridgeless least squares interpolation. Annals of Statistics.</p>
+    </section>
+  </div>
+
+</main>
+<footer class="colophon">
+  <p><b>BCI101</b> An Applied Introduction to Noninvasive Brain-Computer Interfaces. Neurons, to bits, to real-world outcomes. Built on the demos at <a href="https://demo.intomind.com/">demo.intomind.com</a>.</p>
+  <div class="level-line"><span>Level</span><div class="levels" role="group" aria-label="Level"><button type="button" data-level="ms">Middle school</button><button type="button" data-level="hs">High school</button><button type="button" data-level="college">College</button><button type="button" data-level="grad">Graduate</button></div></div>
+</footer>
+</body>
+</html>

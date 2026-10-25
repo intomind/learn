@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The capstone · BCI101</title>
+<meta name="description" content="A project of the students' own design, from a question and a test written first to an honest result: a custom AI head tested fairly and a board that acts on it, or at graduate level a registered report. The brief, the milestones and the rubric at each level.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/assets/site.css">
+<script>(function(){var d=document.documentElement,q=new URLSearchParams(location.search),s=function(k){try{return localStorage.getItem(k)}catch(e){return null}},L={ms:1,hs:1,college:1,grad:1},l=q.get("level");if(L[l]){try{localStorage.setItem("curriculum-level",l)}catch(e){}}else l=s("curriculum-level");if(!L[l]){l="hs";d.dataset.ask="1"}d.dataset.level=l;d.dataset.theme=q.get("theme")||s("curriculum-theme")||"dark";})()</script>
+<script type="module" src="/assets/curriculum.js"></script>
+</head>
+<body>
+<header class="chrome">
+  <a class="mark" href="/">IntoMind<span>Learn</span></a>
+  <nav class="nav" aria-label="Pages"><a href="/" aria-current="page">Contents</a><a href="/labs/">Labs</a><a href="/vocabulary/">Vocabulary</a><a href="/safety/">Safety</a></nav>
+  <div class="controls"><button class="theme" type="button">Light</button></div>
+</header>
+<main class="page kind-chapter">
+  <div class="lv lv-ms" data-l="ms">
+    <header class="hero">
+      <p class="eb">Chapter 9 · Middle school</p>
+      <h1>The capstone</h1>
+      <p class="lede">Design a brain-computer interface of your own: two of your states, a custom AI head that tells them apart, and a board that does something useful with it.</p>
+    </header>
+
+    
+
+    <section id="brief">
+      <h2>The brief</h2>
+      <div class="text">
+        <p>Choose a purpose: something a light or a signal that follows your mind could do. A sign that shows when you are concentrating. A signal that starts a small robot of your own.</p>
+        <p>Then choose two states, teach a custom AI head to tell them apart, test it fairly against the test you wrote first, and make the Raspberry Pi Pico 2 W act on it.</p>
+      </div>
+    </section>
+
+    <section id="milestones">
+      <h2>Milestones</h2>
+      <table class="plan" id="milestones-ms-new"><thead><tr><th>Period</th><th>Milestone</th><th>What happens</th></tr></thead><tbody>
+        <tr><td>1</td><td>Teach</td><td>Each wearer teaches a custom AI head with the group's two states.</td></tr>
+        <tr><td>2</td><td>Test</td><td>Every score next to guessing. Which wearer and states will you build on?</td></tr>
+        <tr><td>3</td><td>Build</td><td>The program on the board, paired with the group's IntoMind One.</td></tr>
+        <tr><td>4</td><td>Build</td><td>The board's light or pin doing the job you chose.</td></tr>
+        <tr><td>5</td><td>Test the whole</td><td>Ten switches: how often does the board follow? Then another group tries to fool it.</td></tr>
+        <tr><td>6</td><td>Improve</td><td>Change one thing, and test again the same way.</td></tr>
+        <tr><td>7</td><td>Improve</td><td>Keep the better version, and write down why.</td></tr>
+        <tr><td>8</td><td>Prepare</td><td>The presentation: purpose, states, test, result, and what you would change.</td></tr>
+        <tr><td>9–11</td><td>Present</td><td>Five minutes for each group, with the board working, or a recording of it.</td></tr>
+      </tbody></table>
+    </section>
+
+    <section id="results">
+      <h2>Your results</h2>
+      <div class="try">
+        <p class="k">Record</p>
+        <h3>Against the test you wrote first</h3>
+        <table class="sheet" data-sheet="ms-capstone">
+          <thead><tr><th>Try</th><th>Wearer</th><th>Score, of 88</th><th>Clearly better than guessing?</th><th>Light followed, of 10</th><th>What we changed</th></tr></thead>
+          <tbody><tr><td>1</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>2</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>3</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>4</td><td></td><td></td><td></td><td></td><td></td></tr></tbody>
+        </table>
+        <p class="ask"><span class="lbl">Work it out</span>Did it meet the test we wrote first? <span class="fill" data-key="met-test" data-hint="yes or no, and why"></span></p>
+      </div>
+    </section>
+
+    <section id="rules">
+      <h2>The rules</h2>
+      <div class="text">
+        <p>Wearing it is a choice. A group in which nobody wants to wear it teaches and tests custom AI heads on a simulated IntoMind One, by adding ?dev to the end of a demo's address. The board connects only to a real IntoMind One, so for the board's stages a volunteer, such as your teacher, teaches a custom AI head and wears it whenever the board needs someone to follow.</p>
+        <p>Projects on the board's pin stay with its own 3.3-volt signal. Nothing on it plugs into a wall.</p>
+        <p>Saved files come from someone's brain: keep them only with the wearer's permission, and delete them all together when the capstone is finished.</p>
+      </div>
+    </section>
+
+    <section id="strong">
+      <h2>What makes a strong project</h2>
+      <dl class="criteria">
+        <div><dt>The plan</dt><dd>A clear purpose, two states that suit it, and a test written before teaching.</dd></div>
+        <div><dt>The fair test</dt><dd>Every score compared with guessing, and the light's switches counted out of ten.</dd></div>
+        <div><dt>The build</dt><dd>The board doing the job, safely, from its own pin.</dd></div>
+        <div><dt>Honest results</dt><dd>What happened, including what didn't work, and a reason for it.</dd></div>
+        <div><dt>The presentation</dt><dd>Clear, on time, and every member of the group speaks.</dd></div>
+      </dl>
+    </section>
+  </div>
+
+  <div class="lv lv-hs" data-l="hs">
+    <header class="hero">
+      <p class="eb">Chapter 10 · High school</p>
+      <h1>The capstone</h1>
+      <p class="lede">Design a brain-computer interface for a person and a purpose. Does it pass the test you wrote first, and does it still work on another day?</p>
+    </header>
+
+    
+
+    <section id="brief">
+      <h2>The brief</h2>
+      <div class="text">
+        <p>Design for the person and the purpose in your brief from <a href="/design/">Designing a BCI</a>, and keep to the test you wrote there.</p>
+        <p>Teach a custom AI head with your two states, at your site, on two different days. Compare every score with guessing, and find out whether the first day's head still works on the second. Then make the Raspberry Pi Pico 2 W act on it for your purpose, test the whole interface against your test, and present what happened.</p>
+      </div>
+    </section>
+
+    <section id="milestones">
+      <h2>Milestones</h2>
+      <figure class="fig" data-fig="timeline" data-table="#milestones-hs-new"><figcaption><b>Thirty-three periods</b> Each milestone as long as it lasts. Someone wears an IntoMind One in the stretches in orange.</figcaption></figure>
+      <table class="plan" id="milestones-hs-new"><thead><tr><th>Periods</th><th>Milestone</th><th>What happens</th></tr></thead><tbody>
+        <tr><td>1–2</td><td>Proposal</td><td>Your brief and your test, reviewed with your teacher. Change only what your teacher asks, before anyone teaches.</td></tr>
+        <tr data-kind="lab"><td>3–5</td><td>Teach, first day</td><td>Each wearer teaches a custom AI head with your states, at your site, and saves it and its training data, with the wearer's permission. Every score next to guessing.</td></tr>
+        <tr data-kind="lab"><td>6–8</td><td>Teach, second day</td><td>On another day, each wearer first installs the first day's head and counts how many of ten switches it follows. Then each teaches again.</td></tr>
+        <tr><td>9–12</td><td>Analyze</td><td>Both days side by side in a spreadsheet, with the skeptic's notes. Another group checks your analysis against your test.</td></tr>
+        <tr><td>13–20</td><td>Build</td><td>The program on the board, changed for your purpose, and your circuit on its pin, with the threshold you planned.</td></tr>
+        <tr data-kind="lab"><td>21–23</td><td>Test it</td><td>Your test as written: ten switches, five of them timed, five minutes of rest, and a timed setup. Then someone from another group tries to fool it.</td></tr>
+        <tr data-kind="lab"><td>24–27</td><td>Improve</td><td>One change at a time, each tested the same way.</td></tr>
+        <tr><td>28–29</td><td>Prepare</td><td>The presentation and the report.</td></tr>
+        <tr><td>30–33</td><td>Present</td><td>Eight minutes for each group, with questions. Then every saved file is deleted, together.</td></tr>
+      </tbody></table>
+    </section>
+
+    <section id="results">
+      <h2>Your results</h2>
+      <div class="try">
+        <p class="k">Record</p>
+        <h3>Teaching, on two days</h3>
+        <table class="sheet" data-sheet="hs-capstone-teach">
+          <thead><tr><th>Wearer</th><th>Day</th><th>Score, of 88</th><th>Clearly better than guessing?</th><th>Skeptic's notes</th></tr></thead>
+          <tbody><tr><td>1</td><td>First</td><td></td><td></td><td></td></tr><tr><td>2</td><td>First</td><td></td><td></td><td></td></tr><tr><td>3</td><td>First</td><td></td><td></td><td></td></tr><tr><td>4</td><td>First</td><td></td><td></td><td></td></tr><tr><td>1</td><td>Second</td><td></td><td></td><td></td></tr><tr><td>2</td><td>Second</td><td></td><td></td><td></td></tr><tr><td>3</td><td>Second</td><td></td><td></td><td></td></tr><tr><td>4</td><td>Second</td><td></td><td></td><td></td></tr></tbody>
+        </table>
+      </div>
+      <div class="try">
+        <p class="k">Record</p>
+        <h3>Does it last a day?</h3>
+        <table class="sheet" data-sheet="hs-capstone-days">
+          <thead><tr><th>Wearer</th><th>The first day's head, on the second day: light followed, of 10</th><th>The second day's head: light followed, of 10</th></tr></thead>
+          <tbody><tr><td>1</td><td></td><td></td></tr><tr><td>2</td><td></td><td></td></tr><tr><td>3</td><td></td><td></td></tr><tr><td>4</td><td></td><td></td></tr></tbody>
+        </table>
+      </div>
+      <div class="try">
+        <p class="k">Record</p>
+        <h3>Against the test you wrote first</h3>
+        <table class="sheet" data-sheet="hs-capstone-test">
+          <thead><tr><th>Requirement</th><th>What we asked for</th><th>What we got</th><th>Met?</th></tr></thead>
+          <tbody>
+            <tr><td>The score</td><td></td><td></td><td></td></tr>
+            <tr><td>Switches the light followed, of 10</td><td></td><td></td><td></td></tr>
+            <tr><td>Median delay, in seconds</td><td></td><td></td><td></td></tr>
+            <tr><td>False positives in 5 minutes of rest</td><td></td><td></td><td></td></tr>
+            <tr><td>Setup time</td><td></td><td></td><td></td></tr>
+            <tr><td>Did blinks or a clenched jaw switch it?</td><td></td><td></td><td></td></tr>
+          </tbody>
+        </table>
+        <p class="ask"><span class="lbl">Work it out</span>Did it meet the test we wrote first? <span class="fill" data-key="met-test" data-hint="yes or no, and why"></span> Did the first day's head still work on the second day, and what might explain it? <span class="fill" data-key="two-days" data-hint="what and why"></span></p>
+      </div>
+    </section>
+
+    <section id="report">
+      <h2>The report</h2>
+      <div class="text">
+        <p>One page, clear enough that another group could repeat what you did, in this order:</p>
+        <ol class="rulelist">
+          <li>The person and the purpose.</li>
+          <li>Your two states and your site, and why.</li>
+          <li>Your test, as you wrote it first.</li>
+          <li>Your results against it, including anything that failed.</li>
+          <li>The first day's head on the second day.</li>
+          <li>What you would change next, and how you would test it.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="rules">
+      <h2>The rules</h2>
+      <div class="text">
+        <p>Wearing it is a choice. A group in which nobody wants to wear it teaches and tests custom AI heads on a simulated IntoMind One, by adding ?dev to the end of a demo's address. The board connects only to a real IntoMind One, so for the board's stages a volunteer, such as your teacher, teaches a custom AI head and wears it whenever the board needs someone to follow.</p>
+        <p>Projects on the board's pin stay with its own 3.3-volt signal. Nothing on it plugs into a wall.</p>
+        <p>Saved files come from someone's brain: keep them only with the wearer's permission, and delete them all together when the capstone is finished.</p>
+      </div>
+    </section>
+
+    <section id="strong">
+      <h2>What makes a strong project</h2>
+      <dl class="criteria">
+        <div><dt>The plan</dt><dd>A person and a purpose, requirements a test can check, and the test signed before anyone teaches.</dd></div>
+        <div><dt>The fair test</dt><dd>Every score compared with guessing, on two days, and the whole interface tested as written.</dd></div>
+        <div><dt>The analysis</dt><dd>The two days side by side, and what could make a score look better than it is.</dd></div>
+        <div><dt>The build</dt><dd>Your own changes to the program, serving the purpose, and a safe circuit on the pin.</dd></div>
+        <div><dt>Honest results</dt><dd>What happened, including what failed the test, and a reason for it.</dd></div>
+        <div><dt>The presentation and report</dt><dd>Clear enough that another group could repeat it, with every member of the group speaking.</dd></div>
+      </dl>
+    </section>
+  </div>
+
+  <div class="lv lv-college" data-l="college">
+    <header class="hero">
+      <p class="eb">Chapter 12 · College</p>
+      <h1>The capstone</h1>
+      <p class="lede">Carry a brain-computer interface from a user's need to a working board: requirements, a preregistered test, data collected under a data plan, a reproducible analysis, and the loop deployed with its latency measured. Does it meet what you said it would?</p>
+    </header>
+
+    
+
+    <section id="brief">
+      <h2>The brief</h2>
+      <div class="text">
+        <p>Start from the user's need and the requirements you wrote in <a href="/design/">Designing a BCI</a>. Preregister your hypothesis and analysis, with the amount of data justified by simulated power. Collect under the data plan your instructor approves, in at least two sessions per wearer on different days. Analyze with held-out rounds and a permutation test, test whether a head from one day works on the next, and reproduce your custom AI head from its training data byte for byte. Deploy it on the board, measure the loop's latency, and test the whole against your requirements.</p>
+      </div>
+    </section>
+
+    <section id="milestones">
+      <h2>Milestones</h2>
+      <table class="plan" id="milestones-college-new"><thead><tr><th>Session</th><th>Milestone</th><th>What happens</th></tr></thead><tbody>
+        <tr><td>Meeting 1</td><td>Design review</td><td>Each group presents its proposal: the user, requirements, the preregistration, the data plan and the simulated power, for critique and approval.</td></tr>
+        <tr><td>Lab 1</td><td>Collect</td><td>First sessions for every wearer, under the approved plan, every head and its training data saved with permission.</td></tr>
+        <tr><td>Meeting 2</td><td>Analysis clinic</td><td>Each pipeline checked against its preregistration: held-out rounds, the permutation test, no leakage.</td></tr>
+        <tr><td>Lab 2</td><td>Collect again</td><td>Second sessions, on another day: the first day's head tested first, then a new one taught.</td></tr>
+        <tr><td>Meeting 3</td><td>Analysis clinic</td><td>Transfer across days, the head reproduced byte for byte, and every deviation from the preregistration written down.</td></tr>
+        <tr><td>Lab 3</td><td>Deploy and test</td><td>The board, the program, the latency measured, and every requirement tested as written.</td></tr>
+        <tr><td>Meeting 4</td><td>Peer review</td><td>Drafts exchanged and reviewed against what makes a strong project.</td></tr>
+        <tr><td>Meeting 5</td><td>Revise</td><td>Revisions, with the deviations stated.</td></tr>
+        <tr><td>Meetings 6 and 7</td><td>Present</td><td>Twelve minutes for each group, with questions.</td></tr>
+        <tr><td>Lab 4</td><td>Demonstrate</td><td>Working demonstrations. Reports due. Then every saved file is deleted, together.</td></tr>
+      </tbody></table>
+    </section>
+
+    <section id="results">
+      <h2>Your results</h2>
+      <div class="try">
+        <p class="k">Record</p>
+        <h3>Against your requirements</h3>
+        <table class="sheet" data-sheet="college-capstone">
+          <thead><tr><th>Requirement</th><th>As preregistered</th><th>Result</th><th>Met?</th></tr></thead>
+          <tbody><tr><td>Effectiveness</td><td></td><td></td><td></td></tr><tr><td>Efficiency</td><td></td><td></td><td></td></tr><tr><td>False alarms</td><td></td><td></td><td></td></tr><tr><td>Setup</td><td></td><td></td><td></td></tr><tr><td>The first day's head on the second day</td><td></td><td></td><td></td></tr><tr><td>The loop's latency</td><td></td><td></td><td></td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="report">
+      <h2>The report</h2>
+      <div class="text">
+        <ol class="rulelist">
+          <li>The user and their need, and the requirements.</li>
+          <li>The preregistration, as written, and every deviation from it, with the reason.</li>
+          <li>Methods another group could repeat: states, site, sessions, the pipeline, the folds, the test, the board's program.</li>
+          <li>Results against each requirement, with the permutation p, the transfer across days, and the latency against your budget.</li>
+          <li>Limitations: what the result doesn't show, and why.</li>
+          <li>Code and the reproduced head's checksum, as an appendix. The data only where every wearer agreed.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="rules">
+      <h2>The rules</h2>
+      <div class="text">
+        <p>Wearing it is a choice. A group in which nobody wants to wear it teaches and tests custom AI heads on a simulated IntoMind One, by adding ?dev to a demo's address. The board connects only to a real IntoMind One, so for the board's stages a volunteer, such as your instructor, teaches a custom AI head and wears it whenever the board needs someone to follow.</p>
+        <p>Projects on the board's pin stay with its own 3.3-volt signal. Nothing on it plugs into a wall.</p>
+        <p>Saved files come from someone's brain: keep them only with the wearer's permission, under your data plan, and delete them all together when the capstone is finished.</p>
+      </div>
+    </section>
+
+    <section id="strong">
+      <h2>What makes a strong project</h2>
+      <dl class="criteria">
+        <div><dt>Need and requirements</dt><dd>A user's need, from a published case, turned into requirements a test can check.</dd></div>
+        <div><dt>Preregistration and power</dt><dd>The hypothesis and analysis fixed before the data, with simulated power justifying the design.</dd></div>
+        <div><dt>Data and ethics</dt><dd>An approved data plan, followed, with consent and deletion.</dd></div>
+        <div><dt>Analysis</dt><dd>Held-out rounds, a permutation test, no leakage, transfer across days, and every deviation stated.</dd></div>
+        <div><dt>Reproducibility</dt><dd>Code that runs, and the custom AI head reproduced byte for byte.</dd></div>
+        <div><dt>Deployment</dt><dd>The board running the head, its latency measured against the budget and explained.</dd></div>
+        <div><dt>Limitations</dt><dd>What the result doesn't show, and why.</dd></div>
+        <div><dt>Communication</dt><dd>A report and presentation another group could build on.</dd></div>
+      </dl>
+    </section>
+  </div>
+
+  <div class="lv lv-grad" data-l="grad">
+    <header class="hero">
+      <p class="eb">Chapter 12 · Graduate</p>
+      <h1>The capstone</h1>
+      <p class="lede">A question of your own, answered as a registered report: the question, the design and the analysis reviewed before any data, then the data, the planned tests, and an honest account of what they show.</p>
+    </header>
+
+    
+
+    <section id="brief">
+      <h2>The brief</h2>
+      <div class="text">
+        <p>Choose a question that this book leaves open and that your group can answer with what it has. Write it as an estimand, design the study, simulate its power with numbers from the labs, write the confirmatory analysis as code that runs on simulated data, and write the protocol: consent, data and deletion. That is the first stage, and it is reviewed before any data exist. After approval, collect, run the planned analysis unchanged, and label everything else exploratory. That is the second stage.</p>
+      </div>
+      <table class="data text">
+        <thead><tr><th>A question the labs leave open</th><th>Where it comes from</th></tr></thead>
+        <tbody>
+          <tr><td>Does the trainer's penalty cost accuracy on real sessions of 88 windows, and does a label-free heavier one recover it?</td><td data-th="Where it comes from">Models that learn, and the Mind-Controlled Light Switch</td></tr>
+          <tr><td>For which pairs of states does a head survive to another day, and does removing each session's mean rescue the rest?</td><td data-th="Where it comes from">The Mind-Controlled Light Switch</td></tr>
+          <tr><td>Is individual alpha frequency more stable across days than reactivity or alpha's power, at one site with dry electrodes?</td><td data-th="Where it comes from">Alpha Flower</td></tr>
+          <tr><td>Do the 10 and 15 hertz responses lateralize between O1 and O2 with the eyes on the center, and which way?</td><td data-th="Where it comes from">BCI Flight Simulator</td></tr>
+          <tr><td>Is the age head's estimate the same at two sites within a person, inside a margin set in advance?</td><td data-th="Where it comes from">Age Detector</td></tr>
+          <tr><td>How much of a head's separation of two states is left when the blinks and muscle that come with them are matched?</td><td data-th="Where it comes from">Signal and noise, and the Mind-Controlled Light Switch</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="milestones">
+      <h2>Milestones</h2>
+      <table class="plan" id="milestones-grad"><thead><tr><th>Session</th><th>Milestone</th><th>What happens</th></tr></thead><tbody>
+        <tr><td>Meeting 1</td><td>First-stage review</td><td>Each group presents its question, estimand, hypotheses, design, simulated power, analysis code and protocol, for critique and approval.</td></tr>
+        <tr><td>Meeting 2</td><td>Pilot and first sessions</td><td>The protocol run end to end once, then first sessions. Collection continues outside class.</td></tr>
+        <tr><td>Meeting 3</td><td>Second sessions</td><td>On another day, for designs that need one. Every file saved and named under the protocol.</td></tr>
+        <tr><td>Meeting 4</td><td>Analysis clinic</td><td>Each group runs the planned analysis, unchanged, and another group reruns its code to the same numbers. Deviations logged.</td></tr>
+        <tr><td>Meeting 5</td><td>Presentations</td><td>Half the groups: fifteen minutes each, with questions.</td></tr>
+        <tr><td>Meeting 6</td><td>Presentations</td><td>The rest. Second-stage reports are due a week later, then every saved file is deleted, together.</td></tr>
+      </tbody></table>
+    </section>
+
+    <section id="results">
+      <h2>Your results</h2>
+      <div class="try">
+        <p class="k">Record</p>
+        <h3>Planned against found</h3>
+        <table class="sheet" data-sheet="grad-capstone">
+          <thead><tr><th>Hypothesis</th><th>The planned test</th><th>Result</th><th>Supported?</th></tr></thead>
+          <tbody><tr><td>1</td><td></td><td></td><td></td></tr><tr><td>2</td><td></td><td></td><td></td></tr><tr><td>3</td><td></td><td></td><td></td></tr><tr><td>Exploratory</td><td></td><td></td><td></td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="report">
+      <h2>The report</h2>
+      <div class="text">
+        <ol class="rulelist">
+          <li>The first stage as approved: the question, the estimand, the hypotheses, the design and its power, and the analysis plan.</li>
+          <li>Methods to the COBIDAS MEEG recommendations, and every deviation from the plan, each with its reason.</li>
+          <li>The confirmatory results exactly as planned, then the exploratory ones, labeled as such.</li>
+          <li>What the results do and don't show, and what the next study should be.</li>
+          <li>Code another group has rerun to the same numbers, and data shared only where every wearer agreed.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="rules">
+      <h2>The rules</h2>
+      <div class="text">
+        <p>Wearing it is a choice. A group in which nobody wants to wear it can ask a methods question of simulated data, or of the data others agreed to share, and a demo on a simulated IntoMind One, with ?dev on the end of its address, can stand in for the device while a pipeline is built.</p>
+        <p>The board's pin stays with its own 3.3-volt signal. Nothing on it plugs into a wall.</p>
+        <p>Saved files come from someone's brain: keep them only with the wearer's permission, under your protocol, and delete them all together when the capstone is finished. A study meant for publication needs a review board's approval before its first recording.</p>
+      </div>
+    </section>
+
+    <section id="strong">
+      <h2>What makes a strong project</h2>
+      <dl class="criteria">
+        <div><dt>Question and estimand</dt><dd>A question the field hasn't settled, stated as an estimand two analysts would compute the same way.</dd></div>
+        <div><dt>Design and power</dt><dd>A design that controls what could fake the answer, with power simulated from realistic numbers.</dd></div>
+        <div><dt>Protocol</dt><dd>Consent, data and deletion planned, approved and followed.</dd></div>
+        <div><dt>Confirmatory analysis</dt><dd>The planned test, run as written, with the right unit and a test that respects the design.</dd></div>
+        <div><dt>Exploration</dt><dd>Labeled as such, and never promoted to a finding.</dd></div>
+        <div><dt>Reproducibility</dt><dd>Code another group reran to the same numbers.</dd></div>
+        <div><dt>Interpretation</dt><dd>Claims no larger than the evidence, with what would change them.</dd></div>
+        <div><dt>Communication</dt><dd>A report and a talk another lab could build on.</dd></div>
+      </dl>
+    </section>
+  </div>
+
+</main>
+<footer class="colophon">
+  <p><b>BCI101</b> An Applied Introduction to Noninvasive Brain-Computer Interfaces. Neurons, to bits, to real-world outcomes. Built on the demos at <a href="https://demo.intomind.com/">demo.intomind.com</a>.</p>
+  <div class="level-line"><span>Level</span><div class="levels" role="group" aria-label="Level"><button type="button" data-level="ms">Middle school</button><button type="button" data-level="hs">High school</button><button type="button" data-level="college">College</button><button type="button" data-level="grad">Graduate</button></div></div>
+</footer>
+</body>
+</html>

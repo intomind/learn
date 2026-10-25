@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chance and fair tests · BCI101</title>
+<meta name="description" content="What guessing scores, how often luck looks like skill, why readings next to each other in time are not separate evidence, and how a permutation test asks what chance alone would do.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/assets/site.css">
+<script>(function(){var d=document.documentElement,q=new URLSearchParams(location.search),s=function(k){try{return localStorage.getItem(k)}catch(e){return null}},L={ms:1,hs:1,college:1,grad:1},l=q.get("level");if(L[l]){try{localStorage.setItem("curriculum-level",l)}catch(e){}}else l=s("curriculum-level");if(!L[l]){l="hs";d.dataset.ask="1"}d.dataset.level=l;d.dataset.theme=q.get("theme")||s("curriculum-theme")||"dark";})()</script>
+<script type="module" src="/assets/curriculum.js"></script>
+</head>
+<body>
+<header class="chrome">
+  <a class="mark" href="/">IntoMind<span>Learn</span></a>
+  <nav class="nav" aria-label="Pages"><a href="/" aria-current="page">Contents</a><a href="/labs/">Labs</a><a href="/vocabulary/">Vocabulary</a><a href="/safety/">Safety</a></nav>
+  <div class="controls"><button class="theme" type="button">Light</button></div>
+</header>
+<main class="page kind-chapter">
+  <div class="lv lv-ms" data-l="ms">
+    <header class="hero">
+      <p class="eb">Chapter 6 · Middle school</p>
+      <h1>Chance and fair tests</h1>
+      <p class="lede">When someone gets a lot right, is it skill, or luck? And how do you test a model fairly?</p>
+    </header>
+
+    
+
+    <section id="luck">
+      <h2>Luck can look like skill</h2>
+      <div class="grid">
+        <div class="text">
+          <p>Guess heads or tails for ten coin flips, and you will usually get about five right. But not always: about one time in six, guessing alone gets seven or more right.</p>
+          <p>So in a class of thirty, about five people will look like good guessers, just by luck.</p>
+        </div>
+        <figure class="fig" data-fig="binomial" data-n="10" data-k="7"><figcaption><b>Ten flips</b> How often a guesser gets each number of ten coin flips right. Five is most likely. Seven or more, in orange, happens about one time in six.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>Lucky guessers</h3>
+        <p>In pairs, one person flips a coin ten times, and the other guesses each flip before it lands. Score the guesses, then swap. Put every score in the class on one dot plot.</p>
+        <p class="ask"><span class="lbl">Work it out</span>I guessed <span class="fill" data-key="my-guesses" data-hint="how many"></span> of 10 right. In our class, <span class="fill" data-key="class-seven" data-hint="how many"></span> people got 7 or more.</p>
+        <p class="see"><b>You should see</b>Most scores near five, and a few people with seven or more. None of them has a special skill at guessing coins.</p>
+      </div>
+    </section>
+
+    <section id="more">
+      <h2>More tries, less luck</h2>
+      <div class="text">
+        <p>More tries make luck matter less. Seven right out of ten, 70 percent, happens by luck about one time in six. But 70 percent right out of forty tries happens by luck less than one time in a hundred.</p>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>More tries</h3>
+        <p>Put four people's scores out of ten together, for a score out of 40. How many of the class's scores out of 40 reach 28, which is 70 percent? Compare with the scores out of ten.</p>
+        <p class="ask"><span class="lbl">Work it out</span>Our score out of 40: <span class="fill" data-key="score-40" data-hint="how many"></span>. Scores of 28 or more in the class: <span class="fill" data-key="class-28" data-hint="how many"></span>.</p>
+        <p class="see"><b>You should see</b>Scores out of 40 bunched near 20, and almost none that reach 28.</p>
+      </div>
+    </section>
+
+    <section id="fair">
+      <h2>A fair test</h2>
+      <div class="text">
+        <p>A fair test of a model does two things. It tests the model on examples it never learned from, as in Models that learn. And it compares the score with what guessing would get, its <dfn data-term="Chance level" data-l="ms" data-def="The score guessing would get.">chance level</dfn>.</p>
+        <p>In the Mind-Controlled Light Switch, the model is tested on 88 readings it never learned from. Guessing would get about half of them right, 44. The demo tells you whether your score is clearly better than that.</p>
+        
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Talk about it</h2>
+      <ol class="qs">
+        <li class="q"><p>Someone guessed eight of ten coin flips right. Are they good at guessing coin flips?</p></li>
+        <li class="q"><p>Why does 70 percent of 40 tries tell you more than 70 percent of 10?</p></li>
+        <li class="q"><p>Name the two things that make a test of a model fair.</p></li>
+      </ol>
+    </section>
+  </div>
+
+  <div class="lv lv-hs" data-l="hs">
+    <header class="hero">
+      <p class="eb">Chapter 6 · High school</p>
+      <h1>Chance and fair tests</h1>
+      <p class="lede">How do you tell whether a score is better than guessing, and why can't 88 readings count as 88 pieces of evidence?</p>
+    </header>
+
+    
+
+    <section id="luck">
+      <h2>Luck can look like skill</h2>
+      <div class="grid">
+        <div class="text">
+          <p>With two equally likely answers, guessing gets about half right: that is the <dfn data-term="Chance level" data-l="hs" data-def="The score guessing would get.">chance level</dfn>. But not always exactly half. Guess ten coin flips, and about one time in six you will get seven or more right.</p>
+          <p>The number right out of n independent guesses follows the <dfn data-term="Binomial distribution" data-l="hs" data-def="How often each number of successes comes up, in a set number of independent tries with the same chance each time.">binomial distribution</dfn>, drawn here for ten.</p>
+        </div>
+        <figure class="fig" data-fig="binomial" data-n="10" data-k="7"><figcaption><b>Ten flips</b> How often a guesser gets each number of ten coin flips right. Seven or more, in orange, happens about one time in six.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>Lucky guessers</h3>
+        <p>In pairs, one person flips a coin ten times, and the other guesses each flip before it lands. Score the guesses, then swap. Put every score in the class on one dot plot.</p>
+        <p class="ask"><span class="lbl">Work it out</span>In our class, <span class="fill" data-key="seven" data-hint="how many"></span> of <span class="fill" data-key="of" data-hint="how many"></span> people got seven or more: about one in <span class="fill" data-key="one-in" data-hint="how many"></span>.</p>
+      </div>
+    </section>
+
+    <section id="p-value">
+      <h2>How often is luck enough?</h2>
+      <div class="grid flip">
+        <div class="text">
+          <p>The chance of a score at least as good as yours, if only guessing were at work, is the one-sided <dfn data-term="p-value" data-l="hs" data-def="How often a result at least this strong would happen if only chance were at work.">p-value</dfn>. Below 0.05 is a common line for “unlikely to be luck.” It is a convention, not a law of nature.</p>
+          <p>The Mind-Controlled Light Switch tests your custom AI head on 88 readings. Guessing would get about 44 of them right, and 53 or more about 3.5 times in 100.</p>
+        </div>
+        <figure class="fig" data-fig="binomial" data-n="88" data-k="53"><figcaption><b>Guessing, 88 times</b> How often a guesser gets each number of 88 readings right. Most often about 44. Fifty-three or more, in orange, about 3.5 times in 100.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>A thousand guessers</h3>
+        <p>In a spreadsheet, make 1,000 rows of 88 guesses each, every guess right or wrong with equal chance: <code>=RANDBETWEEN(0,1)</code>, with 1 for right. Score each row with <code>SUM</code>, and plot the scores. Then find the share that reach 53 or more, with <code>COUNTIF</code>.</p>
+        <p class="ask"><span class="lbl">Work it out</span>Rows at 53 or more: <span class="fill" data-key="rows-53" data-hint="how many"></span> of 1,000, a share of <span class="fill" data-key="share-53" data-hint="how much"></span>.</p>
+        <p class="see"><b>You should see</b>Scores piled up around 44, and about 35 of the 1,000 rows at 53 or more.</p>
+      </div>
+    </section>
+
+    <section id="independence">
+      <h2>Readings that stick together</h2>
+      <div class="grid">
+        <div class="text">
+          <p>The binomial distribution assumes every guess is <dfn data-term="Independent" data-l="hs" data-def="Not affecting each other. EEG readings close in time are not.">independent</dfn>. EEG readings aren't: two readings a few seconds apart are much alike, because the person, the electrodes and the room have hardly changed. Counting 88 readings as 88 independent tries overstates the evidence.</p>
+          <p>So the Mind-Controlled Light Switch keeps each round of readings together: it tests each whole round with a head that never learned from it, and when it checks for luck, it shuffles whole rounds.</p>
+        </div>
+        <figure class="fig" data-fig="rounds" data-held="3"><figcaption><b>Rounds</b> The light switch's 88 readings, in eight rounds of eleven. Readings in a round are alike, so the demo holds back and tests whole rounds, one at a time. The outlined round is one of them.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>Guesses that stick together</h3>
+        <p>In the same spreadsheet, make the guesses stick: each one matches the guess before it 90 percent of the time, with <code>=IF(RAND()&lt;0.9, B2, 1-B2)</code> in each cell after the first. Score and plot the rows again.</p>
+        <p class="ask"><span class="lbl">Work it out</span>Rows at 53 or more now: <span class="fill" data-key="sticky-53" data-hint="how many"></span> of 1,000.</p>
+        <p class="see"><b>You should see</b>A much wider spread, and many more lucky high scores.</p>
+      </div>
+    </section>
+
+    <section id="shuffle">
+      <h2>Shuffle the labels</h2>
+      <div class="grid flip">
+        <div class="text">
+          <p>A <dfn data-term="Permutation test" data-l="hs" data-def="Relabeling the data in every way that keeps its structure, to see what scores chance alone produces.">permutation test</dfn> asks the question directly. Relabel the data in every way that keeps its structure, score every relabeling the same way, and see where the real score falls among them.</p>
+          <p>The Mind-Controlled Light Switch relabels whole rounds: with eight rounds, four of them On, there are 70 ways to label them, and it teaches and tests a fresh custom AI head for each.</p>
+        </div>
+        <figure class="fig" data-fig="labelings"><figcaption><b>70 labelings</b> Every way of calling four of eight rounds On. The real one, and its mirror, are outlined. The p-value is the share that score at least as well as the real one.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>Shuffle your Alpha Flower numbers</h3>
+        <p>Take one wearer's six numbers from Alpha Flower, three open and three closed, and number them 1 to 6. The score is the mean of the three called closed, minus the mean of the other three. Work out the score for all 20 ways to choose which three are called closed.</p>
+        <table class="sheet" data-sheet="hs-shuffle">
+          <thead><tr><th>Called closed</th><th>Score</th></tr></thead>
+          <tbody><tr><td>1 2 3</td><td></td></tr><tr><td>1 2 4</td><td></td></tr><tr><td>1 2 5</td><td></td></tr><tr><td>1 2 6</td><td></td></tr><tr><td>1 3 4</td><td></td></tr><tr><td>1 3 5</td><td></td></tr><tr><td>1 3 6</td><td></td></tr><tr><td>1 4 5</td><td></td></tr><tr><td>1 4 6</td><td></td></tr><tr><td>1 5 6</td><td></td></tr><tr><td>2 3 4</td><td></td></tr><tr><td>2 3 5</td><td></td></tr><tr><td>2 3 6</td><td></td></tr><tr><td>2 4 5</td><td></td></tr><tr><td>2 4 6</td><td></td></tr><tr><td>2 5 6</td><td></td></tr><tr><td>3 4 5</td><td></td></tr><tr><td>3 4 6</td><td></td></tr><tr><td>3 5 6</td><td></td></tr><tr><td>4 5 6</td><td></td></tr></tbody>
+        </table>
+        <p class="ask"><span class="lbl">Work it out</span>The real labeling ranks <span class="fill" data-key="rank" data-hint="which"></span> of 20, so p = <span class="fill" data-key="p" data-hint="how much"></span>.</p>
+        
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Talk about it</h2>
+      <ol class="qs">
+        <li class="q"><p>What does a one-sided p-value of 0.03 mean for a light switch score?</p></li>
+        <li class="q"><p>When the guesses stuck together, high scores became more common. Why does that matter for EEG readings?</p></li>
+        <li class="q"><p>Why does the demo shuffle whole rounds, not single readings?</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Combrisson, E., and Jerbi, K. (2015). Exceeding chance level by chance: the caveat of theoretical chance levels in brain signal classification and statistical assessment of decoding accuracy. Journal of Neuroscience Methods.</p>
+    </section>
+  </div>
+
+  <div class="lv lv-college" data-l="college">
+    <header class="hero">
+      <p class="eb">Chapter 6 · College</p>
+      <h1>Chance and fair tests</h1>
+      <p class="lede">When does a classifier's score mean more than luck? Readings that stick together, tuning on the test, and many tests at once can each make noise look like signal.</p>
+    </header>
+
+    
+
+    <section id="chance">
+      <h2>Chance level, and p-values</h2>
+      <div class="grid">
+        <div class="text">
+          <p>With two states taught equally, guessing gets each reading right half the time: the <dfn data-term="Chance level" data-l="college" data-def="The score guessing would get.">chance level</dfn>. If the 88 readings of the Mind-Controlled Light Switch were independent, the number a guesser gets right would follow a binomial distribution, mean 44, standard deviation √22, about 4.7.</p>
+          <p>A <dfn data-term="p-value" data-l="college" data-def="How often a result at least this strong would happen if only chance were at work.">p-value</dfn> is how often a result at least this strong would happen if only chance were at work. Under the binomial, 53 or more of 88 happens about 3.5 times in 100, below the conventional 0.05.</p>
+        </div>
+        <figure class="fig" data-fig="binomial" data-n="88" data-k="53"><figcaption><b>Guessing, 88 times</b> How often a guesser gets each number of 88 independent readings right. Most often about 44, and 53 or more, in orange, about 3.5 times in 100.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="sticky">
+      <h2>Readings that stick together</h2>
+      <div class="grid flip">
+        <div class="text">
+          <p>EEG readings close in time are alike: the contact, the posture and the wearer's state change slowly. So the 88 readings aren't <dfn data-term="Independent" data-l="college" data-def="Not affecting each other. EEG readings close in time are not.">independent</dfn>, they carry less evidence than 88 coin flips, and the binomial overstates how unlikely a score is.</p>
+          <p>Worse, a test that mixes them up leaks. Split the readings into random folds, and every test reading has near-copies from its own round in training: <dfn data-term="Leakage" data-l="college" data-def="Information from the test data reaching the training, in any way.">leakage</dfn>. Holding out whole rounds, blocked folds, keeps neighbors on the same side.</p>
+        </div>
+        <figure class="fig" data-fig="rounds" data-held="3"><figcaption><b>Rounds</b> The light switch's 88 readings come in eight rounds of eleven, Off and On in turn. Readings in a round are alike, so the demo tests on a whole held-out round.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="permutation">
+      <h2>Permutation tests</h2>
+      <div class="grid">
+        <div class="text">
+          <p>A <dfn data-term="Permutation test" data-l="college" data-def="Relabeling the data in every way that keeps its structure, to see what scores chance alone produces.">permutation test</dfn> builds the null distribution from the data itself: relabel it in every way the null hypothesis allows, score each relabeling exactly as the real one was scored, and count the share that score at least as well. Labels are only exchangeable in blocks, so permute whole rounds.</p>
+          <p>Calling four of eight rounds On can be done C(8, 4) = 70 ways. The Mind-Controlled Light Switch scores every one, and since a labeling and its mirror, with Off and On swapped, score alike, its p-value can't go below 2/70.</p>
+        </div>
+        <figure class="fig" data-fig="labelings"><figcaption><b>70 labelings</b> Every way of calling four of the eight rounds On. Each is scored like the taught one, outlined with its mirror, and the p-value is the share that score at least as well.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>Noise that looks like signal</h3>
+        <p>Make 88 readings of 76 numbers in eight rounds, with no difference at all between Off and On, only an offset shared within each round. Score a ridge classifier with random folds, then with one round held out at a time, and run the permutation test over rounds.</p>
+        <pre><code>import numpy as np
+from itertools import combinations
+
+rng = np.random.default_rng(6)
+rounds, per, d = 8, 11, 76
+# 88 readings of 76 numbers, in rounds of Off and On in turn, with no difference between
+# the states at all. Each round has its own offset, so readings in a round are alike.
+round_of = np.repeat(np.arange(rounds), per)
+X = rng.normal(size=(rounds, d))[round_of] + rng.normal(size=(rounds * per, d))
+y = (round_of % 2).astype(float)
+
+def fit(X, y, lam=100.0):
+    A = np.c_[X, np.ones(len(X))]
+    P = lam * np.eye(A.shape[1])
+    P[-1, -1] = 0
+    return np.linalg.solve(A.T @ A + P, A.T @ y)
+
+def accuracy(X, y, folds):
+    right = 0
+    for test in folds:
+        train = np.setdiff1d(np.arange(len(y)), test)
+        w = fit(X[train], y[train])
+        right += np.sum((np.c_[X[test], np.ones(len(test))] @ w &gt; 0.5) == y[test])
+    return right / len(y)
+
+random_folds = np.array_split(rng.permutation(len(y)), 8)
+round_folds = [np.flatnonzero(round_of == r) for r in range(rounds)]
+print(&quot;random folds:&quot;, round(accuracy(X, y, random_folds), 2))
+real = accuracy(X, y, round_folds)
+print(&quot;a round held out at a time:&quot;, round(real, 2))
+
+# Every way of calling four of the eight rounds On, each scored the same way.
+null = [accuracy(X, np.isin(round_of, on).astype(float), round_folds)
+        for on in combinations(range(rounds), 4)]
+print(&quot;relabelings score&quot;, round(np.mean(null), 2), &quot;on average&quot;)
+print(&quot;p, over 70 labelings of the rounds:&quot;, round(np.mean(np.array(null) &gt;= real), 2))</code></pre>
+        <p class="see"><b>You should see</b>Random folds scoring all 88 right, on pure noise. One round held out at a time, about a half. The relabelings averaging well below a half, and a p of about 0.14: no evidence, rightly.</p>
+        
+      </div>
+    </section>
+
+    <section id="dipping">
+      <h2>Tuning on the test, and many tests</h2>
+      <div class="text">
+        <p>Choosing anything with the test in view, the penalty, the features, the frequency band, the wearer or the session to report, fits that choice to the test and flatters its score. Selecting data by the same statistic you then test is called double dipping. Tune inside the training data only, by nested cross-validation.</p>
+        <p>Run many tests at 0.05 and false positives arrive at that rate: <dfn data-term="Multiple comparisons" data-l="college" data-def="Many tests at once, each with its own chance of a false positive.">multiple comparisons</dfn>. Holm's method controls the chance of any false positive among them, and the Benjamini–Hochberg procedure the expected share of false discoveries. Either way, report how many tests you ran.</p>
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Problems</h2>
+      <ol class="qs">
+        <li class="q"><p>What does a one-sided p-value of 0.03 mean for a light switch score?</p></li>
+        <li class="q"><p>Why does the demo shuffle whole rounds, not single readings?</p></li>
+        <li class="q"><p>You tune the penalty on the same folds you report. Why is the result optimistic, and how do you fix it?</p></li>
+        <li class="q"><p>You test 20 pairs of mental states at 0.05 each. How many false positives should you expect if none truly differ, and what would you do?</p></li>
+        <li class="q"><p>On the same folds, logistic regression got 3 more of 88 readings right than ridge regression. Is it the better classifier?</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Combrisson, E., and Jerbi, K. (2015). Exceeding chance level by chance: the caveat of theoretical chance levels in brain signal classification and statistical assessment of decoding accuracy. Journal of Neuroscience Methods.</p>
+      <p>Kriegeskorte, N., Simmons, W. K., Bellgowan, P. S. F., and Baker, C. I. (2009). Circular analysis in systems neuroscience: the dangers of double dipping. Nature Neuroscience.</p>
+      <p>Varoquaux, G. (2018). Cross-validation failure: small sample sizes lead to large error bars. NeuroImage.</p>
+      <p>Benjamini, Y., and Hochberg, Y. (1995). Controlling the false discovery rate: a practical and powerful approach to multiple testing. Journal of the Royal Statistical Society, Series B.</p>
+    </section>
+  </div>
+
+  <div class="lv lv-grad" data-l="grad">
+    <header class="hero">
+      <p class="eb">Chapter 6 · Graduate</p>
+      <h1>Chance and fair tests</h1>
+      <p class="lede">When is a decoding accuracy evidence of anything, with windows that depend on each other, few of them, and many ways to analyze them?</p>
+    </header>
+
+    
+
+    <section id="chance">
+      <h2>Chance isn't a number</h2>
+      <div class="text">
+        <p>Two classes in equal numbers don't make chance 50 percent. With n independent trials, a guesser reaches k correct with binomial probability, and with 88 trials 53 correct, 60 percent, still happens one time in 29. With fewer trials the bar is higher, and many published decoding results clear 50 percent by less than chance alone would (Combrisson and Jerbi, 2015). Cross-validated accuracy on samples of a hundred or so has error bars of about ten percentage points either way (Varoquaux, 2018).</p>
+      </div>
+    </section>
+
+    <section id="dependence">
+      <h2>Windows that stick together</h2>
+      <div class="text">
+        <p>Those counts assume independent trials. Windows from one session aren't: they overlap, they share each round's state of the electrodes and the person, and they drift together. Eight rounds of eleven windows carry closer to eight observations than to eighty-eight, and a binomial on the windows treats them as eighty-eight. If folds mix windows from the same round into training and test, a decoder can recognize the round rather than the state, and score well on noise. <dfn data-term="Leakage" data-l="grad" data-def="Information about the test data reaching a model while it is fitted or chosen, which makes its test optimistic.">Leakage</dfn> of this kind, between what a model learns from and what it is tested on, runs through machine learning in science (Kapoor and Narayanan, 2023).</p>
+      </div>
+    </section>
+
+    <section id="permutation">
+      <h2>A test that respects the design</h2>
+      <div class="text">
+        <p>A <dfn data-term="Permutation test" data-l="grad" data-def="A test that compares a statistic with its values under every relabeling that the design makes equally likely when nothing is there.">permutation test</dfn> compares the statistic with its values under relabelings that are equally likely if nothing is there, and is exact when the labels are exchangeable under that null (Nichols and Holmes, 2002). For a classifier, the whole pipeline, folds and fitting and scoring, is rerun for every relabeling (Ojala and Garriga, 2010). With labels that come in rounds, only whole rounds trade labels.</p>
+        <p>Its null need not center on one half. Holding out a whole round leaves the training set with more rounds of the other class, and a decoder that leans toward the training majority is pushed to guess wrong on every held-out round, so cross-validated accuracy under the null sits below chance (Jamalabadi and others, 2016). The binomial knows nothing of this, and the permutation null includes it.</p>
+      </div>
+    </section>
+
+    <section id="many">
+      <h2>Many analyses</h2>
+      <div class="text">
+        <p>Every choice made after seeing the data, a band, a window, a penalty, an exclusion, is a test that wasn't counted. Holm's procedure (1979) controls the chance of any false positive among m tests, and Benjamini and Hochberg's (1995) the expected share of false positives among those declared. Neither helps with comparisons nobody counted: the garden of forking paths, where each analysis is reasonable and the one reported was chosen because it worked (Gelman and Loken, 2014). Writing the analysis down before the data is the remedy, which is what preregistration is for.</p>
+      </div>
+    </section>
+
+    <section id="demo">
+      <h2>In the demo</h2>
+      <div class="text">
+        <p>The Mind-Controlled Light Switch keeps 88 windows in eight rounds of 11, alternating Off and On, starting with Off. Its folds are contiguous, five to begin with, more until every training set has more windows than the head has weights, which with 88 windows makes eight folds of 11, one round each. Each fold's penalty uses no labels, so it is computed once. Every way of labeling four of the eight rounds On, 70 in all, is scored with the same folds by heads rounded as the device runs them, and p is the share that score at least as well as the taught labeling. Swapping On and Off splits the rounds the same way and scores the same, so p is never below 2/70, about 0.029. Below 0.05, the demo says the head is clearly better than guessing.</p>
+      </div>
+    </section>
+
+    <section id="analysis">
+      <h2>Analysis</h2>
+      <div class="try">
+        <p class="k">Analysis</p>
+        <h3>Three tests on sessions with and without a signal</h3>
+        <p>Simulate sessions shaped like the light switch's, 8 rounds of 11 embeddings with an offset shared within each round, with no signal and with one. On each, test a ridge head three ways: folds that mix the rounds with a binomial test, rounds held out with a binomial test, and rounds held out against all 70 labelings. Do it with the demo's penalty, and with a heavier one that also uses no labels.</p>
+        <pre><code>import numpy as np
+from itertools import combinations
+from scipy.stats import binom
+
+rng = np.random.default_rng(6)
+ROUNDS, PER, D = 8, 11, 76
+rounds = np.repeat(np.arange(ROUNDS), PER)
+labels = (rounds % 2).astype(float)                   # Off, On, Off, On, as the demo teaches
+u = rng.normal(size=D)
+u = (u - u.mean()) / np.linalg.norm(u - u.mean())    # sums to zero, like every embedding
+
+def session(signal, drift=0.3):
+    """88 embeddings: noise, an offset shared within each round, and the label times u."""
+    x = rng.normal(size=(ROUNDS * PER, D))
+    x += np.repeat(rng.normal(0, drift, (ROUNDS, D)), PER, axis=0)
+    return x - x.mean(axis=1, keepdims=True) + signal * labels[:, None] * u
+
+def accuracy(x, folds, Y, penalty):
+    """Held-out accuracy of ridge for every labeling in Y, one row per labeling. Neither
+    penalty uses labels: "gap" is the demo's, "mean" the Gram matrix's mean eigenvalue."""
+    right = np.zeros(len(Y))
+    for train, test in folds:
+        xc = x[train] - x[train].mean(0)
+        ev = np.linalg.eigvalsh(xc.T @ xc)
+        lam = np.sqrt(max(ev[0], 1) * ev[1]) if penalty == "gap" else ev.mean()
+        fit = np.linalg.solve(xc.T @ xc + lam * np.eye(D), xc.T)
+        yt = Y[:, train]
+        w = (yt - yt.mean(1, keepdims=True)) @ fit.T              # a weight vector per labeling
+        score = (x[test] - x[train].mean(0)) @ w.T + yt.mean(1)
+        right += ((score &gt; 0.5) == (Y[:, test].T == 1)).sum(0)
+    return right / x.shape[0]
+
+n = len(labels)
+by_round = [(np.flatnonzero(rounds != r), np.flatnonzero(rounds == r)) for r in range(ROUNDS)]
+relabel = np.array([np.isin(rounds, c) for c in combinations(range(ROUNDS), 4)], float)  # 70
+taught = next(i for i, r in enumerate(relabel) if np.array_equal(r, labels))
+
+def tests(x, penalty):
+    mixed = rng.permutation(n).reshape(ROUNDS, PER)              # folds that ignore the rounds
+    folds = [(np.setdiff1d(np.arange(n), m), m) for m in mixed]
+    leaky = accuracy(x, folds, labels[None], penalty)
+    scores = accuracy(x, by_round, relabel, penalty)
+    return {"leaky folds, binomial": binom.sf(round(leaky[0] * n) - 1, n, 0.5),
+            "rounds, binomial": binom.sf(round(scores[taught] * n) - 1, n, 0.5),
+            "rounds, 70 labelings": np.mean(scores &gt;= scores[taught] - 1e-12),
+            "null's mean accuracy": scores.mean()}
+
+for penalty, signal in (("gap", 0.0), ("mean", 0.0), ("mean", 2.0)):
+    runs = [tests(session(signal), penalty) for _ in range(300)]
+    print(f"penalty {penalty}, signal {signal}:")
+    for k in runs[0]:
+        v = np.array([r[k] for r in runs])
+        shown = f"{v.mean():.2f}" if "mean" in k else f"p &lt; 0.05 in {np.mean(v &lt; 0.05):.0%}"
+        print(f"   {k:21s} {shown}")</code></pre>
+        <p class="see"><b>You should see</b>With no signal, mixed folds declare a head clearly better than guessing in 36 and 89 percent of sessions. Rounds held out with a binomial test do it in 10 percent with the demo's penalty and 1 percent with the heavier one, whose null averages 0.37. The 70 labelings do it in 3 percent with either. With a signal, the labelings find it in 58 percent of sessions and the binomial in 48.</p>
+        <p>Then report: why the binomial errs in opposite directions with the two penalties, and what the drift between rounds does to each test when you raise it.</p>
+        
+      </div>
+    </section>
+
+    <section id="open">
+      <h2>Open problems</h2>
+      <ol class="rulelist">
+        <li><b>Folds for data that drift.</b> No way of splitting one session predicts how a decoder will do in the next, when the data will have moved. Estimating that from the session at hand is open.</li>
+        <li><b>Small samples.</b> With one person and a hundred windows, error bars are wide whatever the test (Varoquaux, 2018), and what to report beyond a p-value, and how, is not settled.</li>
+        <li><b>From people to populations.</b> A t-test on decoding accuracies across people asks whether the average exceeds chance, not whether a typical person's decoder works. Allefeld, Görgen and Haynes (2016) propose testing the prevalence of an effect instead, and practice hasn't settled.</li>
+      </ol>
+    </section>
+
+    <section id="talk">
+      <h2>Problems</h2>
+      <ol class="qs">
+        <li class="q"><p>How many of 88 independent windows must be right for a one-sided binomial p below 0.05? How many of 8 independent rounds?</p></li>
+        <li class="q"><p>Why do folds that mix windows from the same round score well on noise when rounds carry offsets?</p></li>
+        <li class="q"><p>Why is the demo's p never below 2/70? With ten rounds, five of each, what would the smallest p be?</p></li>
+        <li class="q"><p>With one round held out, why does a decoder that leans toward the training majority guess wrong on every held-out round?</p></li>
+        <li class="q"><p>A paper reports 70 percent decoding accuracy, p &lt; 0.001 by a binomial test over 400 trials from 4 runs, with the trials shuffled into ten folds. What would you ask for?</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Holm, S. (1979). A simple sequentially rejective multiple test procedure. Scandinavian Journal of Statistics.</p>
+      <p>Benjamini, Y., and Hochberg, Y. (1995). Controlling the false discovery rate: a practical and powerful approach to multiple testing. Journal of the Royal Statistical Society, Series B.</p>
+      <p>Nichols, T. E., and Holmes, A. P. (2002). Nonparametric permutation tests for functional neuroimaging: a primer with examples. Human Brain Mapping.</p>
+      <p>Ojala, M., and Garriga, G. C. (2010). Permutation tests for studying classifier performance. Journal of Machine Learning Research.</p>
+      <p>Gelman, A., and Loken, E. (2014). The statistical crisis in science. American Scientist.</p>
+      <p>Combrisson, E., and Jerbi, K. (2015). Exceeding chance level by chance: the caveat of theoretical chance levels in brain signal classification and statistical assessment of decoding accuracy. Journal of Neuroscience Methods.</p>
+      <p>Allefeld, C., Görgen, K., and Haynes, J.-D. (2016). Valid population inference for information-based imaging: from the second-level t-test to prevalence inference. NeuroImage.</p>
+      <p>Jamalabadi, H., Alizadeh, S., Schönauer, M., Leibold, C., and Gais, S. (2016). Classification based hypothesis testing in neuroscience: below-chance level classification rates and overlooked statistical properties of linear parametric classifiers. Human Brain Mapping.</p>
+      <p>Varoquaux, G. (2018). Cross-validation failure: small sample sizes lead to large error bars. NeuroImage.</p>
+      <p>Kapoor, S., and Narayanan, A. (2023). Leakage and the reproducibility crisis in machine-learning-based science. Patterns.</p>
+    </section>
+  </div>
+
+</main>
+<footer class="colophon">
+  <p><b>BCI101</b> An Applied Introduction to Noninvasive Brain-Computer Interfaces. Neurons, to bits, to real-world outcomes. Built on the demos at <a href="https://demo.intomind.com/">demo.intomind.com</a>.</p>
+  <div class="level-line"><span>Level</span><div class="levels" role="group" aria-label="Level"><button type="button" data-level="ms">Middle school</button><button type="button" data-level="hs">High school</button><button type="button" data-level="college">College</button><button type="button" data-level="grad">Graduate</button></div></div>
+</footer>
+</body>
+</html>

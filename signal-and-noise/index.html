@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Signal and noise · BCI101</title>
+<meta name="description" content="Blinks, muscles and loose electrodes make signals that are not from the brain. How to spot them, and why repeating and averaging a measurement shrinks the noise.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/assets/site.css">
+<script>(function(){var d=document.documentElement,q=new URLSearchParams(location.search),s=function(k){try{return localStorage.getItem(k)}catch(e){return null}},L={ms:1,hs:1,college:1,grad:1},l=q.get("level");if(L[l]){try{localStorage.setItem("curriculum-level",l)}catch(e){}}else l=s("curriculum-level");if(!L[l]){l="hs";d.dataset.ask="1"}d.dataset.level=l;d.dataset.theme=q.get("theme")||s("curriculum-theme")||"dark";})()</script>
+<script type="module" src="/assets/curriculum.js"></script>
+</head>
+<body>
+<header class="chrome">
+  <a class="mark" href="/">IntoMind<span>Learn</span></a>
+  <nav class="nav" aria-label="Pages"><a href="/" aria-current="page">Contents</a><a href="/labs/">Labs</a><a href="/vocabulary/">Vocabulary</a><a href="/safety/">Safety</a></nav>
+  <div class="controls"><button class="theme" type="button">Light</button></div>
+</header>
+<main class="page kind-chapter">
+  <div class="lv lv-ms" data-l="ms">
+    <header class="hero">
+      <p class="eb">Chapter 3 · Middle school</p>
+      <h1>Signal and noise</h1>
+      <p class="lede">Is everything an electrode picks up coming from your brain? And how can you tell when a difference is real?</p>
+    </header>
+
+    
+
+    <section id="artifacts">
+      <h2>Signals that aren't from the brain</h2>
+      <div class="grid">
+        <div class="text">
+          <p>Your brain's signal at the scalp is tiny, a few millionths of a volt. Your eyes make much bigger electrical signals, so every blink shows up in EEG as a big, slow bump.</p>
+          <p>A signal in a recording that doesn't come from the brain is called an <dfn data-term="Artifact" data-l="ms" data-def="A signal in a recording that is not from the brain, like a blink or a clenched jaw.">artifact</dfn>.</p>
+        </div>
+        <figure class="fig" data-fig="trace" data-kind="blink"><figcaption><b>Simulated</b> Eyes open, and three blinks, recorded at the forehead, where blinks are largest. Each one is a slow bump many times bigger than the brain's own rhythms.</figcaption></figure>
+      </div>
+      <div class="grid flip">
+        <div class="text">
+          <p>Your muscles make big signals too. Clenching your jaw, talking or moving your head all show up in EEG as fast, spiky activity on top of the brain's.</p>
+          <p>Everything in a measurement that isn't what you want to measure is called <dfn data-term="Noise" data-l="ms" data-def="Everything in a measurement that is not what you want to measure.">noise</dfn>. When you measure alpha, a blink or a clenched jaw is noise.</p>
+        </div>
+        <figure class="fig" data-fig="trace" data-kind="jaw"><figcaption><b>Simulated</b> Eyes closed, with alpha's steady rhythm, and the jaw clenched for a second: fast muscle activity on top of it.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>What moves the number</h3>
+        <p>One wearer per group, with the IntoMind One on and connected to the Alpha Flower demo, as in the lab. The skeptic calls each action for ten seconds, with ten seconds of stillness before it. The recorder writes down the number before and during each one.</p>
+        <p>Blink once a second with your eyes open. Then close your eyes, and with them closed: clench your jaw, then talk, then turn your head.</p>
+        <p class="ask"><span class="lbl">Predict</span>The action that will change the number most is <span class="fill" data-key="predict-most" data-hint="which one"></span>.</p>
+        <table class="sheet" data-sheet="ms-actions">
+          <thead><tr><th>Action</th><th>Before</th><th>During</th><th>Up, down or the same?</th></tr></thead>
+          <tbody><tr><td>Blinking, eyes open</td><td></td><td></td><td></td></tr><tr><td>Clenching the jaw, eyes closed</td><td></td><td></td><td></td></tr><tr><td>Talking, eyes closed</td><td></td><td></td><td></td></tr><tr><td>Turning the head, eyes closed</td><td></td><td></td><td></td></tr></tbody>
+        </table>
+        <p class="see"><b>You should see</b>Most actions lower the number, some much more than others.</p>
+        
+      </div>
+    </section>
+
+    <section id="more-than-once">
+      <h2>Measure more than once</h2>
+      <div class="grid">
+        <div class="text">
+          <p>Every measurement wobbles a little, for many small reasons: how the electrodes touch the skin, a thought, a breath. That is why scientists measure more than once.</p>
+          <p>If a difference shows up every time, it is probably real. If it shows up only once, it could be luck. When the numbers overlap, you can't tell.</p>
+        </div>
+        <figure class="fig" data-fig="dotplot"><figcaption><b>Simulated</b> Five people's alpha numbers, three tries with eyes open and three with eyes closed. For four of them, closed is higher every time. For E, the tries overlap.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>Your numbers, every time</h3>
+        <p>Use your record sheet from Alpha Flower. Write down the lowest and highest of each wearer's eyes-open numbers, and of their eyes-closed numbers. Then put every wearer's numbers on the class's dot plot.</p>
+        <table class="sheet" data-sheet="ms-ranges">
+          <thead><tr><th>Wearer</th><th>Open, lowest</th><th>Open, highest</th><th>Closed, lowest</th><th>Closed, highest</th><th>Do they overlap?</th></tr></thead>
+          <tbody><tr><td>1</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>2</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>3</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>4</td><td></td><td></td><td></td><td></td><td></td></tr></tbody>
+        </table>
+        <p class="see"><b>You should see</b>For most wearers, eyes closed higher every time. For some, the numbers overlap, and the difference can't be told from the wobble.</p>
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Talk about it</h2>
+      <ol class="qs">
+        <li class="q"><p>What is an artifact? Give two examples.</p></li>
+        <li class="q"><p>Which action changed the number most? Why might it?</p></li>
+        <li class="q"><p>Why is one measurement not enough to be sure?</p></li>
+      </ol>
+    </section>
+  </div>
+
+  <div class="lv lv-hs" data-l="hs">
+    <header class="hero">
+      <p class="eb">Chapter 3 · High school</p>
+      <h1>Signal and noise</h1>
+      <p class="lede">What else does an electrode pick up besides your brain, and how do you tell a real difference from the noise?</p>
+    </header>
+
+    
+
+    <section id="artifacts">
+      <h2>Eyes and muscles</h2>
+      <div class="grid">
+        <div class="text">
+          <p>An <dfn data-term="Artifact" data-l="hs" data-def="A signal in a recording that is not from the brain, like a blink or a clenched jaw.">artifact</dfn> is a signal from outside the brain. The eyes act like small batteries, so a blink or an eye movement makes a large, slow wave, mostly below 4 hertz, largest at the front of the head.</p>
+          <p>Muscles, in the jaw, the forehead and the neck, make fast, spiky activity, strongest above 20 hertz. Moving shifts the electrodes on the skin. And mains electricity can add a hum at 50 or 60 hertz, which the IntoMind One's filters remove.</p>
+        </div>
+        <figure class="fig" data-fig="trace" data-kind="blink"><figcaption><b>Simulated</b> Eyes open, and three blinks, recorded at the forehead, where blinks are largest: slow bumps many times bigger than the brain's own rhythms.</figcaption></figure>
+      </div>
+      <div class="grid flip">
+        <div class="text">
+          <p>In a spectrum, a clenched jaw lifts everything from about 20 hertz up. Everything in a measurement that isn't what you want to measure is <dfn data-term="Noise" data-l="hs" data-def="Everything in a measurement that is not what you want to measure.">noise</dfn>, so for alpha's share, both blinks and muscles are noise.</p>
+        </div>
+        <figure class="fig" data-fig="spectrum" data-kinds="open jaw"><figcaption><b>Simulated</b> The spectrum with the eyes open, in gray, and with the eyes closed and the jaw clenched, in orange: muscle lifts everything above about 20 hertz, on top of alpha.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>What moves the number</h3>
+        <p>On the Alpha Flower demo, as in the lab. The wearer sits still with eyes open until the number is steady, then blinks once a second for ten seconds. Then the wearer closes their eyes until the number is steady again, and the skeptic calls one action at a time, for ten seconds each, with ten seconds of stillness between: clenching the jaw, talking, turning the head. The recorder writes down the number before and during each.</p>
+        <p class="ask"><span class="lbl">Predict</span>The action that will lower the number most is <span class="fill" data-key="predict-most" data-hint="which"></span>, because <span class="fill" data-key="predict-why" data-hint="why, in hertz"></span>.</p>
+        <table class="sheet" data-sheet="hs-actions">
+          <thead><tr><th>Action</th><th>Before</th><th>During</th><th>Change</th></tr></thead>
+          <tbody><tr><td>Blinking, eyes open</td><td></td><td></td><td></td></tr><tr><td>Clenching the jaw, eyes closed</td><td></td><td></td><td></td></tr><tr><td>Talking, eyes closed</td><td></td><td></td><td></td></tr><tr><td>Turning the head, eyes closed</td><td></td><td></td><td></td></tr></tbody>
+        </table>
+        <p class="see"><b>You should see</b>Most actions lower the number, some much more than others.</p>
+        
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <div class="grid">
+        <div class="text">
+          <p><dfn data-term="Contact" data-l="hs" data-def="How well an electrode touches the skin.">Contact</dfn> matters as much as any artifact. An electrode resting on hair instead of skin picks up less of the brain and more of everything else.</p>
+          <p>Parting the hair under each electrode, and pressing the IntoMind One down until it feels firm but not tight, improves contact. It matters most for thick, coarse or curly hair, where it may still not be enough. A weak signal is a limit of the method, not of the person.</p>
+        </div>
+        <figure class="fig" data-fig="contact"><figcaption><b>Contact</b> The IntoMind One's electrodes are on its underside. Resting on hair, they are held off the skin. With the hair parted under each one, they rest on skin.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>Contact</h3>
+        <p>With the wearer's eyes closed and still, note the number with the IntoMind One fitted carefully, hair parted. Then rest it lightly, without parting the hair, and note it again. Then fit it carefully again.</p>
+        <table class="sheet" data-sheet="hs-contact">
+          <thead><tr><th>Wearer</th><th>Fitted carefully</th><th>Resting lightly</th><th>Fitted again</th></tr></thead>
+          <tbody><tr><td>1</td><td></td><td></td><td></td></tr><tr><td>2</td><td></td><td></td><td></td></tr><tr><td>3</td><td></td><td></td><td></td></tr><tr><td>4</td><td></td><td></td><td></td></tr></tbody>
+        </table>
+        <p class="see"><b>You should see</b>A lower, less steady number when it rests lightly, for some wearers far more than others.</p>
+        
+      </div>
+    </section>
+
+    <section id="averaging">
+      <h2>Measure more than once</h2>
+      <div class="grid flip">
+        <div class="text">
+          <p>Random noise shrinks when you average. The average of N measurements varies about the square root of N times less than one measurement does: four times as many measurements halve the spread.</p>
+          <p>That is why the Age Detector averages many four-second windows, and why a fair test of a model uses many readings.</p>
+        </div>
+        <figure class="fig" data-fig="averages"><figcaption><b>Simulated</b> Thirty averages of noisy measurements of the same value, taken one at a time, and four, sixteen and sixty-four at a time. The spread halves each time.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>Averaging, in a spreadsheet</h3>
+        <p>Make a column of 6,400 noisy measurements of a true value of 40: <code>=40+40*(RAND()-0.5)</code>. In the next columns, take averages of 4, 16 and 64 measurements at a time, a hundred of each, with <code>AVERAGE</code>. Then find how much each set varies, with <code>STDEV</code>.</p>
+        <table class="sheet" data-sheet="hs-averages">
+          <thead><tr><th>Measurements averaged</th><th>How much the averages vary</th></tr></thead>
+          <tbody><tr><td>1</td><td></td></tr><tr><td>4</td><td></td></tr><tr><td>16</td><td></td></tr><tr><td>64</td><td></td></tr></tbody>
+        </table>
+        <p class="see"><b>You should see</b>The spread halving each time the number averaged goes up four times.</p>
+        
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Talk about it</h2>
+      <ol class="qs">
+        <li class="q"><p>Blinks lowered alpha's share, and so did clenching. Explain each with frequencies.</p></li>
+        <li class="q"><p>To halve the noise in an average, how many more measurements do you need? Why?</p></li>
+        <li class="q"><p>Careful fitting mattered more for some people. What does that mean for comparing people?</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Goncharova, I. I., McFarland, D. J., Vaughan, T. M., and Wolpaw, J. R. (2003). EMG contamination of EEG: spectral and topographical characteristics. Clinical Neurophysiology.</p>
+      <p>Etienne, A., and others (2020). Novel electrodes for reliable EEG recordings on coarse and curly hair. Annual International Conference of the IEEE Engineering in Medicine and Biology Society.</p>
+    </section>
+  </div>
+
+  <div class="lv lv-college" data-l="college">
+    <header class="hero">
+      <p class="eb">Chapter 3 · College</p>
+      <h1>Signal and noise</h1>
+      <p class="lede">What else is in an EEG recording besides the brain, how do you recognize each kind by its spectrum, and when do you avoid it, reject it or correct it?</p>
+    </header>
+
+    
+
+    <section id="snr">
+      <h2>Signal, noise, and their ratio</h2>
+      <div class="grid">
+        <div class="text">
+          <p><dfn data-term="Noise" data-l="college" data-def="Everything in a measurement that is not what you want to measure.">Noise</dfn> is everything in a measurement that isn't what you want. The <dfn data-term="Signal-to-noise ratio" data-l="college" data-def="The power of what you want to measure, divided by the power of everything else in the same band.">signal-to-noise ratio</dfn> divides the power of what you want by the power of everything else in the same band, often in decibels, 10 log<sub>10</sub> of the ratio.</p>
+          <p>What counts as signal depends on the question. For alpha, it is the rhythm against the rest of the 4 to 30 hertz band. For a flickering light, as in the BCI Flight Simulator, it is the power at the flicker's rate against the power just beside it.</p>
+        </div>
+        <figure class="fig" data-fig="trace" data-kind="artifacts" data-seconds="4"><figcaption><b>Simulated</b> Four seconds from the back of the head: two blinks with the eyes open, then the eyes close and alpha rises, then the jaw clenches and fast muscle activity covers everything.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="artifacts">
+      <h2>Artifacts and their signatures</h2>
+      <div class="text">
+        <p>An <dfn data-term="Artifact" data-l="college" data-def="A signal in a recording that is not from the brain, such as a blink, a clenched jaw or a moving electrode.">artifact</dfn> is a signal from something other than the brain. Each common one has a signature in time, in frequency and on the head.</p>
+      </div>
+      <table class="data text">
+        <thead><tr><th>Artifact</th><th>Where it comes from</th><th>In the spectrum</th><th>Where it is largest</th></tr></thead>
+        <tbody>
+          <tr><td>Blinks and eye movements</td><td data-th="Where it comes from">The eye is a dipole, front positive, and the eyelid moves over it</td><td data-th="In the spectrum">Large and slow, mostly below 4 hertz</td><td data-th="Where it is largest">At the front of the head</td></tr>
+          <tr><td>Muscle</td><td data-th="Where it comes from">The jaw, forehead, scalp and neck muscles</td><td data-th="In the spectrum">Broad, rising above about 20 hertz</td><td data-th="Where it is largest">Over the muscle: the temples, forehead and neck</td></tr>
+          <tr><td>Electrode movement</td><td data-th="Where it comes from">An electrode shifting on the skin, or losing contact</td><td data-th="In the spectrum">Steps and slow drifts</td><td data-th="Where it is largest">At that electrode, or every channel if it is the reference</td></tr>
+          <tr><td>Line noise</td><td data-th="Where it comes from">Mains electricity in the room</td><td data-th="In the spectrum">A narrow peak at 50 or 60 hertz and its harmonics</td><td data-th="Where it is largest">Every channel, worst with poor contact</td></tr>
+        </tbody>
+      </table>
+      <div class="grid flip">
+        <div class="text">
+          <p>The IntoMind One filters on the device as shipped, with narrow notches at both mains frequencies and their harmonics, so in its recordings line noise shows as dips rather than peaks.</p>
+          <p>Muscle is the hardest: it overlaps the brain's own fast rhythms, and a share or a band power can change between conditions because the muscles did.</p>
+        </div>
+        <figure class="fig" data-fig="spectrum" data-kinds="open jaw"><figcaption><b>Simulated</b> The spectrum with the eyes open, and with the eyes closed and the jaw clenched: muscle lifts everything above about 20 hertz, on top of alpha, washed.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact, and averaging</h2>
+      <div class="grid">
+        <div class="text">
+          <p>The IntoMind One's electrodes are dry, so <dfn data-term="Contact" data-l="college" data-def="How well an electrode touches the skin: the better the contact, the less noise it adds.">contact</dfn> depends on parting the hair and pressing down. A noisy channel almost always means poor contact at that electrode, and every channel noisy at once means the reference.</p>
+          <p>Noise that is independent from one measurement to the next shrinks when you average: the spread of a mean of N falls as 1/√N. Averaging can't remove what repeats, such as a blink in every trial.</p>
+        </div>
+        <figure class="fig" data-fig="contact"><figcaption><b>Drawn to explain</b> Electrodes resting on hair are held off the skin, and pick up less of the brain and more noise. Parted, each touches skin.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="spectra">
+      <h2>Artifacts in a spectrum</h2>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>Four recordings</h3>
+        <p>With the IntoMind One on the forehead, over Fpz, record twenty seconds each: at rest with the eyes open, blinking every two seconds, clenching the jaw for a second in every three, and reading a sentence aloud, over and over. Then plot their spectra on the same axes, in decibels.</p>
+        <pre><code>cd python
+python3 record_and_export.py --seconds 20 --label rest
+python3 record_and_export.py --seconds 20 --label blinks
+python3 record_and_export.py --seconds 20 --label jaw
+python3 record_and_export.py --seconds 20 --label talking</code></pre>
+        <pre><code>import numpy as np
+import mne
+import matplotlib.pyplot as plt
+from scipy.signal import welch
+
+for label in ("rest", "blinks", "jaw", "talking"):
+    # the path each recording's program printed
+    raw = mne.io.read_raw_bdf(f"{label}.bdf", preload=True, verbose="error")
+    fs = raw.info["sfreq"]
+    x = raw.get_data(picks="eeg") * 1e6          # microvolts
+    f, p = welch(x, fs=fs, nperseg=int(2 * fs))
+    plt.plot(f, 10 * np.log10(p.mean(axis=0)), label=label)
+plt.xlim(1, 150)
+plt.xlabel("hertz")
+plt.ylabel("decibels, against 1 µV² per hertz")
+plt.legend()
+plt.show()</code></pre>
+        <p class="see"><b>You should see</b>Blinks lifting the lowest frequencies, the jaw lifting everything above about 20 hertz, and talking doing both. Dips at the mains frequency and its harmonics, where the device's notches take out line noise.</p>
+        
+      </div>
+    </section>
+
+    <section id="choices">
+      <h2>Avoid, reject or correct</h2>
+      <div class="text">
+        <p>Avoiding an artifact, with clear instructions, a good fit and a quiet room, costs least. Detecting contaminated windows, by amplitude or by power in a band where the brain has little, and rejecting them, costs data, and can bias a comparison if one condition loses more. Correcting them, for example by independent component analysis, separates sources by their statistics, which needs many more channels than four and makes assumptions you should check.</p>
+        <p>Whatever you choose, report it: how many windows each condition lost, and why.</p>
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Problems</h2>
+      <ol class="qs">
+        <li class="q"><p>Alpha's share rises in one condition. Which artifacts could produce that without any change in alpha, and how would you check?</p></li>
+        <li class="q"><p>When would you reject contaminated windows rather than correct them?</p></li>
+        <li class="q"><p>A flicker's rate shows four times the power of the frequencies just beside it. What is that signal-to-noise ratio in decibels?</p></li>
+        <li class="q"><p>To halve the noise in an average, how many more windows do you need? What can't averaging remove?</p></li>
+        <li class="q"><p>All four channels turn noisy at once. What is the likeliest cause, and the fix?</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Goncharova, I. I., McFarland, D. J., Vaughan, T. M., and Wolpaw, J. R. (2003). EMG contamination of EEG: spectral and topographical characteristics. Clinical Neurophysiology.</p>
+      <p>Urigüen, J. A., and Garcia-Zapirain, B. (2015). EEG artifact removal: state-of-the-art and guidelines. Journal of Neural Engineering.</p>
+    </section>
+  </div>
+
+  <div class="lv lv-grad" data-l="grad">
+    <header class="hero">
+      <p class="eb">Chapter 3 · Graduate</p>
+      <h1>Signal and noise</h1>
+      <p class="lede">What else is in a scalp recording, how do you tell it from the brain, and what does each correction cost?</p>
+    </header>
+
+    
+
+    <section id="floor">
+      <h2>The noise floor</h2>
+      <div class="text">
+        <p>With its inputs shorted, the IntoMind One's converter adds 0.14 µV root mean square at 250 samples a second. On a head, the floor is set by the contact. A source resistance R adds thermal noise of √(4kTRB) over a bandwidth B, and the junction of skin and electrode adds more, mostly at low frequencies, and more again when it moves. Dry electrodes meet the skin with no gel, at higher and less stable impedance than wet ones, and with more sensitivity to movement and to hair (Lopez-Gordo, Sanchez-Morillo and Pelayo Valle, 2014).</p>
+        <p>Mains power couples into the body as a voltage common to every electrode. The amplifier rejects what is common to its inputs, but unequal contact impedances turn part of it into a difference: roughly the common voltage times the impedances' difference over the amplifier's common-mode input impedance (Huhta and Webster, 1973). Metting van Rijn, Peper and Grimbergen (1990) treat how to reduce it. With dry contacts the mismatch is large, which is why the device notches out the mains by default.</p>
+      </div>
+    </section>
+
+    <section id="artifacts">
+      <h2>Artifacts and their signatures</h2>
+      <table class="data text">
+        <thead><tr><th>Source</th><th>Signature</th><th>Where it is largest</th></tr></thead>
+        <tbody>
+          <tr><td>Blinks and eye movements</td><td data-th="Signature">Large and slow: the eye is a dipole, cornea positive, and it moves with the lids and the gaze.</td><td data-th="Where it is largest">Near the eyes, falling toward the back.</td></tr>
+          <tr><td>Saccadic spike potential</td><td data-th="Signature">A brief broadband transient at the start of each saccade, microsaccades included, which passes for induced gamma (Yuval-Greenberg and others, 2008).</td><td data-th="Where it is largest">Near the eyes and the temples.</td></tr>
+          <tr><td>Muscle</td><td data-th="Signature">Broadband from about 20 hertz up. Under neuromuscular blockade, scalp power above 20 hertz fell 10- to 200-fold (Whitham and others, 2007).</td><td data-th="Where it is largest">Over the jaw, the temples, the forehead and the neck.</td></tr>
+          <tr><td>Heart</td><td data-th="Signature">The electrocardiogram at about once a second, and the pulse moving an electrode.</td><td data-th="Where it is largest">Over arteries, such as at the temples, and with references low on the head.</td></tr>
+          <tr><td>Movement and contact</td><td data-th="Signature">Steps, drifts and bursts as an electrode shifts on the skin.</td><td data-th="Where it is largest">Wherever contact is poorest.</td></tr>
+          <tr><td>Skin and sweat</td><td data-th="Signature">Very slow drifts as the skin's potential changes.</td><td data-th="Where it is largest">Anywhere, more in warm rooms.</td></tr>
+          <tr><td>Mains</td><td data-th="Signature">50 or 60 hertz and their harmonics.</td><td data-th="Where it is largest">Wherever contacts are unequal.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="filters">
+      <h2>Filters and their costs</h2>
+      <div class="text">
+        <p>The IntoMind One filters on the device, and the stream carries only the result. By default the chain is a high-pass at 0.5 hertz, notches four hertz wide at 48 to 52, 58 to 62, 98 to 102, 118 to 122, 148 to 152 and 178 to 182 hertz, each nulled at its middle and run as two sections, and a low-pass at four tenths of the rate, 200 hertz at 500 a second. The chain can be read, changed or cleared, and a report states the one in force.</p>
+        <p>Every filter changes the signal it passes, as well as removing what it is meant to. A high-pass removes slow potentials and leaves a deflection of the opposite sign when they end (Acunzo, MacKenzie and van Rossum, 2012). Inappropriate high-pass filters have produced effects that were not in the data (Tanner, Morgan-Short and Luck, 2015). Causal filters delay, zero-phase filters spread an event backward in time, and a notch rings after a step (Widmann, Schröger and Maess, 2015). The filter follows the question: what has to survive it.</p>
+      </div>
+    </section>
+
+    <section id="channels">
+      <h2>What four channels rule out</h2>
+      <div class="text">
+        <p>Independent component analysis separates at most as many sources as there are channels (Jung and others, 2000). Four channels close together can't separate the eyes, the muscles, the heart and the brain, and regressing out the eyes needs a channel that records them. What is left is to design the recording so artifacts are rare, and to detect, reject and count what remains.</p>
+        <p>An artifact that follows the condition is worse than one that doesn't, since it becomes the signal. Blinks are fewer with the eyes closed, muscles tense with effort, and the eyes move toward what is attended. A decoder trained on two states that differ in any of these can learn the artifact.</p>
+      </div>
+    </section>
+
+    <section id="analysis">
+      <h2>Analysis</h2>
+      <div class="try">
+        <p class="k">Analysis</p>
+        <h3>What filters cost, and what a detector finds</h3>
+        <p>First, put a 20 µV shift lasting one second through a high-pass at 0.5 hertz, causal and zero-phase, and a 50 µV step through the 58 to 62 hertz notch. The device's high-pass order isn't stated, so a second-order Butterworth stands in for it.</p>
+        <pre><code>import numpy as np
+from scipy.signal import butter, iirnotch, lfilter, filtfilt, sosfilt, sosfiltfilt
+
+fs = 500
+t = np.arange(0, 6, 1 / fs)
+slow = 20.0 * ((t &gt;= 2) &amp; (t &lt; 3))            # a 20 uV shift lasting one second
+blip = np.zeros_like(t); blip[t &gt;= 4.5] = 50.0  # a 50 uV step, as when an electrode shifts
+
+# A stand-in for the device's 0.5 Hz high-pass: second-order Butterworth.
+hp = butter(2, 0.5, "highpass", fs=fs, output="sos")
+causal, zero_phase = sosfilt(hp, slow), sosfiltfilt(hp, slow)
+at = lambda x, s: x[int(s * fs)]
+for when, s in (("0.5 s before it begins", 1.5), ("0.9 s into the shift", 2.9),
+                ("just after it ends", 3.02), ("0.5 s after it ends", 3.5)):
+    print(f"{when:24s} causal {at(causal, s):5.1f} uV   zero-phase {at(zero_phase, s):5.1f} uV")
+
+# The 58 to 62 Hz band, nulled at 60 Hz, run as two sections: how long a step makes it ring.
+b, a = iirnotch(60, 60 / 4, fs=fs)
+rung = lfilter(b, a, lfilter(b, a, blip)) - blip
+tail = np.abs(rung[t &gt;= 4.5])
+last = np.nonzero(tail &gt; 0.01 * 50)[0].max() / fs
+print(f"the notch rings for {1000 * last:.0f} ms after the step, above 1% of its size")</code></pre>
+        <p class="see"><b>You should see</b>The causal filter undoes the shift within a second, overshooting to −3.6 µV, and when it ends drops to −21.1 µV, a deflection that was never in the signal. The zero-phase filter keeps more of it, 7.3 µV, and shows −1.8 µV half a second before it begins. The notch rings for about 100 milliseconds after the step.</p>
+        <p>Then flag the Alpha Flower forehead recordings in 1-second windows, for blinks by their peak-to-peak size and for muscle by their power from 30 to 45 hertz, and check the flags against the blinks the analyst wrote down. Change the thresholds and watch both kinds of error.</p>
+        <pre><code>import numpy as np
+import mne
+from scipy.signal import welch
+
+def flags(path, ptp_uv=100, z=5):
+    """Each 1-s window flagged for a blink (peak to peak) or for muscle (30 to 45 Hz power)."""
+    raw = mne.io.read_raw_bdf(path, preload=True, verbose="error")
+    fs = int(raw.info["sfreq"])
+    x = 1e6 * raw.get_data(picks="eeg")
+    w = x[:, : x.shape[1] // fs * fs].reshape(x.shape[0], -1, fs)   # channels, windows, samples
+    ptp = np.ptp(w, axis=2).max(axis=0)
+    f, p = welch(w, fs=fs, nperseg=fs // 2, axis=2)
+    high = p[:, :, (f &gt;= 30) &amp; (f &lt; 45)].mean(axis=2).max(axis=0)
+    mad = np.median(np.abs(high - np.median(high)))
+    return ptp &gt; ptp_uv, high &gt; np.median(high) + z * 1.4826 * mad, w, fs
+
+def compare(flagged, marks, slack=1):
+    """Marks with a flagged window within `slack` s, marks missed, flagged windows unmarked."""
+    hit = [m for m in marks if flagged[max(0, int(m) - slack):int(m) + slack + 1].any()]
+    near = np.zeros(len(flagged), bool)
+    for m in marks:
+        near[max(0, int(m) - slack):int(m) + slack + 1] = True
+    return len(hit), len(marks) - len(hit), int((flagged &amp; ~near).sum())
+
+blink, muscle, w, fs = flags("w1-fpz.bdf")      # the path the program printed
+marks = [3.5, 9, 15.5, 21, 27, 33.5, 40]        # the analyst's blink times from the sheet
+found, missed, unmarked = compare(blink, marks)
+print(f"{blink.sum()} windows flagged for blinks, {muscle.sum()} for muscle, of {len(blink)}")
+print(f"marks found {found}, missed {missed}; flagged windows with no mark near {unmarked}")
+
+def share(seg):
+    f, p = welch(seg, fs=fs, nperseg=2 * fs)
+    band = lambda lo, hi: p[:, (f &gt;= lo) &amp; (f &lt; hi)].sum(axis=1)
+    return float(np.mean(band(8, 13) / band(4, 30)))
+
+keep = ~(blink | muscle)
+for name, block in (("open", slice(3, 45)), ("closed", slice(48, 90))):
+    every = np.concatenate(list(w[:, block].transpose(1, 0, 2)), axis=1)
+    kept = np.concatenate([w[:, i] for i in range(len(keep))[block] if keep[i]], axis=1)
+    print(f"{name}: share {share(every):.3f} with every window, "
+          f"{share(kept):.3f} without the flagged")</code></pre>
+        
+      </div>
+    </section>
+
+    <section id="open">
+      <h2>Open problems</h2>
+      <ol class="rulelist">
+        <li><b>Gamma from the scalp.</b> Most scalp power above 20 hertz is muscle (Whitham and others, 2007), and induced gamma can be eye movement (Yuval-Greenberg and others, 2008). Separating neural gamma without many channels and an eye tracker is unsolved.</li>
+        <li><b>Contact for everyone.</b> Electrodes struggle through thick, coarse and curly hair, and EEG research has excluded people with such hair, by design or by neglect (Choy, Baker and Stavropoulos, 2022). Electrodes and methods that work equally well for every head are an open engineering problem.</li>
+        <li><b>Cleaning with few channels.</b> Methods that repair rather than reject, such as artifact subspace reconstruction (Mullen and others, 2015), rely on clean calibration data and redundancy across channels. With four channels close together, the best practice is unsettled.</li>
+      </ol>
+    </section>
+
+    <section id="talk">
+      <h2>Problems</h2>
+      <ol class="qs">
+        <li class="q"><p>An electrode contact of 500 kΩ at 310 K: what thermal noise does it add between 0.5 and 100 hertz? Compare it with the converter's 0.14 µV.</p></li>
+        <li class="q"><p>10 mV of mains sits on the body. The two contacts are 200 and 300 kΩ, and the amplifier's common-mode input impedance is 1 GΩ. About how much mains appears in the channel? And with a mismatch of 1 MΩ?</p></li>
+        <li class="q"><p>In the analysis, why does the end of the shift produce a large deflection of the opposite sign through the causal high-pass?</p></li>
+        <li class="q"><p>A study reports more 40-hertz power from 200 to 300 milliseconds after pictures appear, at frontal sites. What could produce it besides the brain, and what control would rule each out?</p></li>
+        <li class="q"><p>In the Mind-Controlled Light Switch, a wearer teaches Off as resting and On as clenching a fist, and the head scores well. What might it have learned, and how would you find out?</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Huhta, J. C., and Webster, J. G. (1973). 60-Hz interference in electrocardiography. IEEE Transactions on Biomedical Engineering.</p>
+      <p>Metting van Rijn, A. C., Peper, A., and Grimbergen, C. A. (1990). High-quality recording of bioelectric events. Part 1: interference reduction, theory and practice. Medical and Biological Engineering and Computing.</p>
+      <p>Jung, T.-P., and others (2000). Removing electroencephalographic artifacts by blind source separation. Psychophysiology.</p>
+      <p>Whitham, E. M., and others (2007). Scalp electrical recording during paralysis: quantitative evidence that EEG frequencies above 20 Hz are contaminated by EMG. Clinical Neurophysiology.</p>
+      <p>Yuval-Greenberg, S., Tomer, O., Keren, A. S., Nelken, I., and Deouell, L. Y. (2008). Transient induced gamma-band response in EEG as a manifestation of miniature saccades. Neuron.</p>
+      <p>Acunzo, D. J., MacKenzie, G., and van Rossum, M. C. W. (2012). Systematic biases in early ERP and ERF components as a result of high-pass filtering. Journal of Neuroscience Methods.</p>
+      <p>Lopez-Gordo, M. A., Sanchez-Morillo, D., and Pelayo Valle, F. (2014). Dry EEG electrodes. Sensors.</p>
+      <p>Mullen, T. R., and others (2015). Real-time neuroimaging and cognitive monitoring using wearable dry EEG. IEEE Transactions on Biomedical Engineering.</p>
+      <p>Tanner, D., Morgan-Short, K., and Luck, S. J. (2015). How inappropriate high-pass filters can produce artifactual effects and incorrect conclusions in ERP studies of language and cognition. Psychophysiology.</p>
+      <p>Widmann, A., Schröger, E., and Maess, B. (2015). Digital filter design for electrophysiological data: a practical approach. Journal of Neuroscience Methods.</p>
+      <p>Choy, T., Baker, E., and Stavropoulos, K. (2022). Systemic racism in EEG research: considerations and potential solutions. Affective Science.</p>
+    </section>
+  </div>
+
+</main>
+<footer class="colophon">
+  <p><b>BCI101</b> An Applied Introduction to Noninvasive Brain-Computer Interfaces. Neurons, to bits, to real-world outcomes. Built on the demos at <a href="https://demo.intomind.com/">demo.intomind.com</a>.</p>
+  <div class="level-line"><span>Level</span><div class="levels" role="group" aria-label="Level"><button type="button" data-level="ms">Middle school</button><button type="button" data-level="hs">High school</button><button type="button" data-level="college">College</button><button type="button" data-level="grad">Graduate</button></div></div>
+</footer>
+</body>
+</html>

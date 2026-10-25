@@ -1,0 +1,705 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Age Detector · BCI101</title>
+<meta name="description" content="An AI model on the IntoMind One's chip estimates an age from EEG, with its published error, and the class finds out how good a guess that is.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/assets/site.css">
+<script>(function(){var d=document.documentElement,q=new URLSearchParams(location.search),s=function(k){try{return localStorage.getItem(k)}catch(e){return null}},L={ms:1,hs:1,college:1,grad:1},l=q.get("level");if(L[l]){try{localStorage.setItem("curriculum-level",l)}catch(e){}}else l=s("curriculum-level");if(!L[l]){l="hs";d.dataset.ask="1"}d.dataset.level=l;d.dataset.theme=q.get("theme")||s("curriculum-theme")||"dark";})()</script>
+<script type="module" src="/assets/curriculum.js"></script>
+</head>
+<body>
+<header class="chrome">
+  <a class="mark" href="/">IntoMind<span>Learn</span></a>
+  <nav class="nav" aria-label="Pages"><a href="/">Contents</a><a href="/labs/" aria-current="page">Labs</a><a href="/vocabulary/">Vocabulary</a><a href="/safety/">Safety</a></nav>
+  <div class="controls"><button class="theme" type="button">Light</button></div>
+</header>
+<main class="page kind-lab">
+  <div class="lv lv-ms" data-l="ms">
+    <header class="hero">
+      <p class="eb">Lab 3 · Middle school</p>
+      <h1>Age Detector</h1>
+      <p class="lede">An AI model on the IntoMind One estimates your age from your EEG. How good is its guess, really?</p>
+    </header>
+
+    
+
+    <section id="ready">
+      <h2>Get ready</h2>
+      <div class="three">
+        <div>
+          <h3>You need</h3>
+          <ul>
+            <li>An IntoMind One, charged, with its cable unplugged</li>
+            <li>A computer with Chrome or Edge</li>
+            <li>A chair for the wearer</li>
+            <li>A slip of paper for each person</li>
+            <li>A clean microfiber, soft cotton or eyeglass cloth</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Roles</h3>
+          <dl class="roles">
+            <div><dt>Wearer</dt><dd>Wears the IntoMind One and sits still, eyes open.</dd></div>
+            <div><dt>Timekeeper</dt><dd>Calls out each minute: one, two, three.</dd></div>
+            <div><dt>Recorder</dt><dd>Writes down the number at each minute.</dd></div>
+            <div><dt>Skeptic</dt><dd>Watches the wearer, and writes down every blink, word or movement.</dd></div>
+          </dl>
+          <p class="after">Take turns, so everyone who wants to can be the wearer. In a group of three, the timekeeper is the skeptic too.</p>
+        </div>
+        <div>
+          <h3>Rules</h3>
+          <ul>
+            <li>Unplug the cable before anyone puts it on.</li>
+            <li>Wearing it is your choice. Every role is a real one.</li>
+            <li>Nobody has to say their age.</li>
+            <li>Wipe the electrodes between wearers with the soft cloth, since a rough one can scratch their gold coating.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="steps">
+      <h2>Steps</h2>
+      <ol class="steps">
+        <li>
+          <h3>Put it on and connect</h3>
+          <figure class="fig trio">
+            <div class="views">
+              <div><span class="picture"><img class="dark" src="/assets/heads/fpz-dark.webp" alt="A head from the front, with an orange area on the forehead."><img class="light" src="/assets/heads/fpz-light.webp" alt="A head from the front, with an orange area on the forehead."></span><span>Forehead</span></div>
+              <div><span class="picture"><img class="dark" src="/assets/heads/cz-dark.webp" alt="A head from above, with an orange area on the top."><img class="light" src="/assets/heads/cz-light.webp" alt="A head from above, with an orange area on the top."></span><span>Top</span></div>
+              <div><span class="picture"><img class="dark" src="/assets/heads/oz-dark.webp" alt="A head from behind, with an orange area on the back."><img class="light" src="/assets/heads/oz-light.webp" alt="A head from behind, with an orange area on the back."></span><span>Back</span></div>
+            </div>
+          </figure>
+          <div>
+            <p>This time, any of these places works: wherever the strap holds the IntoMind One and its electrodes touch skin. This model learned from recordings made with electrodes in many different places, so there is no one right spot.</p>
+            <p>Unplug the cable. The wearer sits down. Put it on, part the hair under each electrode so it touches skin, and press it down until it feels firm but not tight.</p>
+            <p>Open the <a href="https://demo.intomind.com/age-detector/">Age Detector demo</a>, press <b>Connect your IntoMind One</b>, and choose yours from the list.</p>
+            <p class="see"><b>You should see</b>Connected at the top right. After a few seconds, a number that jumps around at first, with “± 9 years” and a count of windows under it.</p>
+            
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>Sit still for three minutes</h3>
+            <p class="ask"><span class="lbl">Predict</span>Between minutes two and three, the number will move <span class="fill" data-key="predict-settle" data-hint="more or less"></span> than between minutes one and two.</p>
+            <p>The wearer sits still with eyes open. At one, two and three minutes, the timekeeper calls out, and the recorder writes down the number, and at three minutes the count of windows too.</p>
+            <p>Press <b>Save image</b> only if the wearer wants a picture of their estimate. The picture is theirs to keep or delete.</p>
+          </div>
+          <table class="sheet" data-sheet="ms-ages">
+            <thead><tr><th>Wearer</th><th>At 1 minute</th><th>At 2 minutes</th><th>At 3 minutes</th><th>Windows at 3 minutes</th><th>Skeptic's notes</th></tr></thead>
+            <tbody><tr><td>1</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>2</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>3</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>4</td><td></td><td></td><td></td><td></td><td></td></tr></tbody>
+          </table>
+          <div>
+            <p class="see"><b>You should see</b>The number changing less and less each minute.</p>
+            
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>Work out your error, privately</h3>
+            <p>On your slip of paper, not on this page: subtract your real age from your final number. That is the model's error for you. Keep your age to yourself.</p>
+            <p>Then, on the same slip, write how many years your age is from the most common age in your class. If you want to, put your slip in the box, with no name on it.</p>
+            <p class="see"><b>You should see</b>An error that could be anywhere from zero to well past nine years, too high or too low.</p>
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>The class's errors</h3>
+            <p>Your teacher reads out the slips. Work out the average size of the model's errors, ignoring whether each was too high or too low. Then do the same for the second number on each slip: the error of guessing that everyone is the class's most common age.</p>
+            <p class="ask"><span class="lbl">Work it out</span>The model missed by <span class="fill" data-key="model-miss" data-hint="how many"></span> years on average. Guessing the class's most common age missed by <span class="fill" data-key="class-miss" data-hint="how many"></span> years.</p>
+            <p class="see"><b>You should see</b>The simple guess winning, by a long way.</p>
+            
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="happened">
+      <h2>What happened</h2>
+      <div class="grid">
+        <div class="text">
+          <p>This model learned from the EEG of thousands of people whose ages were known. It looks at four seconds of your EEG at a time, and makes a guess. The number on the screen is the average of its guesses so far, which is why it settled.</p>
+          <p>Every guess can be wrong. When the model was tested on people it had never learned from, it was off by about nine years on average. That is its <dfn data-term="Error" data-l="ms" data-def="How far a guess is from the truth.">error</dfn>, and it is what “± 9 years” means.</p>
+          <p>Guessing that everyone is the class's most common age is a <dfn data-term="Baseline" data-l="ms" data-def="Something simple to compare a model against.">baseline</dfn>: something simple to compare the model against. In a class of people the same age, the baseline wins. The number doesn't tell you how old your brain is. It shows that this model can find a little information about age in EEG, with a large error.</p>
+        </div>
+        <figure class="fig" data-fig="estimate"><figcaption><b>Simulated</b> One guess for every four seconds of EEG, in gray, and their average so far, in orange, with the model's error of about nine years on either side. The average settles.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Talk about it</h2>
+      <ol class="qs">
+        <li class="q"><p>The screen said ± 9 years. What does that mean?</p></li>
+        <li class="q"><p>Your class is all about the same age. Who guesses better: the model, or someone who says everyone is the class's age? Why?</p></li>
+        <li class="q"><p>Does the number tell you how old your brain is?</p></li>
+      </ol>
+    </section>
+  </div>
+
+  <div class="lv lv-hs" data-l="hs">
+    <header class="hero">
+      <p class="eb">Lab 3 · High school</p>
+      <h1>Age Detector</h1>
+      <p class="lede">An AI model on the IntoMind One estimates your age from your EEG. How big is its error, and is it any better than a guess that ignores your brain completely?</p>
+    </header>
+
+    
+
+    <section id="background">
+      <h2>Background</h2>
+      <p class="after-note">Read it the night before.</p>
+      <div class="grid">
+        <div class="text">
+          <h3>A model on the chip</h3>
+          <p>The IntoMind One's encoder sums up each four seconds of EEG as 76 numbers, its embedding, and a small model, the age head, turns those 76 numbers into an age. The head learned from the EEG of 3,742 people of known age, in 93 studies.</p>
+          <p>The demo shows the average of the head's estimates so far, one for each four-second window, so the number settles as more windows come in.</p>
+        </div>
+        <figure class="fig" data-fig="encoder"><figcaption><b>The model on the chip</b> Four seconds of EEG go into the encoder and come out as 76 numbers. The age head reads them and gives one answer.</figcaption></figure>
+      </div>
+      <div class="grid flip">
+        <div class="text">
+          <h3>Its error, and what to compare it with</h3>
+          <p>The head was tested on whole studies it had never seen. Averaging a person's windows, its <dfn data-term="Error" data-l="hs" data-def="How far a guess is from the truth. The mean error is the average size of the errors, ignoring direction.">error</dfn> was 9.16 years on average: that is the “± 9 years” on the screen.</p>
+          <p>Whether that is good depends on what you compare it with. A <dfn data-term="Baseline" data-l="hs" data-def="Something to compare against: a simple model fitted the same way, or a measurement taken before anything changes.">baseline</dfn> that ignores the brain completely, always guessing the average age of the people the head learned from, was off by 9.77 years.</p>
+          
+        </div>
+        <figure class="fig" data-fig="intervals" data-rows='[{"label":"head against the mean age","value":0.61,"lo":-0.03,"hi":1.25},{"label":"head against band power","value":0.86,"lo":0.24,"hi":1.48}]' data-unit=" years"><figcaption><b>Published</b> How many years better the head did than each baseline, averaging a person's windows, with a 95 percent interval over studies. Against the average age, the interval crosses zero.</figcaption></figure>
+      </div>
+      <div class="grid">
+        <div class="text">
+          <h3>Where it goes, and why</h3>
+          <p>Anywhere. The encoder reads its four seconds of EEG without being told where the electrodes are, and the head was scored across studies that placed their electrodes differently, so the published error already includes that variety. The top of the head, Cz, is on the midline and easy to find, and the back, Oz, and the forehead, Fpz, work too.</p>
+        </div>
+        <figure class="fig" data-fig="head" data-views="top" data-sites="Oz Cz Fpz C3 C4" data-device="Cz"><figcaption><b>Any site</b> The IntoMind One at Cz, the top of the head. Oz, at the back, and Fpz, at the front, work as well.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="ready">
+      <h2>Get ready</h2>
+      <div class="three">
+        <div>
+          <h3>You need</h3>
+          <ul>
+            <li>An IntoMind One, charged, with its cable unplugged</li>
+            <li>A computer with Chrome or Edge</li>
+            <li>A chair for the wearer</li>
+            <li>A slip of paper for each person</li>
+            <li>A clean microfiber, soft cotton or eyeglass cloth</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Roles</h3>
+          <dl class="roles">
+            <div><dt>Wearer</dt><dd>Wears the IntoMind One and sits still, eyes open.</dd></div>
+            <div><dt>Timekeeper</dt><dd>Calls out each minute: one, two, three.</dd></div>
+            <div><dt>Recorder</dt><dd>Writes down the number and the windows at each minute.</dd></div>
+            <div><dt>Skeptic</dt><dd>Watches the wearer, and writes down every blink, word or movement.</dd></div>
+          </dl>
+          <p class="after">Take turns, so everyone who wants to can be the wearer. In a group of three, the timekeeper is the skeptic too.</p>
+        </div>
+        <div>
+          <h3>Rules</h3>
+          <ul>
+            <li>Unplug the cable before anyone puts it on.</li>
+            <li>Wearing it is your choice. Every role is a real one.</li>
+            <li>Nobody has to say their age.</li>
+            <li>Wipe the electrodes between wearers with the soft cloth, since a rough one can scratch their gold coating.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="steps">
+      <h2>Steps</h2>
+      <ol class="steps">
+        <li>
+          <h3>Put it on and connect</h3>
+          <figure class="fig trio">
+            <div class="views">
+              <div><span class="picture"><img class="dark" src="/assets/heads/fpz-dark.webp" alt="A head from the front, with an orange area on the forehead."><img class="light" src="/assets/heads/fpz-light.webp" alt="A head from the front, with an orange area on the forehead."></span><span>Fpz</span></div>
+              <div><span class="picture"><img class="dark" src="/assets/heads/cz-dark.webp" alt="A head from above, with an orange area on the top."><img class="light" src="/assets/heads/cz-light.webp" alt="A head from above, with an orange area on the top."></span><span>Cz</span></div>
+              <div><span class="picture"><img class="dark" src="/assets/heads/oz-dark.webp" alt="A head from behind, with an orange area on the back."><img class="light" src="/assets/heads/oz-light.webp" alt="A head from behind, with an orange area on the back."></span><span>Oz</span></div>
+            </div>
+          </figure>
+          <div>
+            <p>Choose a site, and put the IntoMind One on there, with the strap around the head. Unplug the cable first. Part the hair under each electrode so it touches skin, and press it down until it feels firm but not tight.</p>
+            <p>Open the <a href="https://demo.intomind.com/age-detector/">Age Detector demo</a>, press <b>Connect your IntoMind One</b>, and choose yours from the list.</p>
+            <p class="see"><b>You should see</b>Connected at the top right. After a few seconds, a number that jumps at first, with “± 9 years” and the count of windows under it.</p>
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>Sit still for three minutes</h3>
+            <p class="ask"><span class="lbl">Predict</span>Between minutes two and three, the number will move <span class="fill" data-key="predict-settle" data-hint="more or less"></span> than between minutes one and two, because <span class="fill" data-key="predict-why" data-hint="why"></span>.</p>
+            <p>The wearer sits still with eyes open. At one, two and three minutes, the timekeeper calls out, and the recorder writes down the number and the count of windows.</p>
+            <p>Press <b>Save image</b> only if the wearer wants a picture of their estimate. The picture is theirs to keep or delete.</p>
+          </div>
+          <table class="sheet" data-sheet="hs-ages">
+            <thead><tr><th>Wearer</th><th>At 1 minute</th><th>At 2 minutes</th><th>At 3 minutes</th><th>Windows at 3 minutes</th><th>Skeptic's notes</th></tr></thead>
+            <tbody><tr><td>1</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>2</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>3</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>4</td><td></td><td></td><td></td><td></td><td></td></tr></tbody>
+          </table>
+          <div>
+            <p class="see"><b>You should see</b>The number changing less and less each minute.</p>
+            
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>Work out your error, privately</h3>
+            <p>On your slip of paper, not on this page: subtract your real age from your final number. That is the head's error for you. Keep your age to yourself.</p>
+            <p>On the same slip, write how many years your age is from the most common age in your class. If you want to, put your slip in the box, with no name on it.</p>
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>The class's errors</h3>
+            <p>Your teacher reads out the slips. Work out the mean error of the head, ignoring whether each was too high or too low, and the mean error of guessing the class's most common age.</p>
+            <p class="ask"><span class="lbl">Work it out</span>From <span class="fill" data-key="slips" data-hint="how many"></span> slips: the head's mean error was <span class="fill" data-key="head-miss" data-hint="years"></span> years, and the class's most common age missed by <span class="fill" data-key="class-miss" data-hint="years"></span>.</p>
+            <p class="see"><b>You should see</b>The simple guess winning, by a long way.</p>
+            
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="work">
+      <h2>Work it out</h2>
+      <div class="text">
+        <p class="ask"><span class="lbl">Work it out</span>For the first wearer, the number moved <span class="fill" data-key="moved-1-2" data-hint="years"></span> between minutes one and two, and <span class="fill" data-key="moved-2-3" data-hint="years"></span> between two and three. Did it settle the way you predicted? <span class="fill" data-key="settled" data-hint="yes or no"></span></p>
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Talk about it</h2>
+      <ol class="qs">
+        <li class="q"><p>Averaging a person's windows, the head was off by 9.16 years, and always guessing the average age of the people it learned from was off by 9.77. What does that tell you?</p></li>
+        <li class="q"><p>On a single four-second window, the head was off by 9.93 years, and the average-age guess by 9.75. Why does averaging windows help the head, and not the guess?</p></li>
+        <li class="q"><p>Why was the head tested on whole studies it never saw, rather than on new readings from people it learned from?</p></li>
+        <li class="q"><p>Was the class's mean error bigger or smaller than nine years? Give a reason it might differ.</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>IntoMind (2026). Heads for encoder e2f9b60f411f0e73. github.com/intomind/eeg-foundation-model-heads.</p>
+    </section>
+  </div>
+
+  <div class="lv lv-college" data-l="college">
+    <header class="hero">
+      <p class="eb">Lab 3 · College</p>
+      <h1>Age Detector</h1>
+      <p class="lede">The age head is said to read any site on the head. Does moving the IntoMind One change one person's estimate by more than the spread of its own windows, and in this room, does the head beat guessing the room's most common age?</p>
+    </header>
+
+    
+
+    <section id="background">
+      <h2>Background</h2>
+      <p class="after-note">Read it before the lab.</p>
+      <div class="grid">
+        <div class="text">
+          <h3>What runs, and where</h3>
+          <p>Every four seconds the IntoMind One's encoder turns the EEG into 76 numbers, and the age head, built into the model and selected from power on, turns them into years. The demo averages the estimates, leaving out windows with a gap in the signal, and shows the mean with the published error, ± 9 years.</p>
+          <p>The encoder takes no electrode positions, and the head was scored with the positions hidden, on montages of 2, 4 and 8 electrodes. So it should read any site: a claim you can test on one person.</p>
+        </div>
+        <figure class="fig" data-fig="estimate"><figcaption><b>Simulated</b> An estimate from every four seconds of EEG, and the mean so far, with the published error either side. The mean settles. The band doesn't narrow: ± 9 years is the error after a person's windows are averaged.</figcaption></figure>
+      </div>
+      <div class="grid flip">
+        <div class="text">
+          <h3>What the evaluation says</h3>
+          <p>Averaged over a person's windows, the head misses by 9.16 years on studies it never saw, against 9.77 for always guessing the training studies' mean age: 0.61 years better, with a 95 percent interval from 0.03 worse to 1.25 better. It isn't clearly better than a guess that ignores the brain, and its estimates are pulled toward that mean.</p>
+          <p>In one room, the fair guess is the room's own most common age, and it can do far better.</p>
+        </div>
+        <figure class="fig" data-fig="intervals" data-rows='[{"label":"head against the mean age","value":0.61,"lo":-0.03,"hi":1.25},{"label":"head against band power","value":0.86,"lo":0.24,"hi":1.48}]' data-unit=" years"><figcaption><b>Published</b> How many years better the age head is, averaged over a person's windows, with 95 percent intervals over studies.</figcaption></figure>
+      </div>
+      <div class="text">
+        <h3>Comparing two sites fairly</h3>
+        <p>Neighboring windows are alike, so thirty windows aren't thirty independent estimates. Average them in blocks of five, and compare the two sites' blocks with a permutation test: every way of splitting the blocks into two sites, scored the same way.</p>
+      </div>
+    </section>
+
+    <section id="hypothesis">
+      <h2>Hypothesis</h2>
+      <div class="text">
+        <p class="after-note">Write it before anyone puts the IntoMind One on.</p>
+        <p class="ask"><span class="lbl">Hypothesis</span>Moving the IntoMind One from <span class="fill" data-key="h-first" data-hint="site"></span> to <span class="fill" data-key="h-second" data-hint="site"></span> will change the estimate by <span class="fill" data-key="h-shift" data-hint="more or less than the spread"></span>. In this room, the head's mean error will be <span class="fill" data-key="h-room" data-hint="larger or smaller"></span> than the error of guessing the room's most common age.</p>
+      </div>
+    </section>
+
+    <section id="ready">
+      <h2>Get ready</h2>
+      <div class="three">
+        <div>
+          <h3>You need</h3>
+          <ul>
+            <li>An IntoMind One, charged, with its cable unplugged</li>
+            <li>A computer with Chrome or Edge, Python 3 with the intomind package, and <a href="https://github.com/intomind/demo">the demos' source</a></li>
+            <li>A chair for the wearer, and a slip of paper</li>
+            <li>A clean microfiber, soft cotton or eyeglass cloth</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Roles</h3>
+          <dl class="roles">
+            <div><dt>Wearer</dt><dd>Wears the IntoMind One, and sits still with the eyes open.</dd></div>
+            <div><dt>Operator</dt><dd>Runs the demo and the program, and saves each run.</dd></div>
+            <div><dt>Analyst</dt><dd>Writes down each run, and every blink or movement.</dd></div>
+          </dl>
+          <p class="after">Rotate, so everyone who wants to is the wearer once.</p>
+        </div>
+        <div>
+          <h3>Rules</h3>
+          <ul>
+            <li>Unplug the cable before anyone puts it on.</li>
+            <li>Wearing it is your choice. Every role is a real one.</li>
+            <li>Nobody has to say their age. Errors go in the box without names.</li>
+            <li>Wipe the electrodes between wearers with the soft cloth, since a rough one can scratch their gold coating.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="steps">
+      <h2>Procedure</h2>
+      <ol class="steps">
+        <li>
+          <h3>Put it on at the first site</h3>
+          <figure class="fig" data-fig="picture" data-src="/assets/heads/cz" data-alt="A head seen from above, with an orange area over Cz, on the top of the head."></figure>
+          <div>
+            <p>Any site your group chooses. The top of the head, at Cz, is easy to hold with the strap. Unplug the cable, part the hair under each electrode, and press it down until it feels firm but not tight.</p>
+          </div>
+        </li>
+        <li>
+          <h3>Check it on the demo</h3>
+          <figure class="fig" data-fig="shot" data-shot="age-detector"></figure>
+          <div>
+            <p>Open the <a href="https://demo.intomind.com/age-detector/">Age Detector demo</a> and connect. Watch the estimate for a minute while the wearer sits still with the eyes open, then close the tab: the IntoMind One talks to one program at a time.</p>
+            <p class="see"><b>You should see</b>A number that jumps at first and then settles, with ± 9 years and the count of windows under it.</p>
+          </div>
+        </li>
+        <li>
+          <h3>Run the head from code</h3>
+          <figure class="fig code"><pre><code>cd python
+python3 -u age.py | tee w1-first.txt</code></pre></figure>
+          <div>
+            <p>From <a href="https://github.com/intomind/demo">the demos' source</a>, run the same head as a program for two minutes, and keep what it prints. Each wearer in turn, with their number in the file's name.</p>
+            <p class="see"><b>You should see</b>A line for every four-second window, its estimate and the mean so far, any window with a gap marked and kept out of the mean, and the published error at the end.</p>
+          </div>
+        </li>
+        <li>
+          <h3>A second site</h3>
+          <figure class="fig" data-fig="picture" data-src="/assets/heads/oz" data-alt="A head seen from behind, with an orange area over Oz, on the midline just above the inion."></figure>
+          <div>
+            <p>One wearer per group: move the IntoMind One far from the first site, to the back of the head or the forehead, press it down, and run it again into w1-second.txt.</p>
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>Your error, privately</h3>
+            <p>On a slip, with no name: your final estimate minus your age, and the room's most common age minus your age. Put it in the box only if you want to.</p>
+          </div>
+          <table class="sheet" data-sheet="college-age-runs">
+            <thead><tr><th>Wearer</th><th>Site</th><th>Saved as</th><th>Windows used</th><th>Mean estimate</th><th>Spread of the windows</th><th>Notes</th></tr></thead>
+            <tbody><tr><td>1</td><td></td><td>w1-first.txt</td><td></td><td></td><td></td><td></td></tr><tr><td>1</td><td></td><td>w1-second.txt</td><td></td><td></td><td></td><td></td></tr><tr><td>2</td><td></td><td>w2-first.txt</td><td></td><td></td><td></td><td></td></tr><tr><td>3</td><td></td><td>w3-first.txt</td><td></td><td></td><td></td><td></td></tr></tbody>
+          </table>
+        </li>
+      </ol>
+    </section>
+
+    <section id="analysis">
+      <h2>Analysis</h2>
+      <div class="text">
+        <p>Read each saved run, compare the two sites in blocks of five windows, and test the difference by permuting the blocks.</p>
+      </div>
+      <pre><code>import re
+from itertools import combinations
+import numpy as np
+
+def estimates(path):
+    &quot;&quot;&quot;Each window&#x27;s estimate from a saved run of age.py, leaving out the flagged windows.&quot;&quot;&quot;
+    lines = [l for l in open(path) if l.startswith(&quot;window &quot;) and &quot;kept out&quot; not in l]
+    return np.array([float(re.search(r&quot;: ([\d.]+) years&quot;, l).group(1)) for l in lines])
+
+def blocks(x, size=5):
+    &quot;&quot;&quot;Means of consecutive blocks of windows: neighboring windows are alike.&quot;&quot;&quot;
+    n = len(x) // size
+    return x[:n * size].reshape(n, size).mean(axis=1)
+
+first, second = estimates(&quot;w1-first.txt&quot;), estimates(&quot;w1-second.txt&quot;)   # the runs you saved
+for name, x in ((&quot;first&quot;, first), (&quot;second&quot;, second)):
+    print(name, &quot;site:&quot;, len(x), &quot;windows, mean&quot;, round(x.mean(), 1), &quot;spread&quot;, round(x.std(ddof=1), 1))
+
+a, b = blocks(first), blocks(second)
+diff = b.mean() - a.mean()
+both = np.r_[a, b]
+null = [both[list(c)].mean() - np.delete(both, list(c)).mean()
+        for c in combinations(range(len(both)), len(b))]
+print(&quot;difference&quot;, round(diff, 1), &quot;years, two-sided p&quot;, round(np.mean(np.abs(null) &gt;= abs(diff)), 3))</code></pre>
+      <div class="text">
+        <p class="ask"><span class="lbl">Work it out</span>The two sites differ by <span class="fill" data-key="site-diff" data-hint="years"></span>, with a p of <span class="fill" data-key="site-p" data-hint="p"></span>. From the slips, the head's mean error in this room is <span class="fill" data-key="room-head" data-hint="years"></span>, and guessing the room's most common age misses by <span class="fill" data-key="room-mode" data-hint="years"></span>.</p>
+      </div>
+      
+    </section>
+
+    <section id="report">
+      <h2>Report</h2>
+      <div class="text">
+        <ol class="rulelist">
+          <li>The question, and the hypothesis as you wrote it before recording.</li>
+          <li>Methods: the sites, the runs, the windows kept and left out, and the block permutation test.</li>
+          <li>Results: each run's mean and spread, the difference between the sites with its p, and the room's errors against the room's most common age.</li>
+          <li>Interpretation: what the any-site claim predicts, why estimates sit near the training mean, and what the published evaluation already says about this head.</li>
+          <li>Limitations: one person at two sites, contact and blinks that differ between sites, estimates printed in whole years, and windows that aren't independent.</li>
+          <li>Your code, as an appendix.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Problems</h2>
+      <ol class="qs">
+        <li class="q"><p>What do the encoder, the embedding and the head each do here, and where does each run?</p></li>
+        <li class="q"><p>The evaluation leaves out whole studies, not people. Why?</p></li>
+        <li class="q"><p>Why test the sites on blocks of five windows rather than on single windows?</p></li>
+        <li class="q"><p>Why do the estimates cluster near the training studies' mean age, whoever wears it?</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>IntoMind (2026). Heads for encoder e2f9b60f411f0e73. github.com/intomind/eeg-foundation-model-heads.</p>
+      <p>Mitchell, M., and others (2019). Model cards for model reporting. Proceedings of the Conference on Fairness, Accountability, and Transparency.</p>
+    </section>
+  </div>
+
+  <div class="lv lv-grad" data-l="grad">
+    <header class="hero">
+      <p class="eb">Lab 3 · Graduate</p>
+      <h1>Age Detector</h1>
+      <p class="lede">In a room of people close in age, how much of the age head's error is bias toward its training mean and how much scatter, does its estimate depend on where the device sits, and what would it take to show that it doesn't?</p>
+    </header>
+
+    
+
+    <section id="demo">
+      <h2>The demo, exactly</h2>
+      <table class="data text">
+        <thead><tr><th>Part</th><th>What it does</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td>The head</td><td data-th="What it does">The open age head, built into the device's model and selected from power on, in slot 0. Fitted on 183,642 windows from 3,742 people in 93 studies.</td><td data-th="Source">github.com/intomind/eeg-foundation-model-heads</td></tr>
+          <tr><td>An estimate</td><td data-th="What it does">One for every four-second window, a new one every four seconds, computed on the device from the window's embedding.</td><td data-th="Source">the device's model</td></tr>
+          <tr><td>The number</td><td data-th="What it does">The mean of the estimates so far, leaving out any window with a gap in the signal, shown with ± 9 years, the published error of a person's averaged windows.</td><td data-th="Source">age-detector/main.js, lib/openhead.js</td></tr>
+          <tr><td>The program</td><td data-th="What it does">Two minutes of the same head: every window's estimate in whole years, the running mean, flagged windows marked and left out, then the published errors.</td><td data-th="Source">python/age.py, python/shipped_head.py</td></tr>
+        </tbody>
+      </table>
+      <div class="text">
+        <p>What it leaves out: any calibration to the people in front of it. A least-squares head on a weak signal predicts toward its training mean, so a room younger than that mean is predicted older, by the same pull for everyone. The published error is an average over studies, not this room's. Consecutive windows overlap in what they describe, so thirty windows are fewer than thirty independent estimates.</p>
+      </div>
+    </section>
+
+    <section id="preregister">
+      <h2>Preregister</h2>
+      <div class="text">
+        <p>Fill it in before the lab, and change nothing after the first run. The report names every deviation.</p>
+      </div>
+      <table class="sheet form" data-sheet="grad-age-prereg">
+        <thead><tr><th>Item</th><th>Your plan, before any data</th></tr></thead>
+        <tbody>
+          <tr><td>The two sites, and why</td><td></td></tr>
+          <tr><td>Hypotheses: the site difference, the room's bias, the head against the room's median</td><td></td></tr>
+          <tr><td>The equivalence margin for "any site", and why that size</td><td></td></tr>
+          <tr><td>Exclusions: flagged windows, contact, movement</td><td></td></tr>
+          <tr><td>Tests, and what would count against each hypothesis</td><td></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="ready">
+      <h2>Get ready</h2>
+      <div class="three">
+        <div>
+          <h3>You need</h3>
+          <ul>
+            <li>An IntoMind One, charged, with its cable unplugged</li>
+            <li>A computer with Chrome or Edge, Python 3 with the intomind package and SciPy, and <a href="https://github.com/intomind/demo">the demos' source</a></li>
+            <li>Slips of paper, and the two boxes</li>
+            <li>A clean microfiber, soft cotton or eyeglass cloth</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Roles</h3>
+          <dl class="roles">
+            <div><dt>Wearer</dt><dd>Wears the IntoMind One and sits still, eyes open, during each run.</dd></div>
+            <div><dt>Operator</dt><dd>Runs the demo and the program, and saves each run.</dd></div>
+            <div><dt>Analyst</dt><dd>Keeps the sheet, and notes movement and anything that disturbs the contact.</dd></div>
+          </dl>
+          <p class="after">Rotate, so everyone who wants to is the wearer once.</p>
+        </div>
+        <div>
+          <h3>Rules</h3>
+          <ul>
+            <li>Unplug the cable before anyone puts it on.</li>
+            <li>Wearing it is your choice. Every role is a real one.</li>
+            <li>Your age and your estimate are yours. Nobody has to share either.</li>
+            <li>Wipe the electrodes between wearers with the soft cloth, since a rough one can scratch their gold coating.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="steps">
+      <h2>Procedure</h2>
+      <ol class="steps">
+        <li>
+          <h3>Put it on at the first site</h3>
+          <figure class="fig" data-fig="picture" data-src="/assets/heads/oz" data-alt="A head seen from behind, with an orange area over Oz, on the midline just above the inion."></figure>
+          <div>
+            <p>Two sites far apart test the claim best, such as Oz at the back and Fpz on the forehead. Unplug the cable, part the hair under each electrode, and press it down until it feels firm but not tight.</p>
+          </div>
+        </li>
+        <li>
+          <h3>Check it on the demo</h3>
+          <figure class="fig" data-fig="shot" data-shot="age-detector"></figure>
+          <div>
+            <p>Open the <a href="https://demo.intomind.com/age-detector/">Age Detector demo</a> and connect. Watch the estimate for a minute while the wearer sits still with the eyes open, then close the tab: the IntoMind One talks to one program at a time.</p>
+            <p class="see"><b>You should see</b>A number that jumps at first and then settles, with ± 9 years and the count of windows under it.</p>
+          </div>
+        </li>
+        <li>
+          <h3>Run it at the first site</h3>
+          <figure class="fig code"><pre><code>cd python
+python3 -u age.py | tee w1-site1.txt</code></pre></figure>
+          <div>
+            <p>Two minutes, eyes open, sitting still, and everything it prints kept in a file named for the wearer and the site.</p>
+            <p class="see"><b>You should see</b>A line for every window, about thirty, with its estimate and the mean so far, and the published errors at the end.</p>
+          </div>
+        </li>
+        <li>
+          <h3>Run it at the second site</h3>
+          <figure class="fig" data-fig="picture" data-src="/assets/heads/fpz" data-alt="A head seen from the front, with an orange area over Fpz, on the forehead."></figure>
+          <div>
+            <p>Move the IntoMind One to the second site, press it down, and run it again into <code>w1-site2.txt</code>. Then the next wearer, with w2, and so on.</p>
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>Your errors, privately</h3>
+            <p>On a slip with no name, write two numbers: your final mean estimate minus your age, and the room's median age minus your age. Put it in the second box only if you want to.</p>
+          </div>
+          <table class="sheet" data-sheet="grad-age-runs">
+            <thead><tr><th>Wearer</th><th>Site</th><th>Saved as</th><th>Windows used</th><th>Notes</th></tr></thead>
+            <tbody><tr><td>1</td><td></td><td>w1-site1.txt</td><td></td><td></td></tr><tr><td>1</td><td></td><td>w1-site2.txt</td><td></td><td></td></tr><tr><td>2</td><td></td><td>w2-site1.txt</td><td></td><td></td></tr><tr><td>2</td><td></td><td>w2-site2.txt</td><td></td><td></td></tr><tr><td>3</td><td></td><td>w3-site1.txt</td><td></td><td></td></tr><tr><td>3</td><td></td><td>w3-site2.txt</td><td></td><td></td></tr></tbody>
+          </table>
+        </li>
+      </ol>
+    </section>
+
+    <section id="analysis">
+      <h2>Analyses</h2>
+      <div class="text">
+        <p>For each wearer, privately: the spread of the window estimates, how much consecutive windows agree, and how many independent windows that leaves. Then the two sites: their difference, tested by permuting blocks of five windows, and whether it is shown to lie inside a margin, by an <dfn data-term="Equivalence test" data-l="grad" data-def="A test that a difference lies inside a margin set in advance, by two one-sided tests: the way to show an effect is small, which a nonsignificant test can't.">equivalence test</dfn> of two one-sided tests (Lakens, 2017). Then the room, from the slips: the head's bias and scatter, against the room's median age.</p>
+      </div>
+      <pre><code>import re
+from itertools import combinations
+import numpy as np
+from scipy import stats
+
+def estimates(path):
+    """Each window's estimate from a saved run of age.py, in order, flagged windows left out."""
+    found = (re.match(r"window \d+: (\d+) years", line) for line in open(path)
+             if "kept out" not in line)
+    return np.array([float(m.group(1)) for m in found if m])
+
+def describe(x):
+    """Mean, spread, lag-one autocorrelation, and the windows' worth of independent evidence."""
+    r = np.corrcoef(x[:-1], x[1:])[0, 1]
+    n_eff = len(x) * (1 - r) / (1 + r)
+    return x.mean(), x.std(ddof=1), r, n_eff, x.std(ddof=1) / np.sqrt(n_eff)
+
+def blocks(x, size=5):
+    n = len(x) // size
+    return x[:n * size].reshape(n, size).mean(axis=1)
+
+site1, site2 = estimates("w1-site1.txt"), estimates("w1-site2.txt")   # the runs you saved
+for name, x in (("site 1", site1), ("site 2", site2)):
+    m, sd, r, n_eff, se = describe(x)
+    print(f"{name}: {len(x)} windows, mean {m:.1f}, sd {sd:.1f}, lag-one r {r:.2f}, "
+          f"worth {n_eff:.0f} independent windows, standard error {se:.1f}")
+
+# The difference between sites, by permuting blocks of five windows.
+a, b = blocks(site1), blocks(site2)
+diff = b.mean() - a.mean()
+both = np.r_[a, b]
+null = np.array([both[list(c)].mean() - np.delete(both, list(c)).mean()
+                 for c in combinations(range(len(both)), len(b))])
+print(f"difference {diff:+.1f} years, two-sided p {np.mean(np.abs(null) &gt;= abs(diff)):.3f}")
+
+# Equivalence: two one-sided tests on the blocks, that the difference is inside 3 years.
+margin = 3.0
+p_low = stats.ttest_ind(b + margin, a, alternative="greater").pvalue
+p_high = stats.ttest_ind(b - margin, a, alternative="less").pvalue
+print(f"inside ±{margin:.0f} years: p = {max(p_low, p_high):.3f}")
+
+# The room, from the slips: each wearer's estimate minus their age, and the room's median age
+# minus their age, written side by side with no name.
+head = np.array([7, 12, 3, 9, 15, 6, 10, -2, 8, 11])
+median = np.array([2, -1, 0, 3, 1, -3, 0, -5, 1, 2])
+print(f"the head: bias {head.mean():+.1f} years, scatter {head.std(ddof=1):.1f}, "
+      f"mean error {np.abs(head).mean():.1f}")
+print(f"the room's median age: mean error {np.abs(median).mean():.1f}, "
+      f"paired p {stats.wilcoxon(np.abs(head), np.abs(median)).pvalue:.3f}")</code></pre>
+      <div class="text">
+        <p>Then report:</p>
+        <ol class="rulelist">
+          <li>Each wearer's site difference, with its p and its equivalence test, and what the two together say about "any site".</li>
+          <li>The class's site differences together, and how many wearers and windows an equivalence test at your margin would need.</li>
+          <li>The room's bias and scatter, the head against the room's median, and what the bias says about the head's training mean.</li>
+          <li>What test of "any site" the published evaluation would need, and whether it has one.</li>
+        </ol>
+      </div>
+      
+    </section>
+
+    <section id="open">
+      <h2>Open problems</h2>
+      <ol class="rulelist">
+        <li><b>Any site, tested.</b> A claim that a head reads any site needs the same people scored at several sites, on studies no part of the model saw, compared site by site against an equivalence margin set in advance. The published evaluation scored nine montages and reports their mean, so that comparison is still to be made.</li>
+        <li><b>What age is in the EEG.</b> The aperiodic exponent, alpha's frequency and its power all change with age, and how much of a head's skill is any one of them is not known.</li>
+        <li><b>The gap as a marker.</b> Whether the gap between predicted and actual age says anything about a person's health, beyond the model's own bias, is debated (Butler and others, 2021).</li>
+      </ol>
+    </section>
+
+    <section id="report">
+      <h2>Report</h2>
+      <div class="text">
+        <ol class="rulelist">
+          <li>The preregistration as written, and every deviation from it, each with its reason.</li>
+          <li>Methods: the sites, the runs, the windows left out and why, the tests and the equivalence margin.</li>
+          <li>Results: the site comparison wearer by wearer and for the class, then the room's bias and scatter against its median.</li>
+          <li>What the published evaluation does and doesn't support, and what a test of "any site" would need.</li>
+          <li>The code, and no one's age or estimate beyond what they put in the box.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Lakens, D. (2017). Equivalence tests: a practical primer for t tests, correlations, and meta-analyses. Social Psychological and Personality Science.</p>
+      <p>Smith, S. M., Vidaurre, D., Alfaro-Almagro, F., Nichols, T. E., and Miller, K. L. (2019). Estimation of brain age delta from brain imaging. NeuroImage.</p>
+      <p>Butler, E. R., and others (2021). Pitfalls in brain age analyses. Human Brain Mapping.</p>
+      <p>Engemann, D. A., and others (2022). A reusable benchmark of brain-age prediction from M/EEG resting-state signals. NeuroImage.</p>
+      <p>IntoMind (2026). Heads for encoder e2f9b60f411f0e73. github.com/intomind/eeg-foundation-model-heads.</p>
+    </section>
+  </div>
+
+</main>
+<footer class="colophon">
+  <p><b>BCI101</b> An Applied Introduction to Noninvasive Brain-Computer Interfaces. Neurons, to bits, to real-world outcomes. Built on the demos at <a href="https://demo.intomind.com/">demo.intomind.com</a>.</p>
+  <div class="level-line"><span>Level</span><div class="levels" role="group" aria-label="Level"><button type="button" data-level="ms">Middle school</button><button type="button" data-level="hs">High school</button><button type="button" data-level="college">College</button><button type="button" data-level="grad">Graduate</button></div></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,829 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BCI Flight Simulator · BCI101</title>
+<meta name="description" content="Steer a ship by looking at flickering lights: the back of your brain flickers at the same rate, and a brain-computer interface reads it.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/assets/site.css">
+<script>(function(){var d=document.documentElement,q=new URLSearchParams(location.search),s=function(k){try{return localStorage.getItem(k)}catch(e){return null}},L={ms:1,hs:1,college:1,grad:1},l=q.get("level");if(L[l]){try{localStorage.setItem("curriculum-level",l)}catch(e){}}else l=s("curriculum-level");if(!L[l]){l="hs";d.dataset.ask="1"}d.dataset.level=l;d.dataset.theme=q.get("theme")||s("curriculum-theme")||"dark";})()</script>
+<script type="module" src="/assets/curriculum.js"></script>
+</head>
+<body>
+<header class="chrome">
+  <a class="mark" href="/">IntoMind<span>Learn</span></a>
+  <nav class="nav" aria-label="Pages"><a href="/">Contents</a><a href="/labs/" aria-current="page">Labs</a><a href="/vocabulary/">Vocabulary</a><a href="/safety/">Safety</a></nav>
+  <div class="controls"><button class="theme" type="button">Light</button></div>
+</header>
+<main class="page kind-lab">
+  <div class="lv lv-ms" data-l="ms">
+    <header class="hero">
+      <p class="eb">Lab 2 · Middle school</p>
+      <h1>BCI Flight Simulator</h1>
+      <p class="lede">Can you steer a ship just by looking? Fly one, and find out how a computer can tell which light you are looking at.</p>
+    </header>
+
+    <section class="warn" id="flicker">
+      <h2>This demo flickers</h2>
+      <p>Flicker between about 3 and 60 times a second can trigger a seizure in people with photosensitive epilepsy. Don't play it or watch it if you have epilepsy, or if flickering light has ever made you feel unwell.</p>
+      <p>Whether you play or watch, sit back from the screen, in a well-lit room. If you feel strange while it runs, cover one eye with your hand, turn away from the screen, and tell your teacher.</p>
+      
+    </section>
+
+    
+
+    <section id="ready">
+      <h2>Get ready</h2>
+      <div class="three">
+        <div>
+          <h3>You need</h3>
+          <ul>
+            <li>An IntoMind One, charged, with its cable unplugged</li>
+            <li>A laptop or monitor with Chrome or Edge, never a projector or a big screen</li>
+            <li>A chair for the pilot, back from the screen, in a well-lit room</li>
+            <li>A clean microfiber, soft cotton or eyeglass cloth</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Roles</h3>
+          <dl class="roles">
+            <div><dt>Pilot</dt><dd>Wears the IntoMind One and flies by looking.</dd></div>
+            <div><dt>Caller</dt><dd>Names a light for the pilot to steer toward.</dd></div>
+            <div><dt>Recorder</dt><dd>Counts the right turns and the wrong ones.</dd></div>
+            <div><dt>Skeptic</dt><dd>Watches the pilot, and writes down every blink, glance away or movement.</dd></div>
+          </dl>
+          <p class="after">Take turns, so everyone who wants to can be the pilot. In a group of three, the caller is the skeptic too.</p>
+        </div>
+        <div>
+          <h3>Rules</h3>
+          <ul>
+            <li>Unplug the cable before anyone puts it on.</li>
+            <li>Flying is your choice. Every role is a real one.</li>
+            <li>If the flicker makes you feel strange, cover one eye, turn away and say so.</li>
+            <li>Wipe the electrodes between pilots with the soft cloth, since a rough one can scratch their gold coating.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="steps">
+      <h2>Steps</h2>
+      <ol class="steps">
+        <li>
+          <h3>Put it on and connect</h3>
+          <figure class="fig" data-fig="picture" data-src="/assets/heads/oz" data-alt="A head seen from behind. An orange area on the back of the head, a little above the neck, shows where the IntoMind One goes."></figure>
+          <div>
+            <p>The IntoMind One goes on the back of the head, in the middle, a little above the bump where the skull meets the neck: the same place as in Alpha Flower.</p>
+            <p>Unplug the cable. The pilot sits down, back from the screen. Put it on with the strap around the head. Part the hair under each electrode so it touches skin, and press it down until it feels firm but not tight.</p>
+            <p>Open the <a href="https://demo.intomind.com/flight-simulator/">BCI Flight Simulator demo</a>. Its first screen begins with the flicker warning: read it again. Then press <b>Connect your IntoMind One</b>, and choose yours from the list.</p>
+            <p class="see"><b>You should see</b>Connected at the top right, and the ship with four lights, not yet flickering, at the edges of the screen.</p>
+            
+          </div>
+        </li>
+        <li>
+          <h3>Hold still for ten seconds</h3>
+          <figure class="fig" data-fig="shot" data-shot="flight-steady"></figure>
+          <div>
+            <p>Look at the middle of the screen and sit still. For ten seconds, with the lights steady, the demo measures how much of each light's speed your brain makes on its own.</p>
+            <p class="see"><b>You should see</b>A count from ten to zero in the middle of the screen. Then the lights start to flicker.</p>
+          </div>
+        </li>
+        <li>
+          <h3>Fly by looking</h3>
+          <figure class="fig" data-fig="shot" data-shot="flight-flying"></figure>
+          <div>
+            <p class="ask"><span class="lbl">Predict</span>Steering by looking will be <span class="fill" data-key="predict-eyes" data-hint="faster or slower"></span> than steering with the keys.</p>
+            <p>Look at a light to turn toward it. The ship turns for as long as you look, and flies on the way it points when you look away. Follow the coins to the next ring.</p>
+            <p>The caller names a light, again and again. The recorder counts each time the ship turned toward it, and each time it turned another way.</p>
+            <p class="see"><b>You should see</b>The ship turning a second or two after you look at a light.</p>
+            
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>Fly with your hands</h3>
+            <p>Fly one more round with the arrow keys. Which was easier, and which was faster?</p>
+          </div>
+          <table class="sheet" data-sheet="ms-flights">
+            <thead><tr><th>Pilot</th><th>Turned the right way</th><th>Turned the wrong way</th><th>Easier: eyes or keys?</th><th>Skeptic's notes</th></tr></thead>
+            <tbody><tr><td>1</td><td></td><td></td><td></td><td></td></tr><tr><td>2</td><td></td><td></td><td></td><td></td></tr><tr><td>3</td><td></td><td></td><td></td><td></td></tr><tr><td>4</td><td></td><td></td><td></td><td></td></tr></tbody>
+          </table>
+          <div>
+            <p class="see"><b>You should see</b>The keys answer at once. The lights take a second or two.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="happened">
+      <h2>What happened</h2>
+      <div class="grid">
+        <div class="text">
+          <p>What you see is handled first at the back of your brain, in the <dfn data-term="Visual cortex" data-l="ms" data-def="The part of the brain at the back of the head that handles what you see.">visual cortex</dfn>. When you look at a light that flickers at a steady speed, the neurons there start pulsing at that same speed.</p>
+          <p>Each light in the demo flickers at its own speed: 8, 10, 12 or 15 times a second. So the speed that shows up in your EEG says which light you are looking at, and the ship turns toward it. The IntoMind One never watches your eyes.</p>
+          <p>The ten seconds of stillness at the start told the demo how much of each speed your brain makes anyway, so it could tell a real rise from what was already there.</p>
+          
+        </div>
+        <figure class="fig" data-fig="decoder"><figcaption><b>How it decides</b> The ring marks the light being looked at. Its speed shows up in the EEG far more strongly than the others', and the ship turns toward it. The 10 hertz light stands out least, because the brain's own alpha is there too. Nothing on this page flickers.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Talk about it</h2>
+      <ol class="qs">
+        <li class="q"><p>The IntoMind One doesn't watch your eyes. How does it know where you are looking?</p></li>
+        <li class="q"><p>Why does the demo ask you to look at the middle for ten seconds first?</p></li>
+        <li class="q"><p>Steering with your eyes was slower than with the keys. Who could a brain-computer interface still help, and why?</p></li>
+      </ol>
+    </section>
+  </div>
+
+  <div class="lv lv-hs" data-l="hs">
+    <header class="hero">
+      <p class="eb">Lab 2 · High school</p>
+      <h1>BCI Flight Simulator</h1>
+      <p class="lede">How can a computer tell which of four lights you are looking at, from the back of your brain? And why is one of them harder than the rest?</p>
+    </header>
+
+    <section class="warn" id="flicker">
+      <h2>This demo flickers</h2>
+      <p>Flicker between about 3 and 60 times a second can trigger a seizure in people with photosensitive epilepsy. Don't play it or watch it if you have epilepsy, or if flickering light has ever made you feel unwell.</p>
+      <p>Whether you play or watch, sit back from the screen, in a well-lit room. If you feel strange while it runs, cover one eye with your hand, turn away from the screen, and tell your teacher.</p>
+      
+    </section>
+
+    
+
+    <section id="background">
+      <h2>Background</h2>
+      <p class="after-note">Read it the night before.</p>
+      <div class="grid">
+        <div class="text">
+          <h3>Frequency tagging</h3>
+          <p>A light flickering at a steady rate drives the <dfn data-term="Visual cortex" data-l="hs" data-def="The part of the brain at the back of the head that handles what you see.">visual cortex</dfn> at that rate. The response is a <dfn data-term="SSVEP" data-l="hs" data-def="Steady-state visually evoked potential: the brain's response at the rate of a light that flickers steadily.">steady-state visually evoked potential</dfn>, or SSVEP. It is too small to pick out of the EEG by eye, and clear in its spectrum: a peak at the light's rate, and smaller ones at its harmonics.</p>
+          <p>Give each light its own rate, and the rate that stands out in the EEG says which light has your attention. That is <dfn data-term="Frequency tagging" data-l="hs" data-def="Giving each choice its own flicker rate, so the rate in the EEG says which one has your attention.">frequency tagging</dfn>.</p>
+        </div>
+        <figure class="fig" data-fig="spectrum" data-kinds="ssvep" data-hz="12" data-bands="none"><figcaption><b>Simulated</b> The spectrum from the back of the head while looking at the 12 hertz light: a peak at 12 hertz, a smaller one at 24, and the brain's own rhythms beneath.</figcaption></figure>
+      </div>
+      <div class="grid flip">
+        <div class="text">
+          <h3>The baseline, and the score</h3>
+          <p>The demo's lights flicker at 8, 10, 12 and 15 hertz. Your brain makes rhythms of its own, and alpha sits right around 10. So before the lights start, the demo listens for ten seconds and measures how much of each rate is already there: its <dfn data-term="Baseline" data-l="hs" data-def="Something to compare against: a simple model fitted the same way, or a measurement taken before anything changes.">baseline</dfn>.</p>
+          <p>Then, four times a second, it takes the last two seconds of signal, and scores each rate by its power compared with the power just beside it, against its baseline. A rate that stands out for two updates in a row turns the ship.</p>
+        </div>
+        <figure class="fig" data-fig="decoder"><figcaption><b>How it decides</b> The ring marks the light being looked at. Its rate stands out far above the others, and the ship turns toward it. The 10 hertz light stands out least, because alpha is there too. Nothing on this page flickers.</figcaption></figure>
+      </div>
+      <div class="grid">
+        <div class="text">
+          <h3>Where it goes, and why</h3>
+          <p>The response comes from the primary visual cortex, the first part of the brain to handle what the eyes see, at the back of the head on both sides of the midline. It is strongest on the midline just above the inion, at Oz, weaker one step to either side, at O1 and O2, and weak at the front.</p>
+          
+        </div>
+        <figure class="fig" data-fig="head" data-views="top side" data-sites="O1 Oz O2 Fpz" data-device="Oz" data-shade="occipital"><figcaption><b>The 10–20 system</b> The IntoMind One over Oz, from above and from the left. The response is strongest there, weaker at O1 and O2, and weak at the forehead, Fpz.</figcaption></figure>
+      </div>
+      
+    </section>
+
+    <section id="ready">
+      <h2>Get ready</h2>
+      <div class="three">
+        <div>
+          <h3>You need</h3>
+          <ul>
+            <li>An IntoMind One, charged, with its cable unplugged</li>
+            <li>A laptop or monitor with Chrome or Edge, never a projector or a big screen</li>
+            <li>A chair for the pilot, back from the screen, in a well-lit room</li>
+            <li>A timer for the caller</li>
+            <li>A clean microfiber, soft cotton or eyeglass cloth</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Roles</h3>
+          <dl class="roles">
+            <div><dt>Pilot</dt><dd>Wears the IntoMind One and flies by looking.</dd></div>
+            <div><dt>Caller</dt><dd>Names the lights, and times each look.</dd></div>
+            <div><dt>Recorder</dt><dd>Writes down each delay, and each wrong turn.</dd></div>
+            <div><dt>Skeptic</dt><dd>Watches the pilot, and writes down every blink, glance away or movement.</dd></div>
+          </dl>
+          <p class="after">Take turns, so everyone who wants to can be the pilot. In a group of three, the caller is the skeptic too.</p>
+        </div>
+        <div>
+          <h3>Rules</h3>
+          <ul>
+            <li>Unplug the cable before anyone puts it on.</li>
+            <li>Flying is your choice. Every role is a real one.</li>
+            <li>If the flicker makes you feel strange, cover one eye, turn away and say so.</li>
+            <li>Wipe the electrodes between pilots with the soft cloth, since a rough one can scratch their gold coating.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="steps">
+      <h2>Steps</h2>
+      <ol class="steps">
+        <li>
+          <h3>Put it on and connect</h3>
+          <figure class="fig" data-fig="picture" data-src="/assets/heads/oz" data-alt="A head seen from behind. An orange area over Oz, on the midline just above the inion, shows where the IntoMind One goes."></figure>
+          <div>
+            <p>The IntoMind One goes on the midline just above the inion, over Oz. Unplug the cable. The pilot sits down, back from the screen. Part the hair under each electrode, and press it down until it feels firm but not tight.</p>
+            <p>Open the <a href="https://demo.intomind.com/flight-simulator/">BCI Flight Simulator demo</a>. Its first screen begins with the flicker warning: read it again. Then press <b>Connect your IntoMind One</b>, and choose yours from the list.</p>
+            <p class="see"><b>You should see</b>Connected at the top right, and the ship with four lights, not yet flickering, at the edges of the screen.</p>
+          </div>
+        </li>
+        <li>
+          <h3>Hold still for ten seconds</h3>
+          <figure class="fig" data-fig="shot" data-shot="flight-steady"></figure>
+          <div>
+            <p>Look at the middle of the screen and sit still, while the demo measures your baseline with the lights steady.</p>
+            <p class="see"><b>You should see</b>A count from ten to zero in the middle of the screen. Then the lights start to flicker.</p>
+          </div>
+        </li>
+        <li>
+          <h3>Fly</h3>
+          <figure class="fig" data-fig="shot" data-shot="flight-flying"></figure>
+          <div>
+            <p>Look at a light to turn toward it. The ship turns for as long as you look, and flies on the way it points when you look away. Follow the coins to the next ring, for a minute or two, until steering feels familiar.</p>
+            <p class="see"><b>You should see</b>The ship turning a second or two after you look at a light.</p>
+            
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>Time ten looks</h3>
+            <p class="ask"><span class="lbl">Predict</span>The light that will be slowest to steer with is the <span class="fill" data-key="predict-slowest" data-hint="which"></span> hertz light, because <span class="fill" data-key="predict-why" data-hint="why"></span>.</p>
+            <p>The lights are 8 hertz at the top, 10 on the right, 12 at the bottom, and 15 on the left. The caller names a light at random, ten times, and times how long the ship takes to start turning that way. The recorder writes each delay under its light, and counts the turns the wrong way.</p>
+          </div>
+          <table class="sheet" data-sheet="hs-looks">
+            <thead><tr><th>Pilot</th><th>8 hertz, seconds</th><th>10 hertz, seconds</th><th>12 hertz, seconds</th><th>15 hertz, seconds</th><th>Wrong turns</th></tr></thead>
+            <tbody><tr><td>1</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>2</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>3</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>4</td><td></td><td></td><td></td><td></td><td></td></tr></tbody>
+          </table>
+          <div>
+            <p class="see"><b>You should see</b>Delays of a second or more, and some lights answering faster than others.</p>
+            
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="work">
+      <h2>Work it out</h2>
+      <div class="text">
+        <p class="ask"><span class="lbl">Work it out</span>Across your group, the median delay for each light: 8 hertz <span class="fill" data-key="median-8" data-hint="seconds"></span>, 10 hertz <span class="fill" data-key="median-10" data-hint="seconds"></span>, 12 hertz <span class="fill" data-key="median-12" data-hint="seconds"></span>, 15 hertz <span class="fill" data-key="median-15" data-hint="seconds"></span>. The slowest was <span class="fill" data-key="slowest" data-hint="which"></span>. Did your prediction hold? <span class="fill" data-key="held" data-hint="yes or no"></span></p>
+        
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Talk about it</h2>
+      <ol class="qs">
+        <li class="q"><p>Why is the 10 hertz light often the hardest for the demo to detect?</p></li>
+        <li class="q"><p>The score compares the power at a light's rate with the power just beside it. Why not use the power at the rate alone?</p></li>
+        <li class="q"><p>The demo waits for two updates in a row before it turns. What does that trade?</p></li>
+        <li class="q"><p>Why 8, 10, 12 and 15 hertz, and not 8, 9, 10 and 11?</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Wolpaw, J. R., Birbaumer, N., McFarland, D. J., Pfurtscheller, G., and Vaughan, T. M. (2002). Brain-computer interfaces for communication and control. Clinical Neurophysiology.</p>
+      <p>Herrmann, C. S. (2001). Human EEG responses to 1–100 Hz flicker: resonance phenomena in visual cortex and their potential correlation to cognitive phenomena. Experimental Brain Research.</p>
+      <p>Fisher, R. S., Harding, G., Erba, G., Barkley, G. L., and Wilkins, A. (2005). Photic- and pattern-induced seizures: a review for the Epilepsy Foundation of America Working Group. Epilepsia.</p>
+    </section>
+  </div>
+
+  <div class="lv lv-college" data-l="college">
+    <header class="hero">
+      <p class="eb">Lab 2 · College</p>
+      <h1>BCI Flight Simulator</h1>
+      <p class="lede">Can you find each light's flicker rate in your own EEG, rebuild the demo's score from its definition, and measure what a faster decision costs in accuracy?</p>
+    </header>
+
+    <section class="warn" id="flicker">
+      <h2>This demo flickers</h2>
+      <p>Flicker between about 3 and 60 times a second can trigger a seizure in people with photosensitive epilepsy. Don't play it or watch it if you have epilepsy, or if flickering light has ever made you feel unwell.</p>
+      <p>Whether you play or watch, sit back from the screen, in a well-lit room. If you feel strange while it runs, cover one eye with your hand, turn away from the screen, and tell your instructor.</p>
+      
+    </section>
+
+    
+
+    <section id="background">
+      <h2>Background</h2>
+      <p class="after-note">Read it before the lab.</p>
+      <div class="grid">
+        <div class="text">
+          <h3>Frequency tagging</h3>
+          <p>A light flickering at a steady rate drives the primary visual cortex at that rate, with smaller responses at its harmonics: the <dfn data-term="SSVEP" data-l="college" data-def="Steady-state visually evoked potential: the brain's response at the rate of a light that flickers steadily, and at its harmonics.">steady-state visually evoked potential</dfn>. Give each choice its own rate, and the rate that stands out in the EEG says which one has the eyes. The response is largest over the occipital pole, at Oz, and small beside the EEG's own rhythms, so it is found in the spectrum, not the trace.</p>
+        </div>
+        <figure class="fig" data-fig="spectrum" data-kinds="ssvep" data-hz="12" data-bands="none"><figcaption><b>Simulated</b> The spectrum while looking at the 12 hertz light: a peak at 12 hertz, a smaller one at 24, on the brain's own rhythms.</figcaption></figure>
+      </div>
+      <div class="grid flip">
+        <div class="text">
+          <h3>The demo's score</h3>
+          <p>Four times a second, on the last two seconds of the four channels, the demo computes for each light's rate f:</p>
+          <p class="eq">score = r(f) + ½ max(0, r(2f) − 1)</p>
+          <p>where r(f) is the power at exactly f, from a Hann-windowed segment and averaged over the channels, divided by the mean power at 1, 1.5 and 2 hertz either side. A score near 1 means nothing is there.</p>
+          <p>Each score is divided by its average over a ten-second baseline taken with the lights steady, or by 1 if that is smaller. A light counts when its score reaches 2.5 and is 1.25 times the next, two updates in a row, and lets go after two updates without.</p>
+        </div>
+        <figure class="fig" data-fig="decoder"><figcaption><b>Simulated</b> The four lights as the demo lays them out, and each rate's score. The ring marks the light looked at, and its rate stands out. Nothing here flickers.</figcaption></figure>
+      </div>
+      <div class="text">
+        <h3>Speed against accuracy</h3>
+        <p>A longer window resolves frequency more finely and averages away more noise, but every decision waits for it. Wolpaw's information transfer rate puts both in one number. With N choices, each right with probability P, a decision carries</p>
+        <p class="eq">B = log<sub>2</sub> N + P log<sub>2</sub> P + (1 − P) log<sub>2</sub>((1 − P) / (N − 1))</p>
+        <p>bits, and a decision every T seconds delivers B × 60 / T bits a minute.</p>
+      </div>
+    </section>
+
+    <section id="hypothesis">
+      <h2>Hypothesis</h2>
+      <div class="text">
+        <p class="after-note">Write it before anyone flies.</p>
+        <p class="ask"><span class="lbl">Hypothesis</span>The light hardest to steer with will be <span class="fill" data-key="h-hardest" data-hint="which"></span>, because <span class="fill" data-key="h-why" data-hint="why"></span>. Accuracy with one-second windows will be <span class="fill" data-key="h-one" data-hint="higher or lower"></span> than with two, and the most bits a minute will come at about <span class="fill" data-key="h-best" data-hint="seconds"></span>.</p>
+      </div>
+    </section>
+
+    <section id="ready">
+      <h2>Get ready</h2>
+      <div class="three">
+        <div>
+          <h3>You need</h3>
+          <ul>
+            <li>An IntoMind One, charged, with its cable unplugged</li>
+            <li>A laptop or monitor, never a projector or a large display, with Chrome or Edge, Python 3 with the intomind package and MNE, and <a href="https://github.com/intomind/demo">the demos' source</a></li>
+            <li>A chair back from the screen, in a well-lit room, and a stopwatch</li>
+            <li>A clean microfiber, soft cotton or eyeglass cloth</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Roles</h3>
+          <dl class="roles">
+            <div><dt>Pilot</dt><dd>Wears the IntoMind One, and looks where the operator says.</dd></div>
+            <div><dt>Operator</dt><dd>Runs the demo and the recordings, names the lights, and times each look.</dd></div>
+            <div><dt>Analyst</dt><dd>Writes down each delay and wrong turn, and any look that strayed.</dd></div>
+          </dl>
+          <p class="after">Rotate, so everyone who wants to flies.</p>
+        </div>
+        <div>
+          <h3>Rules</h3>
+          <ul>
+            <li>Unplug the cable before anyone puts it on.</li>
+            <li>Flying is your choice. Every role is a real one.</li>
+            <li>A recording is its wearer's personal data. Keep it only with their permission.</li>
+            <li>Wipe the electrodes between pilots with the soft cloth, since a rough one can scratch their gold coating.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="steps">
+      <h2>Procedure</h2>
+      <ol class="steps">
+        <li>
+          <h3>Put it on at Oz</h3>
+          <figure class="fig" data-fig="picture" data-src="/assets/heads/oz" data-alt="A head seen from behind, with an orange area over Oz, on the midline just above the inion."></figure>
+          <div>
+            <p>On the midline just above the inion, over Oz, with the strap around the head. Unplug the cable. Part the hair under each electrode, and press it down until it feels firm but not tight: hair at the back of the head is the usual reason a pilot can't steer.</p>
+          </div>
+        </li>
+        <li>
+          <h3>Connect, and hold still for the baseline</h3>
+          <figure class="fig" data-fig="shot" data-shot="flight-flying"></figure>
+          <div>
+            <p>Open the <a href="https://demo.intomind.com/flight-simulator/">BCI Flight Simulator demo</a>, read its warning again, and connect. Look at the center of the screen for the ten-second baseline, with the lights steady. Then fly: look at a light to turn toward it, and follow the coins to the next ring.</p>
+            <p class="see"><b>You should see</b>The ship turning a second or two after you look at a light.</p>
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>Time ten looks</h3>
+            <p>The operator names a light at random, ten times, and times how long the ship takes to start turning that way. The analyst writes down each delay, and each turn the wrong way.</p>
+          </div>
+          <table class="sheet" data-sheet="college-looks">
+            <thead><tr><th>Look</th><th>Light</th><th>Seconds to turn</th><th>Turned the wrong way?</th></tr></thead>
+            <tbody><tr><td>1</td><td></td><td></td><td></td></tr><tr><td>2</td><td></td><td></td><td></td></tr><tr><td>3</td><td></td><td></td><td></td></tr><tr><td>4</td><td></td><td></td><td></td></tr><tr><td>5</td><td></td><td></td><td></td></tr><tr><td>6</td><td></td><td></td><td></td></tr><tr><td>7</td><td></td><td></td><td></td></tr><tr><td>8</td><td></td><td></td><td></td></tr><tr><td>9</td><td></td><td></td><td></td></tr><tr><td>10</td><td></td><td></td><td></td></tr></tbody>
+          </table>
+        </li>
+        <li>
+          <h3>Record each light</h3>
+          <figure class="fig code"><pre><code>cd python
+python3 record_and_export.py --seconds 20 --label look-8
+python3 record_and_export.py --seconds 20 --label look-10
+python3 record_and_export.py --seconds 20 --label look-12
+python3 record_and_export.py --seconds 20 --label look-15
+python3 record_and_export.py --seconds 20 --label center</code></pre></figure>
+          <div>
+            <p>Close the demo's tab, so the IntoMind One is free. Open a second copy with ?dev on the end of its address: it flies on a simulated IntoMind One, and shows the same warning and lights. After its baseline, while its lights flicker, record twenty seconds looking at each light, 8 hertz at the top, 10 on the right, 12 at the bottom and 15 on the left, and twenty with the eyes on the center of the screen.</p>
+            <p class="see"><b>You should see</b>Five recordings, each written to a BDF file whose path the program prints.</p>
+            
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="analysis">
+      <h2>Analysis</h2>
+      <div class="text">
+        <p>Plot each recording's spectrum, with 8, 10, 12 and 15 hertz and their harmonics marked. Then compute the demo's score yourself, on windows of 1, 2 and 4 seconds a quarter second apart, divide each light's score by its mean with the eyes on the center, and count how often the looked-at light scores highest.</p>
+      </div>
+      <pre><code>import numpy as np
+import mne
+from scipy.signal.windows import hann
+
+RATES = {&quot;top&quot;: 8, &quot;right&quot;: 10, &quot;bottom&quot;: 12, &quot;left&quot;: 15}
+NEAR = (-2, -1.5, -1, 1, 1.5, 2)
+
+def power(x, fs, hz):
+    &quot;&quot;&quot;Power at exactly hz, Hann-windowed, averaged over channels, as the demo does.&quot;&quot;&quot;
+    n = x.shape[1]
+    xs = (x - x.mean(axis=1, keepdims=True)) * hann(n, sym=False)
+    k = np.exp(-2j * np.pi * hz * np.arange(n) / fs)
+    return float(np.mean(np.abs(xs @ k) ** 2)) / n ** 2
+
+def score(x, fs, hz):
+    snr = lambda f: power(x, fs, f) / np.mean([power(x, fs, f + d) for d in NEAR])
+    return snr(hz) + 0.5 * max(0.0, snr(2 * hz) - 1)
+
+def windows(path, seconds, step=0.25):
+    &quot;&quot;&quot;Every light&#x27;s score in each window of a recording, a quarter second apart.&quot;&quot;&quot;
+    raw = mne.io.read_raw_bdf(path, preload=True, verbose=&quot;error&quot;)
+    fs = raw.info[&quot;sfreq&quot;]
+    x = raw.get_data(picks=&quot;eeg&quot;)
+    n = int(seconds * fs)
+    return [{d: score(x[:, i:i + n], fs, hz) for d, hz in RATES.items()}
+            for i in range(0, x.shape[1] - n + 1, int(step * fs))]
+
+def bits_a_minute(n, p, seconds):
+    &quot;&quot;&quot;Wolpaw&#x27;s information transfer rate, for n choices each right with probability p.&quot;&quot;&quot;
+    if p &lt;= 1 / n:
+        return 0.0
+    bits = np.log2(n) + p * np.log2(p)
+    if p &lt; 1:
+        bits += (1 - p) * np.log2((1 - p) / (n - 1))
+    return bits * 60 / seconds
+
+for seconds in (1, 2, 4):
+    # each light&#x27;s score with the eyes on the center: the demo&#x27;s baseline, divided out
+    center = windows(&quot;center.bdf&quot;, seconds)
+    base = {d: max(1.0, np.mean([s[d] for s in center])) for d in RATES}
+    right = total = 0
+    for d, hz in RATES.items():
+        for s in windows(f&quot;look-{hz}.bdf&quot;, seconds):
+            adjusted = {k: v / base[k] for k, v in s.items()}
+            right += max(adjusted, key=adjusted.get) == d
+            total += 1
+    p = right / total
+    print(seconds, &quot;s:&quot;, round(p, 2), &quot;right,&quot;, round(bits_a_minute(4, p, seconds), 1), &quot;bits a minute&quot;)</code></pre>
+      <table class="sheet" data-sheet="college-flight-results">
+        <thead><tr><th>Window, seconds</th><th>Right, of all windows</th><th>Bits a minute</th><th>The light most often missed</th></tr></thead>
+        <tbody><tr><td>1</td><td></td><td></td><td></td></tr><tr><td>2</td><td></td><td></td><td></td></tr><tr><td>4</td><td></td><td></td><td></td></tr></tbody>
+      </table>
+      
+    </section>
+
+    <section id="report">
+      <h2>Report</h2>
+      <div class="text">
+        <ol class="rulelist">
+          <li>The question, and the hypothesis as you wrote it before flying.</li>
+          <li>Methods: the site, the recordings, the score's definition, the baseline, and the windows.</li>
+          <li>Results: spectra with the rates marked, the median delay for each light from the timed looks, and accuracy and bits a minute for each window.</li>
+          <li>Interpretation: which light was hardest and why, and where speed and accuracy balance.</li>
+          <li>Limitations: twenty seconds a light, one pilot, a baseline taken with the lights flickering, and any looks that strayed.</li>
+          <li>Your code, as an appendix.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Problems</h2>
+      <ol class="qs">
+        <li class="q"><p>What frequency resolution does a two-second window give? Could it separate lights at 8 and 8.5 hertz?</p></li>
+        <li class="q"><p>Why does the score add evidence from the second harmonic?</p></li>
+        <li class="q"><p>Why compare the power at a rate with the power just beside it, rather than use the power alone?</p></li>
+        <li class="q"><p>Your baseline came from the eyes on the center while the lights flickered at the edges. How might it differ from the demo's, taken with the lights steady?</p></li>
+        <li class="q"><p>With four lights, which delivers more bits a minute: 90 percent right every two seconds, or 70 percent right every second?</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Herrmann, C. S. (2001). Human EEG responses to 1–100 Hz flicker: resonance phenomena in visual cortex and their potential correlation to cognitive phenomena. Experimental Brain Research.</p>
+      <p>Vialatte, F.-B., Maurice, M., Dauwels, J., and Cichocki, A. (2010). Steady-state visually evoked potentials: focus on essential paradigms and future perspectives. Progress in Neurobiology.</p>
+      <p>Lin, Z., Zhang, C., Wu, W., and Gao, X. (2006). Frequency recognition based on canonical correlation analysis for SSVEP-based BCIs. IEEE Transactions on Biomedical Engineering.</p>
+      <p>Wolpaw, J. R., Birbaumer, N., McFarland, D. J., Pfurtscheller, G., and Vaughan, T. M. (2002). Brain-computer interfaces for communication and control. Clinical Neurophysiology.</p>
+      <p>Fisher, R. S., Harding, G., Erba, G., Barkley, G. L., and Wilkins, A. (2005). Photic- and pattern-induced seizures: a review for the Epilepsy Foundation of America Working Group. Epilepsia.</p>
+    </section>
+  </div>
+
+  <div class="lv lv-grad" data-l="grad">
+    <header class="hero">
+      <p class="eb">Lab 2 · Graduate</p>
+      <h1>BCI Flight Simulator</h1>
+      <p class="lede">How many bits a minute does the demo's decoder deliver from your visual cortex, how much would a better decoder add, and does each light's response follow the half of the visual field it falls in?</p>
+    </header>
+
+    <section class="warn" id="flicker">
+      <h2>This demo flickers</h2>
+      <p>Flicker between about 3 and 60 times a second can trigger a seizure in people with photosensitive epilepsy. Don't play it or watch it if you have epilepsy, or if flickering light has ever made you feel unwell.</p>
+      <p>Whether you play or watch, sit back from the screen, in a well-lit room. If you feel strange while it runs, cover one eye with your hand, turn away from the screen, and tell your instructor.</p>
+      
+    </section>
+
+    
+
+    <section id="demo">
+      <h2>The demo, exactly</h2>
+      <table class="data text">
+        <thead><tr><th>Part</th><th>What it does</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td>The lights</td><td data-th="What it does">8 hertz at the top, 10 on the right, 12 at the bottom and 15 on the left. Each one's brightness is a sinusoid sampled at every frame's own time, so its rate doesn't depend on the screen's refresh. Each is small enough that no ten-degree field of view is more than a quarter flickering.</td><td data-th="Source">lib/flicker.js</td></tr>
+          <tr><td>The window</td><td data-th="What it does">The last 2 seconds of the four channels, four times a second.</td><td data-th="Source">flight-simulator/main.js</td></tr>
+          <tr><td>Power</td><td data-th="What it does">At each rate exactly, by Goertzel's algorithm, with each channel's mean removed and a periodic Hann window, divided by the window's length squared, and averaged over the channels.</td><td data-th="Source">lib/ssvep.js</td></tr>
+          <tr><td>The score</td><td data-th="What it does">The power at the rate over the mean power 1, 1.5 and 2 hertz either side, plus half of the same ratio at twice the rate, less 1, when that is positive.</td><td data-th="Source">lib/ssvep.js</td></tr>
+          <tr><td>The baseline</td><td data-th="What it does">Ten seconds looking at the center with the lights steady. Every later score is divided by its mean over the baseline, or by 1 if the mean is smaller.</td><td data-th="Source">flight-simulator/main.js, lib/ssvep.js</td></tr>
+          <tr><td>The decision</td><td data-th="What it does">The top light, if it scores at least 2.5 and at least 1.25 times the next. It is held after two updates in a row, and let go after two updates with no light.</td><td data-th="Source">lib/ssvep.js</td></tr>
+          <tr><td>Steering</td><td data-th="What it does">The ship turns toward the held light for as long as it is held.</td><td data-th="Source">flight-simulator/main.js</td></tr>
+        </tbody>
+      </table>
+      <div class="text">
+        <p>What it leaves out: the pattern across channels and the phase, both averaged away. Harmonics past the second. Any calibration to the pilot beyond one baseline. And attention without gaze: it needs the eyes on the light. The 10 hertz light sits in the alpha band, and the baseline divides out the alpha of one moment at rest, not the alpha of the flight.</p>
+      </div>
+    </section>
+
+    <section id="preregister">
+      <h2>Preregister</h2>
+      <div class="text">
+        <p>Fill it in before the lab, and change nothing after the first recording. The report names every deviation.</p>
+      </div>
+      <table class="sheet form" data-sheet="grad-flight-prereg">
+        <thead><tr><th>Item</th><th>Your plan, before any data</th></tr></thead>
+        <tbody>
+          <tr><td>Primary outcome</td><td></td></tr>
+          <tr><td>Hypotheses: the hardest light, the best window, and O1 against O2 for 10 and 15 hertz</td><td></td></tr>
+          <tr><td>Decoders and their parameters</td><td></td></tr>
+          <tr><td>Exclusions: glances away, gaps, poor contact</td><td></td></tr>
+          <tr><td>How you will judge each hypothesis, given windows that overlap</td><td></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="ready">
+      <h2>Get ready</h2>
+      <div class="three">
+        <div>
+          <h3>You need</h3>
+          <ul>
+            <li>An IntoMind One, charged, with its cable unplugged</li>
+            <li>A laptop or monitor, never a projector or a large display, with Chrome or Edge, Python 3 with the intomind package, MNE and SciPy, and <a href="https://github.com/intomind/demo">the demos' source</a></li>
+            <li>A chair back from the screen, in a well-lit room</li>
+            <li>A clean microfiber, soft cotton or eyeglass cloth</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Roles</h3>
+          <dl class="roles">
+            <div><dt>Pilot</dt><dd>Wears the IntoMind One, and looks where the operator says.</dd></div>
+            <div><dt>Operator</dt><dd>Runs the demo and the recordings, and says where to look.</dd></div>
+            <div><dt>Analyst</dt><dd>Watches the pilot's eyes, and writes down every label and every glance away, with its time.</dd></div>
+          </dl>
+          <p class="after">Rotate, so everyone who wants to flies.</p>
+        </div>
+        <div>
+          <h3>Rules</h3>
+          <ul>
+            <li>Unplug the cable before anyone puts it on.</li>
+            <li>Flying is your choice. Every role is a real one.</li>
+            <li>A recording is its wearer's personal data. Keep it only with their permission.</li>
+            <li>Wipe the electrodes between pilots with the soft cloth, since a rough one can scratch their gold coating.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="steps">
+      <h2>Procedure</h2>
+      <ol class="steps">
+        <li>
+          <h3>Put it on at Oz</h3>
+          <figure class="fig" data-fig="picture" data-src="/assets/heads/oz" data-alt="A head seen from behind, with an orange area over Oz, on the midline just above the inion."></figure>
+          <div>
+            <p>On the midline just above the inion, over Oz, where the primary visual cortex of both hemispheres is closest. Unplug the cable. Part the hair under each electrode, and press it down until it feels firm but not tight.</p>
+          </div>
+        </li>
+        <li>
+          <h3>Connect, hold still, and fly</h3>
+          <figure class="fig" data-fig="shot" data-shot="flight-flying"></figure>
+          <div>
+            <p>Open the <a href="https://demo.intomind.com/flight-simulator/">BCI Flight Simulator demo</a>, read its warning again, and connect. Look at the center of the screen for the ten-second baseline, with the lights steady. Then fly for a minute or two: look at a light to turn toward it.</p>
+            <p class="see"><b>You should see</b>The ship turning a second or two after you look at a light.</p>
+          </div>
+        </li>
+        <li>
+          <h3>Record at Oz</h3>
+          <figure class="fig code"><pre><code>cd python
+python3 record_and_export.py --seconds 30 --label w1-steady
+python3 record_and_export.py --seconds 30 --label w1-look-8
+python3 record_and_export.py --seconds 30 --label w1-look-10
+python3 record_and_export.py --seconds 30 --label w1-look-12
+python3 record_and_export.py --seconds 30 --label w1-look-15</code></pre></figure>
+          <div>
+            <p>Close the demo's tab, so the IntoMind One is free. With nothing flickering on the screen, record thirty seconds with the eyes on its center: the steady baseline. Then open a second copy of the demo with ?dev on the end of its address. It flies on a simulated IntoMind One and shows the same warning and lights. After its baseline, while its lights flicker, record thirty seconds looking at each light.</p>
+            
+          </div>
+        </li>
+        <li>
+          <h3>Record at O1 and O2</h3>
+          <figure class="fig" data-fig="picture" data-src="/assets/heads/o1" data-alt="A head seen from behind, with an orange area over O1, left of the midline at the level of Oz."></figure>
+          <div>
+            <p>Move the IntoMind One to O1, left of the midline at the height of Oz, and record a minute with the eyes on the center of the ?dev copy while its lights flicker: <code>--seconds 60 --label w1-center-o1</code>. Then move it to O2, on the right, and record <code>w1-center-o2</code> the same way. With the eyes on the center, the left light falls in the left half of the visual field, which projects to the right hemisphere, and the right light in the right half, projecting to the left.</p>
+            <p class="see"><b>You should see</b>Every recording written to a BDF file whose path the program prints.</p>
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>Each pilot in turn</h3>
+            <p>Wipe the electrodes, and repeat steps 1 to 4 for each pilot, with labels w2 and w3. The analyst records every glance away from where the operator said to look.</p>
+          </div>
+          <table class="sheet" data-sheet="grad-flight-recordings">
+            <thead><tr><th>Pilot</th><th>The folder or paths of the seven files</th><th>Glances away, with times</th></tr></thead>
+            <tbody><tr><td>w1</td><td></td><td></td></tr><tr><td>w2</td><td></td><td></td></tr><tr><td>w3</td><td></td><td></td></tr></tbody>
+          </table>
+        </li>
+      </ol>
+    </section>
+
+    <section id="analysis">
+      <h2>Analyses</h2>
+      <div class="text">
+        <p>For one pilot: the demo's detector rebuilt and run on each look, update by update. Then forced choices on windows of 0.5 to 4 seconds, by the demo's score and by <dfn data-term="Canonical correlation analysis" data-l="grad" data-def="Finding the combinations of two sets of signals, here the channels and sinusoids at a flicker rate, that correlate most, and scoring the rate by that correlation.">canonical correlation</dfn> with sinusoids at each rate and its harmonics (Lin and others, 2006), with Wolpaw's bits a minute and half a second added to each choice for moving the eyes. Then each rate's signal-to-noise ratio at O1 and at O2, with the eyes on the center. Change the w1 in the labels for each pilot.</p>
+      </div>
+      <pre><code>import numpy as np
+import mne
+from scipy.signal import butter, sosfiltfilt
+from scipy.signal.windows import hann
+
+RATES = {"top": 8, "right": 10, "bottom": 12, "left": 15}
+NEAR = (-2, -1.5, -1, 1, 1.5, 2)
+
+def load(path):
+    raw = mne.io.read_raw_bdf(path, preload=True, verbose="error")
+    return raw.info["sfreq"], 1e6 * raw.get_data(picks="eeg")
+
+def power(x, fs, hz):
+    """Power at exactly hz, Hann-windowed, averaged over the channels, as the demo does."""
+    n = x.shape[1]
+    xs = (x - x.mean(axis=1, keepdims=True)) * hann(n, sym=False)
+    k = np.exp(-2j * np.pi * hz * np.arange(n) / fs)
+    return float(np.mean(np.abs(xs @ k) ** 2)) / n ** 2
+
+def snr(x, fs, hz):
+    return power(x, fs, hz) / np.mean([power(x, fs, hz + d) for d in NEAR])
+
+def score(x, fs, hz):
+    return snr(x, fs, hz) + 0.5 * max(0.0, snr(x, fs, 2 * hz) - 1)
+
+def cca(x, fs, hz, harmonics=3):
+    """The largest canonical correlation of the channels with sinusoids at hz's harmonics."""
+    t = np.arange(x.shape[1]) / fs
+    y = np.array([f(2 * np.pi * k * hz * t) for k in range(1, harmonics + 1)
+                  for f in (np.sin, np.cos)])
+    qx = np.linalg.qr((x - x.mean(axis=1, keepdims=True)).T)[0]
+    qy = np.linalg.qr((y - y.mean(axis=1, keepdims=True)).T)[0]
+    return np.linalg.svd(qx.T @ qy, compute_uv=False)[0]
+
+def windows(x, fs, seconds, step=0.25):
+    n = int(seconds * fs)
+    return [x[:, i:i + n] for i in range(0, x.shape[1] - n + 1, int(step * fs))]
+
+def held(adjusted, threshold=2.5, margin=1.25, hold=2, release=2):
+    """The demo's detector, update by update: the light it holds after each, or None."""
+    current = pending = None
+    count = empty = 0
+    out = []
+    for s in adjusted:
+        best, second = sorted(s.values())[::-1][:2]
+        top = max(s, key=s.get) if best &gt;= threshold and best &gt;= margin * second else None
+        if top is None:
+            pending, count, empty = None, 0, empty + 1
+            current = None if empty &gt;= release else current
+        else:
+            empty = 0
+            if top == current:
+                pending, count = None, 0
+            elif top == pending:
+                count += 1
+                if count &gt;= hold:
+                    current, pending, count = top, None, 0
+            else:
+                pending, count = top, 1
+        out.append(current)
+    return out
+
+def bits_a_minute(p, seconds, n=4):
+    """Wolpaw's information transfer rate: n choices, each right with probability p."""
+    if p &lt;= 1 / n:
+        return 0.0
+    bits = np.log2(n) + p * np.log2(p)
+    if p &lt; 1:
+        bits += (1 - p) * np.log2((1 - p) / (n - 1))
+    return bits * 60 / seconds
+
+PILOT = "w1"                        # run it in the folder the program wrote the files to
+fs, steady = load(f"{PILOT}-steady.bdf")         # the center of a still screen: the baseline
+looks = {d: load(f"{PILOT}-look-{hz}.bdf")[1] for d, hz in RATES.items()}
+
+# 1. The demo, exactly: 2-s windows four times a second, divided by the baseline, then held.
+base = {d: max(1.0, np.mean([score(w, fs, hz) for w in windows(steady, fs, 2)]))
+        for d, hz in RATES.items()}
+for d, x in looks.items():
+    h = held([{k: score(w, fs, hz) / base[k] for k, hz in RATES.items()}
+              for w in windows(x, fs, 2)])
+    right, nothing = np.mean([v == d for v in h]), np.mean([v is None for v in h])
+    print(f"looking {d:6s} held: right {right:.2f}, wrong {1 - right - nothing:.2f}, "
+          f"nothing {nothing:.2f}")
+
+# 2. Forced choices on windows of each length: the demo's score against canonical correlation,
+#    which works on the signal band-passed from 6 to 50 Hz, as Lin and others (2006) did.
+GAZE = 0.5                          # seconds to move the eyes, added to each choice
+bp = butter(4, [6, 50], "bandpass", fs=fs, output="sos")
+passed = {d: sosfiltfilt(bp, x, axis=1) for d, x in looks.items()}
+for seconds in (0.5, 1, 2, 4):
+    base = {d: max(1.0, np.mean([score(w, fs, hz) for w in windows(steady, fs, seconds)]))
+            for d, hz in RATES.items()}
+    right, n = {"score": 0, "cca": 0}, 0
+    for d, x in looks.items():
+        for w, v in zip(windows(x, fs, seconds), windows(passed[d], fs, seconds)):
+            s = {k: score(w, fs, hz) / base[k] for k, hz in RATES.items()}
+            c = {k: cca(v, fs, hz) for k, hz in RATES.items()}
+            right["score"] += max(s, key=s.get) == d
+            right["cca"] += max(c, key=c.get) == d
+            n += 1
+    print(f"{seconds} s: " + "   ".join(
+        f"{k} {v / n:.2f} right, {bits_a_minute(v / n, seconds + GAZE):.0f} bits a minute"
+        for k, v in right.items()))
+
+# 3. Eyes on the center, lights flickering: each rate's response at O1 and at O2.
+for site in ("o1", "o2"):
+    fs, x = load(f"{PILOT}-center-{site}.bdf")
+    print(site, "  ".join(f"{d} {np.mean([snr(w, fs, hz) for w in windows(x, fs, 4, 1)]):.2f}"
+                          for d, hz in RATES.items()))</code></pre>
+      <div class="text">
+        <p>Then report, for your group's pilots and the class's:</p>
+        <ol class="rulelist">
+          <li>How often the rebuilt detector holds the right light, a wrong one, or none, for each light.</li>
+          <li>Accuracy and bits a minute against the window, for both decoders, and the window where bits a minute peak.</li>
+          <li>The 10 and 15 hertz responses at O1 against O2, with the 8 and 12 hertz lights, which sit on the vertical midline, as controls.</li>
+          <li>Which light is hardest, and whether the pilot's alpha accounts for it.</li>
+        </ol>
+      </div>
+      
+    </section>
+
+    <section id="open">
+      <h2>Open problems</h2>
+      <ol class="rulelist">
+        <li><b>Without the eyes.</b> The flight steers by gaze, which a person who can't move their eyes doesn't have. With covert attention alone, 6 of 11 people reached 75 percent correct in at least one session (Kelly and others, 2005). Making attention without gaze reliable is open.</li>
+        <li><b>Comfort against signal.</b> Flicker from about 3 to 60 hertz is visible, tiring and carries a risk of seizures (Fisher and others, 2005). Faster or fainter flicker is gentler and gives a weaker response, and how far that can be pushed is unsettled.</li>
+        <li><b>Calibration.</b> Decoders calibrated to each person do far better than the demo's: with forty targets, 0.5-second flickers and a calibrated decoder, Chen and others (2015) reached 5.32 bits a second, and task-related component analysis averaged 325 bits a minute when cued and 199 when spelling freely (Nakanishi and others, 2018). Keeping that across days and people without recalibrating is open.</li>
+        <li><b>Reporting speed.</b> Information transfer rates are often computed in ways that break their assumptions (Yuan and others, 2013), and cued rates overstate free use, as the gap between 325 and 199 shows.</li>
+      </ol>
+    </section>
+
+    <section id="report">
+      <h2>Report</h2>
+      <div class="text">
+        <ol class="rulelist">
+          <li>The preregistration as written, and every deviation from it, each with its reason.</li>
+          <li>Methods to the COBIDAS MEEG recommendations: the device, the sites, the filters in force, the screen and its distance, the recordings, both decoders and every parameter.</li>
+          <li>Results for each pilot first, then the class's, with how the overlap of windows was handled.</li>
+          <li>The half-field result, and what it does and doesn't say about where the responses come from.</li>
+          <li>The code, which another group can run on your files to the same numbers.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Regan, D. (1966). Some characteristics of average steady-state and transient responses evoked by modulated light. Electroencephalography and Clinical Neurophysiology.</p>
+      <p>Barrett, G., Blumhardt, L., Halliday, A. M., Halliday, E., and Kriss, A. (1976). A paradox in the lateralisation of the visual evoked response. Nature.</p>
+      <p>Wolpaw, J. R., Birbaumer, N., McFarland, D. J., Pfurtscheller, G., and Vaughan, T. M. (2002). Brain-computer interfaces for communication and control. Clinical Neurophysiology.</p>
+      <p>Fisher, R. S., Harding, G., Erba, G., Barkley, G. L., and Wilkins, A. (2005). Photic- and pattern-induced seizures: a review for the Epilepsy Foundation of America Working Group. Epilepsia.</p>
+      <p>Kelly, S. P., Lalor, E. C., Finucane, C., McDarby, G., and Reilly, R. B. (2005). Visual spatial attention control in an independent brain-computer interface. IEEE Transactions on Biomedical Engineering.</p>
+      <p>Lin, Z., Zhang, C., Wu, W., and Gao, X. (2006). Frequency recognition based on canonical correlation analysis for SSVEP-based BCIs. IEEE Transactions on Biomedical Engineering.</p>
+      <p>Yuan, P., and others (2013). A study of the existing problems of estimating the information transfer rate in online brain-computer interfaces. Journal of Neural Engineering.</p>
+      <p>Chen, X., Wang, Y., Nakanishi, M., Gao, X., Jung, T.-P., and Gao, S. (2015). High-speed spelling with a noninvasive brain-computer interface. Proceedings of the National Academy of Sciences.</p>
+      <p>Norcia, A. M., Appelbaum, L. G., Ales, J. M., Cottereau, B. R., and Rossion, B. (2015). The steady-state visual evoked potential in vision research: a review. Journal of Vision.</p>
+      <p>Nakanishi, M., and others (2018). Enhancing detection of SSVEPs for a high-speed brain speller using task-related component analysis. IEEE Transactions on Biomedical Engineering.</p>
+    </section>
+  </div>
+
+</main>
+<footer class="colophon">
+  <p><b>BCI101</b> An Applied Introduction to Noninvasive Brain-Computer Interfaces. Neurons, to bits, to real-world outcomes. Built on the demos at <a href="https://demo.intomind.com/">demo.intomind.com</a>.</p>
+  <div class="level-line"><span>Level</span><div class="levels" role="group" aria-label="Level"><button type="button" data-level="ms">Middle school</button><button type="button" data-level="hs">High school</button><button type="button" data-level="college">College</button><button type="button" data-level="grad">Graduate</button></div></div>
+</footer>
+</body>
+</html>

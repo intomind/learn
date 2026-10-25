@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Encoders and heads · BCI101</title>
+<meta name="description" content="The AI model on the IntoMind One's chip turns four seconds of EEG into 76 numbers. What that embedding is, what heads do with it, and what it keeps and loses.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/assets/site.css">
+<script>(function(){var d=document.documentElement,q=new URLSearchParams(location.search),s=function(k){try{return localStorage.getItem(k)}catch(e){return null}},L={ms:1,hs:1,college:1,grad:1},l=q.get("level");if(L[l]){try{localStorage.setItem("curriculum-level",l)}catch(e){}}else l=s("curriculum-level");if(!L[l]){l="hs";d.dataset.ask="1"}d.dataset.level=l;d.dataset.theme=q.get("theme")||s("curriculum-theme")||"dark";})()</script>
+<script type="module" src="/assets/curriculum.js"></script>
+</head>
+<body>
+<header class="chrome">
+  <a class="mark" href="/">IntoMind<span>Learn</span></a>
+  <nav class="nav" aria-label="Pages"><a href="/" aria-current="page">Contents</a><a href="/labs/">Labs</a><a href="/vocabulary/">Vocabulary</a><a href="/safety/">Safety</a></nav>
+  <div class="controls"><button class="theme" type="button">Light</button></div>
+</header>
+<main class="page kind-chapter"><section class="elsewhere" data-l="ms"><h1>Encoders and heads</h1><p class="lede">This chapter is part of the book from high school on.</p><p><a href="/">Back to the contents</a></p></section><div data-l="hs college grad">
+  <div class="lv lv-hs" data-l="hs">
+    <header class="hero">
+      <p class="eb">Chapter 7 · High school</p>
+      <h1>Encoders and heads</h1>
+      <p class="lede">The IntoMind One carries an AI model that sums up four seconds of your EEG as 76 numbers. What can small models read from those numbers, and how do you know?</p>
+    </header>
+
+    
+
+    <section id="embedding">
+      <h2>Four seconds as 76 numbers</h2>
+      <div class="grid">
+        <div class="text">
+          <p>The IntoMind One carries a small AI model on its chip, called an <dfn data-term="Encoder" data-l="hs" data-def="The AI model on the IntoMind One's chip that sums up four seconds of EEG.">encoder</dfn>. Every four seconds, it reads the EEG from all four channels and sums it up as 76 numbers, called an <dfn data-term="Embedding" data-l="hs" data-def="The encoder's summary: 76 numbers for each four seconds.">embedding</dfn>.</p>
+          <p>Think of an embedding as a description. Two stretches of EEG that are alike get descriptions that are alike: lists of numbers close to each other. The encoder learned to describe EEG this way from the recordings of many people, in many studies.</p>
+        </div>
+        <figure class="fig" data-fig="encoder"><figcaption><b>The model on the chip</b> Four seconds of EEG go into the encoder and come out as 76 numbers. Every head reads the same 76.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>Describe it in five numbers</h3>
+        <p>Your group picks five short songs, and describes each with the same five numbers, such as its speed, loudness and number of instruments, without naming it. Swap descriptions with another group. Can they match each list of numbers to its song?</p>
+        <table class="sheet" data-sheet="hs-songs">
+          <thead><tr><th>Song</th><th>Number 1</th><th>Number 2</th><th>Number 3</th><th>Number 4</th><th>Number 5</th></tr></thead>
+          <tbody><tr><td>A</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>B</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>C</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>D</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>E</td><td></td><td></td><td></td><td></td><td></td></tr></tbody>
+        </table>
+        <p class="see"><b>You should see</b>Some songs matched easily, and some confused, because their numbers were alike: an embedding, and its limits.</p>
+      </div>
+    </section>
+
+    <section id="heads">
+      <h2>Heads</h2>
+      <div class="grid flip">
+        <div class="text">
+          <p>A <dfn data-term="Head" data-l="hs" data-def="A small model that turns an embedding into an answer, such as an age or a score.">head</dfn> is a much smaller model that reads the 76 numbers and gives an answer, such as an age, or how much a reading looks like your On state. Heads run on the IntoMind One's chip too, so the EEG doesn't have to leave the device for a head to answer.</p>
+          <p>The IntoMind One comes with two open heads, for age and for biological sex. The custom AI head you teach in the Mind-Controlled Light Switch is a third.</p>
+        </div>
+        <figure class="fig" data-fig="pipeline" data-stages="eeg encoder embedding head score"><figcaption><b>From EEG to one number</b> Each four-second window becomes 76 numbers on the chip, and a head turns them into one answer.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="results">
+      <h2>What the open heads can do</h2>
+      <div class="grid">
+        <div class="text">
+          <p>The open heads were tested on whole studies they had never seen. Averaging a person's readings, the age head was off by 9.16 years on average. Two much simpler methods were off by 10.02 years, using alpha and the other bands' power, and by 9.77, always guessing the average age.</p>
+          <p>Their published results say that the heads do about as well as much simpler methods, and that neither is a useful predictor of a person's age or sex. They are published to show what the embedding carries.</p>
+        </div>
+        <figure class="fig" data-fig="intervals" data-rows='[{"label":"head against the mean age","value":0.61,"lo":-0.03,"hi":1.25},{"label":"head against band power","value":0.86,"lo":0.24,"hi":1.48}]' data-unit=" years"><figcaption><b>Published</b> How many years better the age head did than each simpler method. The line is the 95 percent interval. Against the average age it crosses zero, so there the head isn't clearly better.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>Read the results</h3>
+        <p>The biological sex head's published score, its AUC, was 0.623, where 0.5 is guessing and 1 is perfect. Band power's was 0.614. From all of these numbers, write what each head can do, and what it can't.</p>
+        <p class="ask"><span class="lbl">Work it out</span>The age head can <span class="fill" data-key="age-can" data-hint="what"></span>, and can't <span class="fill" data-key="age-cant" data-hint="what"></span>. The sex head can <span class="fill" data-key="sex-can" data-hint="what"></span>, and can't <span class="fill" data-key="sex-cant" data-hint="what"></span>.</p>
+        
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Talk about it</h2>
+      <ol class="qs">
+        <li class="q"><p>What is an embedding, in your own words?</p></li>
+        <li class="q"><p>Where do the encoder and the heads run, and why does that matter for privacy?</p></li>
+        <li class="q"><p>The age head does about as well as always guessing the average age of the studies it learned from. Why would anyone publish it?</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>IntoMind (2026). Heads for encoder e2f9b60f411f0e73. github.com/intomind/eeg-foundation-model-heads.</p>
+    </section>
+  </div>
+
+  <div class="lv lv-college" data-l="college">
+    <header class="hero">
+      <p class="eb">Chapter 7 · College</p>
+      <h1>Encoders and heads</h1>
+      <p class="lede">What does the network on the IntoMind One's chip keep of four seconds of EEG, what can a 156-byte head read from it, and how do you read a published evaluation as a specification?</p>
+    </header>
+
+    
+
+    <section id="encoder">
+      <h2>The encoder, and its embedding</h2>
+      <div class="grid">
+        <div class="text">
+          <p>The IntoMind One runs a neural network on its Bluetooth chip, an nRF52840 at 64 megahertz with 256 kilobytes of memory. This <dfn data-term="Encoder" data-l="college" data-def="The AI model on the IntoMind One's chip that sums up four seconds of EEG.">encoder</dfn> has 170,772 parameters, 76 wide and 3 layers deep. It was <dfn data-term="Distillation" data-l="college" data-def="Training a small model to reproduce a larger one's outputs.">distilled</dfn>, with no labels, from a larger encoder pretrained on public EEG.</p>
+          <p>It reads four-second windows at 500 samples a second, without needing to know where the electrodes are, and describes each with 76 numbers: its <dfn data-term="Embedding" data-l="college" data-def="The encoder's summary: 76 numbers for each four seconds.">embedding</dfn>. It also describes each fifth of a second with a token. Its weights stay on the device and aren't published. Everything it sends is open.</p>
+        </div>
+        <figure class="fig" data-fig="encoder"><figcaption><b>The model on the chip</b> Four seconds of EEG go into the encoder and come out as 76 numbers. Every head reads the same 76: the published age and sex heads, and the custom AI head you teach.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="heads">
+      <h2>Heads, rounded to bytes</h2>
+      <div class="grid flip">
+        <div class="text">
+          <p>A <dfn data-term="Head" data-l="college" data-def="A small model that turns an embedding into an answer, such as an age or a score.">head</dfn> is linear: weights and a bias from the 76 numbers to each output. For the chip's integer arithmetic its weights are <dfn data-term="Quantization" data-l="college" data-def="Rounding a model's weights to small integers so the device's chip can run them.">quantized</dfn>: scaled so the largest becomes 127, and rounded to signed bytes. A one-output head is 156 bytes.</p>
+          <p>Each head names the encoder it was fitted beside, by its ID, since its weights mean something only on that encoder's 76 numbers. A head is weights, not code: a device never runs code it is sent. Age is built into the model, sex ships in slot 1, and the Mind-Controlled Light Switch puts custom AI heads in slot 2.</p>
+        </div>
+        <figure class="fig" data-fig="pipeline" data-stages="eeg encoder embedding head score"><figcaption><b>Simulated</b> Each four-second window becomes 76 numbers on the chip, and a head turns them into one output. A custom AI head's output is a score, which the page or the board compares with 0.5.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>Rounding a head</h3>
+        <p>From the top of <a href="https://github.com/intomind/demo">the demos' source</a>, fit a head on the trainer's test data with the trainer's λ, round it to bytes, and measure how far rounding moves the scores. Then do the same with λ = 1.</p>
+        <pre><code>import json
+import numpy as np
+
+X = np.array(json.load(open(&quot;tests/fixtures/train/embeddings.json&quot;)), float)
+y = np.array(json.load(open(&quot;tests/fixtures/train/targets.json&quot;)), float)
+A = np.c_[X, np.ones(len(X))]
+
+def head(lam):
+    &quot;&quot;&quot;Ridge on the weights, none on the intercept, then rounded to signed bytes.&quot;&quot;&quot;
+    P = lam * np.eye(A.shape[1])
+    P[-1, -1] = 0
+    w = np.linalg.solve(A.T @ A + P, A.T @ y)
+    scale = np.abs(w[:-1]).max() / 127               # the largest weight becomes 127
+    q = np.round(w[:-1] / scale)
+    b = np.round(w[-1] / scale)
+    return w, q, b, scale
+
+for lam in (json.load(open(&quot;tests/fixtures/train/ridge.json&quot;))[&quot;ridge&quot;], 1.0):
+    w, q, b, scale = head(lam)
+    exact = A @ w
+    rounded = (X @ q + b) * scale
+    print(f&quot;λ {lam:.0f}: rounding moves a score by up to {np.abs(exact - rounded).max():.3f},&quot;,
+          f&quot;and changes {np.sum((exact &gt; 0.5) != (rounded &gt; 0.5))} of 150 decisions&quot;)</code></pre>
+        <p class="see"><b>You should see</b>With the trainer's λ, rounding moves a score by less than 0.01. With λ = 1, by about 0.17, though here no decision flips.</p>
+        
+      </div>
+    </section>
+
+    <section id="keeps">
+      <h2>What the embedding keeps</h2>
+      <div class="grid">
+        <div class="text">
+          <p>An open reconstruction head turns each token back into the fifth of a second it came from. On held-out windows from studies used neither to train the encoder nor to fit the head, it recovers about two thirds of the variance, R² = 0.660, but not evenly: most of the slow rhythms, less from 13 to 30 hertz, and almost nothing above 30.</p>
+          <p>Windows with gross artifacts, 3.9 percent of them, can't be recovered in amplitude and aren't in these numbers. So a head on the embedding sees alpha well, and a 15 hertz flicker response poorly: the BCI Flight Simulator reads the signal itself.</p>
+        </div>
+        <figure class="fig" data-fig="recon"><figcaption><b>Published</b> R², by band, of the signal recovered from the encoder's tokens, on held-out windows without gross artifacts.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="evaluation">
+      <h2>What the open heads can do</h2>
+      <div class="grid flip">
+        <div class="text">
+          <p>The age head was fitted on 183,642 windows from 3,742 people in 93 studies, and scored on each study left out in turn, with the electrode positions hidden. Averaged over a person's windows, it misses by 9.16 years, against 10.02 for band power fitted the same way and 9.77 for always guessing the training studies' mean age.</p>
+          <p>The sex head's AUC is 0.623, against 0.614 for band power. The evaluation says it plainly: neither head is a useful predictor of a person's age or sex, and neither is offered as one. They show what the embedding carries.</p>
+        </div>
+        <figure class="fig" data-fig="intervals" data-rows='[{"label":"head against the mean age","value":0.61,"lo":-0.03,"hi":1.25},{"label":"head against band power","value":0.86,"lo":0.24,"hi":1.48}]' data-unit=" years"><figcaption><b>Published</b> How much better the age head is, averaged over a person's windows, with each 95 percent interval over studies. Against the mean age, the interval includes zero.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>The evaluation as a specification</h3>
+        <p>From the published evaluation, fill in what each is, so someone could decide whether to use it.</p>
+        <table class="sheet" data-sheet="college-spec">
+          <thead><tr><th></th><th>Takes</th><th>Gives</th><th>Tested on</th><th>Against what</th><th>For</th></tr></thead>
+          <tbody><tr><td>The encoder</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>The age head</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>The sex head</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>The reconstruction head</td><td></td><td></td><td></td><td></td><td></td></tr></tbody>
+        </table>
+        
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Problems</h2>
+      <ol class="qs">
+        <li class="q"><p>Why must a head name the encoder it was fitted beside?</p></li>
+        <li class="q"><p>Could a head on the embedding detect a 15 hertz flicker response well? Use the reconstruction table.</p></li>
+        <li class="q"><p>Where do the encoder and the heads run, and why does that matter for privacy?</p></li>
+        <li class="q"><p>The age head is 0.61 years better than the mean age, with a 95 percent interval from 0.03 worse to 1.25 better. What can you conclude, and why would anyone publish it?</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>IntoMind (2026). Heads for encoder e2f9b60f411f0e73. github.com/intomind/eeg-foundation-model-heads.</p>
+      <p>Hinton, G., Vinyals, O., and Dean, J. (2015). Distilling the knowledge in a neural network. arXiv.</p>
+      <p>Jacob, B., and others (2018). Quantization and training of neural networks for efficient integer-arithmetic-only inference. Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition.</p>
+    </section>
+  </div>
+
+  <div class="lv lv-grad" data-l="grad">
+    <header class="hero">
+      <p class="eb">Chapter 7 · Graduate</p>
+      <h1>Encoders and heads</h1>
+      <p class="lede">What does a small pretrained encoder on the device keep of four seconds of EEG, how much data does a linear head on it need, and what does running it in integers cost?</p>
+    </header>
+
+    
+
+    <section id="pretraining">
+      <h2>Pretraining without labels</h2>
+      <div class="text">
+        <p>Labeled EEG is scarce and unlabeled EEG plentiful, so encoders are pretrained by self-supervision: predicting masked parts of the signal, or telling a window's own context from others', as BENDR did with a contrastive task on a large archive of clinical recordings (Kostas, Aroca-Ouellette and Rudzicz, 2021). Larger models followed, turning EEG into tokens and predicting masked ones (Jiang, Zhao and Lu, 2024). A model too large for a device can be <dfn data-term="Distillation" data-l="grad" data-def="Training a small model to reproduce a larger model's outputs, here its representations of EEG, with no labels needed.">distilled</dfn> into a small one trained to reproduce its outputs (Hinton, Vinyals and Dean, 2015).</p>
+      </div>
+    </section>
+
+    <section id="encoder">
+      <h2>The encoder on the device</h2>
+      <div class="text">
+        <p>The IntoMind One's <dfn data-term="Encoder" data-l="grad" data-def="The neural network on the device that describes each four-second window of EEG with tokens and a 76-number embedding.">encoder</dfn> has 170,772 parameters, 76 wide and 3 layers deep, distilled with no labels from a larger encoder pretrained on public EEG. It reads four-second windows at 500 samples a second, from its own copy of the stream, and doesn't need to know where the electrodes are. It describes each channel's every fifth of a second with a token, 80 tokens for a window of four channels, and the <dfn data-term="Embedding" data-l="grad" data-def="The encoder's description of a four-second window: the mean of its tokens, 76 numbers.">embedding</dfn> is their mean: 76 numbers for each window. It runs on an nRF52840 at 64 megahertz with 256 kilobytes of memory, by default on every window, a new one every four seconds, without ever costing the stream a sample. Its weights stay on the device and aren't published.</p>
+      </div>
+    </section>
+
+    <section id="heads">
+      <h2>A head's arithmetic</h2>
+      <div class="text">
+        <p>A <dfn data-term="Head" data-l="grad" data-def="A linear map from an embedding to up to 32 outputs, stored as signed-byte weights with a scale and a bias, and run on the device.">head</dfn> is linear, up to 32 outputs, and runs in integers. The embedding reaches it as 16-bit integers, each value times 4,096, rounded and saturated. Each output's weights are signed bytes, scaled so the largest is 127, with a 32-bit bias in the same units, and the output is</p>
+        <p class="eq">y = s (b + Σ<sub>i</sub> w<sub>i</sub> e<sub>i</sub>)</p>
+        <p>exact in the integers, then scaled. A one-output head is 156 bytes: a 40-byte header with its shape, a name and the encoder's identity, 76 weights, the bias, the scale, and a 32-byte hash. The device checks the hash and the shape, and never who made the head. Each head names its encoder, since its weights mean something only on that encoder's embedding.</p>
+      </div>
+    </section>
+
+    <section id="probing">
+      <h2>What an embedding carries</h2>
+      <div class="text">
+        <p>A linear head trained to predict a property is a probe: its held-out accuracy measures how much of the property is linearly decodable from the representation, with that much data (Alain and Bengio, 2016). A probe that fails on 88 windows says as much about 88 windows as about the embedding. A probe that succeeds still needs a baseline that skips the encoder, such as band power fitted the same way, before the encoder gets the credit.</p>
+        <p>The published evaluation does exactly that. On studies the heads never saw, neither the age head nor the sex head beats band power on one window, and the age head is not clearly better than the training studies' mean age. An open reconstruction head shows what the tokens keep: on held-out windows without gross artifacts, R² of 0.871 from 1 to 4 hertz, 0.665 from 4 to 8, 0.728 from 8 to 13, 0.421 from 13 to 30 and 0.122 from 30 to 45. A head on the embedding sees slow rhythms and alpha well, and a 15 hertz flicker or anything faster poorly.</p>
+      </div>
+    </section>
+
+    <section id="analysis">
+      <h2>Analysis</h2>
+      <div class="try">
+        <p class="k">Analysis</p>
+        <h3>How many windows a head needs, and what bytes cost</h3>
+        <p>On the trainer's fixture, train heads on random sets of 77 to 120 windows and score them on 30 held out, with the demo's penalty and with a heavier one that also uses no labels. Then round both heads to bytes, as the device runs them, and measure what rounding changes.</p>
+        <pre><code>import json
+import numpy as np
+
+F = "tests/fixtures/train/"                  # in the demos' source
+X = np.array(json.load(open(F + "embeddings.json")), float)   # 150 windows of 76, as integers
+y = np.array(json.load(open(F + "targets.json")), float)
+rng = np.random.default_rng(7)
+
+def penalty(Xt, rule):
+    """Label-free penalties: the demo's gap ridge, or the Gram matrix's mean eigenvalue."""
+    ev = np.linalg.eigvalsh((Xt - Xt.mean(0)).T @ (Xt - Xt.mean(0)))
+    return np.sqrt(max(ev[0], 1) * ev[1]) if rule == "gap" else ev.mean()
+
+def fit(Xt, yt, lam):
+    m = Xt.mean(0)
+    xc = Xt - m
+    w = np.linalg.solve(xc.T @ xc + lam * np.eye(X.shape[1]), xc.T @ (yt - yt.mean()))
+    return w, yt.mean() - m @ w
+
+def quantized(w, b):
+    """The head as the device runs it: weights to signed bytes, the bias in the same units."""
+    scale = np.abs(w).max() / 127
+    return np.clip(np.rint(w / scale), -127, 127), np.rint(b / scale), scale
+
+# 1. A learning curve: held-out accuracy against the number of training windows.
+for n in (77, 80, 88, 100, 120):                 # more windows than weights, always
+    acc = {"gap": [], "mean": []}
+    for _ in range(200):
+        order = rng.permutation(len(y))
+        train, test = order[:n], order[120:]          # the last 30 of each shuffle are held out
+        for rule in acc:
+            w, b = fit(X[train], y[train], penalty(X[train], rule))
+            acc[rule].append(np.mean((X[test] @ w + b &gt; 0.5) == (y[test] == 1)))
+    print(f"{n:3d} windows: gap ridge {np.mean(acc['gap']):.2f}, "
+          f"mean eigenvalue {np.mean(acc['mean']):.2f}")
+
+# 2. What rounding to bytes costs, at each penalty, on all 150 windows.
+for rule in ("gap", "mean"):
+    w, b = fit(X, y, penalty(X, rule))
+    q, qb, scale = quantized(w, b)
+    exact, device = X @ w + b, scale * (X @ q + qb)
+    print(f"{rule}: rounding moves scores by up to {np.abs(exact - device).max():.4f}, "
+          f"and flips {np.sum((exact &gt; 0.5) != (device &gt; 0.5))} of 150 decisions")</code></pre>
+        <p class="see"><b>You should see</b>With the demo's penalty, held-out accuracy of 0.55 at 77 windows, 0.65 at 88 and 0.75 at 120. With the heavier penalty, 0.70 to 0.73 throughout. Rounding moves a score by less than 0.01 at either penalty, and flips no decision.</p>
+        <p>Then report: why the demo's penalty is worst just above 76 windows, and what you would tell someone choosing how long to teach a head.</p>
+        
+      </div>
+    </section>
+
+    <section id="open">
+      <h2>Open problems</h2>
+      <ol class="rulelist">
+        <li><b>Against strong baselines.</b> Whether pretrained EEG encoders beat a well-fitted band-power model on small tasks, as these heads don't on one window, is unsettled, and evaluations that skip the baseline can't say.</li>
+        <li><b>Exposure in evaluation.</b> The encoder saw unlabeled windows from 81 of the 109 studies its age head was scored on, and 90 of the 121 for sex. Whether self-supervised exposure to test data inflates a downstream score, and by how much, is an open question for every pretrained model.</li>
+        <li><b>Without positions.</b> An encoder that ignores where electrodes sit works on any montage, and loses whatever position would have told it. What that costs, and for which tasks, is not known.</li>
+        <li><b>How small.</b> How far an encoder can be compressed for a device before it loses what heads need is open, and depends on what they will be asked.</li>
+      </ol>
+    </section>
+
+    <section id="talk">
+      <h2>Problems</h2>
+      <ol class="qs">
+        <li class="q"><p>Account for every byte of a one-output head on a 76-number embedding.</p></li>
+        <li class="q"><p>Bound the error that rounding the weights adds to one output, and say why the actual error is far smaller.</p></li>
+        <li class="q"><p>The embedding is the mean of a window's tokens. What can a head on it not tell apart?</p></li>
+        <li class="q"><p>Why is the demo's penalty at its worst just above 76 windows, and fine at 120?</p></li>
+        <li class="q"><p>A colleague trains a head on 80 windows of two states and reports 95 percent accuracy on them. What do you say?</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Hinton, G., Vinyals, O., and Dean, J. (2015). Distilling the knowledge in a neural network. arXiv.</p>
+      <p>Alain, G., and Bengio, Y. (2016). Understanding intermediate layers using linear classifier probes. arXiv.</p>
+      <p>Jacob, B., and others (2018). Quantization and training of neural networks for efficient integer-arithmetic-only inference. Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition.</p>
+      <p>Kostas, D., Aroca-Ouellette, S., and Rudzicz, F. (2021). BENDR: using transformers and a contrastive self-supervised learning task to learn from massive amounts of EEG data. Frontiers in Human Neuroscience.</p>
+      <p>Jiang, W.-B., Zhao, L.-M., and Lu, B.-L. (2024). Large brain model for learning generic representations with tremendous EEG data in BCI. International Conference on Learning Representations.</p>
+      <p>IntoMind (2026). Heads for encoder e2f9b60f411f0e73. github.com/intomind/eeg-foundation-model-heads.</p>
+    </section>
+  </div>
+
+  <div data-l="ms">
+    <header class="hero">
+      <p class="eb">Part 2 · Bits · Chapter 7</p>
+      <h1>Encoders and heads</h1>
+      <p class="lede" data-l="ms">This topic starts at high school. In middle school, the Age Detector lab's background covers what students need.</p>
+      
+    </header>
+
+
+
+
+
+
+    
+
+  </div>
+</div></main>
+<footer class="colophon">
+  <p><b>BCI101</b> An Applied Introduction to Noninvasive Brain-Computer Interfaces. Neurons, to bits, to real-world outcomes. Built on the demos at <a href="https://demo.intomind.com/">demo.intomind.com</a>.</p>
+  <div class="level-line"><span>Level</span><div class="levels" role="group" aria-label="Level"><button type="button" data-level="ms">Middle school</button><button type="button" data-level="hs">High school</button><button type="button" data-level="college">College</button><button type="button" data-level="grad">Graduate</button></div></div>
+</footer>
+</body>
+</html>

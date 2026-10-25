@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research methods · BCI101</title>
+<meta name="description" content="Designing a study, estimating power by simulation, preregistration, and reporting that others can reproduce.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/assets/site.css">
+<script>(function(){var d=document.documentElement,q=new URLSearchParams(location.search),s=function(k){try{return localStorage.getItem(k)}catch(e){return null}},L={ms:1,hs:1,college:1,grad:1},l=q.get("level");if(L[l]){try{localStorage.setItem("curriculum-level",l)}catch(e){}}else l=s("curriculum-level");if(!L[l]){l="hs";d.dataset.ask="1"}d.dataset.level=l;d.dataset.theme=q.get("theme")||s("curriculum-theme")||"dark";})()</script>
+<script type="module" src="/assets/curriculum.js"></script>
+</head>
+<body>
+<header class="chrome">
+  <a class="mark" href="/">IntoMind<span>Learn</span></a>
+  <nav class="nav" aria-label="Pages"><a href="/" aria-current="page">Contents</a><a href="/labs/">Labs</a><a href="/vocabulary/">Vocabulary</a><a href="/safety/">Safety</a></nav>
+  <div class="controls"><button class="theme" type="button">Light</button></div>
+</header>
+<main class="page kind-chapter"><section class="elsewhere" data-l="ms hs"><h1>Research methods</h1><p class="lede">This chapter is part of the book from college on.</p><p><a href="/">Back to the contents</a></p></section><div data-l="college grad">
+  <div class="lv lv-college" data-l="college">
+    <header class="hero">
+      <p class="eb">Chapter 11 · College</p>
+      <h1>Research methods</h1>
+      <p class="lede">How do you design a study that can answer its question: a hypothesis that could be wrong, enough data to detect what you expect, an analysis fixed before the data, and a report someone else could repeat?</p>
+    </header>
+
+    
+
+    <section id="hypotheses">
+      <h2>Hypotheses, and designs</h2>
+      <div class="grid">
+        <div class="text">
+          <p>A <dfn data-term="Hypothesis" data-l="college" data-def="A claim precise enough that a study could show it wrong.">hypothesis</dfn> is a claim precise enough that a study could show it wrong. The design names what is varied, what is held constant and what is measured, and the analysis is fixed before the data arrives: the features, the model, the folds, the test against chance, and what result would count as support.</p>
+          <p>Within-person designs, eyes open against closed in the same person, remove the differences between people from the comparison. Alternating the conditions in rounds stops slow drifts, fatigue or settling contact, from lining up with one of them.</p>
+        </div>
+        <figure class="fig" data-fig="rounds" data-held="3"><figcaption><b>A design, fixed in advance</b> Eight rounds, Off and On in turn, eleven readings kept in each, the first two after every switch dropped, and each round held out in turn to test on.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="power">
+      <h2>Power</h2>
+      <div class="grid flip">
+        <div class="text">
+          <p><dfn data-term="Power" data-l="college" data-def="The chance a study detects an effect that is really there.">Power</dfn> is the chance a study detects an effect that is really there. Too little data makes a real effect easy to miss, and makes any effect you do find likely to be overstated, since only the estimates that came out large pass the test.</p>
+          <p>For permutation tests and decoding pipelines, the simplest way to estimate it is simulation: generate data with the effect you expect, run the planned analysis, and count how often it succeeds.</p>
+        </div>
+        <figure class="fig" data-fig="power" data-d="0.5"><figcaption><b>Power</b> The chance of detecting a real effect against people per group, for the effect size on the slider. The dashed line is 80 percent, the usual target.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>Power by simulation</h3>
+        <p>Alpha Flower's design used three blocks with the eyes open and three closed, so its permutation p can't go below 0.05. Simulate how often designs with 3 to 6 blocks of each detect a true difference of half, one and two times the spread between blocks.</p>
+        <pre><code>import numpy as np
+from itertools import combinations
+
+rng = np.random.default_rng(0)
+
+def p_value(opened, closed):
+    &quot;&quot;&quot;One-sided permutation p: every way of calling k of the 2k blocks closed.&quot;&quot;&quot;
+    both = np.r_[opened, closed]
+    n, k = len(both), len(closed)
+    splits = np.array(list(combinations(range(n), k)))
+    inside = np.zeros((len(splits), n), bool)
+    inside[np.arange(len(splits))[:, None], splits] = True
+    diffs = (inside @ both) / k - (~inside @ both) / (n - k)
+    return np.mean(diffs &gt;= closed.mean() - opened.mean())
+
+for k in (3, 4, 5, 6):                       # blocks with the eyes open, and as many closed
+    row = []
+    for d in (0.5, 1.0, 2.0):                # the true difference, in units of the spread between blocks
+        hits = sum(p_value(rng.normal(0, 1, k), rng.normal(d, 1, k)) &lt;= 0.05 for _ in range(500))
+        row.append(f&quot;effect {d}: {hits / 500:.2f}&quot;)
+    print(f&quot;{k} blocks of each:&quot;, &quot;, &quot;.join(row))</code></pre>
+        <p class="see"><b>You should see</b>Power climbing with the effect and with the blocks: about 0.6 for a large effect with three blocks of each, and about 0.95 with six.</p>
+        
+      </div>
+    </section>
+
+    <section id="preregistration">
+      <h2>Preregistration, and reproducibility</h2>
+      <div class="text">
+        <p><dfn data-term="Preregistration" data-l="college" data-def="Recording the plan for a study before collecting its data.">Preregistration</dfn> records the plan before the data: the hypothesis, the design, the sample, the analysis and what counts as support. It doesn't forbid looking further, but it separates what was tested from what was found while exploring, which are reported differently.</p>
+        <p>A <dfn data-term="Reproducible" data-l="college" data-def="Able to be repeated by someone else, from the same data and code, to the same result.">reproducible</dfn> result comes with its code, its settings and, where consent allows, its data. The demos show what that can look like: the same training data gives the same custom AI head, byte for byte, in the browser, in Python and in Rust.</p>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>Reproduce a result</h3>
+        <p>From one wearer's saved training data, with their permission, reproduce the custom AI head in Python, and in Rust if you have it, and confirm each matches the head the browser saved. Then write the methods paragraph a stranger would need to do the same.</p>
+        <pre><code>cd python
+python3 teach_it.py --from training-data.json --out python.imh
+cd ../rust
+cargo run --release --bin teach_it -- --from ../python/training-data.json --out rust.imh
+sha256sum ../python/python.imh rust.imh the-head-you-saved.imh</code></pre>
+        <p class="see"><b>You should see</b>The same checksum on all three files.</p>
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Problems</h2>
+      <ol class="qs">
+        <li class="q"><p>Your study found nothing. When does that mean there is nothing to find?</p></li>
+        <li class="q"><p>Why does an underpowered study that does find an effect tend to overstate it?</p></li>
+        <li class="q"><p>From the simulation, how many blocks of each give about 50 percent power for an effect the size of the spread between blocks? What would you do with that?</p></li>
+        <li class="q"><p>Write the sentence a methods section needs about how a light switch score was tested.</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Button, K. S., and others (2013). Power failure: why small sample size undermines the reliability of neuroscience. Nature Reviews Neuroscience.</p>
+      <p>Nosek, B. A., Ebersole, C. R., DeHaven, A. C., and Mellor, D. T. (2018). The preregistration revolution. Proceedings of the National Academy of Sciences.</p>
+      <p>Pernet, C., and others (2020). Issues and recommendations from the OHBM COBIDAS MEEG committee for reproducible EEG and MEG research. Nature Neuroscience.</p>
+    </section>
+  </div>
+
+  <div class="lv lv-grad" data-l="grad">
+    <header class="hero">
+      <p class="eb">Chapter 11 · Graduate</p>
+      <h1>Research methods</h1>
+      <p class="lede">How do you design a study of your own that can fail, decide how much data it needs, and report it so that someone else can check every number?</p>
+    </header>
+
+    
+
+    <section id="estimand">
+      <h2>The estimand</h2>
+      <div class="text">
+        <p>A study estimates something: its <dfn data-term="Estimand" data-l="grad" data-def="Exactly what a study estimates: the quantity, the contrast, the summary and the population, fixed before the data.">estimand</dfn>. Say exactly what, in whom, and against what. "The mean within-person change in alpha's power above the background from eyes open to closed, in healthy adults like those recruited" is an estimand. "Whether alpha changes" isn't. The estimand fixes the unit of analysis. Here it is people, so people are the replicates, and their blocks and windows are measurements within them, however many there are.</p>
+      </div>
+    </section>
+
+    <section id="designs">
+      <h2>Designs</h2>
+      <div class="text">
+        <p>Within-person designs compare conditions in the same person, which removes the large differences between people from the comparison. Order effects, fatigue and drift then become the threat: alternate the conditions, counterbalance their order across people, and block them so that slow changes fall evenly on both. If the order is randomized, a permutation test is justified by the randomization itself. The light switch's rounds always start with Off and alternate, which balances drift, but its test assumes the rounds could have been labeled any way.</p>
+      </div>
+    </section>
+
+    <section id="power">
+      <h2>Power, at two levels</h2>
+      <div class="text">
+        <p>A person's measured effect varies around the population's mean by the person's own deviation and by measurement noise, so its variance is τ² + σ²/b with b blocks. More blocks shrink the second term, never the first, and past a point only more people help. Power for a design is simplest to get by simulating the analysis you will run on data like those you expect. Underpowered studies don't only miss effects (Button and others, 2013). The effects they do report are exaggerated, since only overestimates cross the threshold (Gelman and Carlin, 2014).</p>
+      </div>
+    </section>
+
+    <section id="preregistration">
+      <h2>Preregistration and registered reports</h2>
+      <div class="text">
+        <p>A <dfn data-term="Preregistration" data-l="grad" data-def="A dated, public record of a study's hypotheses, design and analysis, made before the data exist, which separates the tests it planned from what it found by exploring.">preregistration</dfn> records the hypotheses, the design and the analysis before the data exist, and separates confirmatory tests from exploration, which is still welcome when it is labeled (Nosek and others, 2018). A registered report goes further: the journal reviews the question and the methods before the data, and commits to publishing whatever they show (Chambers, 2013). Deviations happen, and the report names every one.</p>
+      </div>
+    </section>
+
+    <section id="reporting">
+      <h2>Reporting, and reproducing</h2>
+      <div class="text">
+        <p>The COBIDAS MEEG recommendations list what an EEG report owes its reader, from the amplifier and the reference to every analysis parameter (Pernet and others, 2020). EEG-BIDS organizes the files so another lab's code can read them (Pernet and others, 2019). Share the code with its environment pinned, and checksums for the data. The demos make some of this concrete: every recording is saved with checksums, and a custom AI head is rebuilt byte for byte from its training data by a second program. Whether influential EEG findings replicate at all is now being tested across many labs (Pavlov and others, 2021).</p>
+      </div>
+    </section>
+
+    <section id="analysis">
+      <h2>Analysis</h2>
+      <div class="try">
+        <p class="k">Analysis</p>
+        <h3>Power and exaggeration, people against blocks</h3>
+        <p>Simulate a within-person study whose effect varies between people, with 8, 16 or 32 people and 4 or 16 blocks each, and test it as you would: each person's mean difference, then a one-sided t-test across people. Record power, and how much the significant estimates overstate the true effect.</p>
+        <pre><code>import numpy as np
+from scipy import stats
+
+rng = np.random.default_rng(11)
+EFFECT, SPREAD, NOISE = 0.3, 0.3, 1.0    # the mean effect, how much it varies between people,
+                                         # and the noise in one block, all in the same units
+
+def study(people, blocks):
+    """Each person's own effect, measured as the mean of their blocks' differences."""
+    own = rng.normal(EFFECT, SPREAD, people)
+    return own + rng.normal(0, NOISE, (people, blocks)).mean(axis=1)
+
+print("people  blocks  power  significant estimates, over the true effect")
+for people in (8, 16, 32):
+    for blocks in (4, 16):
+        estimates = np.array([study(people, blocks) for _ in range(4000)])
+        p = stats.ttest_1samp(estimates, 0, axis=1, alternative="greater").pvalue
+        found = p &lt; 0.05
+        exaggeration = estimates.mean(axis=1)[found].mean() / EFFECT
+        print(f"{people:6d} {blocks:7d} {found.mean():6.2f}  {exaggeration:.2f}")</code></pre>
+        <p class="see"><b>You should see</b>Power of 0.36 with 8 people and 4 blocks each, where significant estimates overstate the effect by 61 percent. Sixteen blocks for 8 people buy about as much as twice the people with 4 blocks, 0.63 against 0.64, and with 32 people power is 0.89 at 4 blocks.</p>
+        <p>Then report: the design your capstone can afford, its power for the effect you expect, and how much its significant result would be likely to exaggerate.</p>
+        
+      </div>
+    </section>
+
+    <section id="open">
+      <h2>Open problems</h2>
+      <ol class="rulelist">
+        <li><b>Preregistering machine learning.</b> A decoding pipeline has many choices, folds, penalties, features and windows, and how to preregister them without freezing what should be learned from the data is unsettled.</li>
+        <li><b>How much replicates.</b> Large replication efforts in EEG are under way (Pavlov and others, 2021), and how many established effects hold is not yet known.</li>
+        <li><b>Effects that differ between people.</b> When an effect varies between people, the average may describe no one. How to estimate and report the spread, with the samples a lab can afford, is open.</li>
+      </ol>
+    </section>
+
+    <section id="talk">
+      <h2>Problems</h2>
+      <ol class="qs">
+        <li class="q"><p>Write the estimand for "does closing the eyes raise alpha", for your class, precisely enough that two analysts would compute the same number.</p></li>
+        <li class="q"><p>With a between-person spread of 0.3 and a block noise of 1, how many blocks make the noise term equal to the spread term? What does that say about adding more?</p></li>
+        <li class="q"><p>Why do significant results from underpowered studies overstate their effects?</p></li>
+        <li class="q"><p>The light switch always teaches Off, On, Off, On. What does that protect against, and what would randomizing the order add?</p></li>
+        <li class="q"><p>Your analysis changed after you saw the data: you dropped a wearer with poor contact. How do you report it?</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Button, K. S., and others (2013). Power failure: why small sample size undermines the reliability of neuroscience. Nature Reviews Neuroscience.</p>
+      <p>Chambers, C. D. (2013). Registered reports: a new publishing initiative at Cortex. Cortex.</p>
+      <p>Gelman, A., and Carlin, J. (2014). Beyond power calculations: assessing Type S (sign) and Type M (magnitude) errors. Perspectives on Psychological Science.</p>
+      <p>Nosek, B. A., Ebersole, C. R., DeHaven, A. C., and Mellor, D. T. (2018). The preregistration revolution. Proceedings of the National Academy of Sciences.</p>
+      <p>Pernet, C. R., and others (2019). EEG-BIDS, an extension to the brain imaging data structure for electroencephalography. Scientific Data.</p>
+      <p>Pernet, C., and others (2020). Issues and recommendations from the OHBM COBIDAS MEEG committee for reproducible EEG and MEG research. Nature Neuroscience.</p>
+      <p>Pavlov, Y. G., and others (2021). #EEGManyLabs: investigating the replicability of influential EEG experiments. Cortex.</p>
+    </section>
+  </div>
+
+  <div data-l="ms hs">
+    <header class="hero">
+      <p class="eb">Part 3 · Real-world outcomes · Chapter 11</p>
+      <h1>Research methods</h1>
+      <p class="lede" data-l="ms hs">This topic is part of the college and graduate courses.</p>
+      
+    </header>
+
+
+
+
+
+
+    
+
+  </div>
+</div></main>
+<footer class="colophon">
+  <p><b>BCI101</b> An Applied Introduction to Noninvasive Brain-Computer Interfaces. Neurons, to bits, to real-world outcomes. Built on the demos at <a href="https://demo.intomind.com/">demo.intomind.com</a>.</p>
+  <div class="level-line"><span>Level</span><div class="levels" role="group" aria-label="Level"><button type="button" data-level="ms">Middle school</button><button type="button" data-level="hs">High school</button><button type="button" data-level="college">College</button><button type="button" data-level="grad">Graduate</button></div></div>
+</footer>
+</body>
+</html>

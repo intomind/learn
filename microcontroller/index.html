@@ -1,0 +1,777 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mind-Controlled Microcontroller · BCI101</title>
+<meta name="description" content="Your custom AI head, running on your IntoMind One, drives a Raspberry Pi Pico 2 W, and a project of your own, with no computer in the room.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/assets/site.css">
+<script>(function(){var d=document.documentElement,q=new URLSearchParams(location.search),s=function(k){try{return localStorage.getItem(k)}catch(e){return null}},L={ms:1,hs:1,college:1,grad:1},l=q.get("level");if(L[l]){try{localStorage.setItem("curriculum-level",l)}catch(e){}}else l=s("curriculum-level");if(!L[l]){l="hs";d.dataset.ask="1"}d.dataset.level=l;d.dataset.theme=q.get("theme")||s("curriculum-theme")||"dark";})()</script>
+<script type="module" src="/assets/curriculum.js"></script>
+</head>
+<body>
+<header class="chrome">
+  <a class="mark" href="/">IntoMind<span>Learn</span></a>
+  <nav class="nav" aria-label="Pages"><a href="/">Contents</a><a href="/labs/" aria-current="page">Labs</a><a href="/vocabulary/">Vocabulary</a><a href="/safety/">Safety</a></nav>
+  <div class="controls"><button class="theme" type="button">Light</button></div>
+</header>
+<main class="page kind-lab">
+  <div class="lv lv-ms" data-l="ms">
+    <header class="hero">
+      <p class="eb">Lab 5 · Middle school</p>
+      <h1>Mind-Controlled Microcontroller</h1>
+      <p class="lede">Put one program on a small board, and it switches its light by itself while your custom AI head reads On. Can it work with no computer in the room?</p>
+    </header>
+
+    
+
+    <section id="ready">
+      <h2>Get ready</h2>
+      <div class="three">
+        <div>
+          <h3>You need</h3>
+          <ul>
+            <li>An IntoMind One with your custom AI head on it, charged, with its cable unplugged</li>
+            <li>A Raspberry Pi Pico 2 W. A Pico 2 without the W has no Bluetooth.</li>
+            <li>A micro USB cable that carries data, and a computer</li>
+            <li>A USB charger for the board</li>
+            <li>A clean microfiber, soft cotton or eyeglass cloth</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Roles</h3>
+          <dl class="roles">
+            <div><dt>Wearer</dt><dd>Wears the IntoMind One, and holds On or Off.</dd></div>
+            <div><dt>Builder</dt><dd>Puts the program on the board, and plugs it in.</dd></div>
+            <div><dt>Recorder</dt><dd>Writes down what the board's light does.</dd></div>
+            <div><dt>Skeptic</dt><dd>Watches: does the light follow the wearer, or something else?</dd></div>
+          </dl>
+          <p class="after">Take turns, so everyone who wants to can be the wearer. In a group of three, the builder is the skeptic too.</p>
+        </div>
+        <div>
+          <h3>Rules</h3>
+          <ul>
+            <li>Unplug the IntoMind One's cable before anyone puts it on. The board's own cable is fine.</li>
+            <li>Wearing it is your choice. Every role is a real one.</li>
+            <li>The board's pin gives only 3.3 volts: enough for an LED or a signal, and never connected to anything that plugs into a wall.</li>
+            <li>Wipe the electrodes between wearers with the soft cloth, since a rough one can scratch their gold coating.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="steps">
+      <h2>Steps</h2>
+      <ol class="steps">
+        <li>
+          <h3>Put your custom AI head on</h3>
+          <figure class="fig" data-fig="shot" data-shot="switch-running"></figure>
+          <div>
+            <p>Open the <a href="https://demo.intomind.com/light-switch/">Mind-Controlled Light Switch demo</a>, connect your IntoMind One, press <b>Install a saved head</b>, and choose the wearer's file. The demo puts the head on your IntoMind One, and runs it. Without a saved file, teach a new one, and run it.</p>
+            <p>Then close the tab, so your IntoMind One is free to talk to the board, and switch it off until step 3.</p>
+            <p class="see"><b>You should see</b>The board drawn on the demo lighting up while the wearer holds their On thought.</p>
+          </div>
+        </li>
+        <li>
+          <h3>Put the program on the board</h3>
+          <figure class="fig" data-fig="shot" data-shot="pico-guide"></figure>
+          <div>
+            <p>Download the program from the <a href="https://demo.intomind.com/pico/">Mind-Controlled Microcontroller guide</a>: one file holds all of it. Hold the white BOOTSEL button on the board while you plug it into the computer, then let go. Drag the file onto the drive that appears. When the board's light blinks once a second, unplug the board until step 3.</p>
+            <p class="see"><b>You should see</b>A drive named RP2350 that closes by itself. Then the board's light blinking once a second, while it looks for your IntoMind One.</p>
+            
+          </div>
+        </li>
+        <li>
+          <h3>Connect your IntoMind One to the board</h3>
+          <figure class="fig" data-fig="board" data-led="follow"></figure>
+          <div>
+            <p class="ask"><span class="lbl">Predict</span>After I start my On thought, the light will come on about <span class="fill" data-key="predict-lag" data-hint="how many"></span> seconds later.</p>
+            <p>When your teacher calls your group, plug the board back in, and switch on your IntoMind One, unplugged. The wearer puts it on where your custom AI head was taught: the back of the head, a little above the bump where the skull meets the neck. The first time, the board pairs with it, and remembers it after that.</p>
+            <p class="see"><b>You should see</b>The light stop blinking. Then it comes on a few seconds after you start your On thought, and goes off a few seconds after you rest.</p>
+            
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>Read the light</h3>
+            <p>The board's light says what the program is doing. While you wear it, you should see only the first two kinds. The others are warnings: they are here so you can read them if they happen. Don't make them happen.</p>
+          </div>
+          <figure class="fig" data-fig="ledstrips"></figure>
+          <table class="sheet" data-sheet="ms-patterns">
+            <thead><tr><th>What the light did</th><th>What it means</th><th>Did you see it?</th></tr></thead>
+            <tbody>
+              <tr><td>One short blink a second</td><td>Looking for your IntoMind One</td><td></td></tr>
+              <tr><td>Off, and on</td><td>Your custom AI head reads Off, or On</td><td></td></tr>
+              <tr><td>Two short blinks a second</td><td>Your IntoMind One is on its charger, and sends no EEG</td><td></td></tr>
+              <tr><td>Three short blinks a second</td><td>No custom AI head is installed</td><td></td></tr>
+              <tr><td>Fast blinking</td><td>The last reading had a gap in the signal, so the board skipped it</td><td></td></tr>
+            </tbody>
+          </table>
+          <div>
+            <p class="see"><b>You should see</b>One blink a second while the board looks, then off and on while you wear it. You may see none of the warnings, and that is a result to record too.</p>
+          </div>
+        </li>
+        <li>
+          <h3>Take the computer away</h3>
+          <figure class="fig" data-fig="datapath" data-to="board"></figure>
+          <div>
+            <p>Unplug the board from the computer, and plug it into a USB charger instead. It finds your IntoMind One by itself.</p>
+            <p>Take turns. Before each wearer, unplug the board, so your IntoMind One is free. Put the wearer's head on it as in step 1, close the tab, and plug the board back in.</p>
+            <p class="see"><b>You should see</b>The light following the wearer's custom AI head, with no computer anywhere in the path.</p>
+            
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="happened">
+      <h2>What happened</h2>
+      <div class="grid">
+        <div class="text">
+          <p>Your custom AI head runs on your IntoMind One, not on the board. Every few seconds, the IntoMind One sends the board one number, the score: near 0 for Off, near 1 for On, and sometimes a little outside. The board compares it with 0.5. Above, it switches its light on. Below, off.</p>
+          <p>They talk over Bluetooth, with no computer between them. When they first connected, they paired: they set up secret keys, so anyone who only listens in can't read what passes between them.</p>
+          <p>The board's light could be anything its pin switches on: another LED, or a signal into a robot's own controller. That is how a brain-computer interface reaches the real world.</p>
+          
+        </div>
+        <figure class="fig" data-fig="pipeline" data-stages="head score light"><figcaption><b>Simulated</b> The custom AI head's score, where it falls against 0.5, and the light. The IntoMind One works out the score. The board compares it with 0.5, and switches the light.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Talk about it</h2>
+      <ol class="qs">
+        <li class="q"><p>Where is the decision On or Off made: on the board, or on your IntoMind One?</p></li>
+        <li class="q"><p>What else could the board's pin switch on, instead of a light?</p></li>
+        <li class="q"><p>Who could a board like this help?</p></li>
+      </ol>
+    </section>
+  </div>
+
+  <div class="lv lv-hs" data-l="hs">
+    <header class="hero">
+      <p class="eb">Lab 5 · High school</p>
+      <h1>Mind-Controlled Microcontroller</h1>
+      <p class="lede">Program a small board to follow your custom AI head, and to switch a circuit you built. With no computer in the loop, how long does a change of mind take to reach the pin?</p>
+    </header>
+
+    
+
+    <section id="background">
+      <h2>Background</h2>
+      <p class="after-note">Read it the night before.</p>
+      <div class="grid">
+        <div class="text">
+          <h3>Who does what</h3>
+          <p>Your IntoMind One does the hard part. For every four seconds of your EEG, it runs the encoder and your custom AI head on its own chip, and sends one number over Bluetooth: the score, near 0 for Off and near 1 for On, and sometimes a little outside.</p>
+          <p>The board does the rest. It compares each score with 0.5, and switches its light and its pin. Once the program is on the board, no computer is needed.</p>
+        </div>
+        <figure class="fig" data-fig="pipeline" data-stages="eeg encoder head score light"><figcaption><b>Simulated</b> Four seconds of EEG, then the encoder and your custom AI head on the IntoMind One's chip. The score goes to the board, which lights its light while the score is above 0.5.</figcaption></figure>
+      </div>
+      <div class="grid flip">
+        <div class="text">
+          <h3>The program</h3>
+          <p>The program is one file of MicroPython. At its top are three settings, then two functions that are yours to change.</p>
+          <p><code>on_switch(on)</code> runs when the decision changes: <code>True</code> for On and <code>False</code> for Off, and losing the link to your IntoMind One counts as Off. <code>on_reading(score, clean)</code> runs for every reading, with the score and whether the signal behind it was clean.</p>
+          <p>The rest of the file finds your IntoMind One, pairs with it the first time, asks it for scores, and runs the board's light, which shows what the program is doing.</p>
+        </div>
+        <figure class="fig" data-fig="ledstrips"><figcaption><b>The board's light</b> Its six patterns, a second of each. While you wear it, you should see only one blink a second, then off and on. The others are warnings, here so you can read them. Don't make them happen.</figcaption></figure>
+      </div>
+      <div class="grid">
+        <div class="text">
+          <h3>Why the light lags</h3>
+          <p>Each reading is four seconds of EEG, and its score comes once the reading has ended. When you switch, the reading under way holds some of each state, so its score falls in between, and the light often waits for the next reading.</p>
+          <p>So the delay depends on where in a reading you switch.</p>
+        </div>
+        <figure class="fig" data-fig="lag"><figcaption><b>Simulated</b> Your EEG in four-second readings, gray for Off and orange for On, with each reading's score under it. The light comes on with the first score above 0.5. Switch at another moment, and the delay changes.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="ready">
+      <h2>Get ready</h2>
+      <div class="three">
+        <div>
+          <h3>You need</h3>
+          <ul>
+            <li>An IntoMind One, charged, with its cable unplugged</li>
+            <li>A Raspberry Pi Pico 2 WH with the IntoMind MicroPython firmware, and a micro USB cable that carries data</li>
+            <li>A computer with a MicroPython editor: Thonny, or Viper IDE on a Chromebook</li>
+            <li>Your circuit from <a href="/circuits/">Microcontrollers and circuits</a>: a breadboard, an LED, a 330 ohm resistor and two jumper wires</li>
+            <li>A USB charger for the board, and a stopwatch</li>
+            <li>A clean microfiber, soft cotton or eyeglass cloth</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Roles</h3>
+          <dl class="roles">
+            <div><dt>Wearer</dt><dd>Wears the IntoMind One, and switches between Off and On when the recorder calls.</dd></div>
+            <div><dt>Programmer</dt><dd>Puts the program on the board, and changes it.</dd></div>
+            <div><dt>Recorder</dt><dd>Calls the switches, and times the light.</dd></div>
+            <div><dt>Skeptic</dt><dd>Watches the wearer and the light. Does the light follow the wearer, or something else?</dd></div>
+          </dl>
+          <p class="after">Take turns, so everyone who wants to can be the wearer. In a group of three, the programmer is the skeptic too.</p>
+        </div>
+        <div>
+          <h3>Rules</h3>
+          <ul>
+            <li>Unplug the IntoMind One's cable before anyone puts it on. The board's own cable is fine.</li>
+            <li>Wearing it is your choice. Every role is a real one.</li>
+            <li>The board's pin gives 3.3 volts. Projects stay with it, and nothing on it ever plugs into a wall.</li>
+            <li>Have every circuit checked before the board is plugged in.</li>
+            <li>Wipe the electrodes between wearers with the soft cloth, since a rough one can scratch their gold coating.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="steps">
+      <h2>Steps</h2>
+      <ol class="steps">
+        <li>
+          <h3>Put your custom AI head on</h3>
+          <figure class="fig" data-fig="shot" data-shot="switch-running"></figure>
+          <div>
+            <p>Open the <a href="https://demo.intomind.com/light-switch/">Mind-Controlled Light Switch demo</a>, connect your IntoMind One, press <b>Install a saved head</b>, and choose the wearer's file. The demo puts the head in slot 2 on your IntoMind One, and runs it. Without a saved file, teach a new one, and run it.</p>
+            <p>Then close the tab, so your IntoMind One is free for the board, and switch it off until step 3.</p>
+            <p class="see"><b>You should see</b>The board drawn on the demo lighting up while the wearer holds On.</p>
+          </div>
+        </li>
+        <li>
+          <h3>Put the program on the board</h3>
+          <figure class="fig code"><pre><code># Where the Mind-Controlled Light Switch demo installs your custom AI head.
+HEAD_SLOT = 2
+# A reading above this means On, the same line the demo draws.
+SWITCH_THRESHOLD = 0.5
+# The start of your IntoMind One's name, like "Ada's", to choose one among
+# several. Empty takes the one heard most strongly.
+DEVICE_NAME_PREFIX = ""</code></pre></figure>
+          <div>
+            <p><a href="https://demo.intomind.com/micropython/mind_controlled_microcontroller.py">Download the program</a>. Plug the board into the computer, and open your editor. Save the program on the board as <code>main.py</code>: in Thonny, open it, choose Save as, then Raspberry Pi Pico. In Viper IDE, drop it onto the board's files, and rename it. The board runs <code>main.py</code> whenever it has power.</p>
+            <p>The settings at its top are the slot your head is in, the line a score must cross to read On, and the start of your IntoMind One's name, if your teacher named them.</p>
+            <p class="see"><b>You should see</b><code>main.py</code> among the board's files in your editor.</p>
+            
+          </div>
+        </li>
+        <li>
+          <h3>Connect your IntoMind One to the board</h3>
+          <figure class="fig code"><pre><code>Looking for your IntoMind One.
+Found IntoMind One. Connecting.
+Running your custom AI head.
+Reading 0.14
+Reading 0.09
+Reading 0.83</code></pre></figure>
+          <div>
+            <p>The wearer puts the IntoMind One on at the site where the head was taught, the same way around. A head learned that site's signal, and at another site the same state makes a different one.</p>
+            <p>When your teacher says, switch your IntoMind One on, keep the board beside it, and press Ctrl-D in the editor to restart the board. The first time, the board pairs with your IntoMind One, and it remembers it after that.</p>
+            <p class="see"><b>You should see</b>The board's light blinking once a second while it looks, then off, and on while the wearer holds On. The editor shows each reading's score, every few seconds.</p>
+            
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>Time it</h3>
+            <p class="ask"><span class="lbl">Predict</span>After I switch to On, the light will come on about <span class="fill" data-key="predict-delay" data-hint="how many"></span> seconds later.</p>
+            <p>The recorder calls five switches to On, and times each one, from the call to the light coming on. After each, the wearer goes back to Off until the light goes off.</p>
+          </div>
+          <table class="sheet" data-sheet="hs-lag">
+            <thead><tr><th>Call</th><th>Seconds to the light</th><th>Did the light follow?</th><th>Skeptic's notes</th></tr></thead>
+            <tbody><tr><td>1</td><td></td><td></td><td></td></tr><tr><td>2</td><td></td><td></td><td></td></tr><tr><td>3</td><td></td><td></td><td></td></tr><tr><td>4</td><td></td><td></td><td></td></tr><tr><td>5</td><td></td><td></td><td></td></tr></tbody>
+          </table>
+          <div>
+            <p class="see"><b>You should see</b>Delays of several seconds, and not the same each time.</p>
+          </div>
+        </li>
+        <li>
+          <h3>Light your own LED</h3>
+          <figure class="fig" data-fig="circuit"></figure>
+          <div>
+            <p>Unplug the board, and check your circuit: from pin 20, which is GP15, through the 330 ohm resistor and the LED to ground on pin 18, with the LED's longer leg toward pin 20. Have it checked, then plug the board back in.</p>
+            <p>In <code>main.py</code>, remove the <code>#</code> from the two lines marked for the pin: <code>pin = Pin(15, Pin.OUT, value=0)</code>, and <code>pin.value(on)</code> in <code>on_switch</code>. Save, and press Ctrl-D.</p>
+            <p class="see"><b>You should see</b>Your LED following your custom AI head, with the board's own light.</p>
+          </div>
+        </li>
+        <li>
+          <h3>Make it yours</h3>
+          <figure class="fig code"><pre><code>pin = Pin(15, Pin.OUT, value=0)
+
+def on_switch(on):
+    pin.value(on)
+
+def on_reading(score, clean):
+    pass</code></pre></figure>
+          <div>
+            <p>Change what happens. Count your switches to On, and print the count. Light your LED only when the score is above 0.8. Print a row of <code>#</code> signs as long as the score, for a graph in the editor. Or plan something of your own.</p>
+            <p>Keep both functions quick: a sleep inside one pauses the whole program, the board's light included. When it works, keep a copy: save <code>main.py</code> on the computer too.</p>
+            <p class="see"><b>You should see</b>Your project doing what you wrote, each time you save and press Ctrl-D. A mistake shows in the editor, with the line it is on.</p>
+          </div>
+        </li>
+        <li>
+          <h3>Take the computer away</h3>
+          <figure class="fig" data-fig="datapath" data-to="board"></figure>
+          <div>
+            <p>Unplug the board from the computer, and plug it into the USB charger. It runs <code>main.py</code> by itself, and finds your IntoMind One.</p>
+            <p>Take turns. Before each wearer, unplug the board, so your IntoMind One is free. Put the wearer's head on it as in step 1, close the tab, and plug the board back in.</p>
+            <p class="see"><b>You should see</b>Your project following each wearer's custom AI head, with no computer in the path. With no editor to print to, the board's light tells you what the program is doing.</p>
+            
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>Remove it, if your teacher asks</h3>
+            <p>Your custom AI head stays on your IntoMind One until it is removed or replaced. When your teacher wants the device clear, unplug the board, then open the Light Switch demo, connect, and press <b>Remove it from your IntoMind One</b>.</p>
+            <p class="see"><b>You should see</b>Removed. Your IntoMind One holds no custom AI head in slot 2.</p>
+            
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="work">
+      <h2>Work it out</h2>
+      <div class="text">
+        <p class="ask"><span class="lbl">Work it out</span>Our median delay, the middle of the five in order: <span class="fill" data-key="median-delay" data-hint="seconds"></span>. That is about <span class="fill" data-key="readings" data-hint="how many"></span> four-second readings.</p>
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Talk about it</h2>
+      <ol class="qs">
+        <li class="q"><p><code>on_switch</code> runs only when the decision changes, and <code>on_reading</code> runs for every reading. Which would you use to count how many times you switched to On? Why?</p></li>
+        <li class="q"><p>A reading with a gap in its signal changes nothing, and the light blinks fast instead. Why is that a good rule?</p></li>
+        <li class="q"><p>Your five delays weren't the same. Give two reasons.</p></li>
+        <li class="q"><p>Why must your project stay with the board's own 3.3 volts?</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Raspberry Pi Ltd. Raspberry Pi Pico 2 W documentation.</p>
+      <p><a href="https://github.com/intomind/demo">The demos' source</a>, github.com/intomind/demo: the program in <code>micropython/mind_controlled_microcontroller.py</code>.</p>
+      <p>The IntoMind MicroPython repository, github.com/intomind/micropython.</p>
+    </section>
+  </div>
+
+  <div class="lv lv-college" data-l="college">
+    <header class="hero">
+      <p class="eb">Lab 6 · College</p>
+      <h1>Mind-Controlled Microcontroller</h1>
+      <p class="lede">Close the loop on a board you program. How long does a change of mental state take to reach its pin, how much of that is the four-second window, and does your budget predict the rest?</p>
+    </header>
+
+    
+
+    <section id="background">
+      <h2>Background</h2>
+      <p class="after-note">Read it before the lab.</p>
+      <div class="grid">
+        <div class="text">
+          <h3>The program</h3>
+          <p>One MicroPython file, mind_controlled_microcontroller.py, in <a href="https://github.com/intomind/demo">the demos' source</a>. It scans for an IntoMind One, pairs the first time and reconnects with the bond after that, selects the head in slot 2, starts the stream, and turns predictions on. Each prediction carries the head's output for one four-second window: the program compares it with <code>SWITCH_THRESHOLD</code>, 0.5, drops any reading whose window had a gap, and counts the link lost after 20 seconds without a reading.</p>
+          <p>It is a small state machine, and the board's light shows its state. Two functions are yours: <code>on_switch(on)</code>, when the decision changes, and <code>on_reading(score, clean)</code>, for every reading.</p>
+        </div>
+        <figure class="fig" data-fig="ledstrips"><figcaption><b>The board's light</b> Its six patterns, a second of each: the program's states. While you wear it you should see only the first and then off and on. The others are warnings, explained, not to be made.</figcaption></figure>
+      </div>
+      <div class="grid flip">
+        <div class="text">
+          <h3>A model of the delay</h3>
+          <p>The IntoMind One sends a reading every four seconds. Suppose a reading's score passes 0.5 once more than half of it is On. A call that falls at a random moment in a reading is then answered when that reading ends, if the call came in its first half, or when the next one ends: between 2 and 6 seconds later, spread evenly, a mean of 4 and a standard deviation of 4/√12, about 1.15. Everything else, the model on the chip, the link, the program and the pin, adds a delay δ on top.</p>
+          <p>Timing by hand adds the people: the wearer reacting to the call, and the operator to the light.</p>
+        </div>
+        <figure class="fig" data-fig="lag"><figcaption><b>Simulated</b> EEG in four-second readings, gray for Off and orange for On, each with its score. The light comes on with the first score above 0.5. Switch at another moment, and the delay changes.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="hypothesis">
+      <h2>Hypothesis</h2>
+      <div class="text">
+        <p class="after-note">Write it from your latency budget, before anyone connects.</p>
+        <p class="ask"><span class="lbl">Hypothesis</span>The mean delay from a call to the pin will be about <span class="fill" data-key="h-mean" data-hint="seconds"></span>, with a spread of about <span class="fill" data-key="h-spread" data-hint="seconds"></span>, and δ, everything after the window, about <span class="fill" data-key="h-delta" data-hint="seconds"></span>.</p>
+      </div>
+    </section>
+
+    <section id="ready">
+      <h2>Get ready</h2>
+      <div class="three">
+        <div>
+          <h3>You need</h3>
+          <ul>
+            <li>An IntoMind One, charged, with its cable unplugged, and the wearer's saved head</li>
+            <li>A Raspberry Pi Pico 2 WH with the IntoMind MicroPython firmware, and a micro USB cable that carries data</li>
+            <li>A computer with a MicroPython editor: Thonny, or Viper IDE on a Chromebook</li>
+            <li>The LED circuit, a USB charger, and a stopwatch</li>
+            <li>A clean microfiber, soft cotton or eyeglass cloth</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Roles</h3>
+          <dl class="roles">
+            <div><dt>Wearer</dt><dd>Wears the IntoMind One, and switches when the operator calls.</dd></div>
+            <div><dt>Operator</dt><dd>Programs the board, calls the switches and times the pin's LED.</dd></div>
+            <div><dt>Analyst</dt><dd>Writes down each delay, and keeps the board's log.</dd></div>
+          </dl>
+        </div>
+        <div>
+          <h3>Rules</h3>
+          <ul>
+            <li>Unplug the IntoMind One's cable before anyone puts it on. The board's own cable is fine.</li>
+            <li>Wearing it is your choice. Every role is a real one.</li>
+            <li>The pin gives 3.3 volts: projects stay with it, nothing on it plugs into a wall, and every circuit is checked before power.</li>
+            <li>Wipe the electrodes between wearers with the soft cloth, since a rough one can scratch their gold coating.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="steps">
+      <h2>Procedure</h2>
+      <ol class="steps">
+        <li>
+          <h3>Put your custom AI head on</h3>
+          <figure class="fig" data-fig="shot" data-shot="switch-running"></figure>
+          <div>
+            <p>On the <a href="https://demo.intomind.com/light-switch/">Mind-Controlled Light Switch demo</a>, connect, press <b>Install a saved head</b>, and choose the wearer's file: the demo puts it in slot 2 and runs it. Then close the tab, so the IntoMind One is free for the board, and switch it off until step 3.</p>
+          </div>
+        </li>
+        <li>
+          <h3>Put the program on the board</h3>
+          <figure class="fig code"><pre><code>pin = Pin(15, Pin.OUT, value=0)
+
+def on_switch(on):
+    pin.value(on)
+
+def on_reading(score, clean):
+    print(time.ticks_ms(), "%.2f" % score, clean)</code></pre></figure>
+          <div>
+            <p><a href="https://demo.intomind.com/micropython/mind_controlled_microcontroller.py">Download the program</a>, and save it on the board as <code>main.py</code>. In its section for your code, uncomment the two lines for the pin, and make <code>on_reading</code> log each reading's time on the board's clock, its score and whether it was clean. Check the LED circuit on pin 20 before the board is plugged in.</p>
+          </div>
+        </li>
+        <li>
+          <h3>Connect</h3>
+          <figure class="fig code"><pre><code>Looking for your IntoMind One.
+Found IntoMind One. Connecting.
+Running your custom AI head.
+51234 0.14 True
+Reading 0.14
+55233 0.09 True
+Reading 0.09</code></pre></figure>
+          <div>
+            <p>The wearer puts the IntoMind One on at the site where the head was taught. When your instructor says, switch it on, keep the board beside it, and press Ctrl-D in the editor to restart the board.</p>
+            <p class="see"><b>You should see</b>The board's light blinking once a second while it looks, then off, and on while the wearer holds On, and a logged line for every reading, about four seconds apart.</p>
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>Ten timed calls</h3>
+            <p>The operator calls a switch to On at a random moment, times it to the LED on pin 20, and waits for the light to go off again before the next. Ten calls. Then copy the editor's log into a file, log.txt.</p>
+          </div>
+          <table class="sheet" data-sheet="college-calls">
+            <thead><tr><th>Call</th><th>Seconds to the pin</th><th>Notes</th></tr></thead>
+            <tbody><tr><td>1</td><td></td><td></td></tr><tr><td>2</td><td></td><td></td></tr><tr><td>3</td><td></td><td></td></tr><tr><td>4</td><td></td><td></td></tr><tr><td>5</td><td></td><td></td></tr><tr><td>6</td><td></td><td></td></tr><tr><td>7</td><td></td><td></td></tr><tr><td>8</td><td></td><td></td></tr><tr><td>9</td><td></td><td></td></tr><tr><td>10</td><td></td><td></td></tr></tbody>
+          </table>
+        </li>
+        <li>
+          <h3>Take the computer away</h3>
+          <figure class="fig" data-fig="datapath" data-to="board"></figure>
+          <div>
+            <p>Unplug the board and plug it into the USB charger. It runs <code>main.py</code> by itself and finds the IntoMind One again.</p>
+            <p class="see"><b>You should see</b>The LED following the wearer, with no computer anywhere in the loop.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="analysis">
+      <h2>Analysis</h2>
+      <div class="text">
+        <p>Compare your ten delays with the window's model, estimate δ, and check the reading interval from the board's own clock.</p>
+      </div>
+      <pre><code>import numpy as np
+
+delays = np.array([5.1, 3.2, 4.8, 6.0, 2.9, 4.4, 5.6, 3.7, 4.9, 4.1])   # your ten timed calls, in seconds
+print(&quot;mean&quot;, round(delays.mean(), 2), &quot;s, spread&quot;, round(delays.std(ddof=1), 2), &quot;s&quot;)
+# If a call falls anywhere in a four-second reading, and the reading under way counts once
+# more than half of it is On, the window alone gives a delay spread evenly from 2 to 6 seconds.
+print(&quot;the window alone: mean 4.0 s, spread&quot;, round(4 / np.sqrt(12), 2), &quot;s&quot;)
+print(&quot;the rest of the loop and the people, about&quot;, round(delays.mean() - 4, 2), &quot;s&quot;)
+
+# The board&#x27;s log: one line per reading, its time in milliseconds, its score, and whether it was clean.
+ticks = np.array([int(line.split()[0]) for line in open(&quot;log.txt&quot;) if line[:1].isdigit()])
+print(&quot;a reading every&quot;, round(np.diff(ticks).mean() / 1000, 2), &quot;s&quot;)</code></pre>
+      <div class="text">
+        <p class="ask"><span class="lbl">Work it out</span>Our mean delay: <span class="fill" data-key="mean" data-hint="seconds"></span>, spread <span class="fill" data-key="spread" data-hint="seconds"></span>. δ, about <span class="fill" data-key="delta" data-hint="seconds"></span>, against our budget's <span class="fill" data-key="budget" data-hint="seconds"></span>.</p>
+      </div>
+      
+    </section>
+
+    <section id="report">
+      <h2>Report</h2>
+      <div class="text">
+        <ol class="rulelist">
+          <li>The question, and your budget and hypothesis as you wrote them first.</li>
+          <li>Methods: the program and your changes, how the calls were made and timed, and the log.</li>
+          <li>Results: the ten delays, their mean and spread against the model's, δ, and the interval between readings.</li>
+          <li>Interpretation: which stage dominates, where your budget was wrong, and what would shorten the loop at what cost.</li>
+          <li>Limitations: ten calls, timing by hand, one wearer and one head.</li>
+          <li>Your program and analysis code, as an appendix.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Problems</h2>
+      <ol class="qs">
+        <li class="q"><p>List the steps from power on to the first prediction, in Bluetooth terms.</p></li>
+        <li class="q"><p>What does pairing with LE Secure Connections and no user confirmation protect against, and what not?</p></li>
+        <li class="q"><p>Break your measured delay into parts.</p></li>
+        <li class="q"><p>Map each light pattern to a state in the program.</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Raspberry Pi Ltd. Raspberry Pi Pico 2 W documentation.</p>
+      <p><a href="https://github.com/intomind/demo">The demos' source</a>, github.com/intomind/demo: the program in micropython/mind_controlled_microcontroller.py, and in C in pico/board.</p>
+      <p>The IntoMind MicroPython repository, github.com/intomind/micropython.</p>
+      <p>Bluetooth SIG. Bluetooth Core Specification, Security Manager.</p>
+    </section>
+  </div>
+
+  <div class="lv lv-grad" data-l="grad">
+    <header class="hero">
+      <p class="eb">Lab 6 · Graduate</p>
+      <h1>Mind-Controlled Microcontroller</h1>
+      <p class="lede">Measured on the board's own clock, how long does a change of state take to reach the pin, does the window model explain it, how often does the pin go high on its own, and what would it take to know?</p>
+    </header>
+
+    
+
+    <section id="demo">
+      <h2>The loop, exactly</h2>
+      <table class="data text">
+        <thead><tr><th>Part</th><th>What it does</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td>Finding</td><td data-th="What it does">Scans for three seconds, keeps the IntoMind Ones whose names start with <code>DEVICE_NAME_PREFIX</code>, empty by default, and connects to the strongest. Pairs the first time, and after two failed connections in a row forgets its pairings and pairs again.</td><td data-th="Source">mind_controlled_microcontroller.py</td></tr>
+          <tr><td>Running</td><td data-th="What it does">Selects the head in slot 2, starts the stream unless one is running, and turns on predictions: one score for every four-second window.</td><td data-th="Source">the same</td></tr>
+          <tr><td>Deciding</td><td data-th="What it does">On when a clean reading's score is above 0.5, Off when it isn't. A reading with a gap changes nothing. No hold and no hysteresis.</td><td data-th="Source">the same</td></tr>
+          <tr><td>Failing safe</td><td data-th="What it does">Off at start, and whenever the link is lost. The link counts as lost after 20 seconds without a reading. Retries every 5 seconds.</td><td data-th="Source">the same</td></tr>
+          <tr><td>Your code</td><td data-th="What it does"><code>on_switch(on)</code> when the decision changes, and <code>on_reading(score, clean)</code> for every reading.</td><td data-th="Source">the same</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="preregister">
+      <h2>Preregister</h2>
+      <div class="text">
+        <p>Fill it in before the lab, from Microcontrollers and circuits. The report names every deviation.</p>
+      </div>
+      <table class="sheet form" data-sheet="grad-micro-prereg">
+        <thead><tr><th>Item</th><th>Your plan, before any data</th></tr></thead>
+        <tbody>
+          <tr><td>The delay you expect, its spread, and where each part comes from</td><td></td></tr>
+          <tr><td>The false switches you expect in five minutes at rest, and what five minutes can show</td><td></td></tr>
+          <tr><td>How you will test the delay against the window model</td><td></td></tr>
+          <tr><td>The board's threats you will demonstrate or argue, and how</td><td></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="ready">
+      <h2>Get ready</h2>
+      <div class="three">
+        <div>
+          <h3>You need</h3>
+          <ul>
+            <li>An IntoMind One, charged, with its cable unplugged, and a saved custom AI head</li>
+            <li>The board with the IntoMind MicroPython firmware, its cable, the LED circuit, a push button, two jumper wires, and a USB charger</li>
+            <li>A computer with Chrome or Edge and a MicroPython editor</li>
+            <li>A clean microfiber, soft cotton or eyeglass cloth</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Roles</h3>
+          <dl class="roles">
+            <div><dt>Wearer</dt><dd>Wears the IntoMind One, and switches state at each call.</dd></div>
+            <div><dt>Operator</dt><dd>Presses the button as they call each switch.</dd></div>
+            <div><dt>Analyst</dt><dd>Keeps the logs, and notes anything that disturbs a call.</dd></div>
+          </dl>
+          <p class="after">Rotate, so everyone who wants to is the wearer once.</p>
+        </div>
+        <div>
+          <h3>Rules</h3>
+          <ul>
+            <li>Unplug the IntoMind One's cable before anyone puts it on.</li>
+            <li>The board's pin is 3.3 volts. It switches an LED or a signal, never anything that plugs into a wall.</li>
+            <li>Check every breadboard before the board is plugged in.</li>
+            <li>Wipe the electrodes between wearers with the soft cloth, since a rough one can scratch their gold coating.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="steps">
+      <h2>Procedure</h2>
+      <ol class="steps">
+        <li>
+          <h3>Put your custom AI head on</h3>
+          <figure class="fig" data-fig="shot" data-shot="switch-running"></figure>
+          <div>
+            <p>On the <a href="https://demo.intomind.com/light-switch/">Mind-Controlled Light Switch demo</a>, connect, press <b>Install a saved head</b>, and choose the wearer's file: the demo puts it in slot 2 and runs it. Then close the tab, so the IntoMind One is free for the board, and switch it off until step 3.</p>
+          </div>
+        </li>
+        <li>
+          <h3>Wire the button, and put the program on the board</h3>
+          <figure class="fig code"><pre><code>pin = Pin(15, Pin.OUT, value=0)
+cue = Pin(14, Pin.IN, Pin.PULL_UP)
+last_cue = 0
+
+def on_cue(p):
+    global last_cue
+    now = time.ticks_ms()
+    if time.ticks_diff(now, last_cue) &gt; 300:      # a button bounces: one press, one cue
+        last_cue = now
+        print("cue", now)
+
+cue.irq(trigger=Pin.IRQ_FALLING, handler=on_cue)
+
+def on_switch(on):
+    pin.value(on)
+    print("switch", time.ticks_ms(), int(on))
+
+def on_reading(score, clean):
+    print("reading", time.ticks_ms(), "%.3f" % score, clean)</code></pre></figure>
+          <div>
+            <p><a href="https://demo.intomind.com/micropython/mind_controlled_microcontroller.py">Download the program</a>, and save it on the board as <code>main.py</code>. With the board unplugged, add a push button from pin 19, GP14, to ground at pin 23, beside the LED circuit on pin 20. Replace the program's section for your code with these lines: the pin, a cue logged on the board's clock when the button is pressed, and every switch and reading logged on the same clock.</p>
+            
+          </div>
+        </li>
+        <li>
+          <h3>Connect</h3>
+          <figure class="fig code"><pre><code>Looking for your IntoMind One.
+Found IntoMind One. Connecting.
+Running your custom AI head.
+reading 51234 0.142 True
+Reading 0.14</code></pre></figure>
+          <div>
+            <p>The wearer puts the IntoMind One on at the site where the head was taught. When your instructor says, switch it on, keep the board beside it, and press Ctrl-D in the editor to restart the board.</p>
+            <p class="see"><b>You should see</b>The board's light blinking once a second while it looks, then off, and on while the wearer holds On, and a logged reading about every four seconds.</p>
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>Ten cued calls</h3>
+            <p>The operator calls On and presses the button at the same moment, at random times, waits for the LED, then calls Off and waits for it to go out. Ten calls. Copy the editor's log into calls.txt.</p>
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>Five minutes at rest</h3>
+            <p>The wearer holds Off for five minutes with no calls. Copy the log into rest.txt.</p>
+          </div>
+        </li>
+        <li class="text">
+          <div>
+            <h3>The prefix, demonstrated</h3>
+            <p>With the board's prefix empty, bring a second IntoMind One, switched on, unworn and connected to nothing, nearer to the board than the wearer's, and restart the board. Then set <code>DEVICE_NAME_PREFIX</code> to the start of the wearer's IntoMind One's name and restart it again.</p>
+            
+          </div>
+        </li>
+        <li>
+          <h3>Take the computer away</h3>
+          <figure class="fig" data-fig="datapath" data-to="board"></figure>
+          <div>
+            <p>Unplug the board and plug it into the USB charger. It runs <code>main.py</code> by itself and finds the IntoMind One again.</p>
+            <p class="see"><b>You should see</b>The LED following the wearer, with no computer anywhere in the loop.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="analysis">
+      <h2>Analyses</h2>
+      <div class="text">
+        <p>From the board's logs: each call's delay from the cue to the pin, the delays against the window model once the rest of the loop and the wearer's reaction are taken out, the spacing of readings, and the rate of false switches at rest with its upper bound.</p>
+      </div>
+      <pre><code>import numpy as np
+from scipy import stats
+
+def events(path, kind):
+    """The board's times, in seconds, for every logged line of one kind."""
+    rows = [line.split() for line in open(path) if line.startswith(kind + " ")]
+    return rows, np.array([int(r[1]) / 1000 for r in rows])
+
+_, cues = events("calls.txt", "cue")                 # the editor's log, copied to files
+switches, t = events("calls.txt", "switch")
+ons = t[[r[2] == "1" for r in switches]]
+delays = np.array([ons[ons &gt; c].min() - c for c in cues if (ons &gt; c).any()])
+print(f"{len(delays)} calls: median {np.median(delays):.2f} s, mean {delays.mean():.2f}, "
+      f"sd {delays.std(ddof=1):.2f}")
+
+# Against the model: uniform from 2 to 6 seconds, shifted by the rest of the loop and the
+# wearer's own reaction, estimated as the mean's excess over 4.
+extra = delays.mean() - 4
+fit = stats.kstest(delays - extra, stats.uniform(loc=2, scale=4).cdf)
+print(f"the rest of the loop and the wearer: about {extra:.2f} s; "
+      f"uniform from 2 to 6 after removing it: p {fit.pvalue:.2f}")
+
+_, readings = events("calls.txt", "reading")
+gaps = np.diff(readings)
+print(f"a reading every {np.median(gaps):.2f} s, the longest gap {gaps.max():.2f} s")
+
+# At rest: switches to On while the wearer held Off, and what that rate could be.
+switches, t = events("rest.txt", "switch")
+_, rest_readings = events("rest.txt", "reading")
+hours = (rest_readings.max() - rest_readings.min()) / 3600
+n = sum(r[2] == "1" for r in switches)
+upper = stats.chi2.ppf(0.95, 2 * (n + 1)) / 2 / hours           # one-sided 95 percent bound
+print(f"{n} false switches in {hours * 60:.0f} minutes: "
+      f"at most {upper:.0f} an hour, at 95 percent")</code></pre>
+      <div class="text">
+        <p>Then report:</p>
+        <ol class="rulelist">
+          <li>The delays, their fit to the window model, and what the remainder is made of.</li>
+          <li>The rate at rest with its bound, and how long a recording would need to show the once-in-two-hours that users ask for.</li>
+          <li>A rule, a threshold and a hold, that would meet that requirement for your head, and what it would cost in delay.</li>
+          <li>Your threat model, with the prefix demonstration as evidence.</li>
+        </ol>
+      </div>
+      
+    </section>
+
+    <section id="open">
+      <h2>Open problems</h2>
+      <ol class="rulelist">
+        <li><b>Evaluation in use.</b> Delay and false switches measured in a lab, cued and watched, differ from those in a home over weeks, and long-term home use is where noninvasive interfaces are tested least (Wolpaw and others, 2018).</li>
+        <li><b>Asynchronous control.</b> Knowing when someone means nothing at all, the no-control state, is harder than telling two states apart, and asynchronous interfaces still trade speed for false activations (Mason and Birch, 2000).</li>
+        <li><b>Trusting the other end.</b> A board that can't authenticate its device, and a device that can't authenticate its heads, rest on physical control of who is nearby. How to do better on hardware this small is open.</li>
+      </ol>
+    </section>
+
+    <section id="report">
+      <h2>Report</h2>
+      <div class="text">
+        <ol class="rulelist">
+          <li>The preregistration as written, and every deviation from it, each with its reason.</li>
+          <li>Methods: the head and its session, the board's code, the cues, and the rest period.</li>
+          <li>Results: the delays and their fit, the rate at rest and its bound.</li>
+          <li>The rule you would ship for a use you name, and the threat model.</li>
+          <li>The code, and the logs, which hold scores and times and nothing else.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Mason, S. G., and Birch, G. E. (2000). A brain-controlled switch for asynchronous control applications. IEEE Transactions on Biomedical Engineering.</p>
+      <p>Huggins, J. E., Wren, P. A., and Gruis, K. L. (2011). What would brain-computer interface users want? Opinions and priorities of potential users with amyotrophic lateral sclerosis. Amyotrophic Lateral Sclerosis.</p>
+      <p>Wolpaw, J. R., and others (2018). Independent home use of a brain-computer interface by people with amyotrophic lateral sclerosis. Neurology.</p>
+      <p>The IntoMind MicroPython repository, github.com/intomind/micropython.</p>
+    </section>
+  </div>
+
+</main>
+<footer class="colophon">
+  <p><b>BCI101</b> An Applied Introduction to Noninvasive Brain-Computer Interfaces. Neurons, to bits, to real-world outcomes. Built on the demos at <a href="https://demo.intomind.com/">demo.intomind.com</a>.</p>
+  <div class="level-line"><span>Level</span><div class="levels" role="group" aria-label="Level"><button type="button" data-level="ms">Middle school</button><button type="button" data-level="hs">High school</button><button type="button" data-level="college">College</button><button type="button" data-level="grad">Graduate</button></div></div>
+</footer>
+</body>
+</html>

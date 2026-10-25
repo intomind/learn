@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Waves and rhythms · BCI101</title>
+<meta name="description" content="Frequency and amplitude, sampling, and taking a signal apart into its frequencies, from counting heartbeats to Welch's method and the aperiodic component.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/assets/site.css">
+<script>(function(){var d=document.documentElement,q=new URLSearchParams(location.search),s=function(k){try{return localStorage.getItem(k)}catch(e){return null}},L={ms:1,hs:1,college:1,grad:1},l=q.get("level");if(L[l]){try{localStorage.setItem("curriculum-level",l)}catch(e){}}else l=s("curriculum-level");if(!L[l]){l="hs";d.dataset.ask="1"}d.dataset.level=l;d.dataset.theme=q.get("theme")||s("curriculum-theme")||"dark";})()</script>
+<script type="module" src="/assets/curriculum.js"></script>
+</head>
+<body>
+<header class="chrome">
+  <a class="mark" href="/">IntoMind<span>Learn</span></a>
+  <nav class="nav" aria-label="Pages"><a href="/" aria-current="page">Contents</a><a href="/labs/">Labs</a><a href="/vocabulary/">Vocabulary</a><a href="/safety/">Safety</a></nav>
+  <div class="controls"><button class="theme" type="button">Light</button></div>
+</header>
+<main class="page kind-chapter">
+  <div class="lv lv-ms" data-l="ms">
+    <header class="hero">
+      <p class="eb">Chapter 2 · Middle school</p>
+      <h1>Waves and rhythms</h1>
+      <p class="lede">What two numbers describe every rhythm, from a shaken rope to your heartbeat to your brain?</p>
+    </header>
+
+    
+
+    <section id="two-numbers">
+      <h2>How often, and how big</h2>
+      <div class="grid">
+        <div class="text">
+          <p>A wave goes up and down again and again. Two numbers describe it.</p>
+          <p>Its <dfn data-term="Frequency" data-l="ms" data-def="How many times a wave repeats each second, measured in hertz.">frequency</dfn> is how many times it repeats each second. It is measured in <dfn data-term="Hertz" data-l="ms" data-def="Times a second: 10 hertz is ten waves every second.">hertz</dfn>: 10 hertz is ten waves every second.</p>
+          <p>Its <dfn data-term="Amplitude" data-l="ms" data-def="How big a wave is, from the middle to the top.">amplitude</dfn> is how big it is, from the middle to the top.</p>
+          <p>Slide the frequency, and more waves fit into the same second. Slide the amplitude, and each wave grows or shrinks, but repeats just as often.</p>
+        </div>
+        <figure class="fig" data-fig="wave" data-controls="hz amp"><figcaption><b>A wave</b> One second of a wave. Frequency is how many waves fit into the second. Amplitude is how tall each one is.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>Waves you can see</h3>
+        <p>Two people hold a long rope or a spring across the floor. One shakes it steadily while a third counts the waves for ten seconds. Shake it slowly, then faster, then bigger. Divide each count by ten for the frequency, in hertz.</p>
+        <table class="sheet" data-sheet="ms-rope">
+          <thead><tr><th>Shake</th><th>Waves in 10 seconds</th><th>Hertz</th></tr></thead>
+          <tbody><tr><td>Slow</td><td></td><td></td></tr><tr><td>Faster</td><td></td><td></td></tr><tr><td>Bigger</td><td></td><td></td></tr></tbody>
+        </table>
+        <p class="see"><b>You should see</b>Shaking faster raises the count, and the frequency with it. Shaking bigger makes taller waves, while the count stays about the same.</p>
+        
+      </div>
+    </section>
+
+    <section id="body">
+      <h2>Rhythms in your body</h2>
+      <div class="grid flip">
+        <div class="text">
+          <p>Your body is full of rhythms. Resting, your heart beats about once a second: about 1 hertz. You breathe more slowly, about 15 times a minute, which is a quarter of a hertz.</p>
+          <p>Your brain has rhythms too, and much faster ones. The rhythm you will measure in Alpha Flower is about 10 hertz, ten times faster than your heartbeat.</p>
+        </div>
+        <figure class="fig" data-fig="rhythms"><figcaption><b>Three rhythms</b> The same four seconds of breathing, a heartbeat and alpha, drawn one above the other.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>Your own rhythms</h3>
+        <p>Find your pulse on the inside of your wrist with two fingers. Count the beats for 15 seconds, and multiply by four for beats a minute. Then count your breaths for a whole minute. Divide each by 60 for the frequency, in hertz.</p>
+        <table class="sheet" data-sheet="ms-body">
+          <thead><tr><th>Rhythm</th><th>Count</th><th>A minute</th><th>Hertz</th></tr></thead>
+          <tbody><tr><td>Heartbeat, 15 seconds</td><td></td><td></td><td></td></tr><tr><td>Breathing, 60 seconds</td><td></td><td></td><td></td></tr></tbody>
+        </table>
+        <p class="see"><b>You should see</b>A heartbeat of about 1 hertz and breathing well under 1 hertz, both far slower than alpha's 10.</p>
+        
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Talk about it</h2>
+      <ol class="qs">
+        <li class="q"><p>A wave repeats 30 times in 3 seconds. What is its frequency?</p></li>
+        <li class="q"><p>Your heart beat 18 times in 15 seconds. How many beats is that a second?</p></li>
+        <li class="q"><p>Shaking the rope faster and shaking it bigger are different changes. Which one changes the frequency?</p></li>
+      </ol>
+    </section>
+  </div>
+
+  <div class="lv lv-hs" data-l="hs">
+    <header class="hero">
+      <p class="eb">Chapter 2 · High school</p>
+      <h1>Waves and rhythms</h1>
+      <p class="lede">What does it take to describe a rhythm, to measure it without fooling yourself, and to take a messy signal apart into the rhythms in it?</p>
+    </header>
+
+    
+
+    <section id="three-numbers">
+      <h2>Three numbers for a wave</h2>
+      <div class="grid">
+        <div class="text">
+          <p>A sine wave is described by three numbers. Its <dfn data-term="Frequency" data-l="hs" data-def="How many times a wave repeats each second, measured in hertz.">frequency</dfn> is how many times it repeats each second, in <dfn data-term="Hertz" data-l="hs" data-def="Times a second: 10 hertz is ten waves every second.">hertz</dfn>. Its <dfn data-term="Amplitude" data-l="hs" data-def="How big a wave is, from the middle to the top.">amplitude</dfn> is how big it is, from the middle to the top. Its <dfn data-term="Phase" data-l="hs" data-def="Where in its cycle a wave is at a given moment.">phase</dfn> is where in its cycle it is at a given moment.</p>
+          <p>Two waves of the same frequency and amplitude can still cancel each other, if their phases are half a cycle apart. That is why neurons in step add up, and neurons out of step don't.</p>
+        </div>
+        <figure class="fig" data-fig="wave" data-controls="hz amp"><figcaption><b>A wave</b> One second of a sine wave. More waves in the second is a higher frequency. Taller waves are a bigger amplitude.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>Waves you can see</h3>
+        <p>Two people hold a long rope or a spring across the floor. One shakes it steadily while a third counts the waves for ten seconds. Shake it slowly, then faster, then bigger.</p>
+        <table class="sheet" data-sheet="hs-rope">
+          <thead><tr><th>Shake</th><th>Waves in 10 seconds</th><th>Frequency, hertz</th><th>What changed</th></tr></thead>
+          <tbody><tr><td>Slow</td><td></td><td></td><td></td></tr><tr><td>Faster</td><td></td><td></td><td></td></tr><tr><td>Bigger</td><td></td><td></td><td></td></tr></tbody>
+        </table>
+        <p class="see"><b>You should see</b>Shaking faster raises the frequency. Shaking bigger raises the amplitude, and leaves the frequency about the same.</p>
+      </div>
+    </section>
+
+    <section id="sampling">
+      <h2>Sampling</h2>
+      <div class="grid flip">
+        <div class="text">
+          <p>A digital device measures a signal at regular instants. How many times a second is its <dfn data-term="Sample rate" data-l="hs" data-def="How many measurements of a signal a device makes each second.">sample rate</dfn>. To capture a frequency, it must sample more than twice in each cycle.</p>
+          <p>Sample a fast wave too slowly, and the samples trace a slower wave that isn't there. That is <dfn data-term="Aliasing" data-l="hs" data-def="A false, slower wave traced by samples taken too slowly.">aliasing</dfn>, the effect that makes a wheel in a film seem to spin backward.</p>
+          <p>The IntoMind One samples 500 times a second, so in principle it can capture rhythms below 250 hertz. Its filters remove most of what lies above 200 hertz.</p>
+        </div>
+        <figure class="fig" data-fig="wave" data-controls="hz amp rate" data-hz="9" data-rate="12"><figcaption><b>Sampling</b> A 9 hertz wave sampled 12 times a second. The samples alone, in orange, trace a slower wave that isn't there. Raise the rate past 18 a second, more than twice the frequency, and the real wave comes back.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>Sampling a wave</h3>
+        <p>On graph paper, draw a 10 hertz sine wave over one second. Mark its value at 50 evenly spaced instants, then at 12, then at 8. Join each set of marks with a smooth curve, and count the curve's waves in the second.</p>
+        <p class="ask"><span class="lbl">Predict</span>Sampled 8 times a second, the 10 hertz wave will look like <span class="fill" data-key="predict-alias" data-hint="how many"></span> hertz.</p>
+        <table class="sheet" data-sheet="hs-sampling">
+          <thead><tr><th>Samples a second</th><th>The curve looks like, hertz</th><th>More than twice the frequency?</th></tr></thead>
+          <tbody><tr><td>50</td><td></td><td></td></tr><tr><td>12</td><td></td><td></td></tr><tr><td>8</td><td></td><td></td></tr></tbody>
+        </table>
+        <p class="see"><b>You should see</b>At 50 a second, the real wave. At 12 and at 8, a slow wave that isn't there.</p>
+        
+      </div>
+    </section>
+
+    <section id="apart">
+      <h2>Taking a signal apart</h2>
+      <div class="grid">
+        <div class="text">
+          <p>Any signal, however messy, can be built by adding sine waves of different frequencies, amplitudes and phases. A <dfn data-term="Spectrum" data-l="hs" data-def="How much of each frequency a signal contains.">spectrum</dfn> shows how much of each frequency a signal contains.</p>
+          <p>In EEG from the back of the head with the eyes closed, the alpha rhythm stands up as a peak near 10 hertz, which you will measure in Alpha Flower.</p>
+        </div>
+        <figure class="fig" data-fig="spectrum" data-kinds="open closed"><figcaption><b>Simulated</b> EEG from the back of the head, taken apart into its frequencies, with the eyes open and closed. With the eyes closed, a peak stands up in the alpha band, 8 to 13 hertz.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>Adding waves, and taking them apart</h3>
+        <p>In a spreadsheet, put the times 0 to 1 second down column A, in steps of 0.002. In column B, a 10 hertz wave: <code>=SIN(2*PI()*10*A2)</code>. In column C, a 25 hertz wave half as big: <code>=0.5*SIN(2*PI()*25*A2)</code>. Add them in column D, and plot it. Then sketch its spectrum by hand: which frequencies, and how much of each. Last, add noise to every sample with <code>+0.5*(RAND()-0.5)</code>, and sketch it again.</p>
+        <p class="see"><b>You should see</b>A sum that looks messy, and a spectrum with just two peaks: 10 hertz, and 25 hertz half as tall. Noise adds a low floor at every frequency.</p>
+      </div>
+    </section>
+
+    <section id="flicker">
+      <h2>A flickering light in a spectrum</h2>
+      <p class="after-note">After the BCI Flight Simulator.</p>
+      <div class="grid flip">
+        <div class="text">
+          <p>When you look at a light that flickers at a steady speed, the back of your brain follows it. In the spectrum, that shows as a peak at the light's speed, and smaller ones at two and three times it, its harmonics.</p>
+        </div>
+        <figure class="fig" data-fig="spectrum" data-kinds="ssvep" data-hz="12" data-bands="none"><figcaption><b>Simulated</b> EEG from the back of the head while looking at the 12 hertz light: a peak at 12 hertz, and a smaller one at 24.</figcaption></figure>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>Sketch it first</h3>
+        <p>Before you look at the figure, sketch the spectrum you would expect from the back of the head while looking at the 12 hertz light, with the eyes relaxed. Mark the light's peak, its harmonics, and alpha. Then: where would the 10 hertz light's peak be hard to see, and why?</p>
+        
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Talk about it</h2>
+      <ol class="qs">
+        <li class="q"><p>Shaking the rope faster and shaking it bigger are different changes. Which one is frequency, and which is amplitude?</p></li>
+        <li class="q"><p>The IntoMind One samples 500 times a second. What is the fastest rhythm it can capture, and why?</p></li>
+        <li class="q"><p>Looking at the 12 hertz light, where in the spectrum would you expect peaks? Why is the 10 hertz light the hardest to see?</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Herrmann, C. S. (2001). Human EEG responses to 1–100 Hz flicker: resonance phenomena in visual cortex and their potential correlation to cognitive phenomena. Experimental Brain Research.</p>
+    </section>
+  </div>
+
+  <div class="lv lv-college" data-l="college">
+    <header class="hero">
+      <p class="eb">Chapter 2 · College</p>
+      <h1>Waves and rhythms</h1>
+      <p class="lede">How do you take a sampled signal apart into its rhythms, and what does each choice in the estimate, the window, the segment and the band, do to the number you report?</p>
+    </header>
+
+    
+
+    <section id="three">
+      <h2>Three numbers for a wave</h2>
+      <div class="grid">
+        <div class="text">
+          <p>A sinusoid is x(t) = A sin(2π f t + φ). Its <dfn data-term="Frequency" data-l="college" data-def="How many cycles a wave completes each second, in hertz.">frequency</dfn> f is how many cycles it completes each second, its <dfn data-term="Amplitude" data-l="college" data-def="The size of a wave, from its middle to its peak.">amplitude</dfn> A how far it swings from its middle, and its <dfn data-term="Phase" data-l="college" data-def="Where in its cycle a wave is at a given moment, as an angle.">phase</dfn> φ where in its cycle it is at time zero.</p>
+          <p>EEG is not one sinusoid, but any stretch of it can be written as a sum of them. A spectrum says how much of each frequency the sum contains.</p>
+        </div>
+        <figure class="fig" data-fig="wave" data-controls="hz amp"><figcaption><b>A wave</b> One second of a sine wave. Slide the frequency, and more cycles fit into the second. Slide the amplitude, and each grows or shrinks.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="sampling">
+      <h2>Sampling</h2>
+      <div class="grid flip">
+        <div class="text">
+          <p>A device measures the voltage f<sub>s</sub> times a second, its sample rate. Only frequencies below f<sub>s</sub>/2, the Nyquist frequency, are represented faithfully. A frequency f above it folds back to |f − k f<sub>s</sub>| for the nearest whole k, a false slower wave: <dfn data-term="Aliasing" data-l="college" data-def="A frequency above half the sample rate appearing as a lower one, because the samples can't tell them apart.">aliasing</dfn>.</p>
+          <p>So a device filters before it samples. The demos run the IntoMind One at 500 samples a second, and as shipped it filters on the device: a high-pass at 0.5 hertz, notches at the mains frequencies and their harmonics, and a low-pass at 200 hertz, safely below the Nyquist frequency of 250.</p>
+        </div>
+        <figure class="fig" data-fig="wave" data-controls="hz amp rate" data-hz="9" data-rate="12"><figcaption><b>Sampling</b> A 9 hertz wave sampled 12 times a second. The samples alone, in orange, trace a 3 hertz wave that isn't there. Raise the rate past 18 a second, and the 9 hertz wave comes back.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="dft">
+      <h2>The discrete Fourier transform</h2>
+      <div class="grid">
+        <div class="text">
+          <p>The discrete Fourier transform of N samples gives the amplitude and phase of N/2 + 1 sinusoids at the frequencies k f<sub>s</sub>/N, from 0 to f<sub>s</sub>/2. Their spacing, the frequency resolution, is f<sub>s</sub>/N = 1/T, one over the duration: two seconds of signal resolve 0.5 hertz, whatever the sample rate.</p>
+          <p>The power at each frequency, divided by the spacing, estimates the <dfn data-term="Power spectral density" data-l="college" data-def="How a signal's power is spread over frequency.">power spectral density</dfn>, in squared microvolts per hertz. Its area between two frequencies is the band power.</p>
+        </div>
+        <figure class="fig" data-fig="spectrum" data-kinds="open closed"><figcaption><b>Simulated</b> EEG from the back of the head, taken apart into its frequencies, with the eyes open and closed. With the eyes closed, a peak stands up in the alpha band, washed.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="leakage">
+      <h2>Leakage and windows</h2>
+      <div class="text">
+        <p>Cutting out N samples treats the signal as if it stopped sharply at both ends. A frequency that falls between two bins then spreads its power over many: <dfn data-term="Leakage and window" data-l="college" data-def="Power spreading from one frequency into others because a signal is cut off, and the taper applied to reduce it.">leakage</dfn>. A window tapers the segment to zero at its ends, which confines the spread at the cost of a wider peak. The Hann window, ½(1 − cos(2πn/N)), is the common choice.</p>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>Leakage</h3>
+        <p>Take the discrete Fourier transform of two seconds of a 10 hertz sine, then of a 10.25 hertz one, which falls halfway between bins, each with and without a Hann window. Scale by the window's sum, so a sine of amplitude 1 reads 1.</p>
+        <pre><code>import numpy as np
+
+fs = 500
+t = np.arange(0, 2, 1 / fs)                       # 1,000 samples: bins every 0.5 Hz
+for f in (10, 10.25):
+    x = np.sin(2 * np.pi * f * t)
+    for name, w in (("none", np.ones_like(t)), ("Hann", np.hanning(len(t)))):
+        amp = np.abs(np.fft.rfft(x * w)) * 2 / w.sum()
+        print(f, name, "peak", round(amp.max(), 2),
+              "bins 9 to 11.5 Hz", np.round(amp[18:24], 2),
+              "largest above 20 Hz", round(amp[40:].max(), 3))</code></pre>
+        <p class="see"><b>You should see</b>At 10 hertz, one bin of 1 with no window, and a wider peak with Hann. At 10.25 hertz, a peak of 0.64 spread across many bins with no window, against 0.85 with Hann and almost nothing far away.</p>
+        
+      </div>
+    </section>
+
+    <section id="welch">
+      <h2>Welch's method, and band power</h2>
+      <div class="text">
+        <p>One periodogram is a noisy estimate: its value at each frequency scatters as widely as the value itself, however long the recording. <dfn data-term="Welch's method" data-l="college" data-def="Estimating a spectrum by averaging the spectra of overlapping, windowed segments.">Welch's method</dfn> cuts the signal into overlapping segments, windows each, takes their periodograms and averages them. K independent segments shrink the scatter by about √K.</p>
+        <p>The segment length T sets the trade: resolution 1/T against the number of segments to average. Band power is the area under the estimate from f<sub>1</sub> to f<sub>2</sub>. A share, such as alpha's power over the power from 4 to 30 hertz, cancels anything that scales every frequency alike.</p>
+      </div>
+      <div class="try">
+        <p class="k">Try it</p>
+        <h3>The segment length</h3>
+        <p>Make a minute of noise with the 1/f spectrum of EEG, add a 10 hertz rhythm, and estimate its spectrum with segments of 1, 2 and 4 seconds. Plot the three, and compute alpha's share from each.</p>
+        <pre><code>import numpy as np
+from scipy.signal import welch
+
+fs, n = 500, 60 * 500
+rng = np.random.default_rng(1)
+spec = rng.normal(size=n // 2 + 1) + 1j * rng.normal(size=n // 2 + 1)
+f = np.fft.rfftfreq(n, 1 / fs)
+spec[1:] /= np.sqrt(f[1:])                        # power falling as 1/f
+spec[0] = 0
+x = np.fft.irfft(spec, n)
+x = 20 * x / x.std() + 10 * np.sin(2 * np.pi * 10 * np.arange(n) / fs)   # microvolts
+
+def band(f, p, lo, hi):
+    pick = (f >= lo) & (f < hi)
+    return np.trapezoid(p[pick], f[pick])
+
+for seconds in (1, 2, 4):
+    f, p = welch(x, fs=fs, nperseg=seconds * fs)  # Hann windows, half overlap
+    print(seconds, "s:", round(band(f, p, 8, 13) / band(f, p, 4, 30), 3))</code></pre>
+        <p class="see"><b>You should see</b>Shares that agree to within a few hundredths, and spectra that differ: smooth but blurred with one-second segments, sharp but ragged with four.</p>
+        
+      </div>
+    </section>
+
+    <section id="talk">
+      <h2>Problems</h2>
+      <ol class="qs">
+        <li class="q"><p>A 9 hertz wave is sampled 12 times a second. At what frequency does it appear, and why?</p></li>
+        <li class="q"><p>What frequency resolution do 2 seconds at 500 samples a second give, and which frequencies are there?</p></li>
+        <li class="q"><p>Why does a Hann window help a 10.25 hertz sine, and what does it cost?</p></li>
+        <li class="q"><p>Four seconds of signal, in two-second segments overlapping by half: how many segments does Welch's method average?</p></li>
+        <li class="q"><p>Why remove the mean before estimating a spectrum?</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Welch, P. D. (1967). The use of fast Fourier transform for the estimation of power spectra: a method based on time averaging over short, modified periodograms. IEEE Transactions on Audio and Electroacoustics.</p>
+      <p>Harris, F. J. (1978). On the use of windows for harmonic analysis with the discrete Fourier transform. Proceedings of the IEEE.</p>
+      <p>Cohen, M. X. (2014). Analyzing Neural Time Series Data: Theory and Practice. MIT Press.</p>
+    </section>
+  </div>
+
+  <div class="lv lv-grad" data-l="grad">
+    <header class="hero">
+      <p class="eb">Chapter 2 · Graduate</p>
+      <h1>Waves and rhythms</h1>
+      <p class="lede">How do you estimate a spectrum from a few seconds of EEG, with what bias and what variance, and how much of a band's power is a rhythm rather than the background it sits on?</p>
+    </header>
+
+    
+
+    <section id="sampling">
+      <h2>Sampling</h2>
+      <div class="text">
+        <p>The IntoMind One samples each channel 250, 500 or 1,000 times a second, and every demo uses 500. A frequency above half the rate, the Nyquist frequency, folds back below it: at 500 a second, 300 hertz would appear at 200. The device's own filters, which can be read and set, by default remove drift below 0.5 hertz, notch out the mains frequencies and their harmonics, and low-pass at 200 hertz at this rate.</p>
+      </div>
+    </section>
+
+    <section id="periodogram">
+      <h2>The periodogram</h2>
+      <div class="text">
+        <p>For N samples x<sub>n</sub> at rate f<sub>s</sub>, with a window w<sub>n</sub>, the periodogram estimates the <dfn data-term="Power spectral density" data-l="grad" data-def="The distribution of a signal's variance over frequency, in squared units per hertz.">power spectral density</dfn> as</p>
+        <p class="eq">P(f) = |Σ<sub>n</sub> w<sub>n</sub> x<sub>n</sub> e<sup>−2πifn/f<sub>s</sub></sup>|² / (f<sub>s</sub> Σ<sub>n</sub> w<sub>n</sub>²)</p>
+        <p>doubled for positive frequencies other than zero and the Nyquist. Its bins are f<sub>s</sub>/N apart: 0.49 hertz for 1,024 samples at 500 a second. Its expectation is the true spectrum smeared by the window's own spectrum, so power leaks from strong frequencies into weak ones. A rectangular window's first sidelobe sits 13 decibels below its main lobe, a Hann window's 31, at the price of a main lobe twice as wide (Harris, 1978). Its variance does not shrink with N: at each frequency it is about the true value times a chi-squared variable with two degrees of freedom, halved, so its standard deviation equals its mean however long the record.</p>
+      </div>
+    </section>
+
+    <section id="welch">
+      <h2>Welch's method and multitapers</h2>
+      <div class="text">
+        <p><dfn data-term="Welch's method" data-l="grad" data-def="Estimating a spectrum as the average of the periodograms of overlapping, windowed segments, trading resolution for variance.">Welch's method</dfn> averages the periodograms of K windowed segments, usually overlapping by half (Welch, 1967). For independent segments the variance falls as 1/K, and the resolution is set by the segment's length, not the record's.</p>
+        <p>A <dfn data-term="Multitaper estimate" data-l="grad" data-def="The average of a segment's spectra under several orthogonal Slepian tapers, each concentrated in a band of chosen width.">multitaper estimate</dfn> (Thomson, 1982) keeps one segment of length T and averages its periodograms under K orthogonal Slepian tapers (Slepian, 1978), each as concentrated as possible in a band of half-width W. With NW = TW, about K = 2NW − 1 tapers are well concentrated, the variance falls as 1/K, and the resolution is 2W. Two seconds at 2 hertz of resolution give NW = 2 and three tapers. The record's length, divided between resolution and variance, is the whole budget, and for EEG it is set by how long the signal stays the same (Babadi and Brown, 2014). Prerau and others (2017) work through the choice for sleep EEG.</p>
+      </div>
+    </section>
+
+    <section id="background">
+      <h2>Rhythm and background</h2>
+      <div class="text">
+        <p>An EEG spectrum is an <dfn data-term="Aperiodic component" data-l="grad" data-def="The part of a power spectrum that falls smoothly with frequency, modeled as an offset, a knee and an exponent, with the rhythms as peaks above it.">aperiodic component</dfn> with peaks above it. Donoghue and others (2020) model it in log power as</p>
+        <p class="eq">log<sub>10</sub> P(f) = b − log<sub>10</sub>(k + f<sup>χ</sup>) + Σ peaks</p>
+        <p>with an offset b, a knee k, an exponent χ, and Gaussian peaks. The exponent and the offset differ between people, with age and between states. A band's power, or a ratio of two bands' powers, moves with either of them while no rhythm changes, so a ratio conflates periodic and aperiodic activity (Donoghue, Dominguez and Voytek, 2020).</p>
+        <p>Alpha's peak frequency differs between people, from about 8 to 12 hertz in healthy adults, and falls with age. The <dfn data-term="Individual alpha frequency" data-l="grad" data-def="The frequency of one person's alpha rhythm, by the peak or the center of gravity of eyes-closed power in a search window.">individual alpha frequency</dfn> is the peak, or the center of gravity, of eyes-closed power in a search window such as 7 to 14 hertz (Klimesch, 1999), with smoothed, automated versions for noisy spectra (Corcoran and others, 2018). A fixed band of 8 to 13 hertz measures a different part of each person's alpha.</p>
+      </div>
+    </section>
+
+    <section id="time-frequency">
+      <h2>A spectrum over time</h2>
+      <div class="text">
+        <p>A spectrogram slides one window along the signal. A wavelet transform scales the window with frequency: a Morlet wavelet of n cycles at frequency f spreads over σ<sub>t</sub> = n/(2πf) in time and σ<sub>f</sub> = f/n in frequency, and their product is fixed at 1/(2π) (Cohen, 2014). Averaging power over time or trials can make brief bursts look like a sustained rhythm, as Jones (2016) and van Ede and others (2018) point out.</p>
+        <p>Alpha Flower reports alpha's share of the power from 4 to 30 hertz, from one Hann-windowed periodogram of 2.05 seconds every quarter second. Its Python program averages three Hann-windowed periodograms of 2 seconds over the last 4, once a second. The analysis compares the two with a multitaper estimate.</p>
+      </div>
+    </section>
+
+    <section id="analysis">
+      <h2>Analysis</h2>
+      <div class="try">
+        <p class="k">Analysis</p>
+        <h3>Three estimators, and a ratio that moves by itself</h3>
+        <p>Simulate twenty minutes of a signal whose spectrum you know exactly: an aperiodic component falling as f<sup>−χ</sup> above 1 hertz, plus an alpha rhythm, a resonance at 10 hertz. Estimate alpha's share in 300 windows of 4 seconds three ways: as the demo does, as its Python program does, and with three Slepian tapers. Then make the background steeper with the alpha unchanged, and measure alpha above a fitted background.</p>
+        <pre><code>import numpy as np
+from scipy.signal import welch, lfilter
+from scipy.signal.windows import dpss, hann
+
+fs, rng = 500, np.random.default_rng(7)
+f = np.linspace(0.5, 60, 20000)                # a fine grid for the true spectrum
+r, theta = 0.99, 2 * np.pi * 10 / fs          # alpha: an AR(2) resonance at 10 Hz
+ar = [1, -2 * r * np.cos(theta), r * r]
+
+def simulate(chi, minutes=20):
+    """Aperiodic noise falling as f^-chi above 1 Hz, plus alpha, and the true spectra."""
+    n = minutes * 60 * fs
+    shape = np.maximum(np.fft.rfftfreq(n, 1 / fs), 1) ** (-chi / 2)
+    spec = np.fft.rfft(rng.normal(size=n)) * shape
+    x = 100 * np.fft.irfft(spec, n) + lfilter([1], ar, rng.normal(0, 0.1, n))
+    z = np.exp(-2j * np.pi * f / fs)
+    alpha = 0.1 ** 2 * 2 / fs / np.abs(1 + ar[1] * z + ar[2] * z ** 2) ** 2
+    return x, 100 ** 2 * 2 / fs * np.maximum(f, 1) ** -chi, alpha
+
+def band(freqs, psd, lo, hi, rule=np.trapezoid):
+    pick = (freqs &gt;= lo) &amp; (freqs &lt; hi)
+    return rule(psd[pick], freqs[pick])
+
+def share(freqs, psd, rule=np.trapezoid):
+    return band(freqs, psd, 8, 13, rule) / band(freqs, psd, 4, 30, rule)
+
+def demo(x):            # one periodic-Hann periodogram of the first 1,024 samples, bins summed
+    seg = x[:1024] - x[:1024].mean()
+    p = np.abs(np.fft.rfft(seg * hann(1024, sym=False))) ** 2
+    return share(np.fft.rfftfreq(1024, 1 / fs), p, rule=lambda y, x: y.sum())
+
+def program(x):         # Welch over 4 s in 2-s segments, as eyes_closed.py does
+    freqs, p = welch(x - x.mean(), fs=fs, nperseg=2 * fs)
+    return share(freqs, p)
+
+def multitaper(x):      # the same 1,024 samples, 3 Slepian tapers, about 2 Hz of resolution
+    seg = x[:1024] - x[:1024].mean()
+    p = (np.abs(np.fft.rfft(dpss(1024, 2, 3) * seg, axis=1)) ** 2).mean(axis=0)
+    return share(np.fft.rfftfreq(1024, 1 / fs), p)
+
+for chi in (1.5, 2.0):
+    x, background, alpha = simulate(chi)
+    true = background + alpha
+    print(f"exponent {chi}: true share {share(f, true):.3f}, "
+          f"true alpha power {band(f, alpha, 6, 14):.1f} uV^2")
+    windows = x.reshape(-1, 4 * fs)                     # 300 windows of 4 s
+    for name, estimate in (("demo", demo), ("program", program), ("multitaper", multitaper)):
+        v = np.array([estimate(w) for w in windows])
+        bias = v.mean() - share(f, true)
+        print(f"   {name:10s} share {v.mean():.3f}  bias {bias:+.3f}  sd {v.std():.3f}")
+    # Fit the background in log-log, away from alpha, and measure alpha above it.
+    freqs, p = welch(x, fs=fs, nperseg=2 * fs)
+    freqs, p = freqs[1:], p[1:]
+    fit = ((freqs &gt;= 2) &amp; (freqs &lt; 6)) | ((freqs &gt;= 15) &amp; (freqs &lt; 40))
+    slope, offset = np.polyfit(np.log10(freqs[fit]), np.log10(p[fit]), 1)
+    above = p - 10 ** (offset + slope * np.log10(freqs))
+    print(f"   fitted exponent {-slope:.2f}, "
+          f"alpha above the fit {band(freqs, above, 6, 14):.1f} uV^2")</code></pre>
+        <p class="see"><b>You should see</b>A true share of 0.464. The demo's estimate scatters most, with a standard deviation of 0.13 from one window to the next, the program's least, 0.08, and the multitaper's in between, 0.10, on the same two seconds as the demo. Every estimator is low by 0.01 to 0.03. With the exponent at 2.0, the true share rises to 0.613 though the alpha is the same, and alpha above the fitted background stays near its true 14.3 µV², at 13.4 and 13.7.</p>
+        <p>Then report: the program's estimator with segments of 1 and 4 seconds, and every estimator with the alpha at 8.5 hertz. Which bias grows, and why?</p>
+        
+      </div>
+    </section>
+
+    <section id="open">
+      <h2>Open problems</h2>
+      <ol class="rulelist">
+        <li><b>What the exponent measures.</b> In models and in recordings, the aperiodic exponent tracks the balance of synaptic excitation and inhibition (Gao, Peterson and Voytek, 2017). It also changes with age, drugs and the state of the recording, and how far it can be read as that balance in scalp EEG is open.</li>
+        <li><b>Rhythms or bursts.</b> Averaged power can't tell a sustained rhythm from brief events of the same frequency, and which description fits, for which rhythm and when, is debated (van Ede and others, 2018).</li>
+        <li><b>A band for each person.</b> Bands anchored to each person's alpha frequency measure people more fairly than fixed ones (Klimesch, 1999), but there is no agreed rule for them, nor for people whose peak is split, broad or missing (Corcoran and others, 2018).</li>
+      </ol>
+    </section>
+
+    <section id="talk">
+      <h2>Problems</h2>
+      <ol class="qs">
+        <li class="q"><p>At 500 samples a second, what is the bin spacing of a 1,024-sample periodogram? With a Hann window, about how long must a segment be to resolve two equal peaks at 9.5 and 10.5 hertz?</p></li>
+        <li class="q"><p>One reading of the demo scatters by about 0.13 around its mean. Why doesn't the demo estimate the share over 10 seconds instead, and what do its two thresholds, 0.36 to count the eyes as closed and 0.27 to count them open again, do about the scatter?</p></li>
+        <li class="q"><p>For 2.048 seconds and 2 hertz of resolution, what NW, and how many tapers? What would 4.096 seconds at the same resolution give?</p></li>
+        <li class="q"><p>Two people have identical alpha rhythms, but the second's aperiodic exponent is 2.0 rather than 1.5, with the same offset. Whose share is larger? What does that do to a study that compares two groups by their share?</p></li>
+        <li class="q"><p>A Morlet wavelet of 7 cycles: what are its spreads in time and frequency at 10 hertz, and at 40?</p></li>
+      </ol>
+    </section>
+
+    <section id="sources" class="refs">
+      <h2>Sources</h2>
+      <p>Welch, P. D. (1967). The use of fast Fourier transform for the estimation of power spectra: a method based on time averaging over short, modified periodograms. IEEE Transactions on Audio and Electroacoustics.</p>
+      <p>Harris, F. J. (1978). On the use of windows for harmonic analysis with the discrete Fourier transform. Proceedings of the IEEE.</p>
+      <p>Slepian, D. (1978). Prolate spheroidal wave functions, Fourier analysis, and uncertainty, V: the discrete case. Bell System Technical Journal.</p>
+      <p>Thomson, D. J. (1982). Spectrum estimation and harmonic analysis. Proceedings of the IEEE.</p>
+      <p>Klimesch, W. (1999). EEG alpha and theta oscillations reflect cognitive and memory performance: a review and analysis. Brain Research Reviews.</p>
+      <p>Babadi, B., and Brown, E. N. (2014). A review of multitaper spectral analysis. IEEE Transactions on Biomedical Engineering.</p>
+      <p>Cohen, M. X. (2014). Analyzing Neural Time Series Data: Theory and Practice. MIT Press.</p>
+      <p>Jones, S. R. (2016). When brain rhythms aren't “rhythmic”: implication for their mechanisms and meaning. Current Opinion in Neurobiology.</p>
+      <p>Gao, R., Peterson, E. J., and Voytek, B. (2017). Inferring synaptic excitation/inhibition balance from field potentials. NeuroImage.</p>
+      <p>Prerau, M. J., and others (2017). Sleep neurophysiological dynamics through the lens of multitaper spectral analysis. Physiology.</p>
+      <p>Corcoran, A. W., Alday, P. M., Schlesewsky, M., and Bornkessel-Schlesewsky, I. (2018). Toward a reliable, automated method of individual alpha frequency (IAF) quantification. Psychophysiology.</p>
+      <p>van Ede, F., Quinn, A. J., Woolrich, M. W., and Nobre, A. C. (2018). Neural oscillations: sustained rhythms or transient burst-events? Trends in Neurosciences.</p>
+      <p>Donoghue, T., and others (2020). Parameterizing neural power spectra into periodic and aperiodic components. Nature Neuroscience.</p>
+      <p>Donoghue, T., Dominguez, J., and Voytek, B. (2020). Electrophysiological frequency band ratio measures conflate periodic and aperiodic neural activity. eNeuro.</p>
+    </section>
+  </div>
+
+</main>
+<footer class="colophon">
+  <p><b>BCI101</b> An Applied Introduction to Noninvasive Brain-Computer Interfaces. Neurons, to bits, to real-world outcomes. Built on the demos at <a href="https://demo.intomind.com/">demo.intomind.com</a>.</p>
+  <div class="level-line"><span>Level</span><div class="levels" role="group" aria-label="Level"><button type="button" data-level="ms">Middle school</button><button type="button" data-level="hs">High school</button><button type="button" data-level="college">College</button><button type="button" data-level="grad">Graduate</button></div></div>
+</footer>
+</body>
+</html>
