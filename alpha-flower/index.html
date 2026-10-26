@@ -29,7 +29,7 @@
     <header class="hero">
       <p class="eb">Lab 1 · High school</p>
       <h1>Alpha Flower</h1>
-      <p class="lede">When you close your eyes, how much of your EEG becomes alpha? And what else, from a blink to where the device sits, changes that number?</p>
+      <p class="lede">How much of your EEG's power is in the alpha band, and how much does closing your eyes raise it? And what else, from a blink to where the device sits, changes it?</p>
     </header>
 
     
@@ -41,15 +41,15 @@
         <div class="text">
           <h3>Alpha</h3>
           <p>EEG records the summed activity of large groups of neurons firing in step, through the skull and scalp, in millionths of a volt. Its rhythms are described by their frequency and amplitude.</p>
-          <p><dfn data-term="Alpha" data-l="hs" data-def="A rhythm of about 8 to 13 waves a second, strongest at the back of the head with the eyes closed.">Alpha</dfn> is the rhythm from about 8 to 13 hertz. It is generated in the visual areas at the back of the brain, is strongest over the back of the head with the eyes closed, and is blocked when the eyes open. Hans Berger first recorded it in 1924, in the first human EEG, and Adrian and Matthews traced it to the occipital lobes ten years later.</p>
+          <p><dfn data-term="Alpha" data-l="hs" data-def="A rhythm of about 8 to 13 hertz, strongest at the back of the head with the eyes closed.">Alpha</dfn> is the rhythm from about 8 to 13 hertz. It is generated in the visual areas at the back of the brain, is strongest over the back of the head with the eyes closed, and is blocked when the eyes open. Hans Berger first recorded it in 1924, in the first human EEG, and Adrian and Matthews traced it to the occipital lobes ten years later.</p>
         </div>
         <figure class="fig" data-fig="trace" data-kind="switch" data-seconds="8" data-zoom="1"><figcaption><b>Simulated</b> Eight seconds of EEG from the back of the head. Halfway through, the eyes close and alpha takes over. Below, one second of it: about ten waves.</figcaption></figure>
       </div>
       <div class="grid flip">
         <div class="text">
-          <h3>Alpha's share</h3>
-          <p>Taken apart by frequency, the signal's spectrum shows a peak in the alpha band when the eyes are closed. The number the demo shows is alpha's share: the power from 8 to 13 hertz, as a percentage of all the power from 4 to 30 hertz.</p>
-          <p>Blinks and muscles make signals too, much bigger than the brain's. Such a signal, one that isn't from the brain, is an <dfn data-term="Artifact" data-l="hs" data-def="A signal in a recording that is not from the brain, like a blink or a clenched jaw.">artifact</dfn>, and artifacts can move the number.</p>
+          <h3>Relative alpha power</h3>
+          <p>Taken apart by frequency, the signal's spectrum shows a peak in the alpha band when the eyes are closed. The demo shows <dfn data-term="Relative alpha power" data-l="hs" data-def="The power from 8 to 13 hertz as a percentage of all the power from 4 to 30 hertz.">relative alpha power</dfn>: the power from 8 to 13 hertz, as a percentage of all the power from 4 to 30 hertz.</p>
+          <p>Blinks and muscles make signals too, much bigger than the brain's. Such a signal, one that isn't from the brain, is an <dfn data-term="Artifact" data-l="hs" data-def="A signal in a recording that is not from the brain, like a blink or a clenched jaw.">artifact</dfn>, and artifacts can change relative alpha power.</p>
         </div>
         <figure class="fig" data-fig="spectrum" data-kinds="open closed"><figcaption><b>Simulated</b> The spectrum with the eyes open, in gray, and closed, in orange. The alpha band, 8 to 13 hertz, is shaded.</figcaption></figure>
       </div>
@@ -108,16 +108,16 @@
             <p>Find the inion with your fingers. The IntoMind One goes on the midline just above it, over Oz, with the strap around the head.</p>
             <p>Unplug the cable. The wearer sits down. Part the hair under each electrode so it touches skin, and press it down until it feels firm but not tight.</p>
             <p>Open the <a href="https://demo.intomind.com/alpha-flower/">Alpha Flower demo</a>, press <b>Connect your IntoMind One</b>, and choose yours from the list.</p>
-            <p class="see"><b>You should see</b>Connected at the top right. After a few seconds, a number at the bottom right: Alpha, as a percentage.</p>
+            <p class="see"><b>You should see</b>Connected at the top right. After a few seconds, relative alpha power at the bottom right, as a percentage.</p>
           </div>
         </li>
         <li class="text">
           <div>
             <h3>Predict, then measure</h3>
-            <p class="ask"><span class="lbl">Predict</span>With my eyes closed, the number will be <span class="fill" data-key="predict-closed" data-hint="higher, lower or the same"></span>, by about <span class="fill" data-key="predict-by" data-hint="how much"></span> points.</p>
+            <p class="ask"><span class="lbl">Predict</span>With my eyes closed, relative alpha power will be <span class="fill" data-key="predict-closed" data-hint="higher, lower or the same"></span>, by about <span class="fill" data-key="predict-by" data-hint="how much"></span> percentage points.</p>
             <dl class="jobs">
               <div><dt>Wearer</dt><dd>Keep your eyes open and still for 30 seconds, then close them for 30 seconds. Do both three times.</dd></div>
-              <div><dt>Recorder</dt><dd>Write down the number at the end of each 30 seconds.</dd></div>
+              <div><dt>Recorder</dt><dd>Write down relative alpha power at the end of each 30 seconds.</dd></div>
               <div><dt>Skeptic</dt><dd>Write down every blink, word or movement, and when it happened.</dd></div>
             </dl>
           </div>
@@ -134,7 +134,7 @@
             </tbody>
           </table>
           <div>
-            <p class="see"><b>You should see</b>For most people, a bigger number with eyes closed.</p>
+            <p class="see"><b>You should see</b>For most people, higher relative alpha power with eyes closed.</p>
             
           </div>
         </li>
@@ -142,9 +142,9 @@
           <h3>Grow a fractal</h3>
           <figure class="fig" data-fig="shot" data-shot="alpha-grown"></figure>
           <div>
-            <p>Close your eyes for about half a minute. The fractal grows only while the demo counts your eyes as closed, and it stays when you open them.</p>
-            <p>A <dfn data-term="Fractal" data-l="hs" data-def="A pattern made by repeating one rule at smaller and smaller scales.">fractal</dfn> is a pattern made by repeating one rule at smaller and smaller scales. This one's rule takes its numbers from your signal: its symmetry from your alpha frequency, its reach from alpha's share, and every bend from the samples themselves.</p>
-            <p class="see"><b>You should see</b>A fractal of your own. <b>Save image</b> saves it, with your alpha frequency, how long it grew, and the date. None of your EEG is in it.</p>
+            <p>Close your eyes for about half a minute. The fractal grows only while the demo counts your eyes as closed: while relative alpha power is above a <dfn data-term="Threshold" data-l="hs" data-def="A value a measurement must reach for something to count, such as the eyes counting as closed.">threshold</dfn> set from your own eyes-open values. It stays when you open them.</p>
+            <p>A <dfn data-term="Fractal" data-l="hs" data-def="A pattern made by repeating one rule at smaller and smaller scales.">fractal</dfn> is a pattern made by repeating one rule at smaller and smaller scales. This one's rule takes its values from your signal: its symmetry from your <dfn data-term="Peak alpha frequency" data-l="hs" data-def="The frequency, in hertz, at which alpha's power is highest.">peak alpha frequency</dfn>, its reach from relative alpha power, and every bend from the samples themselves.</p>
+            <p class="see"><b>You should see</b>A fractal of your own. <b>Save image</b> saves it, with your peak alpha frequency, how long it grew, and the date. None of your EEG is in it.</p>
             
           </div>
         </li>
@@ -152,8 +152,8 @@
           <h3>Test what else moves it</h3>
           <figure class="fig" data-fig="trace" data-kind="jaw"><figcaption><b>Simulated</b> Eyes closed, and the jaw clenched for a second: fast muscle activity on top of alpha.</figcaption></figure>
           <div>
-            <p class="ask"><span class="lbl">Predict</span>Blinking once a second, eyes open, will <span class="fill" data-key="predict-blink" data-hint="raise or lower"></span> the number. Clenching the jaw, eyes closed, will <span class="fill" data-key="predict-jaw" data-hint="raise or lower"></span> it.</p>
-            <p>Try each for 15 seconds, and compare with the open and closed numbers from step 2.</p>
+            <p class="ask"><span class="lbl">Predict</span>Blinking once a second, eyes open, will <span class="fill" data-key="predict-blink" data-hint="raise or lower"></span> relative alpha power. Clenching the jaw, eyes closed, will <span class="fill" data-key="predict-jaw" data-hint="raise or lower"></span> it.</p>
+            <p>Try each for 15 seconds, and compare with the eyes-open and eyes-closed values from step 2.</p>
             <table class="sheet" data-sheet="hs-artifacts">
               <thead><tr><th>Wearer</th><th>Open, blinking</th><th>Closed, jaw clenched</th></tr></thead>
               <tbody><tr><td>1</td><td></td><td></td></tr><tr><td>2</td><td></td><td></td></tr><tr><td>3</td><td></td><td></td></tr><tr><td>4</td><td></td><td></td></tr></tbody>
@@ -166,13 +166,13 @@
           <h3>Move it to the forehead</h3>
           <figure class="fig" data-fig="picture" data-src="/assets/heads/fpz" data-alt="A head seen from the front, with an orange area on the forehead, above the eyebrows."></figure>
           <div>
-            <p class="ask"><span class="lbl">Predict</span>At the forehead, the eyes-closed number will be <span class="fill" data-key="predict-front" data-hint="higher or lower"></span> than at the back.</p>
+            <p class="ask"><span class="lbl">Predict</span>At the forehead, eyes-closed relative alpha power will be <span class="fill" data-key="predict-front" data-hint="higher or lower"></span> than at the back.</p>
             <p>One wearer per group. Move the IntoMind One to the forehead, above the eyebrows, over Fp1 and Fp2, and press it down. Do one open and one closed trial of 30 seconds each. Then put it back on the back of the head.</p>
             <table class="sheet" data-sheet="hs-site">
               <thead><tr><th>Site</th><th>Open</th><th>Closed</th><th>Closed minus open</th></tr></thead>
               <tbody><tr><td>Back of the head, Oz</td><td></td><td></td><td></td></tr><tr><td>Forehead, Fp1 and Fp2</td><td></td><td></td><td></td></tr></tbody>
             </table>
-            <p class="see"><b>You should see</b>Whether your prediction held, and what each blink does to the number at the front.</p>
+            <p class="see"><b>You should see</b>Whether your prediction held, and what each blink does to relative alpha power at the front.</p>
             
           </div>
         </li>
@@ -182,7 +182,7 @@
     <section id="work">
       <h2>Work it out</h2>
       <div class="text">
-        <p>For each wearer, find the mean of the three open numbers and of the three closed ones, and the range of each, from lowest to highest. A difference is convincing when the two ranges don't overlap.</p>
+        <p>For each wearer, find the mean of the three eyes-open values and of the three eyes-closed ones, and the range of each, from lowest to highest. A difference is convincing when the two ranges don't overlap.</p>
       </div>
       <table class="sheet" data-sheet="hs-means">
         <thead><tr><th>Wearer</th><th>Mean open</th><th>Mean closed</th><th>Range open</th><th>Range closed</th><th>Do the ranges overlap?</th></tr></thead>
@@ -193,11 +193,11 @@
     <section id="talk">
       <h2>Talk about it</h2>
       <ol class="qs">
-        <li class="q"><p>The number is alpha's share of the power from 4 to 30 hertz. Why a share, rather than alpha's power alone?</p></li>
+        <li class="q"><p>Relative alpha power is alpha's power as a percentage of the power from 4 to 30 hertz. Why use it, rather than alpha's power alone, its absolute power?</p></li>
         <li class="q"><p>Every closed trial was higher than every open trial. If closing your eyes made no difference, how likely is that, with three trials each?</p></li>
-        <li class="q"><p>Did blinking and clenching your jaw move the number the way you predicted? Explain with frequencies.</p></li>
-        <li class="q"><p>The demo counts your eyes as closed above 36 percent and as open again below 27 percent. Why two lines instead of one?</p></li>
-        <li class="q"><p>At the forehead the eyes-closed number was lower, and blinks moved it more. Explain both.</p></li>
+        <li class="q"><p>Did blinking and clenching your jaw change relative alpha power the way you predicted? Explain with frequencies.</p></li>
+        <li class="q"><p>If your relative alpha power sits at 20 percent with your eyes open, the demo counts your eyes as closed at 30 percent and as open again at 25. Why two thresholds instead of one?</p></li>
+        <li class="q"><p>At the forehead, eyes-closed relative alpha power was lower, and blinks changed it more. Explain both.</p></li>
       </ol>
     </section>
 
@@ -213,7 +213,7 @@
     <header class="hero">
       <p class="eb">Lab 1 · College</p>
       <h1>Alpha Flower</h1>
-      <p class="lede">How much does closing the eyes raise alpha's share of the EEG at the back of the head, against the spread from block to block, and how much of the difference is left at the forehead?</p>
+      <p class="lede">How much does closing the eyes raise relative alpha power at the back of the head, against the spread from block to block, and how much of the difference is left at the forehead?</p>
     </header>
 
     
@@ -231,12 +231,12 @@
       </div>
       <div class="grid flip">
         <div class="text">
-          <h3>Alpha's share</h3>
-          <p>The demo, its Python program and your code all report the same quantity, for each channel and then averaged over the four:</p>
-          <p class="eq">share = ∫<sub>8</sub><sup>13</sup> S(f) df ÷ ∫<sub>4</sub><sup>30</sup> S(f) df</p>
-          <p>where S is the power spectral density. They estimate S differently. Four times a second, the demo takes the last three seconds and fits one Hann-windowed segment of 1,024 samples into them, so its number is one periodogram of the two seconds ending about a second ago. Once a second, the program applies Welch's method to the last four seconds, in two-second segments.</p>
+          <h3>Relative alpha power</h3>
+          <p>The demo, its Python program and your code all report <dfn data-term="Relative alpha power" data-l="college" data-def="The power from 8 to 13 hertz divided by the power from 4 to 30 hertz.">relative alpha power</dfn>, for each channel and then averaged over the four:</p>
+          <p class="eq">relative alpha power = ∫<sub>8</sub><sup>13</sup> S(f) df ÷ ∫<sub>4</sub><sup>30</sup> S(f) df</p>
+          <p>where S is the power spectral density. They estimate S differently. Four times a second, the demo applies Welch's method to the last 1,536 samples, about three seconds, as two Hann-windowed segments of 1,024 samples that overlap by half, so the second ends at the newest sample. Once a second, the program applies Welch's method to the last four seconds, in two-second segments.</p>
         </div>
-        <figure class="fig" data-fig="spectrum" data-kinds="open closed"><figcaption><b>Simulated</b> The spectrum with the eyes open and closed. The share is the washed band's area over the area from 4 to 30 hertz.</figcaption></figure>
+        <figure class="fig" data-fig="spectrum" data-kinds="open closed"><figcaption><b>Simulated</b> The spectrum with the eyes open and closed. Relative alpha power is the shaded band's area over the area from 4 to 30 hertz.</figcaption></figure>
       </div>
       <div class="grid">
         <div class="text">
@@ -247,7 +247,7 @@
       </div>
       <div class="text">
         <h3>A test with six blocks</h3>
-        <p>Each wearer gives three open and three closed blocks at Oz. If closing the eyes made no difference, every way of choosing which three of the six were closed would be equally likely to give the largest shares. There are C(6, 3) = 20 such ways, so all three closed blocks above all three open ones has a one-sided p of 1/20 = 0.05, the smallest this design can give. Across the class's wearers, a sign test asks how often the closed mean beats the open mean.</p>
+        <p>Each wearer gives three open and three closed blocks at Oz. If closing the eyes made no difference, every way of choosing which three of the six were closed would be equally likely to give the largest values. There are C(6, 3) = 20 such ways, so all three closed blocks above all three open ones has a one-sided p of 1/20 = 0.05, the smallest this design can give. Across the class's wearers, a sign test asks how often the closed mean beats the open mean.</p>
       </div>
     </section>
 
@@ -255,7 +255,7 @@
       <h2>Hypothesis</h2>
       <div class="text">
         <p class="after-note">Write it before anyone puts the IntoMind One on.</p>
-        <p class="ask"><span class="lbl">Hypothesis</span>At Oz, alpha's share with the eyes closed will be <span class="fill" data-key="h-oz" data-hint="higher, lower or the same"></span> than with them open, by about <span class="fill" data-key="h-size" data-hint="how much"></span>. At Fpz, the difference will be <span class="fill" data-key="h-fpz" data-hint="larger or smaller"></span>.</p>
+        <p class="ask"><span class="lbl">Hypothesis</span>At Oz, relative alpha power with the eyes closed will be <span class="fill" data-key="h-oz" data-hint="higher, lower or the same"></span> than with them open, by about <span class="fill" data-key="h-size" data-hint="how much"></span>. At Fpz, the difference will be <span class="fill" data-key="h-fpz" data-hint="larger or smaller"></span>.</p>
         <p class="ask"><span class="lbl">Test</span>We will count a wearer's difference at Oz as real if <span class="fill" data-key="h-test" data-hint="the rule"></span>. Our Welch segment length, and why: <span class="fill" data-key="h-segment" data-hint="seconds, and why"></span>.</p>
       </div>
     </section>
@@ -308,7 +308,7 @@
           <figure class="fig" data-fig="shot" data-shot="alpha-grown"></figure>
           <div>
             <p>Open the <a href="https://demo.intomind.com/alpha-flower/">Alpha Flower demo</a>, connect your IntoMind One, and try thirty seconds with the eyes open, then thirty closed. Then close the tab: the IntoMind One talks to one program at a time.</p>
-            <p class="see"><b>You should see</b>Alpha's share at the bottom right, larger with the eyes closed, and a fractal growing while the demo counts the eyes as closed.</p>
+            <p class="see"><b>You should see</b>Relative alpha power at the bottom right, larger with the eyes closed, and a fractal growing while the demo counts the eyes as closed.</p>
             
           </div>
         </li>
@@ -347,15 +347,15 @@ python3 record_and_export.py --seconds 180 --label w1-oz</code></pre></figure>
     <section id="analysis">
       <h2>Analysis</h2>
       <div class="text">
-        <p>Load each recording, cut it into its 30-second blocks, leave out the first three seconds of each while the eyes and the rhythm settle, and compute alpha's share per block. Then test each wearer's difference at Oz.</p>
+        <p>Load each recording, cut it into its 30-second blocks, leave out the first three seconds of each while the eyes and the rhythm settle, and compute relative alpha power per block. Then test each wearer's difference at Oz.</p>
       </div>
       <pre><code>import numpy as np
 import mne
 from itertools import combinations
 from scipy.signal import welch
 
-def share(x, fs, seconds=2):
-    """Alpha's share of 4 to 30 Hz power, per channel, averaged over channels."""
+def relative_alpha(x, fs, seconds=2):
+    """Relative alpha power, 8 to 13 Hz over 4 to 30 Hz, per channel, averaged over channels."""
     f, p = welch(x - x.mean(axis=1, keepdims=True), fs=fs, nperseg=int(seconds * fs))
     def band(lo, hi):
         pick = (f >= lo) & (f < hi)
@@ -363,11 +363,11 @@ def share(x, fs, seconds=2):
     return float(np.mean(band(8, 13) / band(4, 30)))
 
 def blocks(path, n, skip=3):
-    """Alpha's share in each 30-second block of a recording."""
+    """Relative alpha power in each 30-second block of a recording."""
     raw = mne.io.read_raw_bdf(path, preload=True, verbose="error")
     fs = raw.info["sfreq"]
     x = raw.get_data(picks="eeg")
-    return [share(x[:, int((30 * b + skip) * fs):int(30 * (b + 1) * fs)], fs) for b in range(n)]
+    return [relative_alpha(x[:, int((30 * b + skip) * fs):int(30 * (b + 1) * fs)], fs) for b in range(n)]
 
 oz = blocks("w1-oz.bdf", 6)            # the path the program printed: open, closed, ...
 fpz = blocks("w1-fpz.bdf", 2)          # open, closed
@@ -379,7 +379,7 @@ print("Oz open", np.round(opened, 3), "closed", np.round(closed, 3))
 print("difference", round(diff, 3), "one-sided p", np.mean(np.array(null) >= diff))
 print("Fpz open", round(fpz[0], 3), "closed", round(fpz[1], 3))</code></pre>
       <div class="text">
-        <p>Then plot one wearer's spectrum, open against closed, from the same blocks, and repeat the shares with segments of one and four seconds.</p>
+        <p>Then plot one wearer's spectrum, open against closed, from the same blocks, and recompute relative alpha power with segments of one and four seconds.</p>
       </div>
       <table class="sheet" data-sheet="college-alpha-results">
         <thead><tr><th>Wearer</th><th>Oz open, mean</th><th>Oz closed, mean</th><th>Difference</th><th>p, of 20 labelings</th><th>Fpz open</th><th>Fpz closed</th></tr></thead>
@@ -394,10 +394,10 @@ print("Fpz open", round(fpz[0], 3), "closed", round(fpz[1], 3))</code></pre>
         <p>A report another group could repeat from, in this order:</p>
         <ol class="rulelist">
           <li>The question, and the hypothesis and test as you wrote them before recording.</li>
-          <li>Methods: sites, blocks and timing, the share's definition, and the Welch settings with your reason.</li>
-          <li>Results: each wearer's block shares at Oz and Fpz, the permutation p at Oz, the class's sign test, and one wearer's spectra open against closed.</li>
+          <li>Methods: sites, blocks and timing, the definition of relative alpha power, and the Welch settings with your reason.</li>
+          <li>Results: each wearer's relative alpha power per block at Oz and Fpz, the permutation p at Oz, the class's sign test, and one wearer's spectra open against closed.</li>
           <li>Interpretation: the effect against the spread, the difference between the sites, and the blinks and movements noted.</li>
-          <li>Limitations: few blocks, few wearers, contact, and how your number, the program's and the demo's differ.</li>
+          <li>Limitations: few blocks, few wearers, contact, and how your values, the program's and the demo's differ.</li>
           <li>Your code, as an appendix.</li>
         </ol>
       </div>
@@ -406,11 +406,11 @@ print("Fpz open", round(fpz[0], 3), "closed", round(fpz[1], 3))</code></pre>
     <section id="talk">
       <h2>Problems</h2>
       <ol class="qs">
-        <li class="q"><p>Why report alpha's share rather than alpha's power?</p></li>
-        <li class="q"><p>Your number and the demo's differ for the same moment. List every choice that could explain it.</p></li>
+        <li class="q"><p>Why report relative alpha power rather than absolute alpha power?</p></li>
+        <li class="q"><p>Your value and the demo's differ for the same moment. List every choice that could explain it.</p></li>
         <li class="q"><p>With three blocks of each, p can't go below 0.05. What would four blocks of each allow, and five?</p></li>
-        <li class="q"><p>At Fpz, the eyes-closed share was lower and the difference smaller. Explain both.</p></li>
-        <li class="q"><p>A wearer's shares were 0.25 open and 0.33 closed, consistent across blocks. Why did the demo never grow a fractal, and what does that say about fixed thresholds?</p></li>
+        <li class="q"><p>At Fpz, eyes-closed relative alpha power was lower and the difference smaller. Explain both.</p></li>
+        <li class="q"><p>A wearer's relative alpha power was 0.25 open and 0.33 closed, consistent across blocks. The demo sets its thresholds from each wearer's baseline, yet it never grew a fractal. Why, and what would a threshold closer to the baseline cost?</p></li>
       </ol>
     </section>
 
@@ -438,17 +438,17 @@ print("Fpz open", round(fpz[0], 3), "closed", round(fpz[1], 3))</code></pre>
       <table class="data text">
         <thead><tr><th>Part</th><th>What it does</th><th>Source</th></tr></thead>
         <tbody>
-          <tr><td>The reading</td><td data-th="What it does">Alpha's share of the power from 4 to 30 hertz, per channel, averaged over the channels, shown as a percentage and updated every 250 milliseconds.</td><td data-th="Source">alpha-flower/main.js, lib/alpha.js</td></tr>
-          <tr><td>The estimate</td><td data-th="What it does">One periodogram of the first 1,024 of the last 1,500 samples, the 2.05 seconds ending 0.95 seconds before the update, with its mean removed and a periodic Hann window.</td><td data-th="Source">lib/fft.js</td></tr>
+          <tr><td>The reading</td><td data-th="What it does"><dfn data-term="Relative alpha power" data-l="grad" data-def="Power in the alpha band, here 8 to 13 hertz, divided by power in a broader band, here 4 to 30 hertz.">Relative alpha power</dfn>: the power from 8 to 13 hertz over the power from 4 to 30 hertz, per channel, averaged over the channels, shown as a percentage and updated every 250 milliseconds.</td><td data-th="Source">alpha-flower/main.js, lib/alpha.js</td></tr>
+          <tr><td>The estimate</td><td data-th="What it does">Welch's method on the last 1,536 samples, the 3.07 seconds ending at the update: two periodograms of 1,024 samples overlapping by half, each with its mean removed and a periodic Hann window, averaged.</td><td data-th="Source">lib/alpha.js, lib/fft.js</td></tr>
           <tr><td>The bands</td><td data-th="What it does">The bins in [8, 13) and [4, 30) hertz, 0.49 hertz apart, summed: 10 bins from 8.30 to 12.70, and 53 from 4.39 to 29.79.</td><td data-th="Source">lib/fft.js</td></tr>
-          <tr><td>Eyes closed</td><td data-th="What it does">Counted as closed at a share of 0.36 or more, and as open again at 0.27 or less.</td><td data-th="Source">alpha-flower/main.js</td></tr>
-          <tr><td>The fractal</td><td data-th="What it does">Grown while the eyes count as closed, from the last 12 seconds of the first channel, fully in 24 seconds. In the first of its four styles, the peak of Goertzel power under one Hann window, searched from 7 to 14 hertz in steps of 0.1, sets the symmetry and the color. Theta over alpha sets the branching, and alpha's and beta's shares set the reach and the spread, with alpha here from 7.5 to 13 hertz.</td><td data-th="Source">lib/electric.js</td></tr>
+          <tr><td>Eyes closed</td><td data-th="What it does">Counted as closed at a relative alpha power 0.10 or more above the wearer's baseline, and as open again at 0.05 or less above it, each threshold no higher than 0.36 and 0.27. The baseline is the median of the last 80 updates, 20 seconds, while the eyes counted as open. Until there are 8 of them, at the start and after Start over, the thresholds are 0.36 and 0.27.</td><td data-th="Source">lib/alpha.js, alpha-flower/main.js</td></tr>
+          <tr><td>The fractal</td><td data-th="What it does">Grown while the eyes count as closed, from the last 12 seconds of the first channel, fully in 24 seconds. In the first of its four styles, the peak of Goertzel power under one Hann window, searched from 7 to 14 hertz in steps of 0.1, sets the symmetry and the color. The ratio of theta to alpha power sets the branching, and relative alpha and relative beta power, of the power from 4 to 30 hertz, set the reach and the spread, with alpha here from 7.5 to 13 hertz.</td><td data-th="Source">lib/electric.js</td></tr>
           <tr><td>The program</td><td data-th="What it does">Once a second, Welch's method over the last 4 seconds in 2-second Hann segments with half overlap, the bands integrated by trapezoids.</td><td data-th="Source">python/eyes_closed.py</td></tr>
           <tr><td>The recording</td><td data-th="What it does">The stream as the device sends it, after its filters, saved with checksums and written to a BDF file.</td><td data-th="Source">python/record_and_export.py</td></tr>
         </tbody>
       </table>
       <div class="text">
-        <p>What it leaves out: one fixed band for everyone, and two different alpha bands in one demo. The aperiodic background, inside a ratio. The variance of a single periodogram, handled by the gap between two thresholds rather than by averaging. Any rejection of artifacts: a blink or a clench moves the share. The channels, averaged whatever their contact.</p>
+        <p>What it leaves out: one fixed band for everyone, and two different alpha bands in one demo. The aperiodic background, inside a ratio. The variance of two short periodograms, handled by hysteresis between two thresholds rather than by longer averaging. One distance above the baseline for everyone, 0.10, whatever the wearer's own variation. Any rejection of artifacts: a blink or a clench changes relative alpha power. The channels, averaged whatever their contact.</p>
       </div>
     </section>
 
@@ -517,7 +517,7 @@ print("Fpz open", round(fpz[0], 3), "closed", round(fpz[1], 3))</code></pre>
           <figure class="fig" data-fig="shot" data-shot="alpha-grown"></figure>
           <div>
             <p>Open the <a href="https://demo.intomind.com/alpha-flower/">Alpha Flower demo</a>, connect your IntoMind One, and try thirty seconds with the eyes open, then thirty closed. Then close the tab: the IntoMind One talks to one program at a time.</p>
-            <p class="see"><b>You should see</b>Alpha's share at the bottom right, larger with the eyes closed, and a fractal growing while the demo counts the eyes as closed.</p>
+            <p class="see"><b>You should see</b>Relative alpha power at the bottom right, larger with the eyes closed, and a fractal growing while the demo counts the eyes as closed.</p>
             
           </div>
         </li>
@@ -556,7 +556,7 @@ python3 record_and_export.py --seconds 180 --label w1-oz-a</code></pre></figure>
     <section id="analysis">
       <h2>Analyses</h2>
       <div class="text">
-        <p>For each recording: the spectrum of every block from its fourth second on, the background fitted to the eyes-closed spectrum, and alpha as the periodic part above it. The peak and the center of gravity of that part from 7 to 14 hertz are two estimates of the individual alpha frequency. Reactivity is the log ratio of closed to open power, in a band 2 hertz either side of the center of gravity and in the fixed band. The share is the demo's measure, from the same spectrum.</p>
+        <p>For each recording: the spectrum of every block from its fourth second on, the background fitted to the eyes-closed spectrum, and alpha as the periodic part above it. The peak and the center of gravity of that part from 7 to 14 hertz are two estimates of the individual alpha frequency. Reactivity is the log ratio of closed to open power, in a band 2 hertz either side of the center of gravity and in the fixed band. Relative alpha power is the demo's measure, from the same spectrum.</p>
       </div>
       <pre><code>import numpy as np
 import mne
@@ -598,7 +598,7 @@ def describe(path):
     return dict(peak=peak, cog=cog, exponent=exponent, reactivity=np.log10(own),
                 fixed=np.log10(band(f, closed, 8, 13) / band(f, opened, 8, 13)),
                 above=band(f, above, cog - 2, cog + 2),
-                share=band(f, closed, 8, 13) / band(f, closed, 4, 30))
+                rel_alpha=band(f, closed, 8, 13) / band(f, closed, 4, 30))
 
 rows = {f"{w}-{run}": describe(f"{w}-{run}.bdf")       # the paths the program printed
         for w in ("w1", "w2", "w3") for run in ("oz-a", "oz-b", "fpz")}
@@ -612,7 +612,7 @@ for name, d in rows.items():
           <li>Reactivity in each wearer's own band against the fixed band, and whose differ most.</li>
           <li>Run a against run b, for every measure. Pool the class's wearers, and compute each measure's intraclass correlation.</li>
           <li>The forehead against the back: alpha above the background, and the exponent.</li>
-          <li>Across the class's recordings, how much of the variation in the share follows the exponent rather than alpha above the background.</li>
+          <li>Across the class's recordings, how much of the variation in relative alpha power follows the exponent rather than alpha above the background.</li>
         </ol>
       </div>
       <pre><code>import numpy as np
@@ -645,7 +645,7 @@ print(icc([8.86, 10.16, 9.89], [8.91, 10.11, 9.90]))</code></pre>
           <li>The preregistration as written, and every deviation from it, each with its reason.</li>
           <li>Methods to the COBIDAS MEEG recommendations (Pernet and others, 2020): the device, the sites and the reference, the filters in force, the blocks and their timing, the estimator and its parameters, and the exclusions.</li>
           <li>Results with the within-person spread before any comparison between people, and the class's intraclass correlations.</li>
-          <li>What the demo's share would have said about each wearer, and why it differs.</li>
+          <li>What the demo's relative alpha power would have said about each wearer, and why it differs.</li>
           <li>The code, which another group can run on your files to the same numbers.</li>
         </ol>
       </div>
@@ -716,16 +716,16 @@ print(icc([8.86, 10.16, 9.89], [8.91, 10.11, 9.90]))</code></pre>
             <p>The IntoMind One goes on the back of the head, a little above the bump where the skull meets the neck. Feel for the bump with your fingers. It goes about two finger-widths above it, in the middle.</p>
             <p>Unplug the cable. The wearer sits down. Put it on with the strap around the head. Part the hair under each <dfn data-term="Electrode" data-l="ms" data-def="A small contact that touches the skin and picks up electrical signals.">electrode</dfn>, the small contacts on its underside, so each one touches skin. Press it down until it feels firm but not tight.</p>
             <p>Open the <a href="https://demo.intomind.com/alpha-flower/">Alpha Flower demo</a>, press <b>Connect your IntoMind One</b>, and choose yours from the list.</p>
-            <p class="see"><b>You should see</b>Connected at the top right. After a few seconds, a number at the bottom right: Alpha, then a percentage.</p>
+            <p class="see"><b>You should see</b>Connected at the top right. After a few seconds, <dfn data-term="Relative alpha power" data-l="ms" data-def="How much of the EEG's power from 4 to 30 hertz is in the alpha band, 8 to 13 hertz, as a percentage.">relative alpha power</dfn> at the bottom right, as a percentage.</p>
           </div>
         </li>
         <li class="text">
           <div>
             <h3>Predict, then measure</h3>
-            <p class="ask"><span class="lbl">Predict</span>With my eyes closed, the number will be <span class="fill" data-key="predict-closed" data-hint="higher, lower or the same"></span>.</p>
+            <p class="ask"><span class="lbl">Predict</span>With my eyes closed, relative alpha power will be <span class="fill" data-key="predict-closed" data-hint="higher, lower or the same"></span>.</p>
             <dl class="jobs">
               <div><dt>Wearer</dt><dd>Keep your eyes open and still for 30 seconds, then close them for 30 seconds. Do both three times.</dd></div>
-              <div><dt>Recorder</dt><dd>Write down the number at the end of each 30 seconds.</dd></div>
+              <div><dt>Recorder</dt><dd>Write down relative alpha power at the end of each 30 seconds.</dd></div>
               <div><dt>Skeptic</dt><dd>Write down every blink, word or movement, and when it happened.</dd></div>
             </dl>
           </div>
@@ -742,7 +742,7 @@ print(icc([8.86, 10.16, 9.89], [8.91, 10.11, 9.90]))</code></pre>
             </tbody>
           </table>
           <div>
-            <p class="see"><b>You should see</b>For most people, a bigger number with eyes closed.</p>
+            <p class="see"><b>You should see</b>For most people, higher relative alpha power with eyes closed.</p>
             
           </div>
         </li>
@@ -751,8 +751,8 @@ print(icc([8.86, 10.16, 9.89], [8.91, 10.11, 9.90]))</code></pre>
           <figure class="fig" data-fig="shot" data-shot="alpha-grown"></figure>
           <div>
             <p>Close your eyes for about half a minute. The fractal grows only while the demo counts your eyes as closed, and it stays when you open them.</p>
-            <p>A <dfn data-term="Fractal" data-l="ms" data-def="A pattern made by repeating one rule at smaller and smaller scales.">fractal</dfn> is a pattern made by repeating one rule at smaller and smaller scales. The numbers in this one's rule come from your own signal.</p>
-            <p>The four style buttons draw it four ways. <b>Save image</b> saves it. The picture shows how many waves a second your alpha had, how long it grew, and the date. None of your EEG is in it.</p>
+            <p>A <dfn data-term="Fractal" data-l="ms" data-def="A pattern made by repeating one rule at smaller and smaller scales.">fractal</dfn> is a pattern made by repeating one rule at smaller and smaller scales. The values in this one's rule come from your own signal.</p>
+            <p>The four style buttons draw it four ways. <b>Save image</b> saves it. The picture shows your <dfn data-term="Peak alpha frequency" data-l="ms" data-def="The frequency, in hertz, at which your alpha is strongest.">peak alpha frequency</dfn>, how long it grew, and the date. None of your EEG is in it.</p>
             
           </div>
         </li>
@@ -764,7 +764,7 @@ print(icc([8.86, 10.16, 9.89], [8.91, 10.11, 9.90]))</code></pre>
       <div class="grid">
         <div class="text">
           <p>Your brain is made of billions of cells called <dfn data-term="Neuron" data-l="ms" data-def="A brain cell that sends signals to other cells with pulses of electricity.">neurons</dfn>. They signal to each other with tiny pulses of electricity. When millions of them pulse together, in step, the signal is strong enough to pick up through the skull and skin, though it is only millionths of a volt. A recording of it is called <dfn data-term="EEG" data-l="ms" data-def="Electroencephalography: the brain's electrical activity, recorded from electrodes on the scalp.">EEG</dfn>.</p>
-          <p>When you close your eyes, the part of your brain that handles seeing, at the back, has less to do, and many of its neurons fall into step: about ten waves every second. That rhythm is <dfn data-term="Alpha" data-l="ms" data-def="A rhythm of about 8 to 13 waves a second, strongest at the back of the head with the eyes closed.">alpha</dfn>, and it is why the IntoMind One goes on the back of your head. Open your eyes, and alpha fades.</p>
+          <p>When you close your eyes, the <dfn data-term="Visual cortex" data-l="ms" data-def="The part of the brain at the back of the head that handles what you see.">visual cortex</dfn>, at the back of your brain, has less to do, and many of its neurons fall into step at about 10 hertz. That rhythm is <dfn data-term="Alpha" data-l="ms" data-def="A rhythm of about 8 to 13 hertz, strongest at the back of the head with the eyes closed.">alpha</dfn>, and it is why the IntoMind One goes on the back of your head. Open your eyes, and alpha fades.</p>
           <p>Blinks, talking and moving make electrical signals too, much bigger than the brain's. That is why the skeptic watches for them.</p>
           
         </div>
@@ -775,7 +775,7 @@ print(icc([8.86, 10.16, 9.89], [8.91, 10.11, 9.90]))</code></pre>
     <section id="talk">
       <h2>Talk about it</h2>
       <ol class="qs">
-        <li class="q"><p>Was your number bigger with your eyes open or closed? Why?</p></li>
+        <li class="q"><p>Was your relative alpha power higher with your eyes open or closed? Why?</p></li>
         <li class="q"><p>Why does the IntoMind One go on the back of your head for this lab?</p></li>
         <li class="q"><p>Why measure three times with your eyes open and three times closed, instead of once?</p></li>
       </ol>

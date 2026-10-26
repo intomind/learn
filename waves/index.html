@@ -256,12 +256,12 @@ for f in (10, 10.25):
       <h2>Welch's method, and band power</h2>
       <div class="text">
         <p>One periodogram is a noisy estimate: its value at each frequency scatters as widely as the value itself, however long the recording. <dfn data-term="Welch's method" data-l="college" data-def="Estimating a spectrum by averaging the spectra of overlapping, windowed segments.">Welch's method</dfn> cuts the signal into overlapping segments, windows each, takes their periodograms and averages them. K independent segments shrink the scatter by about √K.</p>
-        <p>The segment length T sets the trade: resolution 1/T against the number of segments to average. Band power is the area under the estimate from f<sub>1</sub> to f<sub>2</sub>. A share, such as alpha's power over the power from 4 to 30 hertz, cancels anything that scales every frequency alike.</p>
+        <p>The segment length T sets the trade: resolution 1/T against the number of segments to average. Band power is the area under the estimate from f<sub>1</sub> to f<sub>2</sub>. A relative power, such as alpha's power over the power from 4 to 30 hertz, cancels anything that scales every frequency alike.</p>
       </div>
       <div class="try">
         <p class="k">Try it</p>
         <h3>The segment length</h3>
-        <p>Make a minute of noise with the 1/f spectrum of EEG, add a 10 hertz rhythm, and estimate its spectrum with segments of 1, 2 and 4 seconds. Plot the three, and compute alpha's share from each.</p>
+        <p>Make a minute of noise with the 1/f spectrum of EEG, add a 10 hertz rhythm, and estimate its spectrum with segments of 1, 2 and 4 seconds. Plot the three, and compute relative alpha power from each.</p>
         <pre><code>import numpy as np
 from scipy.signal import welch
 
@@ -281,7 +281,7 @@ def band(f, p, lo, hi):
 for seconds in (1, 2, 4):
     f, p = welch(x, fs=fs, nperseg=seconds * fs)  # Hann windows, half overlap
     print(seconds, "s:", round(band(f, p, 8, 13) / band(f, p, 4, 30), 3))</code></pre>
-        <p class="see"><b>You should see</b>Shares that agree to within a few hundredths, and spectra that differ: smooth but blurred with one-second segments, sharp but ragged with four.</p>
+        <p class="see"><b>You should see</b>Values of relative alpha power that agree to within a few hundredths, and spectra that differ: smooth but blurred with one-second segments, sharp but ragged with four.</p>
         
       </div>
     </section>
@@ -352,7 +352,7 @@ for seconds in (1, 2, 4):
       <h2>A spectrum over time</h2>
       <div class="text">
         <p>A spectrogram slides one window along the signal. A wavelet transform scales the window with frequency: a Morlet wavelet of n cycles at frequency f spreads over σ<sub>t</sub> = n/(2πf) in time and σ<sub>f</sub> = f/n in frequency, and their product is fixed at 1/(2π) (Cohen, 2014). Averaging power over time or trials can make brief bursts look like a sustained rhythm, as Jones (2016) and van Ede and others (2018) point out.</p>
-        <p>Alpha Flower reports alpha's share of the power from 4 to 30 hertz, from one Hann-windowed periodogram of 2.05 seconds every quarter second. Its Python program averages three Hann-windowed periodograms of 2 seconds over the last 4, once a second. The analysis compares the two with a multitaper estimate.</p>
+        <p>Alpha Flower reports relative alpha power, alpha's power over the power from 4 to 30 hertz, every quarter second, from two Hann-windowed periodograms of 2.05 seconds, overlapping by half, over the last 3.07. Its Python program averages three Hann-windowed periodograms of 2 seconds over the last 4, once a second. The analysis compares the two with a multitaper estimate.</p>
       </div>
     </section>
 
@@ -361,7 +361,7 @@ for seconds in (1, 2, 4):
       <div class="try">
         <p class="k">Analysis</p>
         <h3>Three estimators, and a ratio that moves by itself</h3>
-        <p>Simulate twenty minutes of a signal whose spectrum you know exactly: an aperiodic component falling as f<sup>−χ</sup> above 1 hertz, plus an alpha rhythm, a resonance at 10 hertz. Estimate alpha's share in 300 windows of 4 seconds three ways: as the demo does, as its Python program does, and with three Slepian tapers. Then make the background steeper with the alpha unchanged, and measure alpha above a fitted background.</p>
+        <p>Simulate twenty minutes of a signal whose spectrum you know exactly: an aperiodic component falling as f<sup>−χ</sup> above 1 hertz, plus an alpha rhythm, a resonance at 10 hertz. Estimate relative alpha power in 300 windows of 4 seconds three ways: as the demo does, as its Python program does, and with five Slepian tapers. Then make the background steeper with the alpha unchanged, and measure alpha above a fitted background.</p>
         <pre><code>import numpy as np
 from scipy.signal import welch, lfilter
 from scipy.signal.windows import dpss, hann
@@ -385,33 +385,34 @@ def band(freqs, psd, lo, hi, rule=np.trapezoid):
     pick = (freqs &gt;= lo) &amp; (freqs &lt; hi)
     return rule(psd[pick], freqs[pick])
 
-def share(freqs, psd, rule=np.trapezoid):
+def relative_alpha(freqs, psd, rule=np.trapezoid):
     return band(freqs, psd, 8, 13, rule) / band(freqs, psd, 4, 30, rule)
 
-def demo(x):            # one periodic-Hann periodogram of the first 1,024 samples, bins summed
-    seg = x[:1024] - x[:1024].mean()
-    p = np.abs(np.fft.rfft(seg * hann(1024, sym=False))) ** 2
-    return share(np.fft.rfftfreq(1024, 1 / fs), p, rule=lambda y, x: y.sum())
+def demo(x):            # the last 1,536 samples: two periodic-Hann periodograms of 1,024, half overlapping, bins summed
+    p = 0
+    for seg in (x[-1536:-512], x[-1024:]):
+        p = p + np.abs(np.fft.rfft((seg - seg.mean()) * hann(1024, sym=False))) ** 2
+    return relative_alpha(np.fft.rfftfreq(1024, 1 / fs), p, rule=lambda y, x: y.sum())
 
 def program(x):         # Welch over 4 s in 2-s segments, as eyes_closed.py does
     freqs, p = welch(x - x.mean(), fs=fs, nperseg=2 * fs)
-    return share(freqs, p)
+    return relative_alpha(freqs, p)
 
-def multitaper(x):      # the same 1,024 samples, 3 Slepian tapers, about 2 Hz of resolution
-    seg = x[:1024] - x[:1024].mean()
-    p = (np.abs(np.fft.rfft(dpss(1024, 2, 3) * seg, axis=1)) ** 2).mean(axis=0)
-    return share(np.fft.rfftfreq(1024, 1 / fs), p)
+def multitaper(x):      # the same 1,536 samples, 5 Slepian tapers, about 2 Hz of resolution
+    seg = x[-1536:] - x[-1536:].mean()
+    p = (np.abs(np.fft.rfft(dpss(1536, 3, 5) * seg, axis=1)) ** 2).mean(axis=0)
+    return relative_alpha(np.fft.rfftfreq(1536, 1 / fs), p)
 
 for chi in (1.5, 2.0):
     x, background, alpha = simulate(chi)
     true = background + alpha
-    print(f"exponent {chi}: true share {share(f, true):.3f}, "
+    print(f"exponent {chi}: true relative alpha power {relative_alpha(f, true):.3f}, "
           f"true alpha power {band(f, alpha, 6, 14):.1f} uV^2")
     windows = x.reshape(-1, 4 * fs)                     # 300 windows of 4 s
     for name, estimate in (("demo", demo), ("program", program), ("multitaper", multitaper)):
         v = np.array([estimate(w) for w in windows])
-        bias = v.mean() - share(f, true)
-        print(f"   {name:10s} share {v.mean():.3f}  bias {bias:+.3f}  sd {v.std():.3f}")
+        bias = v.mean() - relative_alpha(f, true)
+        print(f"   {name:10s} relative alpha power {v.mean():.3f}  bias {bias:+.3f}  sd {v.std():.3f}")
     # Fit the background in log-log, away from alpha, and measure alpha above it.
     freqs, p = welch(x, fs=fs, nperseg=2 * fs)
     freqs, p = freqs[1:], p[1:]
@@ -420,7 +421,7 @@ for chi in (1.5, 2.0):
     above = p - 10 ** (offset + slope * np.log10(freqs))
     print(f"   fitted exponent {-slope:.2f}, "
           f"alpha above the fit {band(freqs, above, 6, 14):.1f} uV^2")</code></pre>
-        <p class="see"><b>You should see</b>A true share of 0.464. The demo's estimate scatters most, with a standard deviation of 0.13 from one window to the next, the program's least, 0.08, and the multitaper's in between, 0.10, on the same two seconds as the demo. Every estimator is low by 0.01 to 0.03. With the exponent at 2.0, the true share rises to 0.613 though the alpha is the same, and alpha above the fitted background stays near its true 14.3 µV², at 13.4 and 13.7.</p>
+        <p class="see"><b>You should see</b>A true relative alpha power of 0.464. The demo's estimate scatters most, with a standard deviation of 0.10 from one window to the next, and the program's and the multitaper's least, 0.08, the multitaper on the same three seconds as the demo. The program and the multitaper are low by about 0.02, and the demo is within 0.01. With the exponent at 2.0, the true relative alpha power rises to 0.613 though the alpha is the same, and alpha above the fitted background stays near its true 14.3 µV², at 13.4 and 13.7.</p>
         <p>Then report: the program's estimator with segments of 1 and 4 seconds, and every estimator with the alpha at 8.5 hertz. Which bias grows, and why?</p>
         
       </div>
@@ -439,9 +440,9 @@ for chi in (1.5, 2.0):
       <h2>Problems</h2>
       <ol class="qs">
         <li class="q"><p>At 500 samples a second, what is the bin spacing of a 1,024-sample periodogram? With a Hann window, about how long must a segment be to resolve two equal peaks at 9.5 and 10.5 hertz?</p></li>
-        <li class="q"><p>One reading of the demo scatters by about 0.13 around its mean. Why doesn't the demo estimate the share over 10 seconds instead, and what do its two thresholds, 0.36 to count the eyes as closed and 0.27 to count them open again, do about the scatter?</p></li>
+        <li class="q"><p>One value of the demo's relative alpha power scatters by about 0.10 around its mean. Why doesn't the demo estimate it over 10 seconds instead, and what do its two thresholds, 0.10 above the wearer's eyes-open baseline to count the eyes as closed and 0.05 above it to count them open again, do about the scatter?</p></li>
         <li class="q"><p>For 2.048 seconds and 2 hertz of resolution, what NW, and how many tapers? What would 4.096 seconds at the same resolution give?</p></li>
-        <li class="q"><p>Two people have identical alpha rhythms, but the second's aperiodic exponent is 2.0 rather than 1.5, with the same offset. Whose share is larger? What does that do to a study that compares two groups by their share?</p></li>
+        <li class="q"><p>Two people have identical alpha rhythms, but the second's aperiodic exponent is 2.0 rather than 1.5, with the same offset. Whose relative alpha power is larger? What does that do to a study that compares two groups by relative alpha power?</p></li>
         <li class="q"><p>A Morlet wavelet of 7 cycles: what are its spreads in time and frequency at 10 hertz, and at 40?</p></li>
       </ol>
     </section>

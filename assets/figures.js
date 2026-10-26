@@ -133,7 +133,7 @@ export function bandPower(freqs, psd, lo, hi) {
   for (let k = 1; k < freqs.length; k++) if (freqs[k] >= lo && freqs[k] <= hi) p += psd[k] * (freqs[k] - freqs[k - 1]);
   return p;
 }
-export const alphaShare = (freqs, psd) => bandPower(freqs, psd, 8, 13) / Math.max(bandPower(freqs, psd, 4, 30), 1e-9);
+export const relativeAlphaPower = (freqs, psd) => bandPower(freqs, psd, 8, 13) / Math.max(bandPower(freqs, psd, 4, 30), 1e-9);
 
 // ---- Drawing pieces shared by several figures. -----------------------------------------------------
 
@@ -190,12 +190,12 @@ function spectrumBox(x0, y0, w, h, { fs, fmax = 45, bands = [[8, 13]], labels = 
   return { node, update };
 }
 
-/** A horizontal bar for a share, 0 to 1, with its percent. */
-function shareBar(x, y, w, value, { label = "Alpha", h = 14, lines = [] } = {}) {
+/** A horizontal bar for a fraction, 0 to 1, with its percent, and a tick at each threshold. */
+function fractionBar(x, y, w, value, { label = "Alpha", h = 14, thresholds = [] } = {}) {
   const node = g({});
   node.append(rect(x, y, w, h, "fill-tile"));
   node.append(rect(x, y, Math.max(0, Math.min(1, value)) * w, h, "fill-signal"));
-  for (const v of lines) node.append(line(x + v * w, y - 4, x + v * w, y + h + 4, "ink2"));
+  for (const v of thresholds) node.append(line(x + v * w, y - 4, x + v * w, y + h + 4, "ink2"));
   node.append(tx(x, y - 8, label, "t2"));
   node.append(tx(x + w, y - 8, `${Math.round(value * 100)}%`, "big", { "text-anchor": "end", style: "font-size:18px" }));
   return node;
@@ -496,7 +496,7 @@ fig("spectrum", (figure, svg, d) => {
   };
 });
 
-/** The Alpha Flower, live: a trace scrolling by, the eyes opening and closing, the spectrum and the share following. Click to open or close them. */
+/** The Alpha Flower, live: a trace scrolling by, the eyes opening and closing, the spectrum and relative alpha power following. Click to open or close them. */
 fig("alpha-hero", (figure, svg, d) => {
   const fs = 250, keep = 4, total = 48;
   let manual = null;
@@ -505,6 +505,17 @@ fig("alpha-hero", (figure, svg, d) => {
   const sig = eeg({ fs, seconds: total, seed: 5, alpha: 28, open: (t) => (((t % 12) + 12) % 12) < 6 ? 1 : 0 });
   const sigClosed = eeg({ fs, seconds: total, seed: 5, alpha: 28, open: () => 0 });
   const sigOpen = eeg({ fs, seconds: total, seed: 5, alpha: 28, open: () => 1 });
+  // The demo's two thresholds for this wearer: 0.10 and 0.05 above the eyes-open baseline, never above 0.36 and 0.27.
+  const baseline = (() => {
+    const values = [];
+    for (let s = 6; s <= total; s += 3) {
+      const { freqs, psd } = welch(sigOpen.subarray(Math.round((s - 6) * fs), Math.round(s * fs)), fs, 256);
+      values.push(relativeAlphaPower(freqs, psd));
+    }
+    values.sort((a, b) => a - b);
+    return values[values.length >> 1];
+  })();
+  const thresholds = [Math.min(0.27, baseline + 0.05), Math.min(0.36, baseline + 0.1)];
   let parts = null;
   let lastSpec = -1;
   const card = !!d.card;
@@ -559,7 +570,7 @@ fig("alpha-hero", (figure, svg, d) => {
         for (let i = 0; i < win.length; i++) win[i] = src[(end - win.length + i + src.length) % src.length];
         const { freqs, psd } = welch(win, fs, 256);
         box.update(freqs, psd);
-        bar.replaceChildren(shareBar(x0 + tw + 56, parts.h * 0.46 + pad + 92, specW, alphaShare(freqs, psd), { label: "alpha's share of 4 to 30 hertz", lines: [0.27, 0.36] }));
+        bar.replaceChildren(fractionBar(x0 + tw + 56, parts.h * 0.46 + pad + 92, specW, relativeAlphaPower(freqs, psd), { label: "relative alpha power", thresholds }));
       }
     },
   };
