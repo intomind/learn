@@ -61,6 +61,9 @@ def main() -> int:
         for tag in re.findall(r"<(?:link|script|img|iframe|source)\b[^>]*>", text):
             if f'src="{FOREIGN.get(p.relative_to(HERE))}"' in tag:
                 continue
+            # A canonical link names the page's own address for search engines, and loads nothing.
+            if 'rel="canonical"' in tag:
+                continue
             if re.search(r'(?:src|href)="(?:https?:)?//', tag):
                 problems.append(f"{name}: loads from another site: {tag[:80]}")
         for href in re.findall(r'(?<![-\w])(?:href|src)="([^"]+)"', text):
